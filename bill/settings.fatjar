@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Jul 17 17:51:03 CST 2013
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=D\:\\ytodev\\workspace\\w1\\api\\YtoApi.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=<inc|api/src>
