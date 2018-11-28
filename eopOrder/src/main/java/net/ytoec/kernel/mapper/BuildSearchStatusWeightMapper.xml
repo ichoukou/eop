@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.BuildSearchStatusWeightMapper">
+
+	<select id="getBuildSearchByLimit" parameterType="int"  resultType="BuildSearchStatusWeight">
+		select id as id,order_id as orderId,mailno as mailNo,order_status as orderStatus,weight as weight from ec_core_build_search_status_weight
+		order by id asc limit #{limit};
+		</select>
+
+	<select id="removeBuildSearchByLimit" parameterType="int">
+		delete from ec_core_build_search_status_weight
+		order by id asc limit #{limit};
+		</select>
+		
+</mapper>

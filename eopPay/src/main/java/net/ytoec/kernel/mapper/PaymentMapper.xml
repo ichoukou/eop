@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.PaymentMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.Payment" id="paymentResultMap">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="auserId" column="auser_id"/>
+		<result property="dealMoney" column="deal_Money"/>
+		<result property="dealTime" column="deal_Time"/>
+		<result property="payTime" column="pay_Time"/>
+		<result property="dealType" column="deal_type"/>
+		<result property="dealName" column="deal_Name"/>
+		<result property="dealStatus" column="deal_status"/>
+		<result property="flag" column="flag"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="remark" column="remark"/>
+		<result property="reason" column="reason"/>
+		<result property="delFlag" column="del_flag"/>
+		<result property="createrId" column="creater_id"/>		
+	</resultMap>
+	<resultMap type="net.ytoec.kernel.dataobject.Payment" id="paymentHistoryResultMap">	 
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="auserId" column="auser_id"/>
+		<result property="dealMoney" column="deal_Money"/>
+		<result property="dealTime" column="deal_Time"/>
+		<result property="payTime" column="pay_Time"/>
+		<result property="dealType" column="deal_type"/>
+		<result property="dealName" column="deal_Name"/>
+		<result property="dealStatus" column="deal_status"/>
+		<result property="flag" column="flag"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="remark" column="remark"/>
+		<result property="reason" column="reason"/>
+		<result property="delFlag" column="del_flag"/>
+		<result property="createrId" column="creater_id"/>		
+		<result property="promCost" column="promCost" />
+		<result property="userName" column="user_name" />
+		<result property="userNameText" column="user_name_text" />	
+		<result property="shopName" column="shop_name" />	
+	</resultMap>
+	<insert id="add" parameterType="payment" keyProperty="id" useGeneratedKeys="true">	
+		insert into ec_core_payment
+		(
+		   id, user_id, auser_id, deal_Money, deal_Time,pay_Time,deal_type,
+		   deal_Name,deal_status,flag,create_time,update_time,remark,reason,del_flag,creater_id
+		)
+		values
+		(
+		   #{id}, #{userId}, #{auserId}, #{dealMoney}, now(),#{payTime} ,#{dealType},
+		   #{dealName}, #{dealStatus}, #{flag},now(), now(), #{remark},#{reason},0,#{createrId}
+		)
+	</insert>
+	
+	<!--定时用  未付款的订单(超过7天删除) begin -->
+	<select id="getPaymentListByUserId" parameterType="map" resultType="list" resultMap="paymentResultMap">
+			select * from ec_core_payment t 
+			<where>
+			 <if test="userId != null and userId != ''">
+		         and user_id = #{userId} 
+		      </if> 
+			   <if test="delFlag != null and delFlag != ''">
+		         and del_flag = #{delFlag}
+		      </if>  
+		      <if test="dealStatus != null and dealStatus != ''">
+		       and deal_status = #{dealStatus}
+		      </if>   
+		       <if test="createTime != null and createTime != ''">
+		       <![CDATA[  and create_time  <= #{createTime}]]>
+		      </if>  
+		     </where>
+	</select>
+	<!--定时用  未付款的订单(超过7天删除) end -->
+	
+	<select id="get" parameterType="payment" resultType="payment" resultMap="paymentResultMap">		
+		select * from ec_core_payment 
+		<where>
+		    <if test="id != null and id != ''">
+			    and id = #{id}
+			</if>
+	        <if test="userId != null and userId != ''">
+			    and user_id = #{userId}
+			</if>
+			<if test="auserId != null and auserId != ''">
+			    and auser_id = #{auserId}
+			</if>
+			<if test="dealMoney != null and dealMoney != ''">
+			    and deal_Money = #{dealMoney}
+			</if>
+			<if test="dealTime != null and dealTime != ''">
+			    and deal_Time = #{dealTime}
+			</if>
+			<if test="payTime != null and payTime != ''">
+			    and pay_Time = #{payTime}
+			</if>
+			<if test="dealType != null and dealType != ''">
+			    and deal_type = #{dealType}
+			</if>
+			<if test="dealName != null and dealName != ''">
+			    and deal_Name = #{dealName}
+			</if>
+			<if test="dealStatus != null and dealStatus != ''">
+			    and deal_status = #{dealStatus}
+			</if>
+			<if test="flag != null and flag != ''">
+			    and flag = #{flag}
+			</if>
+			<if test="remark != null and remark != ''">
+			    and remark = #{remark}
+			</if>
+		    <if test="reason != null and reason != ''">
+			    and reason = #{reason}
+			</if>
+			 <if test="delFlag != null and delFlag != ''">
+			    and del_flag = #{delFlag}
+			</if>
+			<if test="createrId != null and createrId != ''">
+			    and creater_id = #{createrId}
+			</if>
+		</where>
+	</select>
+	
+	<delete id="remove" parameterType="payment">
+		delete from ec_core_payment where id = #{id}
+	</delete>
+	<!-- 批量修改交易状态为：等待付款（交易（支付）明细表-ec_core_payment begin -->
+	
+	<update id="updateBatchByDealStatus" parameterType="map">
+	    update 
+	        ec_core_payment
+	    set 
+	        update_time = now()	   
+		<if test="userId != null and userId != ''">
+		    ,user_id = #{userId}
+		</if>
+		<if test="auserId != null and auserId != ''">
+		    ,auser_id = #{auserId}
+		</if>
+		<if test="dealMoney != null and dealMoney != ''">
+		    ,deal_Money = #{dealMoney}
+		</if>
+		<if test="dealTime != null and dealTime != ''">
+		    ,deal_Time = #{dealTime}
+		</if>
+		<if test="payTime != null and payTime != ''">
+		    ,pay_Time = #{payTime}
+		</if>
+		<if test="dealType != null and dealType != ''">
+		    ,deal_type = #{dealType}
+		</if>
+		<if test="dealName != null and dealName != ''">
+		    ,deal_Name = #{dealName}
+		</if>
+		<if test="dealStatus != null and dealStatus != ''">
+		    ,deal_status = #{dealStatus}
+		</if>
+		<if test="flag != null and flag != ''">
+		    ,flag = #{flag}
+		</if>
+		<if test="remark != null and remark != ''">
+		    ,remark = #{remark}
+		</if>
+	    <if test="reason != null and reason != ''">
+		    ,reason = #{reason}
+		</if>
+		 <if test="delFlag != null and delFlag != ''">
+		    ,del_flag = #{delFlag}
+		</if>
+		 <if test="payIdList == null">
+		 where 1 != 1	
+		 </if>		
+	    <if test="payIdList != null">	
+	    where id  in
+		<foreach collection="payIdList" item="payIdList" open="(" separator="," close=")" >
+			#{payIdList}
+		</foreach>
+		</if>
+	</update>
+	
+	<!-- 批量修改交易状态为：等待付款（交易（支付）明细表-ec_core_payment end -->
+	
+	<update id="edit" parameterType="payment">
+	    update 
+	        ec_core_payment
+	    set 
+	        update_time = now()	   
+		<if test="userId != null and userId != ''">
+		    ,user_id = #{userId}
+		</if>
+		<if test="auserId != null and auserId != ''">
+		    ,auser_id = #{auserId}
+		</if>
+		<if test="dealMoney != null and dealMoney != ''">
+		    ,deal_Money = #{dealMoney}
+		</if>
+		<if test="dealTime != null and dealTime != ''">
+		    ,deal_Time = #{dealTime}
+		</if>
+		<if test="payTime != null and payTime != ''">
+		    ,pay_Time = #{payTime}
+		</if>
+		<if test="dealType != null and dealType != ''">
+		    ,deal_type = #{dealType}
+		</if>
+		<if test="dealName != null and dealName != ''">
+		    ,deal_Name = #{dealName}
+		</if>
+		<if test="dealStatus != null and dealStatus != ''">
+		    ,deal_status = #{dealStatus}
+		</if>
+		<if test="flag != null and flag != ''">
+		    ,flag = #{flag}
+		</if>
+		<if test="remark != null and remark != ''">
+		    ,remark = #{remark}
+		</if>
+	    <if test="reason != null and reason != ''">
+		    ,reason = #{reason}
+		</if>
+		 <if test="delFlag != null and delFlag != ''">
+		    ,del_flag = #{delFlag}
+		</if>
+		where id = #{id}	
+	</update>
+	
+	<select id="getPaymentList" parameterType="map" resultType="list" resultMap="paymentHistoryResultMap">
+		  select p.*,sh.prom_cost as promCost,u.user_name ,u.user_name_text,u.shop_name
+          from   ec_core_payment p      
+           left join  ec_core_serviceHistory sh  on p.id=sh.pay_id
+           left join  ec_core_user  u on u.id=p.creater_id			  
+		  where  p.deal_status != 5		    
+	        <if test="id != null and id != ''">
+			    and p.id = #{id}
+			</if>
+			<if test="userId != null and userId != ''">
+			    and p.user_id = #{userId}
+			</if>
+			<if test="userIdArray != null">
+				and p.user_id in
+				<foreach collection="userIdArray" item="userIdArray" open="("
+					separator="," close=")">
+					#{userIdArray}
+			    </foreach>
+			</if>
+			<if test="auserId != null and auserId != ''">
+			    and p.auser_id = #{auserId}
+			</if>
+			
+			<if test="startMoney != null and endMoney != null ">
+			    and p.deal_Money between #{startMoney} and #{endMoney}
+			</if>
+			<if test="startMoney != null and endMoney == null ">
+			    and p.deal_Money <![CDATA[>=]]> #{startMoney} 
+			</if>
+			<if test="startMoney == null and endMoney != null ">
+			    and p.deal_Money <![CDATA[<=]]> #{endMoney}
+			</if>
+					
+			<if test="startTime != null and endTime != null ">
+			    and p.deal_Time between #{startTime} and #{endTime}
+			</if>
+			<if test="payTime != null and payTime != ''">
+			    and p.pay_Time = #{payTime}
+			</if>
+			<if test="dealType != null and dealType != ''">
+			    and p.deal_type = #{dealType}
+			</if>
+			<if test="dealTypeArray != null">
+				and p.deal_type  in
+				<foreach collection="dealTypeArray" item="dealTypeArray" open="("
+					separator="," close=")">
+					#{dealTypeArray} 
+			    </foreach>
+			</if>
+			<if test="dealName != null and dealName != ''">
+			    and p.deal_Name = #{dealName}
+			</if>
+			<if test="dealStatus != null and dealStatus != ''">
+			    and p.deal_status = #{dealStatus}
+			</if>
+			<if test="dealStatusArray != null">
+				and p.deal_status in
+			<foreach collection="dealStatusArray" item="dealStatusArray" open="("
+				separator="," close=")">
+				#{dealStatusArray}
+		    </foreach>
+			</if>
+			<if test="flag != null and flag != ''">
+			    and p.flag = #{flag}
+			</if>
+			<if test="remark != null and remark != ''">
+			    and p.remark = #{remark}
+			</if>
+		    <if test="reason != null and reason != ''">
+			    and p.reason = #{reason}
+			</if>
+			 <if test="delFlag != null and delFlag != ''">
+			    and p.del_flag = #{delFlag}
+			</if>		
+			order by p.id desc
+			<if test='startIndex != null and pageNum != null'>
+				limit #{startIndex}, #{pageNum}
+			</if> 
+	</select>
+	
+	<select id="getPaymentListCount" parameterType="map" resultType="java.lang.Integer">
+		   select count(p.id) from ec_core_payment p 		  
+		    where p.deal_status != 5		    
+	        <if test="id != null and id != ''">
+			    and p.id = #{id}
+			</if>
+			<if test="userId != null and userId != ''">
+			    and p.user_id = #{userId}
+			</if>
+			<if test="userIdArray != null">
+				and p.user_id in
+				<foreach collection="userIdArray" item="userIdArray" open="("
+					separator="," close=")">
+					#{userIdArray}
+			    </foreach>
+			</if>
+			<if test="auserId != null and auserId != ''">
+			    and p.auser_id = #{auserId}
+			</if>
+			
+			<if test="startMoney != null and endMoney != null ">
+			    and p.deal_Money between #{startMoney} and #{endMoney}
+			</if>
+			<if test="startMoney != null and endMoney == null ">
+			    and p.deal_Money <![CDATA[>=]]> #{startMoney} 
+			</if>
+			<if test="startMoney == null and endMoney != null ">
+			    and p.deal_Money <![CDATA[<=]]> #{endMoney}
+			</if>
+					
+			<if test="startTime != null and endTime != null ">
+			    and p.deal_Time between #{startTime} and #{endTime}
+			</if>
+			<if test="payTime != null and payTime != ''">
+			    and p.pay_Time = #{payTime}
+			</if>
+			<if test="dealType != null and dealType != ''">
+			    and p.deal_type = #{dealType}
+			</if>
+			<if test="dealTypeArray != null">
+				and p.deal_type  in
+				<foreach collection="dealTypeArray" item="dealTypeArray" open="("
+					separator="," close=")">
+					#{dealTypeArray} 
+			    </foreach>
+			</if>
+			<if test="dealName != null and dealName != ''">
+			    and p.deal_Name = #{dealName}
+			</if>
+			<if test="dealStatus != null and dealStatus != ''">
+			    and p.deal_status = #{dealStatus}
+			</if>
+			<if test="dealStatusArray != null">
+				and p.deal_status in
+			<foreach collection="dealStatusArray" item="dealStatusArray" open="("
+				separator="," close=")">
+				#{dealStatusArray}
+		    </foreach>
+			</if>
+			<if test="flag != null and flag != ''">
+			    and p.flag = #{flag}
+			</if>
+			<if test="remark != null and remark != ''">
+			    and p.remark = #{remark}
+			</if>
+		    <if test="reason != null and reason != ''">
+			    and p.reason = #{reason}
+			</if>
+			 <if test="delFlag != null and delFlag != ''">
+			    and p.del_flag = #{delFlag}
+			</if>				
+	</select>
+	
+	<update id="updateRemarkById" parameterType="payment">
+	    update 
+	        ec_core_payment
+	    set 
+	        update_time = now(),
+	        remark = #{remark}
+	    where id = #{id}
+	</update>
+	
+	<!-- 更新dealMoney -->
+	<update id="updateDealMoneyById" parameterType="payment">
+	    update 
+	        ec_core_payment
+	    set 
+	        update_time = now(),
+	        deal_Money = #{dealMoney}
+	    where id = #{id}
+	</update>
+	
+	<update id="updateDeleteFlagById" parameterType="payment">
+	    update 
+	        ec_core_payment
+	    set 
+	        update_time = now(),
+	        del_flag = #{delFlag}
+	    where id = #{id}
+	</update>
+	
+	<select id="getList" parameterType="map" resultType="list" resultMap="paymentResultMap">
+		select * from ec_core_payment  
+		<where>	    
+			<if test="userId != null and userId != ''">
+			    and user_id = #{userId}
+			</if>
+			<if test="dealStatus != null and dealStatus != ''">
+			    and deal_status = #{dealStatus}
+			</if>
+			 <if test="delFlag != null and delFlag != ''">
+			    and del_flag = #{delFlag}
+			</if>
+			<if test="dealName != null and dealName != ''">
+			    and deal_Name like CONCAT('%',#{dealName},'%')
+			</if>
+		</where>
+		order by id desc
+	</select>
+	
+</mapper>

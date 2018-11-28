@@ -1,0 +1,9 @@
+.box_bd p{font-size:12px;color:#666;}
+p.title01{font-size:15px;font-weight:bold;}
+
+.list01{padding:10px 0;}
+.list01 li{width:416px;float:left;}
+.list01 label{margin:0 0 0 10px;font:normal 12px simsun;color:#666;}
+
+.btn_box{padding:5px 0 10px 300px;}
+.btn_box span{margin:0 10px;}

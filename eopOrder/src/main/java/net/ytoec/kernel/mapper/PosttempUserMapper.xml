@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.PosttempUserMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.PosttempUser" id="posttempUserResultMap">
+		<id property="id" column="id" />
+		<result property="branchId" column="branchId" />
+		<result property="vipId" column="vipId" />
+		<result property="postId" column="postId" />
+	</resultMap>
+
+	<select id="get" parameterType="posttempUser" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE id = #{id}
+	</select>
+
+	<select id="getPosttempUserByVipId" parameterType="map" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE vipId = #{userId}
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 新增功能,根据用户编号集合的用户模板关系 -->
+	<select id="getPosttempUserByVipIds" parameterType="map" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		<where>
+		<if test="userIds != null">
+		and vipId in
+		<foreach collection="userIds" item="userIds" open="(" separator="," close=")" >
+			#{userIds}
+		</foreach>
+		</if>
+		</where>
+		<if test="startIndex != null and pageNum != null">
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>	
+	<!-- 新增功能,根据用户编号集合的用户模板关系 -->
+	
+	
+	<!-- 修正原有新增功能,根据指定用户的usercode集合查询其分仓账号 (业务账号 )的用户模板关系 -->
+	<select id="getPosttempUserByUserCodes" parameterType="map" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT * FROM ec_core_posttempuser w 
+		<where>
+		<if test="userCodes != null">
+		and w.vipId in (SELECT u.id FROM ec_core_userthread u WHERE u.user_code IN 
+		<foreach collection="userCodes" item="userCodes" open="(" separator="," close=")" >
+			#{userCodes}
+		</foreach>
+		)
+		</if>
+		</where>
+		<if test="startIndex != null and pageNum != null">
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>	
+	<!-- 修正原有新增功能,根据指定用户的usercode集合查询其分仓账号 (业务账号 )的用户模板关系 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getPosttempUserByPostId" parameterType="int" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE postId = #{id}
+	</select>
+ 
+	<insert id="add" parameterType="posttempUser" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_POSTTEMPUSER
+		(id, branchId, vipId, postId)
+		VALUES(#{id}, #{branchId}, #{vipId}, #{postId})
+	</insert>
+
+	<delete id="remove" parameterType="posttempUser">
+		DELETE FROM EC_CORE_POSTTEMPUSER
+		WHERE id = #{id}
+	</delete>
+
+	<delete id="delPosttempUserByPostId" parameterType="int">
+		DELETE FROM EC_CORE_POSTTEMPUSER
+		WHERE postId = #{postId}
+	</delete>
+
+	<update id="edit" parameterType="posttempUser">
+		UPDATE EC_CORE_POSTTEMPUSER
+		SET
+		branchId=#{branchId},
+		vipId=#{vipId},
+		postId=#{postId}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getPosttempUserByBranchId" parameterType="int" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE branchId = #{id}
+	</select>
+
+	<select id="getPosttempUserByBranchIdMap" parameterType="int" resultType="posttempUser"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE branchId = #{branchId}
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<select id="getPosttempUserByBranchIdAndVipId" parameterType="map" resultType="list"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE branchId = #{branchId}
+		AND vipId=#{vipId}
+	</select>
+	
+	<select id="getPosttempUserByContractVipIdMap" parameterType="map" resultType="list"
+		resultMap="posttempUserResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMPUSER
+		WHERE branchId = #{branchId}
+		
+		<if test="vipIds != null">
+		AND vipId in
+		<foreach collection="vipIds" item="vipId" open="(" separator="," close=")" >
+			#{vipId}
+		</foreach>
+		</if>
+		<if test="startIndex != null and pageNum != null">
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+</mapper>

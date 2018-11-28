@@ -1,0 +1,16 @@
+#psw_hd{width:900px;height:56px;margin:0 auto;background:#fff;clear:both;padding:15px 0;position:relative;}
+#psw_hd h1{width:319px;height:56px;float:left;}
+#psw_hd h1 a{width:100%;height:100%;display:block;background:url(../../images/single/login_logo.png) no-repeat;text-indent:-9999em;}
+#to_login{position:absolute;top:15px;right:0;font-size:14px;}
+
+#psw_bd{width:898px;margin:0 auto;background:url(../../images/single/psw_bd_bg.png) repeat-x bottom center;border:1px solid #C8C8C8;}
+#psw_process{height:25px;position:relative;float:left;left:50%;margin-top:2px;}
+#psw_process ol{height:100%;float:left;overflow:hidden;position:relative;right:50%;}
+#psw_process li{padding-right:50px;padding-left:25px;background:#077CCC url(../../images/single/process_arrow.png) no-repeat right center;height:100%;font:700 14px/25px SimSun;color:#fff;float:left;position:relative;left:24px;}
+#psw_form{clear:both;overflow:hidden;width:500px;margin:120px auto;}
+
+#psw_ft{margin:0 auto;padding:50px 0 10px 0;width:900px;}
+#psw_ft p{text-align:center;color:#595757;font:12px/2 Arial,SimSun;}
+
+#contact, #quick_link{color: #808080;float:right;font: 12px/22px SimSun;vertical-align:middle;}
+#contact span{padding:0 10px;}

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSInfoMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSInfo" id="smsInfoResultMap">
+		<id property="id" column="id"/>
+		<id property="smsTypeId" column="sms_type_id"/>
+		<id property="smsTemplateId" column="sms_template_id"/>
+		<id property="mailNo" column="mailNo"/>
+		<id property="buyName" column="buy_name"/>
+		<id property="buyLoginName" column="buy_login_name"/>
+		<id property="buyMobile" column="buy_mobile"/>
+		<id property="sendTime" column="send_time"/>
+		<id property="count" column="count"/>
+		<id property="errorSend" column="error_send"/>
+		<id property="content" column="content"/>
+		<id property="status" column="status"/>
+		<id property="serviceType" column="service_type"/>
+		<id property="userId" column="userId"/>
+		<id property="createTime" column="create_time"/>
+		<id property="createUserId" column="create_userId"/>
+		<id property="count" column="count"/>
+		<id property="errorSend" column="errorSend"/>
+		<id property="isDel" column="is_del"/>
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.SMSInfoExpand" id="smsInfoExpandResultMap">
+		<id property="id" column="id"/>
+		<id property="smsTypeId" column="sms_type_id"/>
+		<id property="smsTemplateId" column="sms_template_id"/>
+		<id property="mailNo" column="mailNo"/>
+		<id property="buyName" column="buy_name"/>
+		<id property="buyLoginName" column="buy_login_name"/>
+		<id property="buyMobile" column="buy_mobile"/>
+		<id property="sendTime" column="send_time"/>
+		<id property="count" column="count"/>
+		<id property="errorSend" column="error_send"/>
+		<id property="content" column="content"/>
+		<id property="status" column="sms_status"/>
+		<id property="userId" column="userId"/>
+		<id property="createTime" column="create_time"/>
+		<id property="createUserId" column="create_userId"/>
+		<id property="count" column="count"/>
+		<id property="errorSend" column="errorSend"/>
+		<id property="smsTypeName" column="smstypename	"/>
+		<id property="templateName" column="templatename"/>
+		<id property="smsContent" column="smscontent"/>
+		<id property="shopName" column="shopname"/>
+		<id property="serviceType" column="service_type"/>
+		<id property="isDel" column="is_del"/>
+	</resultMap>
+	
+	<!-- 添加 -->
+	<insert id="addSMSInfo" parameterType="smsInfo" keyProperty="id"
+		useGeneratedKeys="true">
+			insert into ec_core_sms_info(id,sms_type_id,sms_template_id,
+			mailNo,buy_name,buy_login_name,buy_mobile,send_time,content,
+			status,service_type,is_del,userId,create_time,create_userId,error_send,count)values(
+			#{id},#{smsTypeId},#{smsTemplateId},#{mailNo},#{buyName},
+			#{buyLoginName},#{buyMobile},now(),#{content},#{status},#{serviceType},#{isDel},
+			#{userId},now(),#{createUserId}, #{errorSend}, #{count})	
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteSMSInfo" parameterType="Integer">
+		delete from ec_core_sms_info where id = #{id}
+	</delete>
+	
+	<!-- 更新 -->
+	<update id="updateSMSInfo" parameterType="smsInfo">
+		update ec_core_sms_info set
+		sms_type_id = #{smsTypeId},
+		sms_template_id = #{smsTemplateId},
+		mailNo = #{mailNo},
+		buy_name = #{buyName},
+		buy_login_name = #{buyLoginName},
+		buy_mobile = #{buyMobile},
+		send_time = #{sendTime},
+		content = #{content},
+		error_send = #{errorSend},
+		count = #{count},
+		status = #{status},
+		service_type = #{serviceType},
+		userId = #{userId},
+		create_time = #{createTime},
+		create_userId = #{createUserId},
+		is_del = #{isDel}
+		where id = #{id}
+	</update>
+	
+	<!-- 查找 -->
+	<select id="getSMSInfoById" parameterType="Integer" resultType="smsInfo" resultMap="smsInfoResultMap">
+		select * from ec_core_sms_info where id = #{id}	 
+	</select>
+	
+	<!-- 发送短信成功时修改 -->
+	<update id="updateSMSInfoById" parameterType="smsInfo">
+		update ec_core_sms_info set
+		status = #{status},count=#{count},send_time=#{sendTime}
+		where id = #{id}
+	</update>
+	
+	<!-- 发送短信失败时修改 -->
+	<update id="updateErrorSendById" parameterType="smsInfo">
+		update ec_core_sms_info set
+		status = #{status},count=#{count},error_send=#{errorSend},send_time=#{sendTime}
+		where id = #{id}
+	</update>
+	
+	 <!-- 获取主账户ID,以及年月日,获取短信数量  -->
+	 <select id="getCountByToday" parameterType="Map" resultType="integer">
+		select sum(count) from ec_core_sms_info where status='0'
+		<!-- 主账户ID -->
+		<if test="userIds != null and userIds !='' and userIds.size() > 0">
+			AND userId IN
+			<foreach collection="userIds" item="userId" open="(" separator="," close=")" >
+				#{userId} 
+			</foreach>
+		</if>
+		<!-- 年月日 判断 -->
+		<if test="year != null and year !=''">
+			and year(send_time) = #{year}
+		</if>
+		<if test="month != null and month !=''">
+			and month(send_time) = #{month}
+		</if>
+		<if test="day != null and day !=''">
+			and day(send_time) = #{day}
+		</if>
+		<if test="status != null and status !=''">
+			and status = #{status}
+		</if>
+	</select>
+	
+	<select id="getSMSInfoByPamams" parameterType="Map" resultType="list"
+		resultMap="smsInfoExpandResultMap">
+		<![CDATA[
+			select t.*,t1.name as smstypename,t2.name as templatename,t1.introduction as smscontent,t3.shop_name as shopname,t3.user_name as createUserName 
+			from ec_core_sms_info t  
+			left join ec_core_sms_service t1 on (t.sms_type_id = t1.id and t.userid = t1.userid)
+			left join ec_core_sms_template t2 on (t.sms_template_id = t2.id)
+			left join ec_core_user t3 on t.create_userid = t3.id
+		]]>
+		<where>
+			<if test="shopUserIds != null and shopUserIds !='' and shopUserIds.size() > 0">
+				AND t.create_userid IN
+				<foreach collection="shopUserIds" item="shopUserId" open="(" separator="," close=")" >
+					#{shopUserId} 
+				</foreach>
+			</if>
+			<if test="userIds != null and userIds !='' and userIds.size() > 0">
+				AND t.userId IN
+				<foreach collection="userIds" item="userId" open="(" separator="," close=")" >
+					#{userId} 
+				</foreach>
+			</if>
+			<!-- smsTypeId,smsTemplateId,sendTimeStart,sendTimeEnd,status -->
+			<if test="smsTypeId != null and smsTypeId !=''">
+				and t.sms_type_id = #{smsTypeId}
+			</if>
+			<if test="smsTemplateId != null and smsTemplateId !=''">
+				and t.sms_template_id = #{smsTemplateId}
+			</if>
+			<if test="status != null and status !=''">
+				and t.status = #{status}
+			</if>
+			<if test="sendTimeStart != null and sendTimeStart !=''">
+				and date(t.send_time) >= #{sendTimeStart}
+			</if>
+			<if test="sendTimeEnd != null and sendTimeEnd !=''">
+			<![CDATA[
+				and date(t.send_time) <= #{sendTimeEnd}
+			]]>
+			</if>
+			<!-- buyName,buyMobile,mailNo,loginName 以 buyName 处理 -->
+			<if test="buyMobile != null and buyMobile !=''">
+				and t.buy_mobile = #{buyMobile}
+			</if>
+			<if test="mailNo != null and mailNo !=''">
+				and t.mailNo = #{mailNo}
+			</if>
+			<if test="serviceType != null and serviceType !=''">
+				and service_type = #{serviceType}
+			</if>
+			<if test="isDel != null and isDel !=''">
+				and is_del = #{isDel}
+			</if>
+			<if test="buyName != null and buyName !=''">
+				and (t.buy_name = #{buyName} OR t.buy_login_name = #{buyName})
+			</if>
+				order by t.send_time desc
+			<if test='startIndex != null and pageNum != null'>
+				LIMIT #{startIndex}, #{pageNum}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据查询条件获取短信信息数量   -->
+	<select id="getSMSInfoCountByPamams" parameterType="Map" resultType="integer">
+		<![CDATA[
+			select count(*) from ec_core_sms_info 
+		]]>   
+		<where>
+			<if test="shopUserIds != null and shopUserIds !='' and shopUserIds.size() > 0">
+				AND create_userid IN
+				<foreach collection="shopUserIds" item="shopUserId" open="(" separator="," close=")" >
+					#{shopUserId} 
+				</foreach>
+			</if>
+			<if test="userIds != null and userIds !='' and userIds.size() > 0">
+				AND userId IN
+				<foreach collection="userIds" item="userId" open="(" separator="," close=")" >
+					#{userId} 
+				</foreach>
+			</if>
+			<!-- smsTypeId,smsTemplateId,sendTimeStart,sendTimeEnd,status -->
+			<if test="smsTypeId != null and smsTypeId !=''">
+				and sms_type_id = #{smsTypeId}
+			</if>
+			<if test="smsTemplateId != null and smsTemplateId !=''">
+				and sms_template_id = #{smsTemplateId}
+			</if>
+			<if test="status != null and status !=''">
+				and status = #{status}
+			</if>
+			<if test="sendTimeStart != null and sendTimeStart !=''">
+				and date(send_time) >= #{sendTimeStart}
+			</if>
+			<if test="sendTimeEnd != null and sendTimeEnd !=''">
+			<![CDATA[
+				and date(send_time) <= #{sendTimeEnd}
+			]]>
+			</if>
+			<!-- buyName,buyMobile,mailNo,loginName 以 buyName 处理 -->
+			<if test="buyMobile != null and buyMobile !=''">
+				and buy_mobile = #{buyMobile}
+			</if>
+			<if test="mailNo != null and mailNo !=''">
+				and mailNo = #{mailNo}
+			</if>
+			<if test="serviceType != null and serviceType !=''">
+				and service_type = #{serviceType}
+			</if>
+			<if test="isDel != null and isDel !=''">
+				and is_del = #{isDel}
+			</if>
+			<if test="buyName != null and buyName !=''">
+				and (buy_name = #{buyName} OR buy_login_name = #{buyName})
+			</if>
+		</where>
+	</select>
+	<!-- 根据以下参数查看短信是否已经发送 -->
+	<select id="isNotSendByParams" parameterType="Map" resultType="smsInfo" resultMap="smsInfoResultMap">
+		select * from ec_core_sms_info 
+		<where>
+			<if test="status != null and status !=''">
+				and service_type = #{status} 
+			</if>
+			<if test="mailNo != null and mailNo !=''">
+				and mailNo = #{mailNo} 
+			</if>
+			<if test="buyMobile != null and buyMobile !=''">
+				and buy_mobile = #{buyMobile}
+			</if>
+		</where>
+	</select>
+</mapper>

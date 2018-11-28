@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.UserThreadContractMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.UserThreadContract" id="userThreadContractResultMap">
+		<id property="id" column="id" />
+		<id property="siteId" column="site_id" />
+		<id property="conractAreaId" column="conract_area_id" />
+		<id property="createTime" column="create_time" />
+		<id property="updateTime" column="update_time" />
+		<id property="accountType" column="account_type" />
+		<id property="switchEccount" column="switcheccount" /><!-- 是否关闭电子对账功能(1:关闭；0：开启) -->
+		<id property="addUserName" column="add_userName" />
+	</resultMap>
+	
+	<insert id="insertContract" parameterType="userThreadContract" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO EC_CORE_USERTHREAD_CONTRACT_AREA(id, site_id, conract_area_id, 
+			create_time, account_type,add_userName)
+		VALUES(
+		#{id},#{siteId},#{conractAreaId},now(),#{accountType},#{addUserName})
+	</insert>
+	
+	<select id="searchContractsBysiteId" resultType="list" parameterType="userThreadContract" resultMap="userThreadContractResultMap">
+		SELECT DISTINCT * FROM
+		EC_CORE_USERTHREAD_CONTRACT_AREA
+		WHERE site_id = #{siteId}
+		<if test="accountType != null ">
+			AND account_type = '2'
+		</if>
+		
+	</select>
+	
+	<select id="searchContractByConractAreaId" parameterType="userThreadContract" resultType="list" resultMap="userThreadContractResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD_CONTRACT_AREA
+		WHERE conract_area_id = #{conractAreaId}
+		<if test="accountType != null ">
+		AND account_type = '2'
+		</if>
+	</select>
+	
+	<update id="updateContractByAddUserName" parameterType="userThreadContract" >
+		UPDATE EC_CORE_USERTHREAD_CONTRACT_AREA
+		SET account_type = #{accountType},
+		update_time = now()
+		WHERE add_userName = #{addUserName}
+	</update>
+	
+	<select id="remove" parameterType="userThreadContract" >
+		DELETE FROM
+		EC_CORE_USERTHREAD_CONTRACT_AREA
+		WHERE conract_area_id = #{conractAreaId}
+		<if test="addUserName != null" >
+			AND add_userName = #{addUserName}
+		</if>
+	</select>
+	
+	<select id="removeByAddUsername" parameterType="userThreadContract" >
+		DELETE FROM
+		EC_CORE_USERTHREAD_CONTRACT_AREA
+		WHERE add_userName = #{addUserName}
+	</select>
+	
+	<select id="getContractersByUserNameAndType" resultType="list" parameterType="userThreadContract" resultMap="userThreadContractResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD_CONTRACT_AREA
+		WHERE add_userName = #{addUserName}
+		<if test="accountType != null" >
+			AND account_type = #{accountType}
+		</if>
+		
+	</select>
+	
+	<select id="searchContractByConractAreaIdAndUserName" parameterType="userThreadContract" resultType="list" resultMap="userThreadContractResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD_CONTRACT_AREA
+		WHERE conract_area_id = #{conractAreaId}
+		AND add_userName = #{addUserName}
+	</select>
+	
+</mapper>

@@ -1,0 +1,25 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="messageTheme">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入主题</message>
+		</field-validator>
+		<field-validator type="stringlength">
+             <param name="minLength">0</param>
+             <param name="maxLength">20</param>
+             <message>主题不能超过20个字</message>
+        </field-validator>
+	</field>
+	<field name="messageContent">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>请输入主题内容</message>
+		</field-validator>
+		<field-validator type="stringlength">
+             <param name="minLength">0</param>
+             <param name="maxLength">500</param>
+             <message>内容不能超过500字</message>
+        </field-validator>
+	</field>
+</validators>

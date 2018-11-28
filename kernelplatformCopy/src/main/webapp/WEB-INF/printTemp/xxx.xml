@@ -1,0 +1,47 @@
+<data>
+	<item>
+		<store_name>test_vip2 shop</store_name>
+		<ship_name>孙云滕</ship_name>
+		<ship_regionFullName>山东省 烟台市 蓬莱市</ship_regionFullName>
+		<ship_address>电话通知
+			来人自取O(&cap;_&cap;)O~
+		</ship_address>
+		<ship_tel></ship_tel>
+		<ship_zip>265600</ship_zip>
+		<order_no>139250087423758</order_no>
+		<shipment_item_count>4</shipment_item_count>
+		<shipment_no>LP00005387481299</shipment_no>
+		<dly_name>叶生</dly_name>
+		<dly_regionFullName>广东省 广州市 黄埔区</dly_regionFullName>
+		<dly_address>丰乐北路泰景花圆乙烯大院13栋102号</dly_address>
+		<dly_tel>82377474</dly_tel>
+		<dly_zip>510000</dly_zip>
+		<dly_mobile></dly_mobile>
+		<date_year>2012</date_year>
+		<date_moth>02</date_moth>
+		<date_day>05</date_day>
+	</item>
+</data>
+
+<data>
+	<item>
+		<store_name>test_vip2 shop</store_name>
+		<ship_name>孙云滕</ship_name>
+		<ship_regionFullName>山东省 烟台市 蓬莱市</ship_regionFullName>
+		<ship_address>电话通知 来人自取</ship_address>
+		<ship_tel></ship_tel>
+		<ship_zip>265600</ship_zip>
+		<order_no>139250087423758</order_no>
+		<shipment_item_count>4</shipment_item_count>
+		<shipment_no>LP00005387481299</shipment_no>
+		<dly_name>叶生</dly_name>
+		<dly_regionFullName>广东省 广州市 黄埔区</dly_regionFullName>
+		<dly_address>丰乐北路泰景花圆乙烯大院13栋102号</dly_address>
+		<dly_tel>82377474</dly_tel>
+		<dly_zip>510000</dly_zip>
+		<dly_mobile></dly_mobile>
+		<date_year>2012</date_year>
+		<date_moth>02</date_moth>
+		<date_day>05</date_day>
+	</item>
+</data>

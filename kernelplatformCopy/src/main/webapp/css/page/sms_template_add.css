@@ -1,0 +1,21 @@
+.line_box{margin-bottom:10px;position:relative;*zoom:1;}
+.line_box label{font:700 14px/26px SimSun;color:#000;}
+.line_box em{font:12px/26px SimSun;color:#FC3A3A;display:block;margin-top:5px;}
+#sms_content{display:inline-block;float:left;width:585px;height:100px;color:#000;padding:2px 5px;border:1px solid #a0b3d6;/*font:12px/20px Arial;*/font-size:13px;line-height:26px;overflow:auto;}
+#label_key{position:absolute;top:1px;right:321px;_right:320px;*top:2px;height:26px;}
+#label_key li{border:1px solid #97B7E2;float:left;display:inline-block;height:24px;overflow:hidden;}
+#label_key ul{height:26px;vertical-align:middle;float:left;}
+#label_key span{float:left;vertical-align:middle;}
+#label_key li a{height:22px;display:inline-block;background:url(../../images/single/key_bg.png) repeat-x;padding:0 5px;overflow:hidden;margin:1px;}
+#label_key li a:hover{text-decoration:none;}
+.submit_btn{margin:10px 50px;}
+#sms_title{width:200px;}
+.block_label{display:block;}
+.disable_a{cursor:not-allowed;}
+#manager_ft p{/*color:#5ABD08;*/line-height:1.6;}
+.tmp{height:140px;}
+#font_count{color:#2e8306;font:32px/1.4 Arial;}
+#sms_content img{margin:5px 3px -5px;}
+.red{color:#f00;}
+.blue{color:#00f;}
+.end_img{width:1px;heigth:1px;}

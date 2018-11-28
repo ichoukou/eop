@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.TempOrderMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.TempOrder" id="tempOrderResultMap">
+		<id property="id" column="id"/>
+		<result property="orderId" column="order_id"/>
+		<result property="tempType" column="temp_type"/>
+		<result property="tempKey" column="temp_key"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="backup" column="backup"/>
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="tempOrder" keyProperty="id" useGeneratedKeys="true">
+		insert into EC_CORE_TEMPORDER(id, order_id, temp_type, temp_key, backup)
+		values(#{id}, #{orderId}, #{tempType}, #{tempKey}, #{backup})
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="edit" parameterType="tempOrder">
+		update EC_CORE_TEMPORDER t set
+		t.order_id = #{orderId},
+		t.temp_type = #{tempType},
+		t.temp_key = #{tempKey},
+		t.update_time = current_timestamp,
+		t.backup = #{backup}
+		where t.id = #{id}
+	</update>
+	
+	<select id="get" parameterType="tempOrder" resultType="net.ytoec.kernel.dataobject.TempOrder" resultMap="tempOrderResultMap">
+		<![CDATA[
+			select * from EC_CORE_TEMPORDER t where t.id = #{id} 
+        ]]>
+	</select>
+	
+	<select id="getByOrderId" parameterType="string" resultType="list" resultMap="tempOrderResultMap">
+		<![CDATA[
+			select * from EC_CORE_TEMPORDER t where t.order_id = #{orderId}
+        ]]>
+	</select>
+	
+	<!-- 查询不同temp_key下不同订单列表 -->
+	<select id="getTempListByMap" resultType="list" resultMap="tempOrderResultMap" parameterType="java.util.Map">
+			select * from EC_CORE_TEMPORDER t 
+			where t.temp_key = #{tempKey}
+			<if test="orderId!=null">
+				and t.order_id = #{orderId}
+			</if>
+			<if test="tempType!=null">
+				and t.temp_type = #{tempType}
+			</if>
+			order by t.create_time desc
+			<if test='startIndex != null and pageNum != null'>
+				limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 统计不同temp_key下不同订单列表 -->
+	<select id="countTempListByMap" resultType="int" parameterType="java.util.Map">
+			select count(*) from EC_CORE_TEMPORDER t 
+			where t.temp_key = #{tempKey}
+			<if test="orderId!=null">
+				and t.order_id = #{orderId}
+			</if>
+			<if test="tempType!=null">
+				and t.temp_type = #{tempType}
+			</if>
+			order by t.create_time desc
+	</select>
+	
+	<delete id="remove" parameterType="tempOrder">
+		delete from EC_CORE_TEMPORDER where id = #{id}
+	</delete>
+	
+</mapper>

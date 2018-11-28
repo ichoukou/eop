@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="UpdateInfo" type="UpdateInfoType"/>
+	<xsd:complexType name="UpdateInfoType">
+		<xsd:all>
+			<xsd:element name="logisticProviderID" type="logisticProviderID_Type"/>
+			<xsd:element name="ecCompanyId" type="str64Type"/>
+			<xsd:element name="fieldList" type="fieldListType"/>
+		</xsd:all>
+	</xsd:complexType>
+	<xsd:simpleType name="logisticProviderID_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="YTO"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="fieldListType">
+		<xsd:sequence>
+			<xsd:element name="field" type="fieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="fieldType">
+		<xsd:sequence>
+			<xsd:element name="txLogisticID" type="str64Type" />
+			<xsd:element name="fieldName" type="str64_null_Type"/>
+			<xsd:element name="fieldValue" type="str64_null_Type"/>
+			<xsd:element name="remark" type="str215_null_Type"  minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="solution" type="str215_null_Type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="str64Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str64_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str215Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="215" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str215_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="215" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

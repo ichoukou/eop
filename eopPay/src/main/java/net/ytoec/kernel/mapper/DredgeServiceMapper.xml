@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.DredgeServiceMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.DredgeService" id="dredgeServiceResultMap">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="serviceId" column="service_id"/>
+		<result property="flag" column="flag"/>
+		<result property="balance" column="balance"/>
+		<result property="circle" column="circle"/>
+		<result property="beginDate" column="begin_Date"/>
+		<result property="endDate" column="end_Date"/>	
+		<result property="autoRenew" column="auto_renew"/>
+		<result property="smsUsecount" column="sms_usecount"/>
+		<result property="smsAllcount" column="sms_allcount"/>
+		<result property="smsSendcount" column="sms_sendcount"/>
+		<result property="smsLess" column="sms_less"/>
+		<result property="cost" column="cost"/>
+		<result property="remindFlag" column="remind_flag"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	
+	<insert id="add" parameterType="dredgeService" keyProperty="id" useGeneratedKeys="true">
+		insert into ec_core_dredgeservice
+		(
+		  id, user_id, service_id, flag, balance,circle,begin_Date,end_Date,auto_renew,sms_usecount,
+		  sms_allcount,sms_sendcount,sms_less,cost,remind_flag,create_time,update_time,remark
+		)
+		values
+		(
+		  #{id}, #{userId}, #{serviceId}, #{flag}, #{balance},#{circle},
+		  #{beginDate}, #{endDate}, #{autoRenew}, #{smsUsecount}, #{smsAllcount},#{smsSendcount},
+		  #{smsLess},#{cost}, 0, now(), now(),#{remark}
+		)
+	</insert>
+	
+	<!-- 删除记录(除了支付删除临时记录,其它地方禁止调用)begin -->
+	<delete id="remove" parameterType="dredgeService">
+		delete from ec_core_dredgeservice where id = #{id}
+		<if test="serviceId != null and serviceId != ''">
+		       and service_id = #{serviceId}
+		  </if>
+	      <if test="flag != null and flag != ''">
+		       and flag = #{flag}
+		 </if>
+		 <if test="userId != null and userId != ''">
+		      and user_id = #{userId} 
+		</if> 
+	</delete>
+
+	<select id="get" parameterType="dredgeService" resultType="dredgeService" resultMap="dredgeServiceResultMap">
+		select * from ec_core_dredgeservice where id = #{id}  		
+			<if test="userId != null and userId != ''">
+			   and user_id = #{userId} 
+			</if>
+			<if test="serviceId != null and serviceId != ''">
+			   and service_id = #{serviceId} 
+			</if>
+			<if test="flag != null and flag != ''">
+			   and flag = #{flag} 
+			</if>
+			<if test="balance != null and balance != ''">
+			   and balance = #{balance} 
+			</if>
+			<if test="circle != null and circle != ''">
+			   and circle = #{circle} 
+			</if>
+			<if test="beginDate != null and beginDate != ''">
+			   and begin_Date = #{beginDate} 
+			</if>
+			<if test="endDate != null and endDate != ''">
+			   and end_Date = #{endDate} 
+			</if>
+			<if test="autoRenew != null and autoRenew != ''">
+			   and auto_renew = #{autoRenew} 
+			</if>
+			<if test="smsUsecount != null and smsUsecount != ''">
+			   and sms_usecount = #{smsUsecount} 
+			</if>
+			<if test="smsAllcount != null and smsAllcount != ''">
+			   and sms_allcount = #{smsAllcount} 
+			</if>		
+			<if test="smsSendcount != null and smsSendcount != ''">
+			   and sms_sendcount = #{smsSendcount} 
+			</if>
+			<if test="smsLess != null and smsLess != ''">
+			   and sms_less = #{smsLess} 
+			</if>		
+			<if test="cost != null and cost != ''">
+			   and cost = #{cost} 
+			</if>
+			<if test="remindFlag != null and remindFlag != ''">
+			   and remind_flag = #{remindFlag} 
+			</if>	
+			<if test="updateTime != null and updateTime != ''">
+			   and update_time = #{updateTime} 
+			</if>
+			<if test="remark != null and remark != ''">
+			   and remark = #{remark} 
+			</if>
+	</select>
+	
+	<!-- 查询开通的服务 (只查状态是启用的)begin -->
+	<select id="getOpenserviceTimeList"  resultType="dredgeService" resultMap="dredgeServiceResultMap">
+		<![CDATA[
+			select * from ec_core_dredgeservice t where  flag='1' 
+           ]]>
+	</select>
+	
+	<select id="getOpenserviceList" parameterType="map" resultType="dredgeService" resultMap="dredgeServiceResultMap">
+		
+			select * from ec_core_dredgeservice t where  flag='1'
+			<if test="userId != null and userId != ''">
+		      and user_id = #{userId}
+		    </if>			
+			<if test="serviceIdList != null">
+		    and service_id not in
+		     <foreach collection="serviceIdList" item="serviceIdList" open="(" separator="," close=")" >
+			#{serviceIdList}
+		    </foreach>
+		</if>		
+         
+	</select>
+	
+	<!-- 根据名称查询,状态 -->
+	<select id="getOpenserviceListByName" parameterType="map" resultType="dredgeService" resultMap="dredgeServiceResultMap">
+		
+			select * from ec_core_dredgeservice t where  flag='1'
+			<if test="userId != null and userId != ''">
+		      and user_id = #{userId}
+		    </if>
+		    <if test="serviceIdList != null">
+		    and service_id not in
+		     <foreach collection="serviceIdList" item="serviceIdList" open="(" separator="," close=")" >
+			#{serviceIdList}
+		    </foreach>
+			</if>					
+	</select>
+	
+	<!-- 查询开通的服务end -->
+	
+	<!-- 根据用户id,服务id查询 服务表中的一条记录 begin -->
+	<select id="getServiceRecordByUserId" parameterType="Map" resultType="list" resultMap="dredgeServiceResultMap">
+		select * from ec_core_dredgeservice t 
+		where  user_id = #{userId} 	
+		<if test="serviceId != null and serviceId != ''">
+		     and service_id = #{serviceId}
+		</if>
+		<if test="flag != null and flag != ''">
+		     and flag = #{flag}
+		</if>
+		 <if test="remindFlag != null and remindFlag != ''">
+		     and remind_flag = #{remindFlag}
+		 </if>
+	 </select>
+	<!-- 根据用户id,服务id查询 服务表中的一条记录 end -->
+
+	
+	<!-- 修改开发服务表记录短信相关的信息 begin -->
+		<update id="updateDredgeserviceBySMS" parameterType="dredgeService">
+	    update 
+	        ec_core_dredgeservice
+	    set 
+	        update_time = now()	      
+	        <if test="flag != null and flag != ''">
+		       ,flag = #{flag}
+		    </if>
+	        <if test="balance != null and balance != ''">
+		       ,balance = #{balance}
+		    </if>
+	        <if test="circle != null and circle != ''">
+		       ,circle = #{circle}
+		    </if>
+	        <if test="beginDate != null and beginDate != ''">
+		       ,begin_Date = #{beginDate}
+		    </if>	        
+	         <if test="endDate != null and endDate != ''">
+		       ,end_Date = #{endDate}
+		    </if>	
+	        <if test="autoRenew != null and autoRenew != ''">
+		       ,auto_renew = #{autoRenew}
+		    </if>
+	        <if test="smsUsecount != null and smsUsecount != ''">
+		       ,sms_usecount = #{smsUsecount}
+		    </if>
+	        <if test="smsAllcount != null and smsAllcount != ''">
+		       ,sms_allcount =  #{smsAllcount}	
+		    </if>
+	        <if test="smsSendcount != null and smsSendcount != ''">
+		       ,sms_sendcount = #{smsSendcount}	
+		    </if>         
+	        <if test="smsLess != null and smsLess != ''">
+		       ,sms_less = #{smsLess}	
+		    </if> 
+	         <if test="cost != null and cost != ''">
+		       ,cost = #{cost}	
+		    </if>  
+	        <if test="remindFlag != null and remindFlag != ''">
+		       ,remind_flag = #{remindFlag}
+		    </if>
+	         <if test="remark != null and remark != ''">
+		       ,remark = #{remark} 
+		    </if>	        
+	    where  user_id = #{userId} and 
+	    service_id = #{serviceId}	
+	     <if test="updateTime != null and updateTime != ''">
+		       and update_time = #{updateTime} 
+		   </if>		  
+	</update>
+	<!-- 修改开发服务表记录短信相关的信息 end -->
+	
+
+	
+
+	<!-- 修改开发服务表记录 begin -->
+	<update id="updateDredgeserviceBalanceById" parameterType="dredgeService">
+	    update 
+	        ec_core_dredgeservice
+	    set 
+	        update_time = now()	      
+	        <if test="flag != null and flag != ''">
+		       ,flag = #{flag}
+		    </if>
+	        <if test="balance != null and balance != ''">
+		       ,balance = #{balance}
+		    </if>
+	        <if test="circle != null and circle != ''">
+		       ,circle = #{circle}
+		    </if>
+	        <if test="beginDate != null and beginDate != ''">
+		       ,begin_Date = #{beginDate}
+		    </if>	        
+	         <if test="endDate != null and endDate != ''">
+		       ,end_Date = #{endDate}
+		    </if>	
+	        <if test="autoRenew != null and autoRenew != ''">
+		       ,auto_renew = #{autoRenew}
+		    </if>
+	        <if test="smsUsecount != null and smsUsecount != ''">
+		       ,sms_usecount = #{smsUsecount}
+		    </if>
+	        <if test="smsAllcount != null and smsAllcount != ''">
+		       ,sms_allcount = #{smsAllcount}	
+		    </if>
+	        <if test="smsSendcount != null and smsSendcount != ''">
+		       ,sms_sendcount = #{smsSendcount}	
+		    </if>         
+	        <if test="smsLess != null and smsLess != ''">
+		       ,sms_less = #{smsLess}	
+		    </if> 
+	         <if test="cost != null and cost != ''">
+		       ,cost = #{cost}	
+		    </if>  
+	        <if test="remindFlag != null and remindFlag != ''">
+		       ,remind_flag = #{remindFlag}
+		    </if>
+	         <if test="remark != null and remark != ''">
+		       ,remark = #{remark} 
+		    </if>	        
+	        where  user_id = #{userId} and 
+	               service_id = #{serviceId}	
+		    <if test="updateTime != null and updateTime != ''">
+			     and update_time = #{updateTime} 
+			</if>		  
+	</update>
+	
+	<!-- 修改开发服务表记录 end -->
+	
+	<update id="edit" parameterType="dredgeService">
+	    update 
+	        ec_core_dredgeservice
+	    set 
+	        update_time = now()
+	        <if test="serviceId != null and serviceId != ''">
+		       ,service_id = #{serviceId}
+		    </if>
+	        <if test="flag != null and flag != ''">
+		       ,flag = #{flag}
+		    </if>
+	        <if test="balance != null and balance != ''">
+		       ,balance = #{balance}
+		    </if>
+	        <if test="circle != null and circle != ''">
+		       ,circle = #{circle}
+		    </if>
+	        <if test="beginDate != null and beginDate != ''">
+		       ,begin_Date = #{beginDate}
+		    </if>	        
+	         <if test="endDate != null and endDate != ''">
+		       ,end_Date = #{endDate}
+		    </if>	
+	        <if test="autoRenew != null and autoRenew != ''">
+		       ,auto_renew = #{autoRenew}
+		    </if>
+	        <if test="(smsUsecount != null and smsUsecount != '') or smsUsecount == 0 ">
+		       ,sms_usecount = #{smsUsecount}
+		    </if>
+	        <if test="(smsAllcount != null and smsAllcount != '') or smsAllcount == 0 ">
+		       ,sms_allcount = #{smsAllcount}	
+		    </if>
+	        <if test="smsSendcount != null and smsSendcount != ''">
+		       ,sms_sendcount = #{smsSendcount}	
+		    </if>         
+	        <if test="smsLess != null and smsLess != ''">
+		       ,sms_less = #{smsLess}	
+		    </if> 
+	         <if test="cost != null and cost != ''">
+		       ,cost = #{cost}	
+		    </if>  
+	        <if test="remindFlag != null and remindFlag != ''">
+		       ,remind_flag = #{remindFlag}
+		    </if>
+	         <if test="remark != null and remark != ''">
+		       ,remark = #{remark} 
+		    </if>	        
+	    where id = #{id}
+	</update>
+	
+	<select id="getDredgeserviceList" parameterType="map" resultType="list" resultMap="dredgeServiceResultMap">
+		select * from  ec_core_dredgeservice
+		<where>
+			<if test="id != null and id != ''">
+			   and id = #{id} 
+			</if>
+			<if test="userId != null and userId != ''">
+			   and user_id = #{userId} 
+			</if>
+			<if test="serviceId != null and serviceId != ''">
+			   and service_id = #{serviceId} 
+			</if>
+			<if test="userIdArray != null">
+				and user_id in
+			<foreach collection="userIdArray" item="userIdArray" open="("
+				separator="," close=")">
+				#{userIdArray}
+		    </foreach>
+			</if>
+			<if test="serviceIdArray != null">
+				and service_id in
+			<foreach collection="serviceIdArray" item="serviceIdArray" open="("
+				separator="," close=")">
+				#{serviceIdArray}
+		    </foreach>
+			</if>
+			<if test="flag != null and flag != ''">
+			   and flag = #{flag} 
+			</if>
+			<if test="balance != null and balance != ''">
+			   and balance = #{balance} 
+			</if>
+			<if test="circle != null and circle != ''">
+			   and circle = #{circle} 
+			</if>
+			<if test="beginDate != null and beginDate != ''">
+			   and begin_Date = #{beginDate} 
+			</if>
+			<if test="endDate != null and endDate != ''">
+			   and end_Date = #{endDate} 
+			</if>
+			<if test="autoRenew != null and autoRenew != ''">
+			   and auto_renew = #{autoRenew} 
+			</if>
+			<if test="smsUsecount != null and smsUsecount != ''">
+			   and sms_usecount = #{smsUsecount} 
+			</if>
+			<if test="smsAllcount != null and smsAllcount != ''">
+			   and sms_allcount = #{smsAllcount} 
+			</if>		
+			<if test="smsSendcount != null and smsSendcount != ''">
+			   and sms_sendcount = #{smsSendcount} 
+			</if>
+			<if test="smsLess != null and smsLess != ''">
+			   and sms_less = #{smsLess} 
+			</if>		
+			<if test="cost != null and cost != ''">
+			   and cost = #{cost} 
+			</if>
+			<if test="remindFlag != null and remindFlag != ''">
+			   and remind_flag = #{remindFlag} 
+			</if>		
+			<if test="startTime != null and endTime != null ">
+			   and begin_Date between #{startTime} and #{endTime} 
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+			   and update_time = #{updateTime} 
+			</if>
+			<if test="remark != null and remark != ''">
+			   and remark = #{remark} 
+			</if>
+		</where>
+		    order by begin_Date desc
+		<if test='startIndex != null and pageNum != null'>
+		   limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getDredgeserviceListCount" parameterType="map" resultType="java.lang.Integer">
+		select count(id) from  ec_core_dredgeservice
+		<where>
+			<if test="id != null and id != ''">
+			   and id = #{id} 
+			</if>
+			<if test="userId != null and userId != ''">
+			   and user_id = #{userId} 
+			</if>
+			<if test="serviceId != null and serviceId != ''">
+			   and service_id = #{serviceId} 
+			</if>
+			<if test="userIdArray != null">
+				and user_id in
+			<foreach collection="userIdArray" item="userIdArray" open="("
+				separator="," close=")">
+				#{userIdArray}
+		    </foreach>
+			</if>
+			<if test="serviceIdArray != null">
+				and service_id in
+			<foreach collection="serviceIdArray" item="serviceIdArray" open="("
+				separator="," close=")">
+				#{serviceIdArray}
+		    </foreach>
+			</if>
+			<if test="flag != null and flag != ''">
+			   and flag = #{flag} 
+			</if>
+			<if test="balance != null and balance != ''">
+			   and balance = #{balance} 
+			</if>
+			<if test="circle != null and circle != ''">
+			   and circle = #{circle} 
+			</if>
+			<if test="beginDate != null and beginDate != ''">
+			   and begin_Date = #{beginDate} 
+			</if>
+			<if test="endDate != null and endDate != ''">
+			   and end_Date = #{endDate} 
+			</if>
+			<if test="autoRenew != null and autoRenew != ''">
+			   and auto_renew = #{autoRenew} 
+			</if>
+			<if test="smsUsecount != null and smsUsecount != ''">
+			   and sms_usecount = #{smsUsecount} 
+			</if>
+			<if test="smsAllcount != null and smsAllcount != ''">
+			   and sms_allcount = #{smsAllcount} 
+			</if>		
+			<if test="smsSendcount != null and smsSendcount != ''">
+			   and sms_sendcount = #{smsSendcount} 
+			</if>
+			<if test="smsLess != null and smsLess != ''">
+			   and sms_less = #{smsLess} 
+			</if>		
+			<if test="cost != null and cost != ''">
+			   and cost = #{cost} 
+			</if>
+			<if test="remindFlag != null and remindFlag != ''">
+			   and remind_flag = #{remindFlag} 
+			</if>		
+			<if test="startTime != null and endTime != null ">
+			   and begin_Date between #{startTime} and #{endTime} 
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+			   and update_time = #{updateTime} 
+			</if>
+			<if test="remark != null and remark != ''">
+			   and remark = #{remark} 
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateBalanceByUserId" parameterType="dredgeService">
+	      update 
+	        ec_core_dredgeservice
+	      set 
+	        update_time = now()
+	        ,balance = #{balance}
+	     where user_id = #{userId}
+	</update>
+	
+	<update id="updateFlagById" parameterType="dredgeService">
+	     update 
+	        ec_core_dredgeservice
+	      set 
+	        update_time = now()
+	        ,flag = #{flag} 
+	     where id = #{id} 
+	</update>
+	
+	<!-- 批量添加 -->
+	<insert id="insertBatch" parameterType="java.util.List">  
+	    <selectKey keyProperty="id" order="BEFORE"  resultType="java.lang.Integer">  
+           SELECT LAST_INSERT_ID()  
+        </selectKey>   
+        insert into ec_core_dredgeservice
+		(
+		  user_id, service_id, flag, balance,circle,begin_Date,end_Date,auto_renew,sms_usecount,
+		  sms_allcount,sms_sendcount,sms_less,cost,remind_flag,create_time,update_time,remark
+		)
+		values
+	    <foreach collection="list" item="item" index="index" separator=","> 
+	     (
+	       #{item.userId}, #{item.serviceId}, #{item.flag}, #{item.balance},#{item.circle},
+		   #{item.beginDate}, #{item.endDate}, #{item.autoRenew}, #{item.smsUsecount}, #{item.smsAllcount},#{item.smsSendcount},
+		   #{item.smsLess},#{item.cost}, #{item.remindFlag}, now(), now(),#{item.remark}
+	     ) 
+	    </foreach>  
+    </insert>  
+    
+    <!-- 批量更新begin -->
+    <update id="updateBatch" parameterType="java.util.List">
+		  <foreach collection="list" item="item" index="index" separator=" OR ">
+		  update ec_core_dredgeservice set balance = #{item.balance},sms_less=#{item.smsLess},flag = #{item.flag}
+		    where user_id = #{item.userId} and service_id = #{item.serviceId}
+		  </foreach>
+   </update>
+    <!-- 批量更新end -->
+    
+    <!--根据id,serviceId,flag(临时状态的数据更新主要用于支付、付款操作) begin -->
+    <update id="updateDredgeserviceUseAlipay" parameterType="dredgeService">
+	    update 
+	        ec_core_dredgeservice
+	    set 
+	        update_time = now()
+	        <if test="serviceId != null and serviceId != ''">
+		       ,service_id = #{serviceId}
+		    </if>
+	        <if test="flag != null and flag != ''">
+		       ,flag = #{flag}
+		    </if>
+	        <if test="balance != null and balance != ''">
+		       ,balance = #{balance}
+		    </if>
+	        <if test="circle != null and circle != ''">
+		       ,circle = #{circle}
+		    </if>
+	        <if test="beginDate != null and beginDate != ''">
+		       ,begin_Date = #{beginDate}
+		    </if>	        
+	         <if test="endDate != null and endDate != ''">
+		       ,end_Date = #{endDate}
+		    </if>	
+	        <if test="autoRenew != null and autoRenew != ''">
+		       ,auto_renew = #{autoRenew}
+		    </if>
+	        <if test="smsUsecount != null and smsUsecount != ''">
+		       ,sms_usecount = #{smsUsecount}
+		    </if>
+	        <if test="smsAllcount != null and smsAllcount != ''">
+		       ,sms_allcount = #{smsAllcount}	
+		    </if>
+	        <if test="smsSendcount != null and smsSendcount != ''">
+		       ,sms_sendcount = #{smsSendcount}	
+		    </if>         
+	        <if test="smsLess != null and smsLess != ''">
+		       ,sms_less = #{smsLess}	
+		    </if> 
+	         <if test="cost != null and cost != ''">
+		       ,cost =#{cost}	
+		    </if>  
+	        <if test="remindFlag != null and remindFlag != ''">
+		       ,remind_flag = #{remindFlag}
+		    </if>
+	         <if test="remark != null and remark != ''">
+		       ,remark = #{remark} 
+		    </if>	        
+	       where id = #{id}
+	</update>
+    <!--根据id,serviceId,flag(主要用于支付、付款操作) end -->
+    
+    <!--
+	 * 判断用户是否开通了某项服务
+	 * @param map(userId,serviceName)
+	 * @return Integer
+	 -->    
+    <select id="getServiceByUserIdAndServiceName" parameterType="map" resultType="java.lang.Integer">
+      select count(*) from  ec_core_dredgeservice
+        where flag=1 
+              and user_id=#{userId} 
+              and service_id in 
+              (select id from ec_core_payservice where flag=1 and name=#{serviceName})
+    </select>
+    
+</mapper>

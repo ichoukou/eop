@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SyncLockMapper">
+
+	<!-- 新增锁消息 -->
+	<insert id="insertSyncLock" parameterType="net.ytoec.kernel.dataobject.SyncLock" >
+		<![CDATA[		
+			INSERT INTO 
+				EC_CORE_SYNCLOCK
+					(CREATETIME,
+					 CREATOR,
+					 UPDATETIME,
+					 MODIFIER,
+					 METHOD,
+					 BUSINESSID,
+					 ISLOCK)
+			VALUES
+					(NOW(),
+			        'SYSTEM',
+			        NOW(),
+			        'SYSTEM',
+			        #{method,jdbcType=VARCHAR},
+			        #{businessId,jdbcType=VARCHAR},
+			        #{isLock,jdbcType=NUMERIC}) 
+		]]>
+	</insert>
+	<!-- 更新锁状态 -->
+	<update id="updateByLockState" parameterType="net.ytoec.kernel.dataobject.SyncLock">
+		<![CDATA[		
+			UPDATE 
+				EC_CORE_SYNCLOCK 
+			SET 
+				ISLOCK = #{isLock,jdbcType=NUMERIC} 
+			WHERE 
+					METHOD = #{method,jdbcType=VARCHAR} 
+				AND BUSINESSID = #{businessId,jdbcType=VARCHAR} 
+				AND ISLOCK != #{isLock,jdbcType=NUMERIC}
+		]]>
+	</update>
+	<!-- 根据businessId判断是否存在此业务锁 -->
+	<select id="isExistsSyncLock" parameterType="net.ytoec.kernel.dataobject.SyncLock" resultType="int">
+		<![CDATA[
+			SELECT 
+				count(*)
+			FROM 
+				EC_CORE_SYNCLOCK 
+			WHERE 
+				METHOD = #{method,jdbcType=VARCHAR} 
+				AND BUSINESSID = #{businessId,jdbcType=VARCHAR}
+		]]>
+	</select>
+		
+		
+</mapper>
+
+	
+		<!-- 检查并发用 -->
+	<!-- <insert id="updateLockState" parameterType="net.ytoec.kernel.dataobject.SyncLock" >
+		<selectKey keyProperty="id" order="BEFORE" resultType="string">
+			SELECT 
+				count(*) id
+			FROM 
+				EC_CORE_SYNCLOCK 
+			WHERE 
+				METHOD = #{method,jdbcType=VARCHAR} 
+				AND BUSINESSID = #{businessId,jdbcType=VARCHAR}
+		</selectKey>
+		<if test="id == 0">
+			UPDATE 
+				EC_CORE_SYNCLOCK 
+			SET 
+				ISLOCK = #{isLock,jdbcType=NUMERIC} 
+			WHERE 
+					METHOD = #{method,jdbcType=VARCHAR} 
+				AND BUSINESSID = #{businessId,jdbcType=VARCHAR} 
+				AND ISLOCK != #{isLock,jdbcType=NUMERIC}
+		</if>
+		<if test="id == 1">
+			<![CDATA[		
+				INSERT INTO 
+					EC_CORE_SYNCLOCK
+						(id,CREATETIME,
+						 CREATOR,
+						 UPDATETIME,
+						 MODIFIER,
+						 METHOD,
+						 BUSINESSID,
+						 ISLOCK)
+				VALUES
+						( #{id,jdbcType=VARCHAR}, NOW(),
+				        'SYSTEM',
+				        NOW(),
+				        'SYSTEM',
+				        #{method,jdbcType=VARCHAR},
+				        #{businessId,jdbcType=VARCHAR},
+				        #{isLock,jdbcType=NUMERIC}) 
+				ON DUPLICATE KEY 
+				UPDATE 
+					ISLOCK = #{isLock,jdbcType=NUMERIC} 
+			]]>
+		</if>
+	</insert> -->

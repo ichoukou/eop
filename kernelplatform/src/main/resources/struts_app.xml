@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="app" extends="ssMyBatis">
+		
+		<!-- 应用审核管理 -->
+		<action name="*App" class="appAction" method="{1}">
+			<result name="search" type="tiles">WEB-INF.app/search_app.jsp</result>
+            <result name="toList" type="redirect">searchApp.action</result>
+            <result name="toApproval" type="tiles">WEB-INF.app/approval_app.jsp</result>
+            <result name="response" type="json">
+				<param name="root">jsonStr</param>
+			</result>
+		</action>
+		
+		<!-- EOP用户 -->
+		<action name="eopUser" class="eopUserAction">
+			<result name="toList" type="tiles">WEB-INF.user/eop_user_list.jsp</result><!-- 列表页 -->
+			<result name="view" type="tiles">WEB-INF.user/eop_user_detail.jsp</result><!-- 详细页 -->
+		</action>
+		<!-- 易通用户 -->
+		<action name="ytoUser" class="ytoUserAction">
+			<result name="toList" type="tiles">WEB-INF.user/yto_user_list.jsp</result><!-- 列表页 -->
+			<result name="view" type="tiles">WEB-INF.user/yto_user_detail.jsp</result><!-- 详细页 -->
+			<result name="init" type="tiles">WEB-INF.user/yto_user_init.jsp</result>
+			<result name="checkPassword" type="json" >
+				<param name="root">isValidate</param>
+			</result>
+			<result name="jsonEditPwd" type="json"><!-- 修改时ajax修改密码 -->
+				<param name="root">isValidate</param>
+			</result>
+			<result name="toAddYtoUserAccount" type="tiles">WEB-INF.user/ytouser_add_account.jsp</result>
+			<result name="toEditYtoUserAccount" type="tiles">WEB-INF.user/ytouser_edit_account.jsp</result>
+		</action>
+	</package>
+	
+</struts>

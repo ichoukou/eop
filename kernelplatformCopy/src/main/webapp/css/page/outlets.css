@@ -1,0 +1,26 @@
+.box,.table{margin-bottom:10px;}
+#content_bd .box_bd{position:relative;}
+.web_pop{position:absolute;right:10px;top:10px;}
+.web_span{display:block;float:left;height:25px;line-height:25px;margin-right:10px;}
+#dialog_pop{width:530px;}
+#dialog_pop p{padding-top:10px;}
+#dialog_pop p label{width:107px;text-align:right;display:block;float:left;}
+#dialog_pop p input{margin-right:8px;}
+#dialog_pop p textarea{margin-right:8px;height:50px}
+#dialog_textarea1,#dialog_textarea2,#dialog_textarea3{width:230px;}
+.dialog_btn{text-align:center;}
+.table tbody tr .td_f,.table tbody tr .td_d {width:77px;} 
+.table tbody tr td.td_h {width:38px;}
+.td_h span{display:block;text-align:center}
+.td_h span a{color:#1e569e;text-decoration:underline;}
+.td_h span a:hover{color:#1e569e;text-decoration:none;}
+#textarea_demo1{width:100px;height:50px;}
+#textarea_demo2,#textarea_demo3{width:70px;height:50px;}
+#textarea_demo4,#textarea_demo5,#textarea_demo6,#textarea_demo7{width:75px;height:50px;}
+/* .btn_box{padding:5px 0 10px 300px;} */
+.btn_box span{margin:0 10px;}
+#input_text_demo{width:260px;}
+.table thead tr th .th_title{padding:0 4px;}
+.table tbody tr td{padding:15px 4px;}
+.td_e{width:180px;}
+.td_a{width:172px;}

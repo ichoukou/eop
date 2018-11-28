@@ -1,0 +1,29 @@
+#main{padding:8px;width:984px;margin:0 auto 20px;background:#E8F3FA;position:relative;}
+#content{width:786px;float:right;margin:0;padding:0;background:none;}
+#help_content .box_hd strong,#nav_tree .box_hd strong{font:13px/25px SimSun;color:#15428B;}
+#help_content .box_bd,#nav_tree .box_bd{}
+#help_content .box_bd{overflow-y:auto;overflow-x:hidden;}
+#help_content .box_bd h2{font:700 16px/24px SimSun;color:#333;margin-bottom:25px;}
+#sidebar{width:190px;float:left;}
+#nav_tree .box_bd li{padding-left:22px;line-height:26px;background:url(../../images/sprite/nav_tree.png) no-repeat;overflow:hidden;}
+#nav_tree .box_bd .sub_menu{padding-left:3px;}
+#nav_tree .box_bd .fold .sub_menu{display:none;}
+#nav_tree .box_bd .menu_item strong{margin-left:-22px;padding-left:22px;font-weight:400;display:inline-block;cursor:pointer;*background:url(about:blank);}
+#nav_tree .box_bd .menu_item a{color:#808080;}
+#nav_tree .box_bd .menu_item a:hover{background:#E9E8E8;text-decoration:none;}
+#nav_tree .box_bd .menu_item .cur_menu_item,#nav_tree .box_bd .menu_item .cur_sub_menu_item{font-weight:700;color:#333;}
+#nav_tree .box_bd .fold{background-position:-181px -1244px;}
+#nav_tree .box_bd .unfold{background-position:0 -23px;}
+#nav_tree .box_bd .last_fold{background-position:-181px -1282px;}
+#nav_tree .box_bd .first_fold{background-position:0 8px;}
+#nav_tree .box_bd .first_unfold{background-position:-181px 8px;}
+#nav_tree .box_bd .sub_menu_item{background-position:0 -1245px;}
+#nav_tree .box_bd .sub_menu_item_last{background-position:0 -1287px;}
+#help_content .box_hd{position:relative;}
+#help_content #nav_btn{width:52px;height:27px;position:absolute;right:-1px;top:-1px;}
+#help_content #nav_btn a{width:50%;height:100%;float:left;background:url(../../images/sprite/nav_btn.png) no-repeat;text-indent:-9999em;}
+#help_content #nav_btn #nav_prev{background-position:0 0;}
+#help_content #nav_btn #nav_next{background-position:-25px 0;}
+#help_content .cat_box{border-bottom:10px;}
+#help_content .cat_box p{text-indent:2em;line-height:22px;margin-bottom:15px;}
+.arrow_btn{width:8px;height:61px;display:block;position:absolute;background:url(../../images/sprite/arrow_btn.png) no-repeat;top:200px;left:198px;cursor:pointer;}

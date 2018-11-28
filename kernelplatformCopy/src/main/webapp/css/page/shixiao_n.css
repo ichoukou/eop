@@ -1,0 +1,18 @@
+#content_ad{width:948px;margin:0 auto;overflow:hidden;position:relative;}
+.step_content img{border:none;display:block;}
+#content_ad input{background:url(../../images/single/ok.gif) no-repeat;width:289px;height:94px;z-index:9999;position:absolute;top:856px;left:480px;border:none;text-indent:-9999px;cursor:pointer;}
+#content{padding:0px;}
+
+.guide_txt .vip{background:url(../../images/sprite/step.gif) 0 -147px no-repeat;width:849px;height:49px;margin:20px auto; clear:both;}
+.guide_txt .vip li{float:left;text-align:center;line-height:49px;width:161px;padding-left:51px;display:inline;}
+.guide_txt .vip li.curr{color:#fff;}
+
+
+.guide_txt .site{background:url(../../images/single/step_2.gif) 0 0 no-repeat;width:849px;height:49px;margin:20px auto; clear:both;}
+.guide_txt .site li{text-indent:-9999px;}
+.guide_txt .site li.curr{color:#fff;}
+
+
+
+
+

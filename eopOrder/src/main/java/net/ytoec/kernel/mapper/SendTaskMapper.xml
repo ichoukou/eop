@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 发送任务数据映射文件 -->
+<mapper namespace="net.ytoec.kernel.mapper.SendTaskMapper">
+	<cache />
+	<resultMap type="sendTask" id="sendTaskResultMap">
+		<id property="id" column="id" />
+		<result property="clientId" column="client_id" />
+		<result property="createTime" column="create_Time" />
+		<result property="lastSendTime" column="last_send_time" />
+		<result property="orderId" column="order_id" />
+		<result property="requestURL" column="request_url" />
+		<result property="requestParams" column="request_params" />
+		<result property="remark" column="remark" />
+		<result property="taskFlagId" column="task_flag_id" />
+		<result property="taskFlag" column="task_flag" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+	</resultMap>
+	<insert id="add" parameterType="sendTask"> insert into EC_CORE_SEND_TASK
+		(request_url,order_id,last_send_time,client_id,request_params,remark,task_flag_id,task_flag,tx_logistic_id) values
+		(#{requestURL}, #{orderId},now(),#{clientId},#{requestParams},#{remark},#{taskFlagId},#{taskFlag},#{txLogisticId});
+	</insert>
+	<delete id="remove" parameterType="int"> delete from EC_CORE_SEND_TASK
+		where id = (#{id})</delete>
+	<update id="edit" parameterType="sendTask"> update EC_CORE_SEND_TASK t set
+		t.client_id = (#{clientId}),t.last_send_time = now(),t.order_id =
+		#{orderId},t.request_url = #{requestURL},t.requestParams =
+		#{request_params},t.remark = #{remark},t.task_flag_id = #{taskFlagId},t.task_flag = #{taskFlag},t.tx_logistic_id = #{txLogisticId} where t.id = #{id}</update>
+	<select id="getAllSendTask" parameterType="String" resultType="sendTask"
+		resultMap="sendTaskResultMap"> select * from EC_CORE_SEND_TASK</select>
+	<select id="get" parameterType="int" resultType="sendTask"
+		resultMap="sendTaskResultMap"> select * from EC_CORE_SEND_TASK where id = #{id}</select>
+
+	<select id="getSendTaskListByLimit" parameterType="int"
+		resultType="sendTask" resultMap="sendTaskResultMap"> select * from EC_CORE_SEND_TASK order
+		by create_time desc limit #{limit}</select>
+
+	<select id="getPaginationSendTaskList" parameterType="java.util.Map"
+		resultType="list" resultMap="sendTaskResultMap">
+		select * from EC_CORE_SEND_TASK t
+		order by t.id asc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="getSendTaskListByflag" parameterType="java.util.Map" resultType="list" resultMap="sendTaskResultMap">
+		select * from EC_CORE_SEND_Task t 
+		<where>
+				<if test='taskFlag != null'>
+					AND t.task_flag = #{taskFlag}
+				</if>
+				<if test='taskFlagId != null'>
+					AND t.task_flag_id in {#{taskFlagId}}
+				</if>	
+		</where>
+		order by t.id asc 
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+
+	<select id="getSendTaskListByFlagsAndLimit" parameterType="java.util.Map"
+		resultType="list" resultMap="sendTaskResultMap">
+		select * from EC_CORE_SEND_TASK where task_flag_id in
+		<foreach item="flag" collection="flags" open="(" separator=","
+			close=")">
+			#{flag}
+		</foreach>
+		order by id asc limit #{limit}
+	</select>
+
+	<select id="countTask"  resultType="int" >
+		select count(*) from EC_CORE_SEND_TASK 
+	</select>
+</mapper>

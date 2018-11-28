@@ -1,0 +1,23 @@
+td input{border:0px;width:45px;margin:0; padding:0;background-color: transparent; cursor: default;ime-mode: disabled;}
+.table{}
+#sfd{padding:5px;}
+.txt_a{margin-top:10px;}
+.table, .txt_a, .txt_b, .txt_c{margin-bottom:10px;}
+.txt_a label, .txt_b label{vertical-align:top;}
+#textarea_glyf, #textarea_mbsm{width:700px;height:80px;float:left;}
+.txt_c .btn_a{margin-left:385px;}
+.t_dialog{ width:368px; background-color:#FFFFFF; border:2px solid #cddaeb; color:#333333; line-height:24px; text-align:left; position:absolute; left:300px; top:120px; display:none; z-index:999; padding:20px 10px 10px 10px;}
+.t_dialog td{border:1px solid #808080;}
+.t_dialog h2 { font-size:15px; font-weight:600; margin-bottom:10px; background:url(images/bg-content-box.gif) repeat-x; position:relative; }
+.t_dialog h2 a { position:absolute; font-family:Arial, Helvetica, sans-serif; font-size:11px; left:340px; top:-2px; text-decoration:none;}
+.t_dialog thead tr td p{padding:0;line-height:22px;}
+.t_dialog_close{width: 16px;height: 16px;display: block;position: absolute;right: 3px;top: 3px;font: 700 12px/16px Arial;text-align: center;}
+.t_dialog_close:hover{text-decoration:none;}
+
+#t_con,#deletePosttemp{position:absolute;right:0;}
+.m_05{margin-right:10px;}
+.table table input{cursor:text;}
+#dialog_bd .table table th h4,#dialog_bd .table table th p{padding:0 10px;}
+#dialog .table table{width:500px;}
+.req{color:#f00;}
+#user_list_table tr td input,#tbTB tr td input,#user_list_table tr th input,#tbTB tr th input{cursor:default;width:auto;}

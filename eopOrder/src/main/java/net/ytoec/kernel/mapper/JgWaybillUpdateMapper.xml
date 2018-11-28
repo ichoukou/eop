@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.JgWaybillUpdateMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.JgWaybillUpdate" id="jgWaybillUpdateResultMap">
+		<id property="id" column="id"/>
+		<result property="mailNo" column="mail_no"/>
+		<result property="logisticId" column="tx_logistic_id"/>
+		<result property="clientID" column="client_id" />
+	</resultMap>
+	
+<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="net.ytoec.kernel.dataobject.JgWaybillUpdate" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_JGWAYBILL_UPDATE(id, mail_no, tx_logistic_id,client_id)
+		values(#{id}, #{mailNo}, #{logisticId}, #{clientID})
+	</insert>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.QuestionaireExchangeMapper">
+	<resultMap id="questionaireExchangeResultMap" type="net.ytoec.kernel.dataobject.QuestionaireExchange">
+		<id property="id" column="id" />
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="user_id" property="userId"/>
+		<result column="operator_name" property="operatorName"/>
+		<result column="questionaire_id" property="questionaireId"/>
+		<result column="msg_content" property="msgContent"/>
+	</resultMap>
+	<select id="getListByQuestionaireIds" resultMap="questionaireExchangeResultMap"
+		parameterType="java.util.Map">
+		select id, create_time, update_time, user_id, operator_name,
+		questionaire_id, msg_content
+		from ec_core_questionaire_exchange where
+		questionaire_id in
+		<foreach collection="questionnaireIds" item="questionnaireIds"
+			open="(" separator="," close=")">
+			#{questionnaireIds}
+    	</foreach>
+		order by create_time DESC
+	</select>
+	<insert id="add" parameterType="questionaireExchange" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_questionaire_exchange (id,
+		create_time,
+		user_id, operator_name,
+		questionaire_id,
+		msg_content)
+		values (#{id}, current_timestamp,
+		#{userId},
+		#{operatorName},
+		#{questionaireId}, #{msgContent})
+  </insert>
+</mapper>

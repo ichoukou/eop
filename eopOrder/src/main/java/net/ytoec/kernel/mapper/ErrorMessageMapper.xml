@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ErrorMessageMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.ErrorMessage" id="errorMessageResultMap">
+		<id property="id" column="id" />
+		<result property="errorType" column="error_type" />
+		<result property="errorReason" column="error_reason" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	
+	<select id="getErrMsgListByType" parameterType="net.ytoec.kernel.dataobject.ErrorMessage"
+		resultType="list" resultMap="errorMessageResultMap">
+		select t.id, 
+		t.error_type, 
+		t.error_reason, 
+		t.create_time, 
+		t.update_time, 
+		t.remark 
+		from EC_CORE_ERROR_MESSAGE t where t.error_type like '%' #{errorType} '%'
+	</select>
+
+	<select id="getAllErrorMessage" resultType="list" resultMap="errorMessageResultMap">
+		select t.id, 
+		t.error_type, 
+		t.error_reason, 
+		t.create_time, 
+		t.update_time, 
+		t.remark 
+		from EC_CORE_ERROR_MESSAGE t
+	</select>
+
+	<!-- errorMessageResultMap是errormessage-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="errorMessage"
+		resultType="net.ytoec.kernel.dataobject.ErrorMessage" resultMap="errorMessageResultMap">
+		<![CDATA[
+			select t.id, 
+			t.error_type, 
+			t.error_reason, 
+			t.create_time, 
+			t.update_time, 
+			t.remark 
+			from EC_CORE_ERROR_MESSAGE t where t.id = #{id}
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="errorMessage" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_ERROR_MESSAGE(id,error_type, error_reason, remark)
+		values(#{id}, #{errorType}, #{errorReason}, #{remark})
+	</insert>
+
+
+	<update id="edit" parameterType="errorMessage">
+		update EC_CORE_ERROR_MESSAGE t set
+		t.error_type = #{errorType},
+		t.error_reason = #{errorReason},
+		t.remark = #{remark},
+		t.update_time = now()
+		where t.id = #{id}
+	</update>
+	<delete id="remove" parameterType="errorMessage">
+		delete from EC_CORE_ERROR_MESSAGE where id = #{id}
+	</delete>
+</mapper>

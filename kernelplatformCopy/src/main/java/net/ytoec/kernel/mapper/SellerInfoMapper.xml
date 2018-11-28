@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.ytoec.kernel.mapper.SellerInfoMapper" >
+<!-- 密钥表映射 -->
+  <resultMap id="zebraPartern" type="net.ytoec.kernel.dataobject.ZebraPartern" >
+    <id column="partern_id" property="parternId" jdbcType="BIGINT" />
+    <result column="customer_code" property="customerCode" jdbcType="VARCHAR" />
+    <result column="partern_code" property="parternCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+ <!-- user表映射 -->
+ <resultMap id="user" type="net.ytoec.kernel.dataobject.User" >
+		<id property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="userName" column="user_name" />
+		<result property="userPassword" column="user_password" />
+		<result property="userState" column="user_state" />
+		<result property="userCode" column="user_code" />
+		<result property="userType" column="user_type" />
+		<result property="shopName" column="shop_name"/>
+		<result property="taobaoEncodeKey" column="taobao_encode_key"/>
+		<result property="site" column="site" />
+		<result property="userNameText" column="user_name_text" />
+		
+ </resultMap>
+<!-- userThread表映射 -->
+ <resultMap id="userThread" type="net.ytoec.kernel.dataobject.UserThread" >
+		<id property="id" column="id" />
+		<id property="userCode" column="user_code" />
+		<id property="siteCode" column="site_code"/>
+		<id property="userName" column="user_name" />
+ </resultMap>
+ 
+ <resultMap type="net.ytoec.kernel.dataobject.Channel" id="channel">
+		<id property="id" column="id" />
+		<result property="key" column="channel_key" />
+		<result property="value" column="channel_value" />
+		<result property="ipAddress" column="ip_address" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="clientId" column="clientId"/>
+		<result property="parternId" column="parternId"/>
+		<result property="ip" column="ip"/>
+		<result property="isPrint" column="isPrint" />
+		<result property="isSend" column="isSend" />
+		<result property="userName" column="user_code" />
+		<result property="userCode" column="user_name" />
+	</resultMap>
+ 
+<!-- 根据商家编码查询 网点userCode-->
+  <select id="findSiteCodeByUserCode"  parameterType="string" resultType="string">
+    select user_name from ec_core_user where user_code=(select site_code from
+    ec_core_userthread where user_code=#{userCode}) and user_type='1'
+    
+  </select>
+<!-- 根据商家编码查询 密钥(渠道表)-->
+  <select id="findParternByUserCodeFromChannelInfo"  parameterType="string" resultType="string">
+    select parternId from ec_core_channel_info
+    where user_code = #{customerCode}
+  </select>
+  <!-- 根据商家编码查询 密钥(密钥表)-->
+  <select id="findParternByUserCode"  parameterType="string" resultType="string">
+    select partern_code from zebra_partern
+    where customer_code = #{customerCode}
+  </select>
+  
+ <!-- 根据商家编码查询 商家名称-->
+  <select id="findUserNameByUserCode"  parameterType="string" resultType="string">
+    select user_name from ec_core_userthread
+    where user_code = #{userCode}
+  </select>
+  <!-- 根据商家编码查询 商家名称-->
+  <select id="findUserNameByUserCodeFromUser"  parameterType="string" resultType="string">
+    select user_name from ec_core_user
+    where user_code = #{userCode}
+  </select>
+  
+   <!-- 根据商家编码查询 商家编码-->
+  <select id="findUserCodeByUserCode"  parameterType="string" resultType="string">
+    select user_code from ec_core_userthread
+    where user_code = #{userCode}
+  </select>
+  
+     <!-- 根据商家编码查询 网点编码-->
+  <select id="findSiteCodeByUserCodeFromUT"  parameterType="string" resultType="string">
+    select site_code from ec_core_userthread
+    where user_code = #{userCode}
+  </select>
+
+   
+<!-- 根据商家姓名查询密钥 -->
+  <select id="findParternByUserName"  parameterType="string" resultType="string">
+  	select partern_code from zebra_partern where customer_code=
+  	(select user_code from ec_core_userthread where user_name=#{userName,jdbcType=VARCHAR})
+  </select>
+  
+
+<!--  根据商家编码查询商家用户名和密码 -->
+ <select id="findUserByUserCode"  parameterType="string" resultType="list" resultMap="user">
+ 	select *
+ 	from ec_core_user
+ 	where user_code=#{userCode,jdbcType=VARCHAR} and user_type='1'
+ </select>
+ 
+ <!--  查询网点邮箱 -->
+ <select id="findEmailByUserName"  parameterType="string" resultType="string">
+ 	select mail
+ 	from ec_core_user
+ 	where user_name=#{userName,jdbcType=VARCHAR} and user_type='2'
+ </select>
+ 
+ 
+
+<!--  根据商家店铺名查询商家用户名和密码	 -->
+ <select id="findUserByUserName"  parameterType="string" resultMap="user">
+	 	select * from ec_core_user
+ 		where shop_name=#{shopName,jdbcType=VARCHAR}
+ </select>
+<!--  根据商家店铺名和编码综合查询商家用户名和密码	 -->
+ <select id="findUserByUserCodeAndShopName" resultMap="user" parameterType="net.ytoec.kernel.dataobject.User">
+    select * from ec_core_user
+    <where>
+  		<if test="userCode!=null and userCode!=''">
+  			user_code=#{userCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="shopName!=null and shopName!=''">
+  			and shop_name=#{shopName,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+ </select>
+
+<!--  根据商家店铺名和编码综合查询密钥 -->
+ <select id="findParternByUserCodeAndShopName" resultType="string" parameterType="java.util.Map">
+    select partern_code from zebra_partern where customer_code=
+  	(select user_code from ec_core_user
+  	<where>
+  		<if test="userCode!=null and userCode!=''">
+  			user_code=#{userCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="shopName!=null and shopName!=''">
+  			and shop_name=#{shopName,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  	)
+ </select>
+
+<!-- 根据商家所有信息 -->
+<select id="findUserAll" resultType="list" resultMap="userThread" parameterType="string">
+	select * from ec_core_userthread where site_code=#{userName}
+</select>
+
+<update id="updateByPrimaryKeySelective" parameterType="net.ytoec.kernel.dataobject.ZebraPartern" >
+    update zebra_partern
+    <set >
+      <if test="customerCode != null" >
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parternCode != null" >
+        partern_code = #{parternCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where partern_id = #{parternId,jdbcType=BIGINT}
+  </update>
+<!--   插入密钥(渠道表) -->
+  <insert id="insertByCustomerCode" parameterType="net.ytoec.kernel.dataobject.Channel">
+  	insert into ec_core_channel_info(user_code,parternId,update_time,channel_key,clientId,ip) 
+	values(#{userCode},#{parternId},#{updateTime},#{key},#{clientId},#{ip}) 
+  </insert>
+  <!--   插入密钥(密钥表) -->
+  <insert id="insertByCustomerCodeFromPartern" parameterType="net.ytoec.kernel.dataobject.ZebraPartern">
+  	insert into zebra_partern(customer_code,partern_code) 
+	values(#{customerCode},#{parternCode}) 
+  </insert>
+  <!--   插入密用户  -->
+   <insert id="insertUser" parameterType="net.ytoec.kernel.dataobject.User">
+  	insert into ec_core_user(user_name,user_password,user_type,user_state,user_code,user_name_text) 
+	values(#{userName},#{userPassword},#{userType},#{userState},#{userCode},#{userNameText})
+  </insert>
+  <!-- 根据userName查询用户表id -->
+  <select id="findIdByUserName" parameterType="string" resultType="string">
+  	select id from ec_core_user where user_name=#{userName}
+  </select>
+  <!-- 更新密钥 (渠道表) -->
+  <update id="updateByCustomerCode" parameterType="net.ytoec.kernel.dataobject.Channel" >
+   	update ec_core_channel_info set 
+   	parternId=#{parternId},
+   	channel_key=#{key},
+   	clientId=#{clientId},
+   	ip=#{ip},
+   	update_time=#{updateTime}
+   	where user_code=#{userCode}
+  </update>
+  <!-- 更新密钥 (密钥表) -->
+  <update id="updateByCustomerCodeFromPartern" parameterType="net.ytoec.kernel.dataobject.ZebraPartern" >
+   	update zebra_partern set 
+   	partern_code=#{parternCode},
+   	update_time=#{updateTime}
+   	where customer_code=#{customerCode}
+  </update>
+  <!-- 更新商家用户 -->
+  <update id="createUser" parameterType="net.ytoec.kernel.dataobject.User" >
+    update ec_core_user set
+    user_name=#{userName},
+    user_password=#{userPassword},
+    user_type=#{userType},
+    user_state=#{userState},
+    user_code=#{userCode},
+    site=#{site},
+    taobao_encode_key=#{taobaoEncodeKey}
+    where id=#{id}
+  </update>
+  
+  <!-- 更新商家taobaoEncodeKey -->
+  <update id="updateTaobaoEncodeKey" parameterType="net.ytoec.kernel.dataobject.User" >
+  	update ec_core_user
+  	set
+  	taobao_encode_key=#{taobaoEncodeKey}
+  	where user_name=#{userName}
+  </update>
+  
+</mapper>
+
+
+

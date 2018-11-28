@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.MessageUserMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.MessageUser" id="messageUserResultMap">
+		<id property="id" column="id"/>
+		<result property="messageId" column="message_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="messageStatus" column="message_status"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="messageUser" keyProperty="id" useGeneratedKeys="true">
+		insert into EC_CORE_MESSAGE_USER(id, message_id, user_id, message_status)
+		values(#{id}, #{messageId}, #{userId}, #{messageStatus})
+	</insert>
+	
+	<update id="edit" parameterType="messageUser">
+		update EC_CORE_MESSAGE_USER t
+		set t.message_id = #{messageId},
+			t.user_id = #{userId},
+			t.message_status = #{messageStatus}
+		where t.id = #{id}
+	</update>
+	
+	<!-- 标记消息(根据消息Id和用户id) -->
+	<update id="markMessage" parameterType="messageUser">
+		update EC_CORE_MESSAGE_USER t
+		set t.message_status = #{messageStatus}
+		where t.message_id = #{messageId} and t.user_id = #{userId}
+	</update>
+	
+	<delete id="deleteByUserAndMsgId" parameterType="messageUser">
+		DELETE FROM EC_CORE_MESSAGE_USER WHERE message_id = #{messageId} and user_id = #{userId}
+	</delete>
+	
+	<select id="getByMessageId" parameterType="int" resultType="list" resultMap="messageUserResultMap">
+		<![CDATA[
+			select * from EC_CORE_MESSAGE_USER t where t.message_id = #{messageId}
+        ]]>
+	</select>
+	
+	<select id="get" parameterType="messageUser" resultType="messageUser" resultMap="messageUserResultMap">
+		<![CDATA[
+			select * from EC_CORE_MESSAGE_USER t where t.id = #{id}
+        ]]>
+	</select>
+	
+	<select id="getByStatusAndUser" parameterType="messageUser" resultType="list" resultMap="messageUserResultMap">
+		<![CDATA[
+			select * from EC_CORE_MESSAGE_USER t where t.message_status = #{messageStatus} and t.user_id = #{userId}
+        ]]>
+	</select>
+	
+	<select id="getByUserId" parameterType="int" resultType="list" resultMap="messageUserResultMap">
+		<![CDATA[
+			select * from EC_CORE_MESSAGE_USER t where t.user_id = #{userId}
+        ]]>
+	</select>
+
+</mapper>

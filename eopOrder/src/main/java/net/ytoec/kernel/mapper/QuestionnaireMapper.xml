@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.QuestionnaireMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Questionnaire"
+		id="questionnaireResultMap">
+		<id property="id" column="id" />
+		<result property="mailNO" column="mail_no" />
+		<result property="mailType" column="mail_type" />
+		<result property="senderTime" column="sender_time" />
+		<result property="dealStatus" column="deal_status" />
+		<result property="dealInfo" column="deal_info" />
+		<result property="feedbackInfo" column="feedback_info" />
+		<result property="branchId" column="branck_id" />
+		<result property="createTime" column="create_time" />
+		<result property="dealUserId" column="deal_userid" />
+		<result property="dealTime" column="deal_time" />
+		<result property="backupInfo" column="backup_info" />
+		<result property="issueId" column="issue_id" />
+		<result property="issueDesc" column="issue_desc" />
+		<result property="branckText" column="branck_text" />
+		<result property="issueCreateUserText" column="issue_create_user_text" />
+		<result property="issueCreateTime" column="issue_create_time" />
+		<result property="recBranckText" column="rec_branck_text" />
+		<result property="reportBranckCode" column="report_branck_code" />
+		<result property="reportBranckText" column="report_branck_text" />
+		<result property="issueStatus" column="issue_status" />
+		<result property="customerId" column="customer_id" />
+		<result property="vipStatus" column="vipStatus" />
+		<result property="wdIsRead" column="wdIsRead" />
+		<result property="mjIsRead" column="mjIsRead" />
+		<result property="buyerPhone" column="buyer_phone" />
+		<result property="buyerMobile" column="buyer_mobile" />
+		<result property="buyerName" column="buyer_name" />
+		<result property="IMG1" column="IMG1" />
+		<result property="IMG2" column="IMG2" />
+		<result property="IMG3" column="IMG3" />
+		<result property="IMG4" column="IMG4" />
+		<result property="orderStatus" column="order_status" />
+		<result property="taobaoLoginName" column="taobao_login_name" /><!-- 会员名 -->
+		<result property="partitionDate" column="partitiondate"/>
+		<result property="tagId" column="tag_id"/>						<!-- 标签id -->
+		<result property="otherPartitionDate" column="otherPartitionDate"/>	
+	</resultMap>
+	
+	<!-- 更新淘宝号到问题件表中  -->
+	<update id="updateBuyerNickToQuestionaire" parameterType="map">
+ 		UPDATE  
+			EC_CORE_QUESTIONNAIRE
+		SET taobao_login_name=#{buyerNick} 
+		<where>
+		<if test="customerId != null and customerId != ''">
+			AND customer_id=#{customerId} 
+		</if>
+		<choose>
+			<when test="buyerMobile != null and buyerMobile != '' and buyerPhone != null and buyerPhone != ''">
+				AND (buyer_mobile = #{buyerMobile} OR buyer_phone = #{buyerPhone})
+			</when>
+			<otherwise>
+				<if test="buyerMobile != null and buyerMobile != ''">
+					AND buyer_mobile = #{buyerMobile}
+				</if>
+				<if test="buyerPhone != null and buyerPhone != ''">
+					AND buyer_phone = #{buyerPhone}
+				</if>
+			</otherwise>
+		</choose>
+		</where>
+	</update>
+	
+	<!-- 根据customerId查找问题件表的id -->
+	<select id="selectQuesByCustomerId" parameterType="java.util.Map" resultType="list" resultMap="questionnaireResultMap">
+		select * from EC_CORE_QUESTIONNAIRE 
+		<where>
+		<if test="customerId != null and customerId != ''">
+			AND customer_id=#{customerId} 
+		</if>
+		<choose>
+			<when test="buyerMobile != null and buyerMobile != '' and buyerPhone != null and buyerPhone != ''">
+				AND (buyer_mobile = #{buyerMobile} OR buyer_phone = #{buyerPhone})
+			</when>
+			<otherwise>
+				<if test="buyerMobile != null and buyerMobile != ''">
+					AND buyer_mobile = #{buyerMobile}
+				</if>
+				<if test="buyerPhone != null and buyerPhone != ''">
+					AND buyer_phone = #{buyerPhone}
+				</if>
+			</otherwise>
+		</choose>
+		</where>
+	</select>
+	
+	<!-- 根据问题件id，更新淘宝号 -->
+	<update id="updateQuesById" parameterType="map">
+		update EC_CORE_QUESTIONNAIRE t set 
+		t.taobao_login_name = #{buyerNick} 
+		where t.id in 
+		<foreach collection="quesIds" item="quesId" open="(" separator="," close=")" >
+			  #{quesId}
+		</foreach>
+	</update>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="questionnaire" keyProperty="id"
+		 >
+		insert into EC_CORE_QUESTIONNAIRE(
+		 
+		mail_no,
+		mail_type, 
+		sender_time, 
+		deal_status,
+		deal_info,
+		feedback_info, 
+		branck_id, 
+		deal_userid,
+		deal_time,
+		backup_info, 
+		issue_id, 
+		issue_desc, 
+		branck_text,
+		issue_create_user_text, 
+		issue_create_time, 
+		rec_branck_text,
+		report_branck_code,
+		report_branck_text, 
+		issue_status, 
+		customer_id, 
+		vipStatus, 
+		wdIsRead,
+		mjIsRead,
+		buyer_phone,
+		buyer_mobile,
+		buyer_name,
+		IMG1,IMG2,IMG3,IMG4,
+		order_status,
+		taobao_login_name,
+		partitiondate,
+		tag_id
+		)
+		values(  #{mailNO},
+		#{mailType},
+		#{senderTime},
+		#{dealStatus}, #{dealInfo},
+		#{feedbackInfo},
+		#{branchId}, #{dealUserId},#{dealTime},
+		#{backupInfo}, #{issueId}, #{issueDesc},
+		#{branckText},
+		#{issueCreateUserText}, #{issueCreateTime},
+		#{recBranckText}, #{reportBranckCode},
+		#{reportBranckText}, #{issueStatus}, #{customerId}, #{vipStatus},
+		#{wdIsRead}, #{mjIsRead}, #{buyerPhone}, #{buyerMobile}, #{buyerName}, 
+		#{IMG1}, #{IMG2}, #{IMG3}, #{IMG4}, #{orderStatus}, #{taobaoLoginName}, #{partitionDate}, #{tagId})
+	</insert>
+
+	<!-- 更新问题单 -->
+	<update id="edit" parameterType="questionnaire">
+		update EC_CORE_QUESTIONNAIRE t
+		set
+		t.mail_no = #{mailNO},
+		t.mail_type = #{mailType},
+		t.sender_time = #{senderTime},
+		t.deal_status = #{dealStatus},
+		t.deal_info = #{dealInfo},
+		t.feedback_info = #{feedbackInfo},
+		t.branck_id = #{branchId},
+		t.deal_userid = #{dealUserId},
+		t.deal_time = #{dealTime},
+		t.backup_info = #{backupInfo},
+		t.issue_id = #{issueId},
+		t.issue_desc = #{issueDesc},
+		t.branck_text = #{branckText},
+		t.issue_create_user_text = #{issueCreateUserText},
+		t.issue_create_time = #{issueCreateTime},
+		t.rec_branck_text = #{recBranckText},
+		t.report_branck_text = #{reportBranckText},
+		t.issue_status = #{issueStatus},
+		t.customer_id = #{customerId},
+		t.vipStatus = #{vipStatus},
+		t.wdIsRead = #{wdIsRead},
+		t.mjIsRead = #{mjIsRead},
+		t.buyer_phone = #{buyerPhone},
+		t.buyer_mobile = #{buyerMobile},
+		t.buyer_name = #{buyerName},
+		t.IMG1 = #{IMG1},
+		t.IMG2 = #{IMG2},
+		t.IMG3 = #{IMG3},
+		t.IMG4 = #{IMG4},
+		t.order_status = #{orderStatus},
+		t.taobao_login_name = #{taobaoLoginName},
+		t.partitiondate = #{partitionDate},
+		t.tag_id = #{tagId}
+		where t.id = #{id}
+		and t.partitiondate >= #{otherPartitionDate}
+	</update>
+	
+	<!-- 更新问题件表的order_status字段 -->
+	<update id="updateOrderStatusByMailNo" parameterType="map">
+		update ec_core_questionnaire q set q.order_status = #{orderStatus} where q.mail_no = #{mailNo}
+	</update>
+	
+	<!-- 更新问题单 -->
+	<update id="updateVipId" parameterType="questionnaire">
+		update
+		EC_CORE_QUESTIONNAIRE t set
+		t.customer_id = #{customerId}
+		where t.id = #{id}
+	</update>
+	<!-- 标记问题单为已处理，并且更新处理信息等 -->
+	<update id="dealQuestionnaire" parameterType="questionnaire">
+		update
+		EC_CORE_QUESTIONNAIRE t set
+		t.deal_status = #{dealStatus},
+		t.deal_info = #{dealInfo},
+		t.feedback_info = #{feedbackInfo},
+		t.deal_userid = #{dealUserId},
+		t.deal_time = now(),
+		t.partitiondate = #{partitionDate}
+		where t.id = #{id}
+	</update>
+
+	<!-- questionnaireResultMap是questionnaire-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="questionnaire"
+		resultType="net.ytoec.kernel.dataobject.Questionnaire" resultMap="questionnaireResultMap">
+		<![CDATA[
+			select * from EC_CORE_QUESTIONNAIRE t where t.id = #{id} 
+        ]]>
+	</select>
+
+	<!-- 查询某个网点下的VIP的问题单 -->
+	<select id="getQuestionnaireListByBranchId" parameterType="java.util.Map"
+		resultType="list" resultMap="questionnaireResultMap">
+		select *
+		from EC_CORE_QUESTIONNAIRE t
+		<where>
+			<if test='branchId != null'>
+				AND t.branck_id = #{branchId}
+				</if>
+			<if test='startTime != null and endTime != null'>
+				AND t.sender_time between #{startTime} and #{endTime}
+			</if>
+		</where>
+		order by t.create_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+			</if>
+	</select>
+
+	<select id="getAllQuestionnaire" resultType="list"
+		resultMap="questionnaireResultMap">
+		select *
+		from EC_CORE_QUESTIONNAIRE t order by t.create_time
+		desc
+	</select>
+
+	<delete id="remove" parameterType="questionnaire">
+		delete from
+		EC_CORE_QUESTIONNAIRE where id = #{id}
+	</delete>
+
+	<select id="getNoVipIdListByMapSearch" parameterType="java.util.Map"
+		resultType="list" resultMap="questionnaireResultMap">
+		select *
+		from EC_CORE_QUESTIONNAIRE t
+		<where>
+			<if test='startTime != null and endTime != null'>
+				t.create_time between #{startTime} and #{endTime} and t.customer_id
+				is null
+			</if>
+		</where>
+	</select>
+
+	<select id="getQsnByMailNo" parameterType="String"
+		resultType="list" resultMap="questionnaireResultMap">
+		select  *
+		from EC_CORE_QUESTIONNAIRE t
+		where t.mail_no = #{mailNo}
+	</select>
+
+	<select id="getQsnByIssueId" parameterType="String"
+		resultType="net.ytoec.kernel.dataobject.Questionnaire" resultMap="questionnaireResultMap">
+		select *
+		from EC_CORE_QUESTIONNAIRE t
+		where t.issue_id = #{issueId}
+	</select>
+
+	<select id="queryQuestionnaireManageList" parameterType="java.util.Map" resultType="list" resultMap="questionnaireResultMap">
+		select * from EC_CORE_QUESTIONNAIRE t
+		<where>
+			<if test='branchId != null'>
+				AND t.branck_id = #{branchId}
+			</if>
+			<if test='customerId != null'>
+				<choose>
+					<when test="customerId.size() == 0">
+						AND t.customer_id is null
+					</when>
+					<otherwise>
+						AND t.customer_id IN
+						<foreach item="customerId" collection="customerId" open="(" separator="," close=")">
+							#{customerId}
+						</foreach>
+					</otherwise>
+				</choose>
+			</if>
+			<if test='wdIsRead != null'>
+				AND t.wdIsRead = #{wdIsRead}
+			</if>
+			<if test='issueStatus != null'>
+				AND t.issue_status = #{issueStatus}
+			</if>
+			<if test='mailNO != null'>
+				AND t.mail_no = #{mailNO}
+			</if>
+			<if test='feedbackInfo != null'>
+				AND t.feedback_info IN
+				<foreach item="feedbackInfo" collection="feedbackInfo" open="(" separator="," close=")">
+					#{feedbackInfo}
+				</foreach>
+			</if>
+			<if test='mjIsRead != null'>
+				AND t.mjIsRead = #{mjIsRead}
+			</if>
+			<if test='dealStatus != null'>
+				AND t.deal_status = #{dealStatus}
+			</if>
+			<if test='vipStatus != null'>
+				AND t.vipStatus = #{vipStatus}
+			</if>
+			<if test="tagId != null">
+				AND t.tag_id = #{tagId}
+			</if>
+			<!-- 更改为按分区字段查询 -->
+			<if test='startTime != null and endTime != null'>
+				AND t.partitiondate between #{startTime} and #{endTime}
+			</if>
+			<if test='mailType != null'>
+				AND t.mail_type = #{mailType}
+			</if>
+			<if test='contactWay != null'>
+				AND (t.buyer_phone = #{contactWay} or t.buyer_mobile = #{contactWay})
+			</if>
+			<if test='buyerName != null'>
+				AND t.buyer_name = #{buyerName}
+			</if>
+			<if test='orderStatus != null'>
+				AND t.order_status = #{orderStatus}
+			</if>
+		</where>
+		<if test="sortType == 1">
+			order by t.deal_time ASC 
+		</if>
+		<if test="sortType == 2">
+			order by t.deal_time DESC 
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="countQuestionnaireManageList" parameterType="java.util.Map" resultType="int">
+		select count(*) from EC_CORE_QUESTIONNAIRE t
+		<where>
+			<if test='branchId != null'>
+				AND t.branck_id = #{branchId}
+			</if>
+			<if test='customerId != null'>
+				<choose>
+					<when test="customerId.size() == 0">
+						AND t.customer_id is null
+					</when>
+					<otherwise>
+						AND t.customer_id IN
+						<foreach item="customerId" collection="customerId" open="(" separator="," close=")">
+							#{customerId}
+						</foreach>
+					</otherwise>
+				</choose>
+			</if>
+			<if test='wdIsRead != null'>
+				AND t.wdIsRead = #{wdIsRead}
+			</if>
+			<if test='issueStatus != null'>
+				AND t.issue_status = #{issueStatus}
+			</if>
+			<if test='mailNO != null'>
+				AND t.mail_no = #{mailNO}
+			</if>
+			<if test='feedbackInfo != null'>
+				AND t.feedback_info IN
+				<foreach item="feedbackInfo" collection="feedbackInfo" open="(" separator="," close=")">
+					#{feedbackInfo}
+				</foreach>
+			</if>
+			<if test='mjIsRead != null'>
+				AND t.mjIsRead = #{mjIsRead}
+			</if>
+			<if test='dealStatus != null'>
+				AND t.deal_status = #{dealStatus}
+			</if>
+			<if test='vipStatus != null'>
+				AND t.vipStatus = #{vipStatus}
+			</if>
+			<if test="tagId != null">
+				AND t.tag_id = #{tagId}
+			</if>
+			<!-- 更改为按分区字段查询 -->
+			<if test='startTime != null and endTime != null'>
+				AND t.partitiondate between #{startTime} and #{endTime}
+			</if>
+			<if test='mailType != null'>
+				AND t.mail_type = #{mailType}
+			</if>
+			<if test='contactWay != null'>
+				AND (t.buyer_phone = #{contactWay} or t.buyer_mobile = #{contactWay})
+			</if>
+			<if test='buyerName != null'>
+				AND t.buyer_name = #{buyerName}
+			</if>
+			<if test='orderStatus != null'>
+				AND t.order_status = #{orderStatus}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateQuestionnaireIssueStatus" parameterType="Questionnaire">
+	    update ec_core_questionnaire  set issue_status = #{issueStatus} where id=#{id}  
+	</update>
+	
+	<select id="getQuestionnaireByDealTime" parameterType="map"  resultType="Questionnaire">
+		select id as id,issue_id as issueId,issue_status as issueStatus from ec_core_questionnaire  where create_time > #{dealTime} order by id ASC limit #{limit}
+	</select>
+	<select id="getQuestionnaireById" parameterType="map"  resultType="Questionnaire">
+		select id as id,issue_id as issueId,issue_status as issueStatus from ec_core_questionnaire  where id >#{id} order by id ASC limit #{limit}
+	</select>
+	
+	<!-- 更新问题件的金刚状态 -->
+	<update id="updateIssueStatusByissueId" parameterType="Questionnaire">
+	 update ec_core_questionnaire  set issue_status = #{issueStatus} where issue_id=#{issueId}   
+	</update>
+	
+	<!-- 更新问题件的金刚状态,根据id来更新 -->
+	<update id="updateIssueStatusById" parameterType="Questionnaire">
+	 update ec_core_questionnaire  set issue_status = #{issueStatus} where id = #{id}   
+	</update>
+	
+	<select id="wayQuestionnaireManageList" parameterType="java.util.Map" resultType="java.lang.String">
+		select mail_no from EC_CORE_QUESTIONNAIRE t
+		<where>
+			<if test='branchId != null'>
+				AND t.branck_id = #{branchId}
+			</if>
+			<if test='mailNO != null'>
+				AND t.mail_no = #{mailNO}
+			</if>
+			<if test='customerId != null'>
+				<choose>
+					<when test="customerId.size() == 0">
+						AND t.customer_id is null
+					</when>
+					<otherwise>
+						AND t.customer_id IN
+						<foreach item="customerId" collection="customerId" open="(" separator="," close=")">
+							#{customerId}
+						</foreach>
+					</otherwise>
+				</choose>
+			</if>
+			<if test='dealStatus != null'>
+				AND t.deal_status = #{dealStatus}
+			</if>
+		</where>
+	
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,20 @@
+.rec_p1 span{color:#F00;padding-left:5px;padding-right:5px;}
+.rec_l{width:360px;float:left}
+.rec_p2{font-weight:bold;margin-top:15px;}
+.rec_p2 span{font-weight:normal;margin-left:70px;}
+.rec_clear{clear:both;height:2px;overflow:hidden}
+.rec_ul{color:#666;line-height:20px;margin-top:6px;}
+.rec_ul span{margin-right:10px;}
+.rec_r{width:400px;float:right;margin-top:20px;margin-left:60px;}
+#no_num{width:40px;margin-right:15px;}
+.rec_p3{padding:5px 10px;background:#f1f5f8;margin-top:20px;}
+.rec_bor{border-top:none}
+.rec_p4{font-weight:bold;margin-bottom:10px;margin-top:15px;}
+.table table td,.table table tr th{padding:0px;margin:0px;text-align:center}
+.rec_p5{margin-top:15px;}
+.rec_p6{height:43px;margin-top:10px;}
+.rec_p6 span{height:43px;display:block;float:left}
+.rec_p6 span .input_radio{position:relative;top:8px;}
+.rec_p6 span img{border:1px solid #ccc;margin-left:20px;}
+.rec_p7{margin-left:5px;margin-top:20px;height:50px;}
+.rec_p2 a{color:#06c;}

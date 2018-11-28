@@ -1,0 +1,23 @@
+#serve_form .detail_box{clear:both;font:13px/26px Arial,SimSun;margin-bottom:10px;overflow:hidden;padding-left:100px;vertical-align:top;}
+#serve_form .detail_box label{cursor:pointer;display:inline-block;float:left;height:100%;line-height:26px;margin-left:-100px;text-align:right;width:90px;}
+#serve_form .detail_box .clear_label{float:none;margin:0;width:260px;text-align:left;}
+#serve_form .detail_box ul li{line-height:30px;}
+#serve_form .detail_box ul li .date_range{margin-left:15px;color:#808080;font-family:Arial;}
+#serve_form .p_label{font:700 14px/1.8 SimSun;}
+.icon_desc{padding-left:88px;display:block;}
+.desc_p{display:block;line-height:1.4;color:#808080;}
+.icon_desc i{width:58px;height:58px;float:left;margin-left:-80px;display:inline;overflow:hidden;background:url(../../images/sprite/serve_icon.png) no-repeat;}
+.icon_desc strong{font:700 14px/1.4 SimSun;margin-right:20px;}
+#icon_desc_a i{background-position:0 0;}
+#icon_desc_b i{background-position:0 -58px;}
+#icon_desc_c i{background-position:0 -116px;}
+#detail_box_c .detail_info{display:inline-block;width:200px;margin-bottom:10px;}
+#detail_box_c #period_use{width:310px;}
+#detail_box_c .detail_info em{font-style:normal;}
+#agreement{margin-bottom:10px;width:600px;height:90px;background-color: #999;border-color: #000;}
+.dialog_p{margin-bottom:10px;line-height:1.2;}
+#pay_form{width:250px;}
+#gudie_desc{color:#808080;display:block;margin:0 auto;font-style:normal;line-height:1.4;margin-bottom:10px;}
+#to_pay span{color:#f00;}
+#help_tips li{line-height:30px;}
+#serve_form #detail_box_c .clear_label{width:auto;}

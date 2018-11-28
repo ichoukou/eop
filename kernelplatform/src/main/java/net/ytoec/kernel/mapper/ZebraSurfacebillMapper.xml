@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ZebraSurfacebillMapper">
+	<resultMap id="BaseResultMap" type="net.ytoec.kernel.dataobject.ZebraSurfacebill">
+		<id column="waybill_no" property="waybillNo" jdbcType="VARCHAR" />
+		<result column="customer_code" property="customerCode"
+			jdbcType="VARCHAR" />
+		<result column="fb_createdate" property="fbCreatedate"
+			jdbcType="TIMESTAMP" />
+		<result column="fb_downloaddate" property="fbDownloaddate"
+			jdbcType="TIMESTAMP" />
+		<result column="version_no" property="versionNo" jdbcType="VARCHAR" />
+		<result column="is_use" property="use" jdbcType="BIT" />
+		<result column="is_print" property="print" jdbcType="BIT" />
+		<result column="jg_create_time" property="jgCreateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="third_create_time" property="thirdCreateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="sequence" property="sequence" jdbcType="INTEGER" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!-- 统计面单实体 -->
+	<resultMap id="UserWaybillInfoRM" type="net.ytoec.kernel.dataobject.UserWaybillInfo">
+		<result property="customerCode" column="CUSTOMERCODE" />
+		<result property="customerName" column="CUSTOMERNAME" />
+		<result property="totalCount" column="TOTALCOUNT" />
+		<result property="totalBoxNum" column="TOTALBOXNUM" />
+		<result property="remainCount" column="REMAINCOUNT" />
+		<result property="remainBoxNum" column="REMAINBOXNUM" />
+		<result property="usedCount" column="USEDCOUNT" />
+		<result property="usedBoxNum" column="USEDBOXNUM" />
+	</resultMap>
+
+	<!-- 新增运单信息 -->
+	<insert id="insertSurfaceBill" parameterType="net.ytoec.kernel.dataobject.MailNoInfo">
+		<![CDATA[
+			INSERT INTO 
+				ZEBRA_SURFACEBILL(
+					WAYBILL_NO,
+					CUSTOMER_CODE,
+					FB_CREATEDATE,
+					IS_USE,
+					IS_PRINT,
+					JG_CREATE_TIME) 
+			VALUES (
+					#{waybillNo},
+					#{customerCode},
+					#{createTime},
+					0,
+					0,
+					NOW())
+		]]>
+	</insert>
+	<!-- 根据序列号查询面单号集合 -->
+	<select id="queryWaybillBySequence" resultType="String">
+		<![CDATA[
+			SELECT 
+				WAYBILL_NO
+			FROM
+				ZEBRA_SURFACEBILL
+			WHERE 
+				CUSTOMER_CODE = #{customerCode}
+				AND SEQUENCE = #{sequence}
+		]]>
+	</select>
+	
+	<!-- 批量插入运单信息 -->
+	<insert id="batchInsertSurfaceBill" parameterType="list">
+		<![CDATA[
+			INSERT INTO 
+				ZEBRA_SURFACEBILL(
+					WAYBILL_NO,
+					CUSTOMER_CODE,
+					FB_CREATEDATE,
+					IS_USE,
+					IS_PRINT,
+					JG_CREATE_TIME) 
+			VALUES
+		]]>
+		<foreach collection="list" item="mailNoInfo" open="" close=""
+			separator=",">
+			<![CDATA[ (#{mailNoInfo.waybillNo},#{mailNoInfo.customerCode},#{mailNoInfo.createTime},0,0,NOW())]]>
+		</foreach>
+	</insert>
+	
+	<!-- 更新商家一定数量的面单 -->
+	<update id="batchUpdateStatebyQuantity" parameterType="map">
+		<![CDATA[ 
+			UPDATE 
+				ZEBRA_SURFACEBILL 
+			SET 
+				SEQUENCE = #{sequence},
+				UPDATE_TIME = NOW(),
+				THIRD_CREATE_TIME = NOW(),
+				IS_USE = 1
+			WHERE 
+				CUSTOMER_CODE = #{customerCode} 
+				AND IS_USE = 0 
+				LIMIT #{quantity}
+		]]>
+	</update>
+	
+	<!-- 查询商家一定数量的面单 -->
+	<select id="querySurfaceBillListByLimit" parameterType="map"
+		resultType="String">
+	  	<![CDATA[     
+	  		SELECT 
+	  			WAYBILL_NO 
+	  		FROM 
+	  			ZEBRA_SURFACEBILL 
+	  		WHERE IS_USE = 0  
+	  			AND CUSTOMER_CODE =  #{customerCode, jdbcType=VARCHAR} 
+	  			AND WAYBILL_NO NOT LIKE 'D%'
+				LIMIT 0,#{limit, jdbcType=NUMERIC}
+	  	 ]]>
+	</select>
+
+	<!--根据序列号修改面单状态 -->
+	<update id="updateStateBySequence" parameterType="map">
+		<![CDATA[  
+			UPDATE 
+				ZEBRA_SURFACEBILL
+			SET
+				IS_USE = #{isUse, jdbcType=NUMERIC},
+				UPDATE_TIME = NOW()
+			WHERE 
+				SEQUENCE = #{sequence, jdbcType=VARCHAR}
+		 ]]>
+	</update>
+	<!-- 统计商家面单信息 -->
+	<select id="countWaybillInfo" resultMap="UserWaybillInfoRM"
+		parameterType="list">
+		<![CDATA[ 
+			SELECT 
+				USER.USER_NAME CUSTOMERNAME,
+				INFO.CUSTOMER_CODE CUSTOMERCODE,
+				INFO.TOTALCOUNT, 
+				INFO.TOTALCOUNT/1000 TOTALBOXNUM,
+				INFO.TOTALCOUNT-IFNULL(INFO.USEDCOUNT,0) REMAINCOUNT,
+				(INFO.TOTALCOUNT-IFNULL(INFO.USEDCOUNT,0))/1000 REMAINBOXNUM,
+				IFNULL(INFO.USEDCOUNT,0), 
+				IFNULL(INFO.USEDCOUNT,0)/1000 USEDBOXNUM 
+			FROM 
+			(
+				SELECT 
+					BILL1.CUSTOMER_CODE,
+					USEDCOUNT,TOTALCOUNT 
+				FROM 
+				(
+			
+					SELECT 
+						CUSTOMER_CODE,
+						COUNT(*) TOTALCOUNT 
+					FROM 
+						ZEBRA_SURFACEBILL 
+					WHERE
+						CUSTOMER_CODE IN 
+				]]>
+		<foreach collection="list" item="customerCode" open="(" close=")"
+			separator=",">
+					<![CDATA[ #{customerCode} ]]>
+		</foreach>
+				<![CDATA[ 		
+					GROUP BY CUSTOMER_CODE
+					
+				) BILL1
+				LEFT JOIN 
+				(
+					SELECT 
+						CUSTOMER_CODE,
+						COUNT(*) USEDCOUNT 
+					FROM 
+						ZEBRA_SURFACEBILL 
+					WHERE
+						CUSTOMER_CODE IN
+				]]>
+		<foreach collection="list" item="customerCode" open="(" close=")"
+			separator=",">
+					<![CDATA[ #{customerCode} ]]>
+		</foreach>
+		<![CDATA[ 	 
+					AND IS_USE = 1 
+					GROUP BY CUSTOMER_CODE 
+				) BILL2
+				ON 
+					BILL1.CUSTOMER_CODE = BILL2.CUSTOMER_CODE
+			) INFO
+			INNER JOIN 
+				EC_CORE_USERTHREAD USER 
+			ON 
+				USER_CODE = INFO.CUSTOMER_CODE
+		]]>
+	</select>
+
+
+	<!-- 查找当前用户使用的最大版本号 -->
+	<select id="selectVersionNo" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		SELECT MAX(version_no) FROM zebra_surfacebill where
+		customer_code =
+		#{currentUserNo}
+	</select>
+
+	<select id="selectCounts" parameterType="java.lang.String"
+		resultType="int">
+		SELECT count(*) FROM zebra_surfacebill where customer_code
+		=
+		#{currentUserNo} and is_use = 0
+	</select>
+
+	<!-- 插入运单信息 -->
+	<insert id="insertBill" parameterType="net.ytoec.kernel.dataobject.ZebraSurfacebill">
+	<![CDATA[
+		INSERT INTO zebra_surfacebill(fb_createdate,is_use,waybill_no,fb_downloaddate,version_no,customer_code,jg_create_time) 
+		VALUES(#{fbCreatedate},0, #{waybillNo},now(),#{versionNo},#{customerCode},now())
+	 ]]>
+	</insert>
+
+	<!-- 查询易通能补给仓配通的某商家的电子面单 -->
+	<select id="selectZebraSurfacebillsByCustomerCode"
+		parameterType="Map" resultType="list" resultMap="BaseResultMap">
+		select * from zebra_surfacebill where
+		customer_code=#{customerCode} and
+		is_use=#{state}
+		order by waybill_no
+		<if test="state!=2">
+			limit 0,#{counts}
+		</if>
+	</select>
+
+	<!-- 批量更新下发状态 -->
+	<update id="batchUpdateUseState" parameterType="Map">
+		update zebra_surfacebill set is_use=#{state}
+		<if test="sequence!=0">
+			,sequence=#{sequence}
+  		</if>
+		,third_create_time=now()
+		where
+		<foreach collection="waybillNos" item="waybillNo" open=""
+			close="" separator="OR">
+			waybill_no = #{waybillNo}  
+  		</foreach>
+	</update>
+
+	<!-- 批量更新打印状态 -->
+	<update id="batchUpdatePrintState" parameterType="Map">
+		update zebra_surfacebill set is_print=1
+		where
+		<foreach collection="waybillNos" item="map" open="" close=""
+			separator="OR">
+			waybill_no = #{map.waybillNo}  
+  		</foreach>
+	</update>
+
+	<!-- 根据商家编码查询商家未下发(即:未使用)状态的电子面单数量 -->
+	<select id="selectCountsByState" parameterType="map" resultType="int">
+		select count(waybill_no) from zebra_surfacebill where
+		customer_code=#{customerCode} and is_use=#{state}
+	</select>
+	<!-- 查询面单总数 -->
+	<select id="selectAllCounts" parameterType="java.lang.String"
+		resultType="int">
+		select count(waybill_no) from zebra_surfacebill where
+		customer_code=#{customer_code}
+	</select>
+
+
+	<!-- 批量插入仓配通回传给易通的电子面单 -->
+	<insert id="batchInsert" parameterType="Map">
+		insert into
+		zebra_upload_surfacebill(waybill_no,order_no,customer_code) values
+		<foreach collection="waybillNos" item="map" open="" close=""
+			separator=",">
+			(#{map.waybillNo},#{map.orderNo},#{customerCode})  
+  		</foreach>
+	</insert>
+
+	<!-- 批量删除仓配通回传给易通的电子面单 -->
+	<delete id="batchDelete" parameterType="Map">
+		delete from zebra_upload_surfacebill
+		where
+		<foreach collection="waybillNos" item="waybillNo" open=""
+			close="" separator="OR">
+			waybill_no=#{waybillNo}  
+  		</foreach>
+		and customer_code=#{customerCode}
+	</delete>
+
+	<!-- 查询仓配通回传电子面单表，得到需要要补仓配通的电子面单数量 -->
+	<select id="selectCountsByCustomerCode" parameterType="string"
+		resultType="int">
+		select count(waybill_no) from zebra_upload_surfacebill
+		where customer_code=#{customerCode}
+	</select>
+
+	<!-- 易通给仓配通的某商家下发多少条电子面单，先查询出要相应删除的回传电子面单中某商家的多少条数据 -->
+	<select id="selectByCustomerCodeAndCounts" parameterType="Map"
+		resultType="string">
+		select waybill_no from zebra_upload_surfacebill where
+		customer_code=#{customerCode} limit 0,#{counts} 
+	</select>
+
+	<!-- 通过主键查询请求序列 -->
+	<select id="selectSequenceByKey" parameterType="map" resultType="string">
+		select sequence_id as sequence from zebra_sequence where
+		sequence_id=#{sequence}
+		and customer_code=#{customerCode}
+	</select>
+
+	<!-- 通过主键查询请求序列 -->
+	<select id="selectUploadSurfacebillsBySenquence" parameterType="string"
+		resultType="string">
+		select waybill_no from zebra_upload_surfacebill
+		where
+		customer_code=(select customer_code from zebra_sequence where
+		sequence_id=#{sequence})
+	</select>
+
+	<!-- 查询已经给商家下发的电子面单数 -->
+	<select id="selectUsedCountsByCustomerCode" parameterType="string"
+		resultType="int">
+		select count(waybill_no) from zebra_surfacebill
+		where
+		customer_code=#{customerCode} and (is_use=1 or is_use=2) 
+	</select>
+
+	<!-- 查询要删除该商家上传到回传表counts数据的面单号 -->
+	<select id="selectUploadSurceBillByCustomerCodeAndCounts"
+		parameterType="map" resultType="string">
+		select waybill_no from
+		zebra_upload_surfacebill where
+		customer_code=#{customerCode} limit
+		0,#{counts}
+  	</select>
+
+	<!-- 根据商家代码，请求序列更新面单使用状态 -->
+	<update id="updateUseStateByCustomerCodeAndSequence">
+		update zebra_surfacebill set is_use=#{state}
+		where
+		customer_code=#{customerCode} and sequence=#{sequence}
+  	</update>
+	<!-- 删除一定数量的回传单数据 -->
+	<delete id="deleteUploadBillByLimit" parameterType="map">
+		<![CDATA[
+			DELETE FROM 
+				ZEBRA_UPLOAD_SURFACEBILL
+			WHERE 
+				CUSTOMER_CODE =  #{customerCode, jdbcType=VARCHAR}
+				LIMIT #{limit, jdbcType=NUMERIC}
+		]]>
+	</delete>
+</mapper>

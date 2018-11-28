@@ -1,0 +1,8 @@
+.pagenavi{height:24px;text-align:right;overflow:hidden;font-family:Arial;padding-top:10px;}
+.pagenavi a{text-decoration:none;color:#333;}
+.pagenavi a:hover{text-decoration:none;}
+.pagenavi .page_cur,.pagenavi .page_num{border-width:1px;border-style:solid;padding:0 8px;display:inline-block;font:12px/22px Arial;background:url(../../images/module/pagenavi.png) repeat-x;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.pagenavi .page_num{color:#808080;border-color:#C4C4C4;background-position:0 0;}
+.pagenavi .page_num:hover,.pagenavi .page_cur{color:#1E569E;border-color:#95B8E5;background-position:0 -22px;}
+.pagenavi .page_num:active{background-position:0 -44px;}
+.pagenavi .page_total em{font-style:normal;}

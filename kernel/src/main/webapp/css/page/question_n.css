@@ -1,0 +1,18 @@
+#content_ad{width:875px;float:right;overflow:hidden;position:relative;background:#3b7bbc url(../../images/single/ad_bg.jpg) repeat;}
+.step_content img{margin:5px;}
+#content_ad input{background:url(../../images/single/ok.gif) no-repeat;width:184px;height:47px;z-index:9999;position:absolute;top:190px;left:310px;border:none;text-indent:-9999px;cursor:pointer;}
+
+
+.guide_txt .vip{background:url(../../images/sprite/step.gif) 0 -147px no-repeat;width:849px;height:49px;margin:20px auto; clear:both;}
+.guide_txt .vip li{float:left;text-align:center;line-height:49px;width:161px;padding-left:51px;display:inline;}
+.guide_txt .vip li.curr{color:#fff;}
+
+
+.guide_txt .site{background:url(../../images/single/step_2.gif) 0 0 no-repeat;width:849px;height:49px;margin:20px auto; clear:both;}
+.guide_txt .site li{text-indent:-9999px;}
+.guide_txt .site li.curr{color:#fff;}
+
+
+
+
+

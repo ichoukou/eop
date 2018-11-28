@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.PayServiceMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.PayService" id="payServiceResultMap">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="unitPrice" column="unit_price"/>
+		<result property="flag" column="flag"/>
+		<result property="serviceType" column="service_type"/>		
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>	
+		<result property="remark" column="remark"/>	
+	</resultMap>
+	
+	<insert id="add" parameterType="payService" keyProperty="id" useGeneratedKeys="true">
+		insert into ec_core_payservice
+		(
+		   id, name, unit_price, flag, service_type,remark,create_time,update_time
+		)
+		values
+		(
+		   #{id}, #{name}, #{unitPrice}, #{flag}, #{serviceType},#{remark},now(), now()
+		)
+	</insert>
+	
+	<select id="get" parameterType="payService" resultType="net.ytoec.kernel.dataobject.PayService" resultMap="payServiceResultMap">
+			select * from ec_core_payservice		
+		<where>
+			<if test="id != null and id != ''">
+			     and id = #{id} 
+			</if>		
+			<if test="name != null and name != ''">
+			     and name = #{name}
+			</if>
+			<if test="unitPrice != null and unitPrice != ''">
+			     and unit_price = #{unitPrice}
+			</if>
+			<if test="flag != null and flag != ''">
+			     and flag = #{flag}
+			</if>
+			<if test="serviceType != null and serviceType != ''">
+			     and service_type = #{serviceType}
+			</if>
+			<if test="remark != null and remark != ''">
+			     and remark = #{remark}
+		    </if> 	
+	    </where>         
+	</select>
+	
+	
+	<select id="getNOpenserviceList" parameterType="map" resultType="List" resultMap="payServiceResultMap">
+		select * from ec_core_payservice t 
+		where  flag='1' and service_type !='0'	
+		<if test="dServiceIdList != null">
+		and id not in
+		<foreach collection="dServiceIdList" item="dServiceIdList" open="(" separator="," close=")" >
+			#{dServiceIdList}
+		</foreach>
+		</if>
+	</select>
+	
+	<delete id="remove" parameterType="payService">
+		delete from ec_core_payservice where id = #{id}
+	</delete>
+	
+	<update id="edit" parameterType="serviceHistory">
+	    update 
+	        ec_core_payservice
+	    set 
+	        update_time = now()	    
+		<if test="name != null and name != ''">
+		     , name = #{name}
+		</if>
+		<if test="unitPrice != null and unitPrice != ''">
+		     , unit_price = #{unitPrice}
+		</if>
+		<if test="flag != null and flag != ''">
+		     , flag = #{flag}
+		</if>
+		<if test="serviceType != null and serviceType != ''">
+		     , service_type = #{serviceType}
+		</if>
+		<if test="remark != null and remark != ''">
+		     , remark = #{remark}
+	    </if>
+	    where id = #{id}	
+	</update>
+	
+	<!--  查询免费的服务列表   -->
+	<select id="getFreeServiceList"  resultType="List" resultMap="payServiceResultMap">
+	    select  *  
+	    from  ec_core_payservice 	       
+        where service_type=0 and flag=1
+	</select>
+	
+	<!--  查询收费的服务列表(短信除外)   -->
+	<select id="getNFreeserviceList"  resultType="List" resultMap="payServiceResultMap">
+	    select  *  
+	    from  ec_core_payservice 	       
+        where service_type=2 and flag=1
+	</select>
+	
+	<!--  查询所有的已经开通的服务列表  (免费服务除外) -->
+	<select id="getAllOpenServiceList"  resultType="List" resultMap="payServiceResultMap">
+	    select  *  from  ec_core_payservice 	       
+        where flag=1 and service_type!=0      
+	</select>
+	
+</mapper>

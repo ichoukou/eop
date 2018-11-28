@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 淘宝订单信息插入数据库（会员，问题件，订单）的定时器！by wusha -->
+	<bean id="executeTaobaoInfoTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.TaobaoInfoToDBTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="smsBuyersService" value-ref="smsBuyersServiceImpl" />
+				<entry key="taobaoTaskService" value-ref="taobaoTaskServiceImpl" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- 执行淘宝获取订单之后产生任务的定时器！by wusha -->
+	<bean id="executeTaobaoTaskTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.BuyersTaobaoTaskTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="smsBuyersService" value-ref="smsBuyersServiceImpl" />
+			</map>
+		</property>
+	</bean>
+	<bean id="executeTaobaoTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeTaobaoTaskTimer" />
+		<property name="cronExpression" value="0 0/30 * * * ?" />
+	</bean>
+
+	<!-- 淘宝订单信息插入数据库（会员，问题件，订单）的定时器！by wusha -->
+	<bean id="executeTaobaoInfoTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeTaobaoInfoTimer" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+
+
+	<!-- 问题件 金刚状态 一次性补偿定时器 -->
+	<bean id="questionnaireStatusUpdateQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.QuestionnaireCompensateTimer" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="limit" value="10000" />
+				<entry key="jingangLimit" value="1000" />
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="questionnaireService" value-ref="questionnaireServiceImpl" />
+				<entry key="receiver"
+					value="yitonggroup@ytoxl.com" />
+			</map>
+		</property>
+	</bean>
+	<bean id="questionnaireStatusUpdateQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="questionnaireStatusUpdateQuartz" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+
+
+	<!-- 更新问题件 -->
+	<bean id="questionnaireTimer" class="net.ytoec.kernel.timer.QuestionnaireTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+
+		<property name="questionnaireService" ref="questionnaireServiceImpl" />
+
+		<property name="tablename" value="${questionnaire.table.issue}" />
+		<property name="period" value="${questionnaire.timer.period}" />
+	</bean>
+	<bean id="questionnaireTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 1秒开始执行任务 -->
+		<property name="delay" value="30000" />
+		<property name="period" value="300000" />
+		<property name="timerTask" ref="questionnaireTimer" />
+	</bean>
+
+	<!-- 更新重量 -->
+	<bean id="weightTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 20秒开始执行任务 -->
+		<property name="delay" value="20000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="600000" />
+		<property name="timerTask" ref="weightUpdate" />
+	</bean>
+	<bean id="weightUpdate" class="net.ytoec.kernel.timer.WeightUpdaeTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+
+		<property name="orderService" ref="orderServiceImpl" />
+		<property name="configCodeService" ref="configCodeServiceImpl" />
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="executeTaobaoInfoTrigger" />
+				<ref bean="executeTaobaoTaskTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

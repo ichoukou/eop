@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderPrintMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.OrderPrint" id="orderPrintResultMap">
+		<id property="id" column="id" />
+		<result property="version" column="version" />
+		<result property="logisticProviderId" column="logistic_provider_id" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+		<result property="tradeNo" column="tradeNo" />
+		<result property="customerId" column="customer_id" />
+		<result property="mailNo" column="mailNo" />
+		<result property="type" column="type" />
+		<result property="flag" column="flag" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="sendStartTime" column="send_start_time" />
+		<result property="sendEndTime" column="send_end_time" />
+		<result property="insuranceValue" column="insurance_value" />
+		<result property="packageOrNot" column="package_or_not" />
+		<result property="special" column="special" />
+		<result property="remark" column="remark" />
+		<result property="clientId" column="client_id" />
+		<result property="status" column="status" />
+		<result property="weight" column="weight" />
+		<result property="signPrice" column="sign_price" />
+		<result property="vipId" column="vip_id" />
+		<result property="lineType" column="line_type" />
+		<result property="weightUpdateFlag" column="weight_update_flag" />
+		<result property="orderType" column="order_type" />
+		<result property="serviceType" column="service_type" />
+		<result property="goodsValue" column="goods_value" />
+		<result property="itemsValue" column="items_value" />
+		<result property="totalServiceFee" column="total_service_fee" />
+		<result property="buyServiceFee" column="buy_service_fee" />
+		<result property="codSplitFee" column="cod_split_fee" />
+		<result property="acceptTime" column="accept_time" />
+		<result property="partitiondate" column="partitiondate" />
+		<result property="freightType" column="freight_type" />
+		<result property="freight" column="freight" />
+		<result property="trimFreight" column="trim_freight" />
+		<result property="isCombine" column="is_combine" />
+		<result property="isPrint" column="is_print" />
+		<result property="isPrintSend" column="is_print_send" />
+		<result property="isSend" column="is_send" />
+		<result property="parentId" column="parent_id" />
+		<result property="firstProductName" column="first_product_name" />
+		<result property="productName" column="product_name" />
+		<result property="buyName" column="buy_name" />
+		<result property="buyMobile" column="buy_mobile" />
+		<result property="buyTelphone" column="buy_telphone" />
+		<result property="buyFulladdress" column="buy_fulladdress" />
+		<result property="buyProv" column="buy_prov" />
+		<result property="buyCity" column="buy_city" />
+		<result property="buyDistrict" column="buy_district" />
+		<result property="buyAddress" column="buy_address" />
+		<result property="buyPostcode" column="buy_postcode" />
+		<result property="saleName" column="sale_name" />
+		<result property="saleMobile" column="sale_mobile" />
+		<result property="saleTelphone" column="sale_telphone" />
+		<result property="saleFulladdress" column="sale_fulladdress" />
+		<result property="saleProv" column="sale_prov" />
+		<result property="saleCity" column="sale_city" />
+		<result property="saleDistrict" column="sale_district" />
+		<result property="saleAddress" column="sale_address" />
+		<result property="oldPrice" column="old_price" />
+		<result property="joinNum" column="join_num" />
+	</resultMap>
+	
+	<!-- 插入面单打印表中的记录 -->
+	<insert id="addOrderPrint" useGeneratedKeys="false" keyProperty="id" parameterType="orderPrint">
+		insert into ec_core_order_print (
+			id
+			,version
+			,logistic_provider_id
+			,tx_logistic_id
+			,tradeNo
+			,customer_id
+			,mailNo
+			,type
+			,flag
+			,create_time
+			,update_time
+			,send_start_time
+			,send_end_time
+			,insurance_value
+			,package_or_not
+			,special
+			,remark
+			,client_id
+			,status
+			,weight
+			,sign_price
+			,vip_id
+			,line_type
+			,weight_update_flag
+			,order_type
+			,service_type
+			,goods_value
+			,items_value
+			,total_service_fee
+			,buy_service_fee
+			,cod_split_fee
+			,accept_time
+			,partitiondate
+			,freight_type
+			,freight
+			,trim_freight
+			,is_combine
+			,is_print
+			,is_print_send
+			,is_send
+			,parent_id
+			,first_product_name
+			,product_name
+			,buy_name
+			,buy_mobile
+			,buy_telphone
+			,buy_fulladdress
+			,buy_prov
+			,buy_city
+			,buy_district
+			,buy_address
+			,buy_postcode
+			,sale_name
+			,sale_mobile
+			,sale_telphone
+			,sale_fulladdress
+			,sale_prov
+			,sale_city
+			,sale_district
+			,sale_address
+			,old_price
+			,join_num
+		) values (	
+			#{id}		
+			,#{version}
+			,#{logisticProviderId}
+			,#{txLogisticId}
+			,#{tradeNo}
+			,#{customerId}
+			,#{mailNo}
+			,#{type}
+			,#{flag}
+			,now()
+			,now()
+			,#{sendStartTime}
+			,#{sendEndTime}
+			,#{insuranceValue}
+			,#{packageOrNot}
+			,#{special}
+			,#{remark}
+			,#{clientId}
+			,#{status}
+			,#{weight}
+			,#{signPrice}
+			,#{vipId}
+			,#{lineType}
+			,#{weightUpdateFlag}
+			,#{orderType}
+			,#{serviceType}
+			,#{goodsValue}
+			,#{itemsValue}
+			,#{totalServiceFee}
+			,#{buyServiceFee}
+			,#{codSplitFee}
+			,#{acceptTime}
+			,sysdate()
+			,#{freightType}
+			,#{freight}
+			,#{trimFreight}
+			,#{isCombine}
+			,#{isPrint}
+			,#{isPrintSend}
+			,#{isSend}
+			,#{parentId}
+			,#{firstProductName}
+			,#{productName}
+			,#{buyName}
+			,#{buyMobile}
+			,#{buyTelphone}
+			,#{buyFulladdress}
+			,#{buyProv}
+			,#{buyCity}
+			,#{buyDistrict}
+			,#{buyAddress}
+			,#{buyPostcode}
+			,#{saleName}
+			,#{saleMobile}
+			,#{saleTelphone}
+			,#{saleFulladdress}
+			,#{saleProv}
+			,#{saleCity}
+			,#{saleDistrict}
+			,#{saleAddress}
+			,#{oldPrice}
+			,#{joinNum}
+		)
+	</insert>
+	
+	<!--抓取单个对象-->
+	<select id="getOrderPrint" parameterType="integer" resultType="orderPrint" resultMap="orderPrintResultMap">
+    	select * from ec_core_order_print
+    	where id = #{id}
+	</select>
+	
+	<!--抓取单个或者多个对象-->
+	<select id="getServalOrderPrintLists" parameterType="Map" resultType="list" resultMap="orderPrintResultMap">
+    	select * from ec_core_order_print
+    	WHERE id IN    
+    	<foreach collection="joinOrClearOrderIds" item="joinOrClearOrderId" open="(" separator="," close=")" >
+			#{joinOrClearOrderId}
+		</foreach>	
+		<!-- 
+			按照字段排序
+		 -->
+		 <if test='orderByCol == "mobileAndTelphone"'>
+			ORDER BY buy_mobile || buy_telphone DESC
+		</if>
+		 <if test='orderByCol == "buyAddress"'>
+			ORDER BY buy_fulladdress DESC
+		</if>
+		<if test='orderByCol == "firstProductName"'>
+			ORDER BY first_product_name DESC
+		</if>
+		 <if test='orderByCol == "tradeNoUp"'>
+			ORDER BY tradeNo ASC
+		</if>
+		<if test='orderByCol == "tradeNoDown"'>
+			ORDER BY tradeNo DESC
+		</if>
+		<if test='orderByCol == "createDateUp"'>
+			ORDER BY create_time ASC
+		</if>
+		<if test='orderByCol == "createDateDown"'>
+			ORDER BY create_time DESC
+		</if>
+		<if test='orderByCol == "logisticUp"'>
+			ORDER BY tx_logistic_id ASC
+		</if>
+		<if test='orderByCol == "logisticDown"'>
+			ORDER BY tx_logistic_id DESC
+		</if>
+	</select>
+	
+	<!--不想看到它功能-->
+	<select id="updateOrderPrintByIds" parameterType="Map">
+    	update ec_core_order_print SET is_print = 'N'
+    	WHERE id IN    
+    	<foreach collection="delOpIds" item="delOpId" open="(" separator="," close=")" >
+			#{delOpId}
+		</foreach>	
+	</select>
+	
+	<!--修改-->
+	<update id="updateOrderPrint" parameterType="orderPrint">
+		update ec_core_order_print 
+		set 
+			id = #{id}	
+			,version = #{version}
+			,logistic_provider_id = #{logisticProviderId}
+			,tx_logistic_id = #{txLogisticId}
+			,tradeNo = #{tradeNo}
+			,customer_id = #{customerId}
+			,mailNo = #{mailNo}
+			,type = #{type}
+			,flag = #{flag}
+			,create_time = #{createTime}
+			,update_time = now()
+			,send_start_time = #{sendStartTime}
+			,send_end_time = #{sendEndTime}
+			,insurance_value = #{insuranceValue}
+			,package_or_not = #{packageOrNot}
+			,special = #{special}
+			,remark = #{remark}
+			,client_id = #{clientId}
+			,status = #{status}
+			,weight = #{weight}
+			,sign_price = #{signPrice}
+			,vip_id = #{vipId}
+			,line_type = #{lineType}
+			,weight_update_flag = #{weightUpdateFlag}
+			,order_type = #{orderType}
+			,service_type = #{serviceType}
+			,goods_value = #{goodsValue}
+			,items_value = #{itemsValue}
+			,total_service_fee = #{totalServiceFee}
+			,buy_service_fee = #{buyServiceFee}
+			,cod_split_fee = #{codSplitFee}
+			,accept_time = #{acceptTime}
+			,partitiondate = #{partitiondate}
+			,freight_type = #{freightType}
+			,freight = #{freight}
+			,trim_freight = #{trimFreight}
+			,is_combine = #{isCombine}
+			,is_print = #{isPrint}
+			,is_print_send = #{isPrintSend}
+			,is_send = #{isSend}
+			,parent_id = #{parentId}
+			,first_product_name = #{firstProductName}
+			,product_name = #{productName}
+			,buy_name = #{buyName}
+			,buy_mobile = #{buyMobile}
+			,buy_telphone = #{buyTelphone}
+			,buy_fulladdress = #{buyFulladdress}
+			,buy_prov = #{buyProv}
+			,buy_city = #{buyCity}
+			,buy_district = #{buyDistrict}
+			,buy_address = #{buyAddress}
+			,buy_postcode = #{buyPostcode}
+			,sale_name = #{saleName}
+			,sale_mobile = #{saleMobile}
+			,sale_telphone = #{saleTelphone}
+			,sale_fulladdress = #{saleFulladdress}
+			,sale_prov =#{saleProv}
+			,sale_city = #{saleCity}
+			,sale_district = #{saleDistrict}
+			,sale_address = #{saleAddress}
+			,old_price = #{oldPrice}
+			,join_num = #{joinNum}
+		where id = #{id}
+	</update>
+	
+	<!-- 分页查询start -->
+	<!--批量打印-->
+	<select id="getTotal" parameterType="Map" resultType="integer">
+		select count(*) from ec_core_order_print
+		WHERE parent_id in ('0', '1') AND is_send = 'N'
+		<if test="tradeNo != null and tradeNo != ''">
+			 AND tradeNo = #{tradeNo}
+		</if>
+		<if test="mailNo != null and mailNo != ''">
+			 AND mailNo = #{mailNo}
+		</if>
+		<if test="customerId != null and customerId != ''">
+			 AND customer_id = #{customerId}
+		</if>
+		<if test="startDate != null and endDate != null">
+			<![CDATA[
+			 AND partitiondate >= #{startDate} AND partitiondate < #{endDate}
+			 ]]>
+		</if>
+		<if test="customerIds != null and customerIds !=''">
+			AND customer_id IN
+			<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		<if test='flag == "nodata"'>
+			 AND 1 != 1
+		</if>
+		<!-- 
+			订单类型
+		 -->
+		<if test="orderType == 1">
+			AND is_print = 'Y'  AND is_print_send != 'Y'
+		</if>
+		<if test="orderType == 2">
+			AND is_print_send = 'Y' AND is_print != 'Y'
+		</if>
+		<if test="orderType == 3">
+			AND is_print_send = 'Y' AND is_print = 'Y'
+		</if>
+		<if test="orderType == 4">
+			AND mailNo != '' 
+		</if>
+		<if test="orderType == 5">
+			AND mailNo = '' 
+		</if>
+		<if test="orderType == 6">
+			AND parent_id = '0'
+		</if>
+		<if test="orderType == 7">
+			AND parent_id = '1'
+		</if>
+		<if test="orderType == 8">
+			AND is_print != 'Y' AND is_print_send != 'Y'
+		</if>
+	</select>
+	<select id="getAllOrderPrint" parameterType="Map" resultType="list" resultMap="orderPrintResultMap">
+		select * from ec_core_order_print
+		WHERE parent_id in ('0', '1') AND is_send = 'N'
+		<if test="tradeNo != null and tradeNo != ''">
+			 AND tradeNo = #{tradeNo}
+		</if>
+		<if test="mailNo != null and mailNo != ''">
+			 AND mailNo = #{mailNo}
+		</if>
+		<if test="customerId != null and customerId != ''">
+			 AND customer_id = #{customerId}
+		</if>
+		<if test="startDate != null and endDate != null">
+			 <![CDATA[
+			 AND partitiondate >= #{startDate} AND partitiondate < #{endDate}
+			 ]]>
+		</if>
+		<if test="customerIds != null and customerIds !=''">
+			AND customer_id IN
+			<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		<if test='flag == "nodata"'>
+			 AND 1 != 1
+		</if>
+		<!-- 
+			订单类型
+		 -->
+		<if test="orderType == 1">
+			AND is_print = 'Y' AND is_print_send != 'Y'
+		</if>
+		<if test="orderType == 2">
+			AND is_print_send = 'Y' AND is_print != 'Y'
+		</if>
+		<if test="orderType == 3">
+			AND is_print_send = 'Y' AND is_print = 'Y'
+		</if>
+		<if test="orderType == 4">
+			AND mailNo != '' 
+		</if>
+		<if test="orderType == 5">
+			AND mailNo = '' 
+		</if>
+		<if test="orderType == 6">
+			AND parent_id = '0'
+		</if>
+		<if test="orderType == 7">
+			AND parent_id = '1'
+		</if>
+		<if test="orderType == 8">
+			AND is_print != 'Y' AND is_print_send != 'Y'
+		</if>
+		<!-- 
+			按照字段排序
+		 -->
+		 <if test='orderByCol == "mobileAndTelphone"'>
+			ORDER BY buy_mobile || buy_telphone DESC
+		</if>
+		 <if test='orderByCol == "buyAddress"'>
+			ORDER BY buy_fulladdress DESC
+		</if>
+		<if test='orderByCol == "firstProductName"'>
+			ORDER BY first_product_name DESC
+		</if>
+		 <if test='orderByCol == "tradeNoUp"'>
+			ORDER BY tradeNo ASC
+		</if>
+		<if test='orderByCol == "tradeNoDown"'>
+			ORDER BY tradeNo DESC
+		</if>
+		<if test='orderByCol == "createDateUp"'>
+			ORDER BY create_time ASC
+		</if>
+		<if test='orderByCol == "createDateDown"'>
+			ORDER BY create_time DESC
+		</if>
+		<if test='orderByCol == "logisticUp"'>
+			ORDER BY tx_logistic_id ASC
+		</if>
+		<if test='orderByCol == "logisticDown"'>
+			ORDER BY tx_logistic_id DESC
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!--已发货-->
+	<select id="getDeliveredTotal" parameterType="Map" resultType="integer">
+		select count(*) from ec_core_order_print
+		WHERE is_send = 'Y' AND parent_id in ('0', '1')
+		<if test="tradeNo != null and tradeNo != ''">
+			 AND tradeNo = #{tradeNo}
+		</if>
+		<if test="mailNo != null and mailNo != ''">
+			 AND mailNo = #{mailNo}
+		</if>
+		<if test="customerId != null and customerId != ''">
+			 AND customer_id = #{customerId}
+		</if>
+		<if test="startDate != null and endDate != null">
+			 AND update_time between #{startDate} and #{endDate}
+		</if>
+		<if test="customerIds != null and customerIds !=''">
+			AND UPPER(client_id)!='TAOBAO' AND client_id is not null AND customer_id IN
+			<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		<if test='flag == "nodata"'>
+			 AND 1 != 1
+		</if>
+	</select>
+	
+	<select id="getDeliveredOrderPrint" parameterType="Map" resultType="list" resultMap="orderPrintResultMap">
+		select * from ec_core_order_print
+		WHERE is_send = 'Y' AND parent_id in ('0', '1')
+		<if test="tradeNo != null and tradeNo != ''">
+			 AND tradeNo = #{tradeNo}
+		</if>
+		<if test="mailNo != null and mailNo != ''">
+			 AND mailNo = #{mailNo}
+		</if>
+		<if test="customerId != null and customerId != ''">
+			 AND customer_id = #{customerId}
+		</if>
+		<if test="startDate != null and endDate != null">
+			  <![CDATA[
+			 AND update_time >= #{startDate} AND update_time < #{endDate}
+			 ]]>
+		</if>
+		<if test="customerIds != null and customerIds !=''">
+			AND UPPER(client_id)!='TAOBAO' AND client_id is not null AND customer_id IN
+			<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		<if test='flag == "nodata"'>
+			 AND 1 != 1
+		</if>
+		<!-- 
+			按照字段排序
+		 -->
+		 <if test='orderByCol == "mobileAndTelphone"'>
+			ORDER BY buy_mobile || buy_telphone DESC
+		</if>
+		 <if test='orderByCol == "buyAddress"'>
+			ORDER BY buy_fulladdress DESC
+		</if>
+		<if test='orderByCol == "firstProductName"'>
+			ORDER BY first_product_name DESC
+		</if>
+		 <if test='orderByCol == "tradeNoUp"'>
+			ORDER BY tradeNo ASC
+		</if>
+		<if test='orderByCol == "tradeNoDown"'>
+			ORDER BY tradeNo DESC
+		</if>
+		<if test='orderByCol == "createDateUp"'>
+			ORDER BY create_time ASC
+		</if>
+		<if test='orderByCol == "createDateDown"'>
+			ORDER BY create_time DESC
+		</if>
+		<if test='orderByCol == "logisticUp"'>
+			ORDER BY tx_logistic_id ASC
+		</if>
+		<if test='orderByCol == "logisticDown"'>
+			ORDER BY tx_logistic_id DESC
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!--代发货-->
+	<select id="getUndeliverTotal" parameterType="Map" resultType="integer">
+		select count(*) from ec_core_order_print
+		WHERE is_print = 'Y' AND is_send = 'N' AND parent_id in ('0', '1')
+		<if test="tradeNo != null and tradeNo != ''">
+			 AND tradeNo = #{tradeNo}
+		</if>
+		<if test="mailNo != null and mailNo != ''">
+			 AND mailNo = #{mailNo}
+		</if>
+		<if test="customerId != null and customerId != ''">
+			 AND customer_id = #{customerId}
+		</if>
+		<if test="startDate != null and endDate != null">
+			 <![CDATA[
+			 AND partitiondate >= #{startDate} AND partitiondate < #{endDate}
+			 ]]>
+		</if>
+		<if test="customerIds != null and customerIds !=''">
+			AND UPPER(client_id)!='TAOBAO' AND client_id is not null AND customer_id IN
+			<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		<if test='flag == "nodata"'>
+			 AND 1 != 1
+		</if>
+	</select>
+	
+	<select id="getUndeliverOrderPrint" parameterType="Map" resultType="list" resultMap="orderPrintResultMap">
+		select * from ec_core_order_print
+		WHERE is_print = 'Y' AND is_send = 'N' AND parent_id in ('0', '1')
+		<if test="tradeNo != null and tradeNo != ''">
+			 AND tradeNo = #{tradeNo}
+		</if>
+		<if test="mailNo != null and mailNo != ''">
+			 AND mailNo = #{mailNo}
+		</if>
+		<if test="customerId != null and customerId != ''">
+			 AND customer_id = #{customerId}
+		</if>
+		
+		<if test="startDate != null and endDate != null">
+			  <![CDATA[
+			 AND partitiondate >= #{startDate} AND partitiondate < #{endDate}
+			 ]]>
+		</if>
+		<if test="customerIds != null and customerIds !=''">
+			AND UPPER(client_id)!='TAOBAO' AND client_id is not null AND customer_id IN
+			<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		
+		<if test='flag == "nodata"'>
+			 AND 1 != 1
+		</if>
+		<!-- 
+			按照字段排序
+		 -->
+		 <if test='orderByCol == "mobileAndTelphone"'>
+			ORDER BY buy_mobile || buy_telphone DESC
+		</if>
+		 <if test='orderByCol == "buyAddress"'>
+			ORDER BY buy_fulladdress DESC
+		</if>
+		<if test='orderByCol == "firstProductName"'>
+			ORDER BY first_product_name DESC
+		</if>
+		 <if test='orderByCol == "tradeNoUp"'>
+			ORDER BY tradeNo ASC
+		</if>
+		<if test='orderByCol == "tradeNoDown"'>
+			ORDER BY tradeNo DESC
+		</if>
+		<if test='orderByCol == "createDateUp"'>
+			ORDER BY create_time ASC
+		</if>
+		<if test='orderByCol == "createDateDown"'>
+			ORDER BY create_time DESC
+		</if>
+		<if test='orderByCol == "logisticUp"'>
+			ORDER BY tx_logistic_id ASC
+		</if>
+		<if test='orderByCol == "logisticDown"'>
+			ORDER BY tx_logistic_id DESC
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 分页查询end -->
+	
+	<!-- 通过 parent_id 查出订单列表-->
+	<select id="getOrderPrintByParentId" parameterType="integer" resultType="list" resultMap="orderPrintResultMap">
+		SELECT * 
+		FROM
+		ec_core_order_print where parent_id = #{parentId}
+	</select>
+	
+	<!-- 根据ID 修改打印快速单状态-->
+	<update id="updateOrderPrintIsPrint" parameterType="map" >
+		UPDATE ec_core_order_print
+		SET is_print=#{isPrint}
+		WHERE id = #{id}
+	</update>		
+	
+	<!-- 根据ID 修改打印发货单状态-->
+	<update id="updateOrderPrintIsSendPrint" parameterType="map" >
+		UPDATE ec_core_order_print
+		SET is_print_send=#{isPrintSend}
+		WHERE id = #{id}
+	</update>	
+	
+	
+	<!-- 根据ID 修改批量发货状态-->
+	<update id="updateOrderPrintIsSend" parameterType="map" >
+		UPDATE ec_core_order_print
+		SET is_send=#{isSend}, update_time=now()
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 根据面单号-->
+	<update id="updateOrderNo" parameterType="map" >
+		UPDATE ec_core_order_print
+		SET mailNo=#{mailNo}, update_time=now()
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 根据 tx_logistic_id修改 -->
+	<update id="updateOrderPrintByTxLogisticIdIsSend" parameterType = "map">
+		update ec_core_order_print set is_send= "Y",update_time = now() where tx_logistic_id = #{txLogisticId}
+	</update>
+</mapper>

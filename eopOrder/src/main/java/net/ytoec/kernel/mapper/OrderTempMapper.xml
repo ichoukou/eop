@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderTempMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.OrderTemp" id="orderTempResultMap">
+		<id property="id" column="id" />
+		<result property="mailNo" column="mailNo" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+		<result property="buyerName" column="buyer_name" />
+		<result property="name" column="name" />
+		<result property="prov" column="prov" />
+		<result property="city" column="city" />
+		<result property="district" column="district" />
+		<result property="address" column="address" />
+		<result property="postCode" column="post_code" />
+		<result property="phone" column="phone" />
+		<result property="mobile" column="mobile" />
+ 		<result property="sendName" column="send_name" />
+ 		<result property="sendAddress" column="send_address"/>
+		<result property="sendMobile" column="send_mobile" />
+		<result property="sendPhone" column="send_phone" />
+		<result property="createTime" column="create_time" />
+		<result property="goodsName" column="goods_name" />
+		<result property="totalPrice" column="total_price" />
+		<result property="singlePrice" column="single_price" />
+		<result property="quantity" column="quantity" />
+		<result property="partitionDate" column="partitiondate" />
+		<result property="endDate" column="enddate" />
+		<result property="clientId" column="clientId"/>
+		<result property="remark" column="remark" />
+	</resultMap>
+
+	<insert id="addOrderTempList" parameterType="java.util.List">
+		INSERT INTO EC_CORE_ORDER_TEMP
+		(mailNo,tx_logistic_id, buyer_name, name, prov, city, district,
+		address, post_code, phone, mobile, send_name, send_address, send_mobile, send_phone, create_time, goods_name, total_price,
+		single_price, quantity, partitiondate, enddate, remark,clientId)
+		VALUES
+		<foreach collection="list" item="item" index="index"  separator=",">  
+			(#{item.mailNo},#{item.txLogisticId}, #{item.buyerName}, #{item.name}, #{item.prov},#{item.city}, #{item.district},
+			#{item.address}, #{item.postCode}, #{item.phone}, #{item.mobile}, #{item.sendName}, #{item.sendAddress}, #{item.sendMobile}, #{item.sendPhone},#{item.createTime},#{item.goodsName}, #{item.totalPrice},
+			#{item.singlePrice}, #{item.quantity}, sysdate(), #{item.endDate}, #{item.remark},#{item.clientId} ) 
+		</foreach>
+	</insert>
+
+	<select id="getAllOrderTemp" resultType="list" resultMap="orderTempResultMap">
+		SELECT
+		t.id,
+		t.mailNo,
+		t.tx_logistic_id,
+		t.buyer_name,
+		t.name,
+		t.prov,
+		t.city,
+		t.district,
+		t.address,
+		t.post_code,
+		t.phone,
+		t.mobile,
+		t.send_name,
+		t.send_address,
+		t.send_mobile,
+		t.send_phone,
+		t.create_time,
+		t.goods_name,
+		t.total_price,
+		t.single_price,
+		t.quantity,
+		t.partitiondate,
+		t.enddate,
+		t.remark,
+		t.clientId
+		FROM
+		EC_CORE_ORDER_TEMP t
+	</select>
+
+	<select id="getOrderTempListByRemark" resultType="list" resultMap="orderTempResultMap" parameterType="string">
+		SELECT
+		t.id,
+		t.mailNo,
+		t.tx_logistic_id,
+		t.buyer_name,
+		t.name,
+		t.prov,
+		t.city,
+		t.district,
+		t.address,
+		t.post_code,
+		t.phone,
+		t.mobile,
+		t.send_name,
+		t.send_address,
+		t.send_mobile,
+		t.send_phone,
+		t.create_time,
+		t.goods_name,
+		t.total_price,
+		t.single_price,
+		t.quantity,
+		t.partitiondate,
+		t.enddate,
+		t.remark,
+		t.clientId
+		FROM
+		EC_CORE_ORDER_TEMP t 
+		WHERE t.remark=#{remark}
+	</select>
+
+	<select id="getOrderTempListByRemarkPage" resultType="list" resultMap="orderTempResultMap" parameterType="map">
+		SELECT
+		t.id,
+		t.mailNo,
+		t.tx_logistic_id,
+		t.buyer_name,
+		t.name,
+		t.prov,
+		t.city,
+		t.district,
+		t.address,
+		t.post_code,
+		t.phone,
+		t.mobile,
+		t.send_name,
+		t.send_address,
+		t.send_mobile,
+		t.send_phone,
+		t.create_time,
+		t.goods_name,
+		t.total_price,
+		t.single_price,
+		t.quantity,
+		t.partitiondate,
+		t.enddate,
+		t.remark,
+		t.clientId
+		FROM
+		EC_CORE_ORDER_TEMP t 
+		WHERE t.remark=#{remark} 
+				
+		<if test="mailNoOrTraderNo!=null">
+			and (mailno=#{mailNoOrTraderNo} or tx_logistic_id=#{mailNoOrTraderNo})
+	    </if>
+	    order by t.id DESC
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<insert id="add" parameterType="orderTemp" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_ORDER_TEMP
+		(mailNo,tx_logistic_id, buyer_name, name, prov, city, district,
+		address, post_code, phone, mobile, send_name, send_address, send_mobile, send_phone, create_time, goods_name, total_price,
+		single_price, quantity, partitiondate, enddate, remark,clientId)
+		VALUES
+		(#{mailNo},#{txLogisticId}, #{buyerName}, #{name}, #{prov},#{city}, #{district},
+		#{address}, #{postCode}, #{phone}, #{mobile}, #{sendName}, #{sendAddress}, #{sendMobile}, #{sendPhone},#{createTime},#{goodsName}, #{totalPrice},
+		#{singlePrice}, #{quantity}, sysdate(), #{endDate}, #{remark},#{clientId} ) 
+	</insert>
+
+	<delete id="remove" parameterType="orderTemp">
+		DELETE FROM EC_CORE_ORDER_TEMP
+		WHERE id = #{id}
+	</delete>
+
+	<select id="get" parameterType="orderTemp" resultType="orderTemp" resultMap="orderTempResultMap">
+		SELECT
+		t.id,
+		t.mailNo,
+		t.tx_logistic_id,
+		t.buyer_name,
+		t.name,
+		t.prov,
+		t.city,
+		t.district,
+		t.address,
+		t.post_code,
+		t.phone,
+		t.mobile,
+		t.send_name,
+		t.send_address,
+		t.send_mobile,
+		t.send_phone,
+		t.create_time,
+		t.goods_name,
+		t.total_price,
+		t.single_price,
+		t.quantity,
+		t.partitionDate,
+		t.endDate,
+		t.remark,
+		t.clientId
+		FROM
+		EC_CORE_ORDER_TEMP t
+		WHERE t.id = #{id}
+	</select>
+
+	<select id="getOrderTempLogisticIdRemark" parameterType="orderTemp" resultType="list" resultMap="orderTempResultMap">
+		SELECT
+		t.id,
+		t.mailNo,
+		t.tx_logistic_id,
+		t.buyer_name,
+		t.name,
+		t.prov,
+		t.city,
+		t.district,
+		t.address,
+		t.post_code,
+		t.phone,
+		t.mobile,
+		t.send_name,
+		t.send_address,
+		t.send_mobile,
+		t.send_phone,
+		t.create_time,
+		t.goods_name,
+		t.total_price,
+		t.single_price,
+		t.quantity,
+		t.partitionDate,
+		t.endDate,
+		t.remark,
+		t.clientId
+		FROM
+		EC_CORE_ORDER_TEMP t
+		WHERE 
+		t.tx_logistic_id=#{txLogisticId}
+		AND
+		t.remark=#{remark}
+	</select>
+
+	<update id="edit" parameterType="orderTemp">
+		UPDATE EC_CORE_ORDER_TEMP
+		SET
+		mailNo = #{mailNo},
+		tx_logistic_id = #{txLogisticId},
+		buyer_name = #{buyerName},
+		name = #{name},
+		prov = #{prov},
+		city = #{city},
+		district = #{district},
+		address = #{address},
+		post_code = #{postCode},
+		phone = #{phone},
+		mobile = #{mobile},
+		send_name=#{sendName},
+		send_address=#{sendAddress},
+		send_mobile=#{sendMobile},
+		send_phone=#{sendPhone},
+		create_time = #{createTime},
+		goods_name = #{goodsName},
+		total_price = #{totalPrice},
+		single_price = #{singlePrice},
+		quantity = #{quantity},
+		remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getOrderTempByMailNoRemark" parameterType="orderTemp" resultType="list" resultMap="orderTempResultMap">
+		SELECT
+		t.id,
+		t.mailNo,
+		t.tx_logistic_id,
+		t.buyer_name,
+		t.name,
+		t.prov,
+		t.city,
+		t.district,
+		t.address,
+		t.post_code,
+		t.phone,
+		t.mobile,
+		t.send_name,
+		t.send_address,
+		t.send_mobile,
+		t.send_phone,
+		t.create_time,
+		t.goods_name,
+		t.total_price,
+		t.single_price,
+		t.quantity,
+		t.partitiondate,
+		t.enddate,	
+		t.remark,
+		t.clientId
+		FROM
+		EC_CORE_ORDER_TEMP t
+		WHERE t.mailNo = #{mailNo}
+		AND
+		t.remark=#{remark}
+	</select>
+	
+	<select id="countOrderTempListByMap" resultType="int" parameterType="java.util.Map" >
+			select count(*) from EC_CORE_ORDER_TEMP t where t.remark = #{remark}
+			<if test="mailNoOrTraderNo!=null">
+			and (mailno=#{mailNoOrTraderNo} or tx_logistic_id=#{mailNoOrTraderNo})
+			</if>
+	</select>
+</mapper>

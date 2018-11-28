@@ -1,0 +1,52 @@
+#info{margin-bottom:10px;}
+#info .box_bd{height:130px;}
+#info .box_hd strong{color:#1E569E;font-weight:400;font-family:Arial;}
+#login_info{width:510px;float:left;}
+#login_info li{line-height:27px;}
+#news{width:335px;float:right;}
+#login_info .input_text{width:220px;}
+#news li{text-align:right;line-height:27px;}
+#news li a{float:left;color:#333;}
+#news li .news_date{color:#808080;}
+#slide{border:1px solid #8DB2E3;width:853px;height:215px;position:relative;margin-bottom:10px;}
+#slide_panel{width:853px;height:215px;overflow:hidden;}
+#slide_panel ul{width:9999px;height:215px;}
+#slide_panel li{width:853px;height:215px;float:left;overflow:hidden;}
+#slide_panel li a{width:100%;height:100%;display:block;}
+#slide_panel li a img{width:100%;height:100%;display:block;}
+#slide_trigger{position:absolute;bottom:10px;right:10px;}
+#slide_trigger ul{height:16px;display:inline-block;*zoom:1;*display:inline;}
+#slide_trigger li{float:left;margin:0 4px;display:inline;}
+#slide_trigger li a{width:16px;height:16px;display:block;line-height:16px;text-align:center;background:#C3D7EB;color:#004DB3;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;border-radius:8px;}
+#slide_trigger li a:hover,#slide_trigger .cur_trigger a{background:#105AB6;color:#fff;text-decoration:none;}
+#transport_status{width:853px;position:relative;padding-top:40px;background:#fff;}
+#transport_status img{width:100%;height:100%;display:block;}
+#transport_status select{position:absolute;right:10px;top:10px;}
+.newscontent{ text-align:left;line-height:24px; margin:0 10px; }
+.newstop{text-align:center;position:relative; margin:20px 0;}
+#sear_text #sear_btn{margin:12px 0;}=======
+.newstop{text-align:center;position:relative; margin:20px 0;}
+#prompt{width:460px;}
+.guide{margin-bottom:10px;}
+.guide ol{width:100%;border:1px solid #96B7E0;overflow:hidden;clear:both;*zoom:1;background:#fff;}
+.guide ol li{float:left;width:227px;height:36px;text-align:center;list-style:decimal inside none;font:13px/36px SimSun;color:#808080;}
+.title_a{font-size:15px;margin-bottom:10px;}
+.method_p{font:13px/1.4 SimSun;margin-bottom:10px;}
+.submit_box{text-align:center;}
+#promptButton{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding:2px 10px;margin:0 auto;border:1px solid #69D426;background:#9BDB3F;color:#fff;}
+.guide_txt_bg{background:url(../../images/z_dot_r.gif) no-repeat right center;color:#3ABF00;}
+.gui_img{margin-bottom:15px;}
+#transport_status #chart{width:853px;height:342px;display:block;}
+#act_bind_btn{margin-top:0;margin-left:0;position:absolute;right:170px;top:0;}
+.customer_search{padding-top:8px;}
+.tab_a .tab_panels{padding:0px;padding-top:10px;}
+
+#add_cust{width:330px;}
+#add_cust .info{padding-left:72px;height:60px;}
+#add_cust label{margin-left:-72px;}
+#add_cust #cust_name{margin-bottom:5px;}
+#add_cust .res_code{padding:5px 0;position:relative;}
+#add_cust .result{text-align:center;}
+#add_cust em{color:#00f;font-size:18px;font-style:normal;font-weight:bold;padding-right:15px;}
+#dialog .disable,#dialog .disable span{cursor:not-allowed;}
+#add_cust_btn{margin-left:10px;}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.BigPenManagerMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.BigPenManager" id="bigPenManager">
+		<result property="id" column="city_id" />
+		<result property="cityLevel" column="city_level" />
+		<result property="cityPinyin" column="city_pinyin" />
+		<result property="cityName" column="city_name" />
+		<result property="cityMark" column="city_mark" />
+		<result property="cityCode" column="city_code" />
+		<result property="parentCityCode" column="parent_city_code" />
+		<result property="versionNo" column="core_version_no" />
+		<result property="status" column="status" />
+		<result property="FullPathName" column="full_path_name" />
+		<result property="remark" column="remark" />
+		<result property="flag" column="flag" />
+	</resultMap>
+	
+    <!--   查询属于当前版本号     -->
+	<select id="selectVersion" resultType="java.lang.Integer">
+	<![CDATA[
+	        SELECT MAX(core_version_no) FROM T_BAS_BIG_PEN
+	]]>
+	</select>
+	
+	<!--   根据条件查询大头笔信息 -->
+	<select id="selecBigPenManagerCount" parameterType="net.ytoec.kernel.dataobject.BigPenManager" resultType="list" resultMap = "bigPenManager">
+	    select * from T_BAS_BIG_PEN where full_path_name = #{FullPathName} and status = #{status}
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insertBigpenManager" parameterType="net.ytoec.kernel.dataobject.BigPenManager"> 
+		insert into T_BAS_BIG_PEN(city_id,city_level,city_pinyin,city_name,city_mark,city_code,parent_city_code,core_version_no,status,full_path_name,remark,flag)
+  		values(#{id},#{cityLevel},#{cityPinyin},#{cityName},#{cityMark},#{cityCode},#{parentCityCode},#{versionNo},#{status},#{FullPathName},#{remark},#{flag}); 
+ 	</insert>  
+ 	
+ 	<select id="selecBigPenManager" parameterType="net.ytoec.kernel.dataobject.BigPenManager" resultType="net.ytoec.kernel.dataobject.BigPenManager">
+ 	    select * from T_BAS_BIG_PEN where city_id = #{id}
+ 	</select>
+ 	 
+ 	<!-- 根据city_id更新t_bas_big_pen表-->
+    <update id="updateBigpenManager" parameterType="net.ytoec.kernel.dataobject.BigPenManager">
+		update t_bas_big_pen 
+		set 
+		 city_level=#{cityLevel}, 
+		 city_pinyin=#{cityPinyin},
+		 city_name=#{cityName},
+		 city_mark=#{cityMark},
+		 city_code=#{cityCode},
+		 parent_city_code=#{parentCityCode},
+		 core_version_no=#{versionNo},
+		 status=#{status},
+		 full_path_name=#{FullPathName},
+		 remark=#{remark},
+		 flag=#{flag}
+		 where city_id=#{id}
+  </update>
+ 	 
+</mapper>

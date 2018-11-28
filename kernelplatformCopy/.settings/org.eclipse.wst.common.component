@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="kernelplatformCopy">
+        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="eopCore-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopCore/eopCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopUser-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopUser/eopUser">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopApp-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopApp/eopApp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopCMS-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopCMS/eopCMS">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopFileCore-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopFileCore/eopFileCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopSMS-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopSMS/eopSMS">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopPay-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopPay/eopPay">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopOrder-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopOrder/eopOrder">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="eopMQ-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eopMQ/eopMQ">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="/kernel"/>
+        <property name="java-output-path" value="/kernelplatformCopy/src/main/webapp/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

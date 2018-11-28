@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSServiceMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSService" id="smsServiceResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="imageUrl" column="image_url" />
+		<result property="introduction" column="introduction" />
+		<result property="sendTimeType" column="send_time_type" />
+		<result property="isOn" column="is_on" />
+		<result property="isAutoSend" column="is_auto_send" />
+		<result property="userId" column="userId" />
+		<result property="updateUserId" column="update_userId" />
+		<result property="updateTime" column="update_time" />
+		<result property="createTime" column="create_time" />
+		<result property="createUserId" column="create_userId" />
+	</resultMap>
+	              
+         
+	<insert id="addSMSService" parameterType="smsService" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_sms_service(id,name,image_url,introduction,send_time_type,is_on,is_auto_send,userId,update_userId,update_time,create_time,create_userId) 
+		values(#{id},#{name},#{imageUrl},#{introduction},#{sendTimeType},#{isOn},#{isAutoSend},#{userId},#{updateUserId},#{updateTime},now(),#{createUserId});	
+	</insert>
+	
+	<delete id="delSMSServiceById" parameterType="Integer">
+		delete from ec_core_sms_service where id=#{id}
+	</delete>
+	
+	<update id="editSMSService" parameterType="smsService">
+		update ec_core_sms_service set 
+			name=#{name},image_url=#{imageUrl},introduction=#{introduction},send_time_type=#{sendTimeType},is_on=#{isOn},
+			is_auto_send=#{isAutoSend},userId=#{userId},update_userId=#{updateUserId},create_userId=#{createUserId},update_time=now()   
+		where id=#{id}
+	</update>
+	
+	<select id="getSMSServiceById" parameterType="Integer" resultType="smsService"
+		resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where id=#{id}
+	</select>
+	
+	<!-- 根据服务名称获取服务 -->
+	 <select id="getSMSServiceByServiceName" parameterType="map" resultType="smsService" resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where name=#{name} and userId=#{userId}
+	</select>
+	
+	<!--分仓用户 根据服务名称获取服务   关闭 -->
+	 <select id="getSMSServiceByServiceNameFenCangList" parameterType="map" resultType="smsService" resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where name=#{name} and create_userId=#{createUserId}
+	</select>
+	
+	<!--分仓用户 根据服务名称获取服务  开启-->
+	 <select id="getSMSServiceByServiceNameFenCang" parameterType="map" resultType="smsService" resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where name=#{name} and userId=#{userId}
+	</select>
+	<!-- 获取短信服务列表 -->
+	<select id="getSMSServiceAll" parameterType="Integer" resultType="list" resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where userId=#{userId}
+	</select>
+	
+	<!-- toAdd模版页面初始化下拉框 -->
+	<select id="getSMSServiceAllForToAdd" parameterType="Integer" resultType="list" resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where userId=#{userId} and name not in('问题件通知','营销定制')
+	</select>
+	
+	<!--根据主账号ID下已开启的短信服务  -->
+	<select id="getSMSServicesByUserId" parameterType="Integer" resultType="list" resultMap="smsServiceResultMap">
+		select * from ec_core_sms_service where userId=#{userId} and is_on='Y';
+	</select>
+	
+	<!-- 分仓开启服务 -->
+	<update id="updateServiceForFenCang" parameterType="smsService">
+		update ec_core_sms_service set is_on=#{isOn},update_userId=#{updateUserId},update_time=now()   
+		where id=#{id}
+	</update>
+</mapper>
+

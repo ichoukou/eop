@@ -1,0 +1,15 @@
+#sear_box{margin-bottom:10px;}
+#sear_box .box_bd{padding-bottom:0;}
+.status,.limit_date{display:block;position:relative;}
+.status{color:#808080;}
+.unpaid,.tran_amount{color:#f00;}
+.limit_date{color:#808080;z-index:9;position:static;}
+.status{z-index:10;}
+.close_tip{position:absolute;background:url(../../images/single/close_tip.png) no-repeat;width:180px;height:60px;display:block;padding:10px 8px;z-index:8;left:-64px;top:20px;_top:19px;font:12px/1.4 SimSun;color:#808080;display:none;}
+.tr_hover .status{z-index:20;font-weight:400;*zoom:1;}
+.tr_hover .close_tip{display:block;}
+.dialog_p{margin-bottom:10px;line-height:1.2;}
+#pay_form{width:250px;}
+#gudie_desc{color:#808080;display:block;margin:0 auto;font-style:normal;line-height:1.4;margin-bottom:10px;}
+#to_pay span{color:#f00;}
+#help_tips li{line-height:30px;}

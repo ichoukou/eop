@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="cacheEnabled" value="false"/>
+	</settings>
+	<typeAliases>
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.Order" alias="order" /> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.ErrorMessage" alias="errorMessage" /> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.Product" alias="product" /> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.CoreTaskLog" alias="coreTaskLog" /> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.CoreTaskLogToTB" alias="coreTaskLogToTB" /> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.TraderInfo" alias="traderInfo" /> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.SendTask" alias="sendTask"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.SendTaskToTB" alias="sendTaskToTB"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.Region" alias="region"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.LeaveMessage" alias="leaveMessage"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.Questionnaire" alias="questionnaire"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.ConfigCode" alias="configCode"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.JgWaybill" alias="jgWaybill"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.ServerThread" alias="serverThread"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.Posttemp" alias="posttemp"/> -->
+<!-- 		<typeAlias type="net.ytoec.kernel.dataobject.PosttempUser" alias="posttempUser"/> -->
+<!-- 	    <typeAlias type="net.ytoec.kernel.dataobject.CoreContact" alias="coreContact"/> -->
+<!-- 	    <typeAlias type="net.ytoec.kernel.dataobject.UserThread" alias="userThread"/> -->
+<!-- 		 <typeAlias type="net.ytoec.kernel.dataobject.ServerConfig" alias="serverConfig"/> -->
+<!-- 		 <typeAlias type="net.ytoec.kernel.dataobject.User" alias="user"/> -->
+<!-- 		 <typeAlias type="net.ytoec.kernel.dataobject.StandardPosttemp" alias="standardPosttemp"/> -->
+
+		<!-- 
+		<typeAlias type="net.ytoec.kernel.dataobject.PrintTemp" alias="printTemp"/>
+		<typeAlias type="net.ytoec.kernel.dataobject.PrintTempDetails" alias="printTempDetails"/>
+		 -->
+		
+		<typeAlias type="net.ytoec.kernel.dataobject.WarnValue" alias="warnValue"/>
+		<typeAlias type="net.ytoec.kernel.dataobject.ReportIssue" alias="reportIssue"/>
+		<typeAlias type="net.ytoec.kernel.dataobject.WarnUpOper" alias="warnUpOper"/>
+		
+	</typeAliases>
+</configuration>
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 发送任务数据映射文件 -->
+<mapper namespace="net.ytoec.kernel.mapper.StandardPosttempMapper">
+	<cache />
+	<resultMap type="standardPosttemp" id="standardPosttempResultMap">
+		<id property="id" column="id" />
+		<result property="sourceId" column="source_id" />
+		<result property="standardPrice" column="standard_price" />
+		<result property="continuationPrice" column="continuation_price" />
+		<result property="destId" column="dest_id" />
+		<result property="name" column="name" />
+		<result property="remark" column="remark" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="firstWeight" column="first_weight" />
+		
+	</resultMap>
+	<insert id="add" parameterType="standardPosttemp"> insert into
+		EC_CORE_STANDARD_POSTTEMP
+		(source_id,standard_price,dest_id,name,remark,continuation_price,create_time,update_time,first_weight)
+		values
+		(#{sourceId},
+		#{standardPrice},#{destId},#{name},#{remark},#{continuationPrice},now(),now(),#{firstWeight});
+	</insert>
+	<delete id="remove" parameterType="int"> delete from
+		EC_CORE_STANDARD_POSTTEMP
+		where id = (#{id})</delete>
+	<update id="edit" parameterType="standardPosttemp"> update
+		EC_CORE_STANDARD_POSTTEMP t set
+		t.source_id =
+		(#{sourceId}),t.standard_price =
+		#{standardPrice},t.dest_id =
+		#{destId},t.name =
+		#{name},t.remark =
+		#{remark},t.update_time=now(),t.continuation_price=#{continuationPrice},first_weight=#{firstWeight}
+		where t.id = #{id}</update>
+	<select id="getAllStandardPosttemp" parameterType="String"
+		resultType="standardPosttemp" resultMap="standardPosttempResultMap"> select * from
+		EC_CORE_STANDARD_POSTTEMP</select>
+	<select id="get" parameterType="int" resultType="standardPosttemp"
+		resultMap="standardPosttempResultMap"> select * from EC_CORE_STANDARD_POSTTEMP where id = #{id}
+	</select>
+
+
+	<select id="getStandardPosttempListBySourceId" parameterType="java.util.Map"
+		resultType="list" resultMap="standardPosttempResultMap">
+		select * from EC_CORE_STANDARD_POSTTEMP t
+		<where>
+			<if test='sourceId != null'>
+				AND t.source_id = #{sourceId}
+				</if>
+		</where>
+		order by t.id asc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<select id="getStandardPosttempByProv" parameterType="java.util.Map"
+		resultType="list" resultMap="standardPosttempResultMap">
+		select * from EC_CORE_STANDARD_POSTTEMP t
+		where t.source_id = #{sourceId} and t.dest_id = #{destId}
+	</select>
+
+</mapper>

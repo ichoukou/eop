@@ -1,0 +1,6 @@
+.invoice_preview{width:auto;margin:0 auto;}
+.invoice_preview table{width:88%;margin:0 6%;}
+.page_break{page-break-after:always;border:0 none;}
+.print_btn{display:none;}
+.invoice_preview table td{font-size:11px;-webkit-text-size-adjust:none;}
+.invoice_preview .goods_info td{border-left:0;border-right:0;}

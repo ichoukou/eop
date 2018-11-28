@@ -1,0 +1,32 @@
+.mar4{margin-top:10px;}
+.mar3{margin-left:6px;}
+.mar2{margin-top:10px;}
+.mar5{margin-top:20px;}
+.mar5 span{margin-right:10px;}
+.table_box{border-top:none;}
+.td_b{width:70px;}
+.td_c{width:70px;}
+.td_d{width:80px;}
+.td_e{width:80px;}
+.td_f{width:68px;}
+.td_g{width:85px;}
+.all_checkbox{width:30px;}
+.check_color{color:#0066cc;}
+.check_text{float:left}
+.page_h{height:40px;margin-top:10px;}
+#cos_num,#cos_name{margin-right:10px;}
+.btn_a{margin-left:6px;}
+.table thead tr th .th_title{padding:0 5px}
+#add_cust{width:330px;}
+#add_cust .info{padding-left:72px;height:60px;}
+#add_cust label{margin-left:-72px;}
+#add_cust #cust_name{margin-bottom:5px;}
+#add_cust .res_code{padding:5px 0;position:relative;}
+#add_cust .result{text-align:center;}
+#add_cust em{color:#00f;font-size:18px;font-style:normal;font-weight:bold;padding-right:15px;}
+.disable,.disable span{cursor:not-allowed;}
+#add_cust_btn{margin-left:10px;}
+.table tbody tr td.td_i{text-align:center;padding:5px;width:105px;}
+.table tbody tr td.td_i a{margin:5px 0;}
+.table tbody tr td.td_h{width:90px;}
+.pagenavi{margin-top:10px;height:25px;}

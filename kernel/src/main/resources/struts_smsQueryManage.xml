@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<package name="smsquery" namespace="/" extends="ssMyBatis">
+	
+		<action name="smsHomeEvent_*" class="smsHomeAction" method="{1}">
+			<result name="setting" type="tiles">WEB-INF.sms/smsSetting.jsp</result>
+			<result name="pauseSuccess" type="redirect">
+				<param name="location">smsHomeEvent_homePage.action</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="home" type="tiles">WEB-INF.sms/smsHome.jsp</result>
+			<result name="smsWelcome" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+			
+			 <result name="saveSetting" type="redirect">
+				<param name="location">smsHomeEvent_homePage.action?menuFlag=sms_home</param>
+				<param name="namespace">/</param>
+			 </result>
+			
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<!-- 短信查询ACTION配置 -->
+		<action name="smsSearch" class="smsSearchAction" method="{1}">
+			<result name="searchPage" type="tiles">WEB-INF.sms/sms_search.jsp</result>
+			<result name="smsTemplates" >/WEB-INF/sms/sms_search_select.jsp</result>
+			<result name="smsWelcome" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+			<result name="send" type="json">
+				<param name="root">response</param>
+			</result>
+			<!-- 默认拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+		
+		<!-- 管理员短信查询ACTION配置 -->
+		<action name="smsSearchAdmin_*" class="smsSearchAction" method="{1}">
+			<result name="smsSearchAdmin" type="tiles">WEB-INF.sms/sms_search_admin.jsp</result>
+			<result name="smsWelcome" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+			<!-- 默认拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+
+	</package>
+	
+</struts>

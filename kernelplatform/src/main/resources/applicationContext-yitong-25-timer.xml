@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 读取MQ的订单更新信息写入SOLR -->
+	<bean id="executeOrderChange2SolrFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.OrderChange2SolrFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="10" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeOrderChange2SolrFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOrderChange2SolrFromMQTimer" />
+		<property name="cronExpression" value="10 0/1 * * * ?" />
+	</bean>
+	
+	<!-- 读取MQ的订单新增信息写入SOLR -->
+	<bean id="executeOrderAdd2SolrFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.OrderAdd2SolrFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="5" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeOrderAdd2SolrFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOrderAdd2SolrFromMQTimer" />
+		<property name="cronExpression" value="30 0/1 * * * ?" />
+	</bean>
+	<!-- 读取暂时写入SOLR失败的信息，再次写入SOLR -->
+	<bean id="executeOrderAdd2SolrFromBACKMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.OrderAdd2SolrFromBACKMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="5" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeOrderAdd2SolrFromBACKMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOrderAdd2SolrFromBACKMQTimer" />
+		<property name="cronExpression" value="45 0/10 * * * ?" />
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				 <ref bean="executeOrderChange2SolrFromMQTrigger"/>
+				 <ref bean="executeOrderAdd2SolrFromMQTrigger"/>
+				 <ref bean="executeOrderAdd2SolrFromBACKMQTrigger"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="addThreadPoolTaskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="20" />
+		<property name="maxPoolSize" value="25" />
+		<property name="keepAliveSeconds" value="300" />
+	</bean>
+</beans>

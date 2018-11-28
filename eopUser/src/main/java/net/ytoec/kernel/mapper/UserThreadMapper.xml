@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.UserThreadMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.UserThread" id="userThreadResultMap">
+		<id property="id" column="id" />
+		<id property="userCode" column="user_code" />
+		<id property="siteCode" column="site_code" />
+		<id property="userName" column="user_name" />
+		<id property="userState" column="user_state" />
+		<id property="createTime" column="cteate_time" />
+		<id property="backup1" column="backup1" />
+		<id property="backup2" column="backup2" />
+		<id property="backup3" column="backup3" />
+		<id property="isPrint" column="isprint" />
+		<id property="isCanDownload" column="isCanDownload" />
+		<id property="operateDate" column="operate_time" />
+		
+		<result property="switchEccount" column="switcheccount" /><!-- 是否关闭电子对账功能(1:关闭；0：开启) -->
+		<result property="userCodeUpteTime" column="user_code_update_time" /><!-- 修改用户编码的时间戳 -->
+	</resultMap>
+	
+	<select id="get" parameterType="userThread" resultType="userThread"	resultMap="userThreadResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD
+		WHERE id = #{id}
+	</select>
+	
+	<select id="getByIdAndState" parameterType="userThread" resultType="userThread"	resultMap="userThreadResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD
+		WHERE id = #{id}
+		AND user_state = '1'
+	</select>
+	
+	<select id="getByState" parameterType="string" resultType="list" resultMap="userThreadResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD
+		WHERE user_state = #{userState}
+	</select>
+
+	<select id="getAllUser" resultType="list" resultMap="userThreadResultMap">
+		SELECT * FROM EC_CORE_USERTHREAD
+	</select>
+
+	<insert id="add" parameterType="userThread" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO EC_CORE_USERTHREAD(id, user_code, site_code, user_name, user_state, 
+			backup1, backup2, backup3, switcheccount,user_code_update_time,isprint)
+		VALUES(
+		#{id},#{userCode},#{siteCode},#{userName},#{userState},
+		#{backup1},#{backup2},#{backup3},#{switchEccount},#{userCodeUpteTime},#{isPrint})
+	</insert>
+
+	<delete id="remove" parameterType="userThread">
+		DELETE FROM EC_CORE_USERTHREAD
+		WHERE
+		id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="userThread">
+		UPDATE EC_CORE_USERTHREAD
+		SET
+		update_time=now(),
+		user_code=#{userCode},
+		site_code=#{siteCode},
+		user_name=#{userName},
+		user_state=#{userState},
+		backup1=#{backup1},
+		backup2=#{backup2},
+		backup3=#{backup3},
+		switcheccount=#{switchEccount},
+		isprint=#{isPrint},
+		user_code_update_time=#{userCodeUpteTime}
+		WHERE id = #{id}
+	</update>
+
+	<select id="searchUsersByCode" parameterType="userThread" resultType="list"
+		resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		WHERE user_code = #{userCode} 
+		<if test='userState!=null'>
+			 AND user_state=#{userState}
+		</if>
+	</select>
+	<!-- 获取某个网点下已经激活的用户 -->
+	<select id="searchUsersBySite" parameterType="userThread" resultType="list" resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		WHERE site_code = #{siteCode} and user_state=1
+	</select>
+	
+	<!-- 获取某个网点下已经激活或未激活的用户 -->
+	<select id="searchAllUsersBySite" parameterType="userThread" resultType="list" resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		WHERE site_code = #{siteCode}
+	</select>
+	
+	
+	<select id="searchUsersBySiteCodeAndName" parameterType="map" resultType="list" resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		<where>
+			user_state= #{userState} and site_code = #{siteCode}
+			<if test='switchEccount != null'>
+				and switcheccount = #{switchEccount}
+			</if>
+			<if test='userCode != null'>
+				and user_code = #{userCode}
+			</if>
+			<if test='userName != null'>
+				and user_name like '%' #{userName} '%'
+			</if>
+			<if test='ids != null' >
+				and id not in 
+				<foreach collection="ids" item="id" open="(" separator="," close=")" >
+				#{id}
+				</foreach>
+			</if>
+			
+		</where>
+		order by cteate_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getUserThreadByPostId" parameterType="int" resultType="list"
+		resultMap="userThreadResultMap">
+	
+		SELECT U.id,U.user_code,U.site_code,U.user_name,U.user_state,u.cteate_time,u.user_code_update_time,u.update_time FROM EC_CORE_USERTHREAD U, 
+		EC_CORE_POSTTEMPUSER P where U.id=p.vipid and P.POSTID = #{postId}
+	</select>
+	
+	<select id="getContractUserList" parameterType="map" resultType="list" resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		WHERE
+			user_state= #{userState} 
+		<if test='switchEccount != null'>
+			AND switcheccount = #{switchEccount}
+		</if>
+	    AND id in  
+	    <foreach collection="ids" item="id" open="(" separator="," close=")" >
+			#{id}
+		</foreach>
+		order by cteate_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	
+	<update id="updateUserThread" parameterType="userThread">
+		UPDATE EC_CORE_USERTHREAD
+		SET
+		isprint=#{isPrint}
+		WHERE user_code = #{userCode}
+	</update>	
+	<select id="getisPrintFlag" parameterType="userThread" resultType="userThread"	resultMap="userThreadResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD
+		WHERE user_code = #{userCode}
+	</select>
+	
+	<select id="getUserThreadList" parameterType="net.ytoec.kernel.dataobject.QueryUserCondition" resultMap="userThreadResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD
+		WHERE 1=1
+			<if test="customerName != null and customerName != ''">
+				<![CDATA[ 
+					and user_name like '%' #{customerName} '%'
+					]]>
+			</if>
+			<if test="isCanDownload != null and isCanDownload !=-1">
+				and isCanDownload = #{isCanDownload}
+			</if>
+			<if test="customerCode != null and customerCode != ''">
+				and user_code = #{customerCode}
+			</if>
+			<if test="siteCode !=null and siteCode != ''">
+				and site_code = #{siteCode}
+			</if>
+			<if test="startDate != null and startDate != ''">
+				<![CDATA[
+					and operate_time >= #{startDate}
+					]]>
+			</if>
+			<if test="endDate != null and endDate != ''">
+				<![CDATA[
+					and operate_time <= DATE_ADD(#{endDate},INTERVAL '23:59:59' HOUR_SECOND)
+					]]>
+			</if>
+			<if test="startLine != null and limit != null">
+				limit #{startLine},#{limit}
+			</if>
+	</select>
+	
+	<select id="getCountUserThread" parameterType="net.ytoec.kernel.dataobject.QueryUserCondition" resultType="int">
+		SELECT count(*) FROM
+		EC_CORE_USERTHREAD
+		WHERE 1=1
+			<if test="customerName != null and customerName != ''">
+				<![CDATA[ 
+					and user_name like '%' #{customerName} '%'
+					]]>
+			</if>
+			<if test="isCanDownload != null and isCanDownload !=-1">
+				and isCanDownload = #{isCanDownload}
+			</if>
+			<if test="customerCode != null and customerCode != ''">
+				and user_code = #{customerCode}
+			</if>
+			<if test="siteCode !=null and siteCode != ''">
+				and site_code = #{siteCode}
+			</if>
+			<if test="startDate != null and startDate != ''">
+				<![CDATA[
+					and operate_time >= #{startDate}
+					]]>
+			</if>
+			<if test="endDate != null and endDate != ''">
+				<![CDATA[
+					and operate_time <= DATE_ADD(#{endDate},INTERVAL '23:59:59' HOUR_SECOND)
+					]]>
+			</if>
+	</select>
+	
+	<update id="updateIsCanDownloadByIds">
+		UPDATE 
+			EC_CORE_USERTHREAD 
+		set
+			isCanDownload = #{isCanDownload},
+			operate_time = SYSDATE()
+		WHERE
+	    	id in  
+	    <foreach collection="ids" item="id" open="(" separator="," close=")" >
+			#{id}
+		</foreach>
+	</update>
+</mapper>

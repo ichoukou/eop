@@ -1,0 +1,21 @@
+#manager_hd{border:1px solid #8CA2D3;border-bottom:0 none;background:url(../../images/single/manager_hd.png) repeat-x;height:39px;position:relative;}
+#manager_hd ul{height:32px;padding:7px 10px 0;}
+#manager_hd li{float:left;margin:0 5px;display:inline;}
+#manager_hd li a{width:77px;height:26px;line-height:26px;display:block;color:#808080;text-align:center;}
+#manager_hd li a:hover,#manager_hd .cur a{background:url(../../images/sprite/sms_btn.png) no-repeat 0 -26px;color:#333;text-decoration:none;}
+#manager_hd #new_template{position:absolute;width:74px;height:26px;display:block;background:url(../../images/sprite/sms_btn.png) no-repeat;top:7px;right:10px;line-height:26px;text-align:center;padding-left:19px;;}
+#manager_hd #new_template:hover{text-decoration:none;}
+#tem_table .td_e a{color:#808080;margin:0 5px;}
+#tem_table .td_e .tem_view,#tem_table .td_e .tem_edit,#tem_table .td_e .tem_del,#tem_table .td_e .tem_default{color:#1E569E;}
+.tem_title{line-height:17px;display:inline-block;height:17px;}
+#default_tem .tem_title{padding-right:20px;background:url(../../images/sprite/ydjk_icon.png) no-repeat right -53px;vertical-align:middle;padding-left:5px;}
+#default_tem .tem_status{color:#5ABD08;}
+.fail_tem .tem_status{color:#FE0D0D;line-height:13px;display:inline-block;}
+.fail_tem .tem_status i{background:url(../../images/single/ques_order22×22.png) no-repeat;display:inline-block;width:22px;height:22px;vertical-align:middle;margin-left:5px;}
+.failImg{background:url(../../images/sprite/sms_btn.png) no-repeat -77px -26px;display:inline-block;width:12px;height:13px;vertical-align:top;margin-left:5px;}
+#manager_ft{padding:10px;}
+#manager_ft p{color:#5ABD08;line-height:1.6;}
+#view_more{width:400px;}
+#view_more p{line-height:1.6;margin-bottom:5px;}
+.data_content{width:252px;display:block;overflow:hidden;}
+#view_more .table tbody tr td{padding:5px 10px;}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ZebraJobStatusMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.ZebraJobStatus" id="jobStatusMap">
+		<result property="jobName" column="job_name" />
+		<result property="status" column="job_status" />
+	</resultMap>
+
+	<insert id="addJobStatus" parameterType="net.ytoec.kernel.dataobject.ZebraJobStatus">
+		insert into
+		zebra_job_status(job_name,job_status) values (#{jobName},#{status});
+	</insert>
+
+	<select id="getJobStatus" parameterType="net.ytoec.kernel.dataobject.ZebraJobStatus" resultType="int">
+		select
+		job_status from zebra_job_status where job_name = #{jobName}	
+  	</select>
+
+	<update id="updateJobStatus" parameterType="net.ytoec.kernel.dataobject.ZebraJobStatus">
+		update zebra_job_status set
+		job_status=#{status} where job_name=#{jobName}
+  	</update>
+
+</mapper>

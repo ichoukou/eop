@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ZebraSurfacebillMapper">
+	<resultMap id="BaseResultMap" type="net.ytoec.kernel.dataobject.ZebraSurfacebill">
+		<id column="waybill_no" property="waybillNo" jdbcType="VARCHAR" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="current_user_no" property="currentUserNo"
+			jdbcType="VARCHAR" />
+		<result column="fb_createdate" property="fbCreatedate"
+			jdbcType="TIMESTAMP" />
+		<result column="fb_updatedate" property="fbUpdatedate"
+			jdbcType="TIMESTAMP" />
+		<result column="fb_downloaddate" property="fbDownloaddate"
+			jdbcType="TIMESTAMP" />
+		<result column="fb_uploaddate" property="fbUploaddate"
+			jdbcType="TIMESTAMP" />
+		<result column="fb_printdate" property="fbPrintdate" jdbcType="TIMESTAMP" />
+		<result column="fbsend_status" property="fbsendStatus"
+			jdbcType="INTEGER" />
+		<result column="fbsend_times" property="fbsendTimes" jdbcType="INTEGER" />
+		<result column="fbsend_describe" property="fbsendDescribe"
+			jdbcType="VARCHAR" />
+		<result column="version_no" property="versionNo" jdbcType="VARCHAR" />
+		<result column="is_use" property="use" jdbcType="BIT" />
+		<result column="is_print" property="print" jdbcType="BIT" />
+	</resultMap>
+	<resultMap type="net.ytoec.kernel.dataobject.User" id="userResultMap">
+		<id property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="userName" column="user_name" />
+		<result property="userPassword" column="user_password" />
+		<result property="telePhone" column="tele_phone" />
+		<result property="mobilePhone" column="mobile_phone" />
+		<result property="addressProvince" column="address_province" />
+		<result property="addressCity" column="address_city" />
+		<result property="addressDistrict" column="address_district" />
+		<result property="addressStreet" column="address_street" />
+		<result property="sex" column="sex" />
+		<result property="shopName" column="shop_name" />
+		<result property="shopAccount" column="shop_account" />
+		<result property="mail" column="mail" />
+		<result property="cardType" column="card_type" />
+		<result property="cardNo" column="card_no" />
+		<result property="userType" column="user_type" />
+		<result property="userSource" column="user_source" />
+		<result property="userState" column="user_state" />
+		<result property="userLevel" column="user_level" />
+		<result property="createUser" column="create_user" />
+		<result property="createTime" column="create_time" />
+		<!--result property="updateUser" column="update_user" / @2011-07-27 直接用工具删除该字段 
+			By ChenRen -->
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+		<result property="site" column="site" />
+		<result property="userNameText" column="user_name_text" />
+		<result property="userCode" column="user_code" />
+		<result property="loginTime" column="login_time" />
+		<result property="taobaoEncodeKey" column="taobao_encode_key" />
+		<result property="field001" column="field001" />
+		<result property="field002" column="field002" />
+		<result property="field003" column="field003" />
+		<result property="bindedCustomerId" column="binded_customer_id" />
+		<result property="clientId" column="client_id" /><!-- 2012-02-22添加该字段zhengliang -->
+		<result property="childType" column="child_type" /><!-- 2012-03-22添加该字段zhengliang -->
+		
+		<result property="repeatNum" column="repeat_num" /><!-- 2012-05-10在userBean中添加属性，不存在数据表中 -->
+		<result property="isPrint" column="isprint" />
+		<result property="printNav" column="print_nav" />
+	</resultMap>
+
+	<!-- 查询属于当前用户可用的运单信息 -->
+	<select id="getZebraSurfacebillMinnoNoUsed" parameterType="java.lang.String"
+		resultType="net.ytoec.kernel.dataobject.ZebraSurfacebill" resultMap="BaseResultMap">
+	<![CDATA[
+		select waybill_no
+        from zebra_surfacebill s
+        where 1=1 
+    		and s.is_use = 0 
+    		and s.current_user_no = #{currentUserNo}
+		order by s.waybill_no asc limit 1
+	]]>
+	</select>
+
+	<!-- 查找当前用户使用的最大版本号 -->
+	<select id="selectVersionNo" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no =
+		#{currentUserNo}
+	</select>
+	<select id="selectCounts" parameterType="java.lang.String"
+		resultType="int">
+		SELECT count(*) FROM zebra_surfacebill where current_user_no =
+		#{currentUserNo} and is_use = 0
+	</select>
+
+
+	<!-- 修改运单信息及状态 -->
+	<update id="edit" parameterType="net.ytoec.kernel.dataobject.ZebraSurfacebill">
+	<![CDATA[
+		update zebra_surfacebill s
+		set
+ 	
+			s.order_no = #{orderNo},
+			s.is_use = 1,
+			s.current_user_no = #{currentUserNo},
+			s.fb_printdate = now()
+		where 1=1
+			and s.waybill_no = #{waybillNo}
+	 ]]>
+	</update>
+
+	<!-- 插入运单信息 -->
+	<insert id="insertBill" parameterType="net.ytoec.kernel.dataobject.ZebraSurfacebill">
+	<![CDATA[
+		INSERT INTO zebra_surfacebill(fb_createdate,is_use,waybill_no,fb_downloaddate,fbsend_status,fbsend_times,version_no,current_user_no) 
+		VALUES(#{fbCreatedate},0, #{waybillNo},now(),0,0,#{versionNo},#{currentUserNo})
+	 ]]>
+	</insert>
+
+	<!-- 分页查询面单信息 -->
+	<select id="findZebraSurfacebillByPages" parameterType="java.util.Map"
+		resultType="net.ytoec.kernel.dataobject.ZebraSurfacebill" resultMap="BaseResultMap">
+	    <![CDATA[
+		SELECT fb_createdate,fb_updatedate,is_use,waybill_no,order_no,fb_downloaddate,
+		fb_uploaddate,fb_printdate,fbsend_status,fbsend_times,fbsend_describe
+		  from zebra_surfacebill
+		where 1=1 
+	]]>
+		<if test="fbCreatedate != '' and fbCreatedate != null">
+			and fb.fb_createdate = #{fbCreatedate}
+		</if>
+		<if test="fbUpdatedate != '' and fbUpdatedate != null">
+			and fb.fb_updatedate = #{fbUpdatedate}
+		</if>
+		<if test="isUse !='' and isUse != null">
+			and fb.is_use = #{isUse}
+	   </if>
+		<if test="waybillNo !='' and waybillNo != null">
+			and fb.waybill_no = #{waybillNo}
+	   </if>
+		<if test="orderNo != '' and orderNo != null">
+			and fb.order_no = #{orderNo}
+		</if>
+		<if test="fbDownloaddate != '' and fbDownloaddate != null">
+			and fb.fbdownload_date = #{fbDownloaddate}
+		</if>
+		<if test="fbUploaddate != '' and fbUploaddate != null">
+			and fb.fbupload_date = #{fbUploaddate}
+		</if>
+		<if test="fbPrintdate != '' and fbPrintdate != null">
+			and fb.fbprint_date = #{fbPrintdate}
+		</if>
+		<if test="fbsendStatus != '' and fbsendStatus != null">
+			and fb.fbsend_status = #{fbsendStatus}
+		</if>
+		<if test="fbsendTimes != '' and fbsendTimes != null">
+			and fb.fbsend_times = #{fbsendTimes}
+		</if>
+		and fb.current_user_no = #{currentUserNo}
+
+		order by fb.order_no asc
+		limit 1
+	</select>
+	<!-- 查询所有该用户的页面信息 -->
+	<select id="findZebraSurfacebillsByCurrentUser" resultType="list"
+		parameterType="java.lang.String" resultMap="BaseResultMap">
+		select fb_createdate,fb_printdate,is_use,waybill_no from zebra_surfacebill
+		where is_use=1 and current_user_no =#{userId}
+	</select>
+	<select id="findZebraSurfacebillListBySend" resultType="list"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select fb_createdate,fb_printdate,is_use,waybill_no,order_no,current_user_no
+		from zebra_surfacebill where is_use=1 and (fbsend_status=0 or
+		fbsend_status=1)
+		and fbsend_times &lt; #{times} ORDER BY fb_printdate LIMIT 100
+	</select>
+
+	<!-- 根据电子面单号码获取发送次数 -->
+	<select id="getSendTimes" resultType="int" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT FBSEND_TIMES FROM zebra_surfacebill WHERE waybill_no = #{waybillNo}
+	</select>
+
+
+	<!-- 查询易通能补给仓配通的某商家的电子面单 -->
+	<select id="selectZebraSurfacebillsByCustomerCode" parameterType="Map"
+		resultType="list" resultMap="BaseResultMap">
+		select * from zebra_surfacebill where
+		current_user_no=#{customerCode} and is_use=#{state}
+		order by waybill_no 
+		<if test="state!=2">
+			limit 0,#{counts}
+		</if>
+	</select>
+	
+	<!-- 批量更新下发状态 -->
+	<update id="batchUpdateUseState" parameterType="Map">  
+  		update zebra_surfacebill set is_use=#{state}  
+  		where
+  		<foreach collection="waybillNos" item="waybillNo" open="" close="" separator="OR">  
+   			waybill_no = #{waybillNo}  
+  		</foreach>  
+ 	</update> 
+ 	
+ 	<!-- 批量更新打印状态 -->
+	<update id="batchUpdatePrintState" parameterType="Map">  
+  		update zebra_surfacebill set is_print=1  
+  		where
+  		<foreach collection="waybillNos" item="map" open="" close="" separator="OR">  
+   			waybill_no = #{map.waybillNo}  
+  		</foreach>  
+ 	</update>
+	
+	<!-- 根据商家编码查询商家未下发(即:未使用)状态的电子面单数量 -->
+	<select id="selectCountsByState" parameterType="map" resultType="int">
+		select count(waybill_no) from zebra_surfacebill where current_user_no=#{customerCode} and is_use=#{state}
+	</select>
+	<!-- 查询面单总数 -->
+	<select id="selectAllCounts" parameterType="java.lang.String" resultType="int">
+		select count(waybill_no) from zebra_surfacebill where current_user_no=#{customer_code}
+	</select>
+	
+ 
+ 	<!-- 批量插入仓配通回传给易通的电子面单 -->
+	<insert id="batchInsert" parameterType="Map">
+		insert into zebra_upload_surfacebill(waybill_no,order_no,customer_code) values  
+  		<foreach collection="waybillNos" item="map" open="" close="" separator=",">  
+   			(#{map.waybillNo},#{map.orderNo},#{customerCode})  
+  		</foreach>
+	</insert>
+	
+	<!-- 批量删除仓配通回传给易通的电子面单  -->
+	<delete id="batchDelete" parameterType="Map">
+  		delete from zebra_upload_surfacebill
+  		where
+  		<foreach collection="waybillNos" item="waybillNo" open="" close="" separator="OR">  
+   			waybill_no=#{waybillNo}  
+  		</foreach>
+  		and customer_code=#{customerCode}
+	</delete>
+	
+	<!-- 查询仓配通回传电子面单表，得到需要要补仓配通的电子面单数量 -->
+	<select id="selectCountsByCustomerCode" parameterType="string" resultType="int">
+		select count(waybill_no) from zebra_upload_surfacebill where customer_code=#{customerCode}
+	</select>
+	
+	<!-- 易通给仓配通的某商家下发多少条电子面单，先查询出要相应删除的回传电子面单中某商家的多少条数据 -->
+	<select id="selectByCustomerCodeAndCounts" parameterType="Map" resultType="string">
+		select waybill_no from zebra_upload_surfacebill where customer_code=#{customerCode} limit 0,#{counts} 
+	</select>
+	 
+	<!-- 通过主键查询请求序列  -->
+	<select id="selectSequenceByKey" parameterType="map" resultType="string">
+		select sequence_id as sequence from zebra_sequence where sequence_id=#{sequence} 
+		and customer_code=#{customerCode}
+	</select>
+	
+	<!-- 通过主键查询请求序列  -->
+	<select id="selectUploadSurfacebillsBySenquence" parameterType="string" resultType="string">
+		select waybill_no from zebra_upload_surfacebill 
+		where customer_code=(select customer_code from zebra_sequence where sequence_id=#{sequence})
+	</select>
+	
+	<!-- 查询已经给商家下发的电子面单数-->
+	<select id="selectUsedCountsByCustomerCode" parameterType="string" resultType="int">
+		select count(waybill_no) from zebra_surfacebill 
+		where current_user_no=#{customerCode} and (is_use=1 or is_use=2) 
+	</select>
+	
+	<!-- 查询要删除该商家上传到回传表counts数据的面单号 -->
+  	<select id="selectUploadSurceBillByCustomerCodeAndCounts" parameterType="map" resultType="string"> 
+  	  select waybill_no from zebra_upload_surfacebill where customer_code=#{customerCode} limit 0,#{counts}
+  	</select>
+	
+</mapper>

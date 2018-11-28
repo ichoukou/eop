@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSOtherWaitMapper">
+	
+	<resultMap type="net.ytoec.kernel.dataobject.SMSObject" id="smsResultMap">
+		<id property="id" column="id" jdbcType="INTEGER"/>		
+		<result property="smsType" column="sms_type"/>
+		<result property="sequenceID" column="sequenceID"/>
+		<result property="userId" column="user_id"/>		
+		<result property="createTime" column="create_time"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="deliverTime" column="deliver_time"/>
+		<result property="sendMobile" column="send_mobile"/>
+		<result property="destMobile" column="dest_mobile"/>		
+		<result property="pkTotal" column="Pk_total"/>
+		<result property="messageContent" column="message_content"/>
+		<result property="status" column="status"/>
+		<result property="errorCode" column="error_code"/>
+		<result property="succTotal" column="succ_total"/>		
+		<result property="failTotal" column="fail_total"/>	
+		<result property="receiveName" column="receive_name"/>	
+	</resultMap>
+	
+	<delete id="remove" parameterType="net.ytoec.kernel.dataobject.SMSObject">
+		delete from ec_core_sms_wait where id = #{id}
+    </delete>
+    
+	<delete id="deleteByStatus" parameterType="java.lang.String">
+		delete from ec_core_sms_wait where  status = #{value}
+    </delete>
+    
+    <insert id="insertBatchToSMS"  keyProperty="id" useGeneratedKeys="true">
+		insert into ec_core_sms_wait(dest_mobile,receive_name)
+		(
+		    select distinct a.dest_mobile, a.receive_name 
+		       from ec_core_phone_temp  a 
+            where  length(trim(a.dest_mobile)) = 11  
+                   and a.dest_mobile != 'null' 
+                   and a.dest_mobile != 'NULL'
+		)
+	</insert>
+	<insert id="insertPhone" parameterType="net.ytoec.kernel.dataobject.SMSObject" keyProperty="id" 
+		useGeneratedKeys="true">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+        </selectKey>
+		insert into ec_core_sms_wait(dest_mobile,message_content,Pk_total) 
+		values(#{destMobile},#{messageContent},#{pkTotal});
+		
+	</insert>
+	
+	<update id="updatesequenceID" parameterType="net.ytoec.kernel.dataobject.SMSObject">
+		update ec_core_sms_wait set sequenceID=(#{id}) where id=(#{id});
+	</update>
+<!-- 	<update id="editBatch" parameterType="map"> -->
+<!-- 	    update  ec_core_sms_wait  -->
+<!-- 	    set	sms_type = #{smsType}			 -->
+<!-- 		   ,Pk_total = #{pkTotal}			 -->
+<!-- 		   ,message_content = #{messageContent}	  -->
+<!-- 		where  status = #{status}   -->
+<!-- 	</update> -->
+	<update id="editBatch" parameterType="map">
+	    update  ec_core_sms_wait 
+	    set	sms_type = #{smsType}			
+		where  status = #{status}  
+	</update>
+	
+	
+	<update id="edit" parameterType="net.ytoec.kernel.dataobject.SMSObject">
+		update  ec_core_sms_wait  
+		    set  status = #{status}	  
+		    <if test="smsType != null and smsType != ''">
+				,sms_type = #{smsType}
+			</if>
+			<if test="sequenceID != null and sequenceID != ''">
+				,sequenceID = #{sequenceID}
+			</if>
+			<if test="userId != null and userId != ''">
+				,user_id = #{userId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				,create_time = #{createTime}
+			</if>
+			<if test="sendTime != null and sendTime != ''">
+				,send_time = #{sendTime}
+			</if>
+			<if test="deliverTime != null and deliverTime != ''">
+				,deliver_time = #{deliverTime}
+			</if>
+			<if test="sendMobile != null and sendMobile != ''">
+				,send_mobile = #{sendMobile}
+			</if>
+			<if test="destMobile != null and destMobile != ''">
+				,dest_mobile = #{destMobile}
+			</if>
+			<if test="pkTotal != null and pkTotal != ''">
+				,Pk_total = #{pkTotal}
+			</if>
+			<if test="messageContent != null and messageContent != ''">
+				,message_content = #{messageContent}	 
+			</if>			
+			<if test="errorCode != null and errorCode != ''">
+				,error_code = #{errorCode}	 
+			</if>
+			<if test="succTotal != null and succTotal != ''">
+				,succ_total = #{succTotal}	 
+			</if>			
+			<if test="receiveName != null and receiveName != ''">
+				,receive_name = #{receiveName}	 
+			</if>
+			<if test="failTotal != null and failTotal != ''">
+				,fail_total = #{failTotal}	 
+			</if>			
+		where id = #{id}
+	</update>
+	
+	 
+	<select id="get" parameterType="net.ytoec.kernel.dataobject.SMSObject" resultType="net.ytoec.kernel.dataobject.SMSObject" 
+	          resultMap="smsResultMap">
+		select * from ec_core_sms_wait  where id = #{id}
+	</select>
+	
+	<select id="getList" parameterType="map" resultType="list" resultMap="smsResultMap">
+		select * from ec_core_sms_wait  
+		<where> 
+		    <if test="status != null and status != ''">
+				and status = #{status}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				and create_time <![CDATA[<=]]> #{createTime} and status = 88
+			</if>	
+		</where>
+		<if test="limit != null and limit != ''">
+			order by id asc limit #{limit}	
+		</if>	
+	</select>
+	
+	<select id="searchMaxId" resultMap="smsResultMap">
+		select id from ec_core_sms_wait where id=(select max(id) from ec_core_sms_wait)
+	</select>
+	
+</mapper>

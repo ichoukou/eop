@@ -1,0 +1,836 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/base/reset.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/common/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/module/button.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/module/box.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/module/tab.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/module/table.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/module/dialog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/module/pagenavi.css" media="all" />
+	<!-- S 当前页面 CSS -->
+	<link rel="stylesheet" type="text/css" href="css/page/sur_print.css" media="all" />
+	<!-- E 当前页面 CSS -->
+	<title>面单打印</title>
+</head>
+<body id="sur_print">
+	<!-- #include file="公共模块/header.html" -->
+	
+	<!-- S Main -->
+	<div id="main" class="clearfix">
+		<!-- S Content -->
+		<div id="content">
+			<div id="content_hd" class="clearfix">
+				<h2 id="message_icon">面单打印</h2>
+				<em>可打印淘宝线上下单的订单<a href="#">快速入门</a></em>
+				
+				<div id="filter_boxes">
+					<span class="filter_box">
+						<input type="checkbox" id="allow_wd" />
+						<label for="allow_wd">允许网点打印</label>
+					</span>
+					<span class="filter_box">
+						<label for="show_num">每页显示：</label>
+						<select name="" id="show_num">
+							<option value="25">25</option>
+							<option value="50" selected>50</option>
+							<option value="100">100</option>
+							<option value="200">200</option>
+							<option value="300">300</option>
+							<option value="500">500</option>
+						</select>
+					</span>
+				</div>
+			</div>
+			<div id="content_bd">
+				<!-- S Tab -->
+				<div class="tab tab_a">
+					<div class="tab_triggers">
+						<ul>
+							<li class="tab_cur"><a href="javascript:;">批量打印</a></li>
+							<li><a href="javascript:;">待发货</a></li>
+							<li><a href="javascript:;">已发货</a></li>
+						</ul>  
+					</div>
+					<div class="tab_panels">
+						<!-- S 批量打印 tab -->
+						<div id="tab_panel_a" class="tab_panel">
+							<!-- S Box -->
+							<div class="box box_a">
+								<div id="box_bd_a" class="box_bd">
+									<form action="#" id="batch_search" class="form">
+										<p>
+											<label>温馨提示：</label>
+											<strong class="form_tip">选择淘宝中“在线下单”圆通→淘宝中确认批量发货→易通面单打印</strong>
+										</p>
+										<p>
+											<label>下单时间：</label>
+											<label for="lastest_a" class="label_raido"><input type="radio" id="lastest_a" class="input_radio" value="" checked />今天</label>
+											<label for="lastest_b" class="label_raido"><input type="radio" id="lastest_b" class="input_radio" value="" />昨天</label>
+											<label for="lastest_c" class="label_raido"><input type="radio" id="lastest_c" class="input_radio" value="" />近三天</label>
+											<input id="date_start" class="Wdate" type="text" /> 
+											至 
+											<input id="date_end" class="Wdate" type="text" />
+											<span id="date_tip"></span>
+										</p>
+										<p>
+											<label for="order_type">订单类型：</label>
+											<select name="" id="order_type">
+												<option value="">所有订单</option>
+												<option value="">仅打印快递单</option>
+												<option value="">仅打印发货单</option>
+												<option value="">已打印两单</option>
+												<option value="">已录入运单号</option>
+												<option value="">未录入运单号</option>
+												<option value="">未合并订单</option>
+												<option value="">已合并订单</option>
+											</select>
+											<input type="text" id="order_num" class="input_text" />
+											<a href="javascript:;" id="batch_sear_btn" class="btn btn_a" title="查询"><span>查 询</span></a>
+											<span id="order_numTip"></span>
+										</p>
+										<div id="set_print">
+											<span id="print_guide">设置纸张格式<a href="#">指南</a></span>
+											<!-- <a href="javascript:;" id="set_print_btn" class="btn btn_a" title="设置打印机"><span>设置打印机</span></a> -->
+										</div>
+										<!-- S 每页显示和排序 -->
+										<input type="hidden" id="per_page_a" value="" />
+										<input type="hidden" id="order_by_a" value="" />
+										<!-- E 每页显示和排序 -->
+									</form>
+								</div>
+								
+								<div id="box_bd_b" class="box_bd">
+									<a href="javascript:;" id="merger_orders_btn" class="btn btn_a" title="合并订单"><span>合并订单</span></a>
+									<a href="javascript:;" id="fill_out_btn" class="btn btn_a" title="批量填写运单号"><span>批量填写运单号</span></a>
+									<select name="" id="waybill_template">
+										<option value="">圆通模板一</option>
+										<option value="">圆通模板二</option>
+										<option value="">圆通模板三</option>
+										<option value="">圆通模板四</option>
+									</select>
+									<div id="merger_select">
+										<form action="" id="merger_form_a">
+											<a href="javascript:;" title="合并订单" id="merger_order">合并订单</a>
+											<a href="javascript:;" title="取消合并" id="cancel_merger">取消合并</a>
+											<input type="hidden" id="order_ids_a" />
+										</form>
+									</div>
+								</div>
+								
+								<div id="box_bd_c" class="box_bd">
+									<a href="javascript:;" id="print_express" class="btn btn_a" title="打印快递单"><span>打印快递单</span></a>
+									<a href="javascript:;" id="print_invoice" class="btn btn_a" title="打印发货单"><span>打印发货单</span></a>
+									<div id="orderby_box">
+										<label for="orderby">排序：</label>
+										<select name="" id="orderby">
+											<option value="order_1">收货地址</option>
+											<option value="order_2">商品名称</option>
+											<option value="order_3">联系方式</option>
+											<option value="order_4" selected>下单时间↑</option>
+											<option value="order_5">下单时间↓</option>
+											<option value="order_6">订单号↑</option>
+											<option value="order_7">订单号↓</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- E Box -->
+							
+							<!-- S Table -->
+							<div class="table">
+								<table>
+									<thead>
+										<tr>
+											<th width="36" class="th_a">
+												<div class="th_title"><em><input type="checkbox" class="check_all" /></em></div>
+											</th>
+											<th width="160" class="th_b">
+												<div class="th_title"><em><i class="fold_unfold"></i>运单号</em></div>
+											</th>
+											<th width="140" class="th_c">
+												<div class="th_title"><em>订单号</em></div>
+											</th>
+											<th class="th_d">
+												<div class="th_title"><em>收件地址</em></div>
+											</th>
+											<th width="110" class="th_e">
+												<div class="th_title"><em>联系方式</em></div>
+											</th>
+											<th width="100" class="th_f">
+												<div class="th_title"><em>收件人姓名</em></div>
+											</th>
+											<th width="100" class="th_g">
+												<div class="th_title"><em>打印状态</em></div>
+											</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+										<tr class="list_tr">
+											<td class="td_a">
+												<input type="checkbox" class="td_check" />
+												<input type="hidden" class="order_id_a" value="1111" />
+											</td>
+											<td class="td_b">
+												<span class="shipnum">2501834305</span>
+												<a href="javascript:;" class="modify_shipnum do_link" title="修改">修改</a>
+												<input class="def_shipnum" type="hidden" value="2501834305" />
+											</td>
+											<td class="td_c">
+												<span class="ordernum">LP00005216922247<i class="merger_icon">2</i></span>
+											</td>
+											<td class="td_d">
+												<div class="td_address">
+													广东省汕头市金平区大马路大马路12334号5509楼303室
+												</div>
+											</td>
+											<td class="td_e">
+												<span class="contact_tel">13777548215</span>
+												<span class="contact_tel">021-8542365</span>
+											</td>
+											<td class="td_f"><span class="td_name">老李</span></td>
+											<td class="td_g">
+												<span class="print_status">未打印面单</span>
+												<span class="print_status">已打印发货单</span>
+											</td>
+										</tr>
+										<tr class="detail_tr">
+											<td class="detail_td" colspan="7" style="display:none;">
+												<div class="detail_box clearfix">
+													<!-- S 商品信息 -->
+													<div class="detail_info">
+														<h4>商品信息</h4>
+														<dl>
+															<dt>商品名称：</dt>
+															<dd>粉红色铅笔（1）</dd>
+															<dd>黑色铅笔（2）</dd>
+															<dd>白色铅笔（3）</dd>
+														</dl>
+														<dl>
+															<dt>价格：</dt>
+															<dd>8元</dd>
+														</dl>
+														<dl>
+															<dt>邮政编码：</dt>
+															<dd>123456</dd>
+														</dl>
+													</div>
+													<!-- E 商品信息 -->
+
+													<!-- S 发件信息 -->
+													<div class="detail_info">
+														<h4>发件信息</h4>
+														<dl>
+															<dt>网店名称：</dt>
+															<dd>巧克力专卖店</dd>
+														</dl>
+														<dl>
+															<dt>发货地址：</dt>
+															<dd>上海市青浦区华徐公路99弄121号</dd>
+														</dl>
+														<dl>
+															<dt>联系方式：</dt>
+															<dd>13598987878</dd>
+														</dl>
+														<dl>
+															<dt>发货日期：</dt>
+															<dd>2012-04-16</dd>
+														</dl>
+													</div>
+													<!-- E 发件信息 -->
+												</div>
+											</td>
+										</tr>
+										<tr class="list_tr">
+											<td class="td_a">
+												<input type="checkbox" class="td_check" />
+												<input type="hidden" class="order_id_a" value="2222" />
+											</td>
+											<td class="td_b">
+												<span class="shipnum">2501834305</span>
+												<a href="javascript:;" class="modify_shipnum do_link" title="修改">修改</a>
+												<input class="def_shipnum" type="hidden" value="2501834305" />
+											</td>
+											<td class="td_c">
+												<span class="ordernum">LP00005216922247</span>
+											</td>
+											<td class="td_d">
+												<div class="td_address">
+													我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！我是超长地址，哈哈！
+												</div>
+											</td>
+											<td class="td_e">
+												<span class="contact_tel">13777548215</span>
+												<span class="contact_tel">021-8542365</span>
+											</td>
+											<td class="td_f"><span class="td_name">老李</span></td>
+											<td class="td_g">
+												<span class="print_status">未打印面单</span>
+												<span class="print_status">已打印发货单</span>
+											</td>
+										</tr>
+										<tr class="detail_tr">
+											<td class="detail_td" colspan="7" style="display:none;">
+												<div class="detail_box clearfix">
+													<!-- S 商品信息 -->
+													<div class="detail_info">
+														<h4>商品信息</h4>
+														<dl>
+															<dt>商品名称：</dt>
+															<dd>粉红色铅笔（1）</dd>
+															<dd>黑色铅笔（2）</dd>
+															<dd>白色铅笔（3）</dd>
+														</dl>
+														<dl>
+															<dt>价格：</dt>
+															<dd>8元</dd>
+														</dl>
+														<dl>
+															<dt>邮政编码：</dt>
+															<dd>123456</dd>
+														</dl>
+													</div>
+													<!-- E 商品信息 -->
+
+													<!-- S 发件信息 -->
+													<div class="detail_info">
+														<h4>发件信息</h4>
+														<dl>
+															<dt>网店名称：</dt>
+															<dd>巧克力专卖店</dd>
+														</dl>
+														<dl>
+															<dt>发货地址：</dt>
+															<dd>上海市青浦区华徐公路99弄121号</dd>
+														</dl>
+														<dl>
+															<dt>联系方式：</dt>
+															<dd>13598987878</dd>
+														</dl>
+														<dl>
+															<dt>发货日期：</dt>
+															<dd>2012-04-16</dd>
+														</dl>
+													</div>
+													<!-- E 发件信息 -->
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- E Table -->
+							
+							<div class="table_footer clearfix">
+								<div class="print_box">
+									<input type="checkbox" id="select_all" class="check_all" />
+									<label for="select_all">全选</label>
+									
+									<a href="javascript:;" id="print_express2" class="btn btn_a" title="打印快递单"><span>打印快递单</span></a>
+									<a href="javascript:;" id="print_invoice2" class="btn btn_a" title="打印发货单"><span>打印发货单</span></a>
+								</div>
+
+								<!-- S PageNavi -->
+								<div class="pagenavi">
+									<a href="#" title="首页" class="page_txt">« 首页</a>
+									<span class="page_cur">1</span>
+									<a href="javascript:;" title="2" class="page_num">2</a>
+									<a href="javascript:;" title="3" class="page_num">3</a>
+									<a href="javascript:;" title="4" class="page_num">4</a>
+									<a href="javascript:;" title="5" class="page_num">5</a>
+									<a href="javascript:;" title="下一页" class="page_txt">下一页</a>
+									<a href="javascript:;" title="末页" class="page_txt">末页 »</a>
+									<span class="page_total">共 <em>231</em> 页 / 共 <em>2306</em> 条</span>
+								</div>
+								<!-- E PageNavi -->
+							</div>
+						</div>
+						<!-- E 批量打印 tab -->
+						
+						<!-- S 待发货 tab -->
+						<div id="tab_panel_b" class="tab_panel" style="display:none;">
+							<!-- S Box -->
+							<div class="box box_a">
+								<div class="box_bd" id="box_bd_f">
+									<form action="#" id="sear_ship_form">
+										<input type="text" class="input_text" />
+										<a href="javascript:;" id="sear_ship_btn" class="btn btn_a" title="查询"><span>查 询</span></a>
+									</form>
+								</div>
+								<div class="box_bd" id="box_bd_d">
+									<a href="javascript:;" id="batch_send_btn" class="btn btn_a" title="批量发货"><span>批量发货</span></a>
+									<div id="sear_ship_box">
+										<label for="orderby2">排序：</label>
+										<select id="orderby2" name="">
+											<option value="order_1">收货地址</option>
+											<option value="order_2">商品名称</option>
+											<option value="order_3">联系方式</option>
+											<option value="order_4" selected>下单时间↑</option>
+											<option value="order_5">下单时间↓</option>
+											<option value="order_6">订单号↑</option>
+											<option value="order_7">订单号↓</option>
+										</select>
+										<!-- S 每页显示和排序 -->
+										<input type="hidden" id="per_page_b" value="" />
+										<input type="hidden" id="order_by_b" value="" />
+										<!-- E 每页显示和排序 -->
+									</div>
+								</div>
+							</div>
+							<!-- E Box -->
+							
+							<!-- S Table -->
+							<div class="table">
+								<table>
+									<thead>
+										<tr>
+											<th width="36" class="th_a">
+												<div class="th_title"><em><input type="checkbox" class="check_all" /></em></div>
+											</th>
+											<th width="160" class="th_b">
+												<div class="th_title"><em><i class="fold_unfold"></i>运单号</em></div>
+											</th>
+											<th width="140" class="th_c">
+												<div class="th_title"><em>订单号</em></div>
+											</th>
+											<th class="th_d">
+												<div class="th_title"><em>收件地址</em></div>
+											</th>
+											<th width="110" class="th_e">
+												<div class="th_title"><em>联系方式</em></div>
+											</th>
+											<th width="100" class="th_f">
+												<div class="th_title"><em>收件人姓名</em></div>
+											</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+										<tr class="list_tr">
+											<td class="td_a"><input type="checkbox" class="td_check" /></td>
+											<td class="td_b">
+												<span class="shipnum">2501834305</span>
+												<a href="javascript:;" class="modify_shipnum do_link" title="修改">修改</a>
+												<input class="def_shipnum" type="hidden" value="2501834305" />
+											</td>
+											<td class="td_c">
+												<span class="ordernum">LP00005216922247</span>
+											</td>
+											<td class="td_d">
+												<div class="td_address">
+													广东省汕头市金平区大马路大马路12334号5509楼303室广东省汕头市金平区大马路大马路12334号5509楼303室
+												</div>
+											</td>
+											<td class="td_e">
+												<span class="contact_tel">13777548215</span>
+												<span class="contact_tel">021-8542365</span>
+											</td>
+											<td class="td_f"><span class="td_name">老李</span></td>
+										</tr>
+										<tr class="detail_tr">
+											<td class="detail_td" colspan="6" style="display:none;">
+												<div class="detail_box clearfix">
+													<!-- S 商品信息 -->
+													<div class="detail_info">
+														<h4>商品信息</h4>
+														<dl>
+															<dt>商品名称：</dt>
+															<dd>粉红色铅笔（1）</dd>
+															<dd>黑色铅笔（2）</dd>
+															<dd>白色铅笔（3）</dd>
+														</dl>
+														<dl>
+															<dt>价格：</dt>
+															<dd>8元</dd>
+														</dl>
+														<dl>
+															<dt>邮政编码：</dt>
+															<dd>123456</dd>
+														</dl>
+													</div>
+													<!-- E 商品信息 -->
+
+													<!-- S 发件信息 -->
+													<div class="detail_info">
+														<h4>发件信息</h4>
+														<dl>
+															<dt>网店名称：</dt>
+															<dd>巧克力专卖店</dd>
+														</dl>
+														<dl>
+															<dt>发货地址：</dt>
+															<dd>上海市青浦区华徐公路99弄121号</dd>
+														</dl>
+														<dl>
+															<dt>联系方式：</dt>
+															<dd>13598987878</dd>
+														</dl>
+														<dl>
+															<dt>发货日期：</dt>
+															<dd>2012-04-16</dd>
+														</dl>
+													</div>
+													<!-- E 发件信息 -->
+												</div>
+											</td>
+										</tr>
+										<tr class="list_tr">
+											<td class="td_a"><input type="checkbox" class="td_check" /></td>
+											<td class="td_b">
+												<span class="shipnum">2501834305</span>
+												<a href="javascript:;" class="modify_shipnum do_link" title="修改">修改</a>
+												<input class="def_shipnum" type="hidden" value="2501834305" />
+											</td>
+											<td class="td_c">
+												<span class="ordernum">LP00005216922247</span>
+											</td>
+											<td class="td_d">
+												<div class="td_address">
+													广东省汕头市金平区大马路大马路12334号5509楼303室广东省汕头市金平区大马路大马路12334号5509楼303室
+												</div>
+											</td>
+											<td class="td_e">
+												<span class="contact_tel">13777548215</span>
+												<span class="contact_tel">021-8542365</span>
+											</td>
+											<td class="td_f"><span class="td_name">老李</span></td>
+										</tr>
+										<tr class="detail_tr">
+											<td class="detail_td" colspan="6" style="display:none;">
+												<div class="detail_box clearfix">
+													<!-- S 商品信息 -->
+													<div class="detail_info">
+														<h4>商品信息</h4>
+														<dl>
+															<dt>商品名称：</dt>
+															<dd>粉红色铅笔（1）</dd>
+															<dd>黑色铅笔（2）</dd>
+															<dd>白色铅笔（3）</dd>
+														</dl>
+														<dl>
+															<dt>价格：</dt>
+															<dd>8元</dd>
+														</dl>
+														<dl>
+															<dt>邮政编码：</dt>
+															<dd>123456</dd>
+														</dl>
+													</div>
+													<!-- E 商品信息 -->
+
+													<!-- S 发件信息 -->
+													<div class="detail_info">
+														<h4>发件信息</h4>
+														<dl>
+															<dt>网店名称：</dt>
+															<dd>巧克力专卖店</dd>
+														</dl>
+														<dl>
+															<dt>发货地址：</dt>
+															<dd>上海市青浦区华徐公路99弄121号</dd>
+														</dl>
+														<dl>
+															<dt>联系方式：</dt>
+															<dd>13598987878</dd>
+														</dl>
+														<dl>
+															<dt>发货日期：</dt>
+															<dd>2012-04-16</dd>
+														</dl>
+													</div>
+													<!-- E 发件信息 -->
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- E Table -->
+							
+							<div class="table_footer clearfix">
+								<div class="print_box">
+									<input type="checkbox" id="select_all2" class="check_all" />
+									<label for="select_all2">全选</label>
+									
+									<a href="javascript:;" id="ship_vol_btn" class="btn btn_a" title="批量发货"><span>批量发货</span></a>
+									<a href="javascript:;" id="del_item_btn" class="btn btn_a" title="不想看到他"><span>不想看到他</span></a>
+								</div>
+
+								<!-- S PageNavi -->
+								<div class="pagenavi">
+									<a href="#" title="首页" class="page_txt">« 首页</a>
+									<span class="page_cur">1</span>
+									<a href="javascript:;" title="2" class="page_num">2</a>
+									<a href="javascript:;" title="3" class="page_num">3</a>
+									<a href="javascript:;" title="4" class="page_num">4</a>
+									<a href="javascript:;" title="5" class="page_num">5</a>
+									<a href="javascript:;" title="下一页" class="page_txt">下一页</a>
+									<a href="javascript:;" title="末页" class="page_txt">末页 »</a>
+									<span class="page_total">共 <em>231</em> 页 / 共 <em>2306</em> 条</span>
+								</div>
+								<!-- E PageNavi -->
+							</div>
+						</div>
+						<!-- E 待发货 tab -->
+
+						<!-- S 已发货 tab -->
+						<div id="tab_panel_c" class="tab_panel" style="display:none;">
+							<!-- S Box -->
+							<div id="date_choose" class="box box_a">
+								<div id="box_bd_g" class="box_bd">
+									<form action="#" id="send_search" class="form">
+										<p>
+											<label>发货时间：</label>
+											<label for="lastest_d" class="label_raido"><input type="radio" id="lastest_d" class="input_radio" name="" value="" checked="">今天</label>
+											<label for="lastest_e" class="label_raido"><input type="radio" id="lastest_e" class="input_radio" name="" value="">昨天</label>
+											<label for="lastest_f" class="label_raido"><input type="radio" id="lastest_f" class="input_radio" name="" value="">近三天</label>
+											<input id="date_start2" class="Wdate" type="text"> 
+											至 
+											<input id="date_end2" class="Wdate" type="text">
+											<span id="date_tip2"></span>
+										</p>
+										<div id="sear_ship">
+											<input type="text" class="input_text">
+											<a title="查询" class="btn btn_a" id="sear_ship_btn2" href="javascript:;"><span>查 询</span></a>
+										</div>
+										<!-- S 每页显示和排序 -->
+										<input type="hidden" id="per_page_c" value="" />
+										<input type="hidden" id="order_by_c" value="" />
+										<!-- E 每页显示和排序 -->
+									</form>
+								</div>
+							</div>
+							<!-- E Box -->
+							
+							<!-- S Box -->
+							<div class="box box_a">
+								<div id="box_bd_e" class="box_bd">
+									<div id="sear_ship_box2">
+										<label for="orderby3">排序：</label>
+										<select id="orderby3" name="">
+											<option value="order_1">收货地址</option>
+											<option value="order_2">商品名称</option>
+											<option value="order_3">联系方式</option>
+											<option value="order_4" selected>下单时间↑</option>
+											<option value="order_5">下单时间↓</option>
+											<option value="order_6">订单号↑</option>
+											<option value="order_7">订单号↓</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- E Box -->
+							
+							<!-- S Table -->
+							<div class="table">
+								<table>
+									<thead>
+										<tr>
+											<th width="160" class="th_b">
+												<div class="th_title"><em><i class="fold_unfold"></i>运单号</em></div>
+											</th>
+											<th width="140" class="th_c">
+												<div class="th_title"><em>订单号</em></div>
+											</th>
+											<th class="th_d">
+												<div class="th_title"><em>收件地址</em></div>
+											</th>
+											<th width="110" class="th_e">
+												<div class="th_title"><em>联系方式</em></div>
+											</th>
+											<th width="100" class="th_f">
+												<div class="th_title"><em>收件人姓名</em></div>
+											</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+										<tr class="list_tr">
+											<td class="td_b">
+												<span class="shipnum">2501834305</span>
+											</td>
+											<td class="td_c">
+												<span class="ordernum">LP00005216922247</span>
+											</td>
+											<td class="td_d">
+												<div class="td_address">
+													广东省汕头市金平区大马路大马路12334号5509楼303室广东省汕头市金平区大马路大马路12334号5509楼303室
+												</div>
+											</td>
+											<td class="td_e">
+												<span class="contact_tel">13777548215</span>
+												<span class="contact_tel">021-8542365</span>
+											</td>
+											<td class="td_f"><span class="td_name">老李</span></td>
+										</tr>
+										<tr class="detail_tr">
+											<td class="detail_td" colspan="5" style="display:none;">
+												<div class="detail_box clearfix">
+													<!-- S 商品信息 -->
+													<div class="detail_info">
+														<h4>商品信息</h4>
+														<dl>
+															<dt>商品名称：</dt>
+															<dd>粉红色铅笔（1）</dd>
+															<dd>黑色铅笔（2）</dd>
+															<dd>白色铅笔（3）</dd>
+														</dl>
+														<dl>
+															<dt>价格：</dt>
+															<dd>8元</dd>
+														</dl>
+														<dl>
+															<dt>邮政编码：</dt>
+															<dd>123456</dd>
+														</dl>
+													</div>
+													<!-- E 商品信息 -->
+
+													<!-- S 发件信息 -->
+													<div class="detail_info">
+														<h4>发件信息</h4>
+														<dl>
+															<dt>网店名称：</dt>
+															<dd>巧克力专卖店</dd>
+														</dl>
+														<dl>
+															<dt>发货地址：</dt>
+															<dd>上海市青浦区华徐公路99弄121号</dd>
+														</dl>
+														<dl>
+															<dt>联系方式：</dt>
+															<dd>13598987878</dd>
+														</dl>
+														<dl>
+															<dt>发货日期：</dt>
+															<dd>2012-04-16</dd>
+														</dl>
+													</div>
+													<!-- E 发件信息 -->
+												</div>
+											</td>
+										</tr>
+										<tr class="list_tr">
+											<td class="td_b">
+												<span class="shipnum">2501834305</span>
+											</td>
+											<td class="td_c">
+												<span class="ordernum">LP00005216922247</span>
+											</td>
+											<td class="td_d">
+												<div class="td_address">
+													广东省汕头市金平区大马路大马路12334号5509楼303室广东省汕头市金平区大马路大马路12334号5509楼303室
+												</div>
+											</td>
+											<td class="td_e">
+												<span class="contact_tel">13777548215</span>
+												<span class="contact_tel">021-8542365</span>
+											</td>
+											<td class="td_f"><span class="td_name">老李</span></td>
+										</tr>
+										<tr class="detail_tr">
+											<td class="detail_td" colspan="5" style="display:none;">
+												<div class="detail_box clearfix">
+													<!-- S 商品信息 -->
+													<div class="detail_info">
+														<h4>商品信息</h4>
+														<dl>
+															<dt>商品名称：</dt>
+															<dd>粉红色铅笔（1）</dd>
+															<dd>黑色铅笔（2）</dd>
+															<dd>白色铅笔（3）</dd>
+														</dl>
+														<dl>
+															<dt>价格：</dt>
+															<dd>8元</dd>
+														</dl>
+														<dl>
+															<dt>邮政编码：</dt>
+															<dd>123456</dd>
+														</dl>
+													</div>
+													<!-- E 商品信息 -->
+
+													<!-- S 发件信息 -->
+													<div class="detail_info">
+														<h4>发件信息</h4>
+														<dl>
+															<dt>网店名称：</dt>
+															<dd>巧克力专卖店</dd>
+														</dl>
+														<dl>
+															<dt>发货地址：</dt>
+															<dd>上海市青浦区华徐公路99弄121号</dd>
+														</dl>
+														<dl>
+															<dt>联系方式：</dt>
+															<dd>13598987878</dd>
+														</dl>
+														<dl>
+															<dt>发货日期：</dt>
+															<dd>2012-04-16</dd>
+														</dl>
+													</div>
+													<!-- E 发件信息 -->
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- E Table -->
+							
+							<div class="table_footer clearfix">
+								<!-- S PageNavi -->
+								<div class="pagenavi">
+									<a href="#" title="首页" class="page_txt">« 首页</a>
+									<span class="page_cur">1</span>
+									<a href="javascript:;" title="2" class="page_num">2</a>
+									<a href="javascript:;" title="3" class="page_num">3</a>
+									<a href="javascript:;" title="4" class="page_num">4</a>
+									<a href="javascript:;" title="5" class="page_num">5</a>
+									<a href="javascript:;" title="下一页" class="page_txt">下一页</a>
+									<a href="javascript:;" title="末页" class="page_txt">末页 »</a>
+									<span class="page_total">共 <em>231</em> 页 / 共 <em>2306</em> 条</span>
+								</div>
+								<!-- E PageNavi -->
+							</div>
+						</div>
+						<!-- E 已发货 tab -->
+					</div>
+				</div>
+				<!-- E Tab -->
+			</div>
+		</div>
+		<!-- E Content -->
+		
+		<!-- #include file="公共模块/sidebar.html" -->
+	</div>
+	<!-- E Main -->
+	
+	<!-- #include file="公共模块/footer.html" -->
+	
+	
+	<script type="text/javascript" src="js/lib/jquery-1.7.min.js"></script>
+	<!--[if IE 6]>
+		<script type="text/javascript" src="js/util/position_fixed.js"></script>
+		<script type="text/javascript" src="js/util/DD_belatedPNG.js"></script>
+		<script type="text/javascript">
+			DD_belatedPNG.fix('.png');
+		</script>
+	<![endif]-->
+	<script type="text/javascript" src="js/common/common.js"></script>
+	<script type="text/javascript" src="js/module/tab.js"></script>
+	<script type="text/javascript" src="js/module/table.js"></script>
+	<script type="text/javascript" src="js/module/dialog.js"></script>
+	<script type="text/javascript" src="js/module/formvalidator/formValidator-4.1.1.js"></script>
+	<script type="text/javascript" src="js/module/formvalidator/formValidatorRegex.js"></script>
+	<script type="text/javascript" src="js/module/calendar/WdatePicker.js"></script>
+	<!-- S 当前页面 JS -->
+	<script type="text/javascript" src="js/page/sur_print.js"></script>
+	<!-- E 当前页面 JS -->
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderStatusSMSMapper">
+ <resultMap type="net.ytoec.kernel.action.remote.xml.WaiteSendSMSInfo" id="orderStatusSMSMapper">
+ <id property="id" column="id" />
+ <id property="mailNo" column="mailNo"/>
+ <id property="txLogisticID" column="tx_logistic_id"/>
+ <id property="status" column="status"/>
+ <id property="createTime" column="create_time"/>
+ <id property="flag" column="flag"/>
+ <id property="partitiondate" column="partitiondate"/>
+ 
+ 
+ </resultMap>
+ 
+<!-- 将订单 批量插入到ec_core_orderstatus_sms中，用于发送短信 -->
+ <insert id="batchAddOrdForSMS" parameterType="list" >
+ insert into ec_core_orderstatus_sms(mailNo,tx_logistic_id,status,create_time,flag,partitiondate)values
+ <foreach collection="list" item="item" index="index" separator=",">
+ (#{item.mailNo},#{item.txLogisticID},#{item.status},now(),#{item.flag},now())
+ </foreach>
+ </insert>
+ 
+ <!-- 批量查询ec_core_orderstatus_sms中订单，用于发送短信 -->
+ <select id="batchSearchOrdForSMS" parameterType="map" resultType="list" resultMap="orderStatusSMSMapper">
+ select * from ec_core_orderstatus_sms 
+ <where>
+ flag=#{flag} and partitiondate=#{date} 
+ </where>
+ order by id asc limit #{limit}
+ </select>
+ 
+ <!-- 批量删除ec_core_orderstatus_sms中订单信息 -->
+ <delete id="batchDeleteOrd">
+ delete from ec_core_orderstatus_sms where tx_logistic_id in (
+ <foreach collection="list" item="item" index="index" separator=",">
+ #{item.txLogisticID}
+ </foreach>
+  )
+ </delete>
+ 
+</mapper>

@@ -1,0 +1,85 @@
+﻿/* CSS Document */
+*{margin:0;padding:0;list-style:none;-webkit-text-size-adjust:none}
+body{font:12px/1.2 Arial, Tahoma, "微软雅黑", sans-serif;color:#333;}
+img,div,input{behavior: url("../images/transparent/iepngfix.htc")}
+.clear{clear:both;}
+
+a{color:#595757;text-decoration:none} 
+a:hover { color:#036eb8; text-decoration:underline;} 
+img {border:none; vertical-align:middle;}
+#container { width:100%; margin:0 auto;}
+
+#footer{ height:60px;overflow:hidden;padding-top:25px;width:1000px;margin:0 auto;}
+#footer p {text-align:center; line-height:24px;  font-size:13px; color:#595554}
+
+.input_on{ padding:6px 8px; border:2px solid #036eb8;background-color:#FFFFCC;}
+.input_off{ padding:6px 8px; border:2px solid #CCC;background-color:#FFF; }
+
+input.inp{ padding:6px 8px;border: 2px solid #b1b5ba; color: #333; }
+#conright .inw { width:280px; font-size:14px;}
+
+.loginbox{font:12px/3 Tahoma,Helvetica,Arial,'微软雅黑',sans-serif;padding:0px 0 20px;}
+
+
+/* header */
+
+#login_header{width:1000px; height:100px; margin:0 auto; overflow:hidden;}
+#logo,#cityname{position:relative;}
+
+#login_content{ background-color:#15588f;height:390px; margin-top:12px;border-top:1px solid #c3cee5; border-bottom:1px solid #c3cee5;}
+
+
+#logo{left:20px;top:17px;}
+#logo img{ display:block;}
+#cityname{ width:101px; height:39px;border-left:#f6f6f6 1px solid; top:-30px;left:210px; padding-left:15px; font:24px/1.8 "微软雅黑","黑体", sans-serif; color:#666;}
+
+.red{ color:#FF0000;font-size:11px;height:18px;}
+/*图片轮播控件*/
+#conleft{float:left; overflow:hidden; margin-top:0px; margin-left:40px;}
+#ibanner {position:relative; width:520px;height:390px; overflow:hidden; background:url(../images/ad01.jpg) no-repeat;display:block; }
+
+#ibanner_pic a{position:absolute; top:0; left:0; display:block; overflow:hidden;}
+
+/**/
+#conright{width:370px; float:right; background:url(../images/conright-bbg.gif)  bottom no-repeat;padding-top:30px;padding-right:20px;}
+
+.login-scrool{ background:url(../images/logintopbg.jpg) no-repeat;padding-left:42px;  width:370pxj; height:36px;font-size:12px; color:#960000;line-height:51px;}
+
+
+.scrool-bg{background:#d8e0ed url(../images/loginbottombg.jpg) left bottom no-repeat;margin:0}
+.loginbox{height:271px;overflow: hidden}
+.loginbox table{ border-collapse:collapse; border:none; width:300px; margin-left:36px; height:190px;}
+.loginbox table td{text-align:left; font-size:14px; color:#666; font-weight: 500; vertical-align:text-top; padding:7px 0 !important;}
+
+
+.loginbox .butt{*top:8px; float:left; margin-right:5px;}
+.btns{ width:104px;height:34px; line-height:34px font-family:"黑体"; font-size:16px; display:inline-block;background:url(../images/btn_login.png) no-repeat;border:none; color:#fff; font-weight:bold;cursor: pointer; margin:0; text-align:centerpx;}
+
+.loginline{background:url(../images/loginline.jpg) left bottom no-repeat; height:40px;width:300px;margin-left:36px;font-size:14px; margin-top:0px;display:block; line-height:40px;}
+.taologin{ margin-left:36px; color:#3f5e95;height:30px;line-height:30px; _margin-top:10px;}
+.taologin img{margin-right:6px;}
+
+
+/** 右侧客服在线 */
+#linebox {float:left;margin-left:610px;margin-top:-80px;display:inline;}
+#linebox span{margin-right:10px;}
+
+
+#slide{width:925px;margin:42px auto 0;}
+#slide_hd{background:#E8F0FC;padding:0 60px;}
+#slide_hd h4{font:700 14px/36px SimSun;color:#0F75BC;}
+#slide_bd{position:relative;border-bottom:1px solid #D1E0F6;*zoom:1;}
+#slide_bd ul{margin:0 auto;width:9999px;}
+#slide_bd li{float:left;width:172px;height:111px;margin-left:-1px;background:url(../../images/single/slide_bg.png) no-repeat left bottom;}
+#slide_bd li a{width:100%;height:100%;display:block;text-decoration:none;}
+#slide_bd li a:hover{background:url(../../images/single/slide_bg2.png) no-repeat left bottom;}
+#slide_bd li a:hover em{color:#1469A0;}
+#slide_bd li em{font:12px/20px SimSun;color:#808080;display:block;text-align:center;margin-top:10px;}
+#slide_bd li img{border:1px solid #E1E1E1;display:block;margin:24px auto 0;}
+#slide_box{width:854px;margin:0 auto;overflow:hidden;}
+#slide_navi{width:100%;position:absolute;top:0;}
+#slide_navi a{position:absolute;top:24px;text-indent:-9999em;overflow:hidden;width:35px;height:37px;display:block;background:url(../../images/sprite/slide_navi.png) no-repeat;}
+#slide_navi #slide_prev{background-position:0 0;left:0;}
+#slide_navi #slide_prev:hover{background-position:0 -37px;}
+#slide_navi #slide_next{background-position:-35px 0;right:0;}
+#slide_navi #slide_next:hover{background-position:-35px -37px;}

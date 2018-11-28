@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 密钥管理配置相关 -->
+	<package name="partern" extends="ssMyBatis" namespace="/">
+
+		<!-- 密匙管理页面 -->
+		<action name="pIndex" class="parternAction" method="search">
+			<result name="index" type="tiles">WEB-INF.partern/parternManager.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+
+		<!--********************************** -->
+		<!--************密钥操作*********** -->
+		<!--********************************** -->
+		<action name="pAdd" class="parternAction" method="add">
+			<result name="add">/WEB-INF/partern/parternManager.jsp</result>
+			<result name="addError">/WEB-INF/partern/parternManager.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="pUpdate" class="parternAction" method="pupdate">
+			<result name="pupdate">/WEB-INF/partern/parternUpdate.jsp</result>
+		</action>
+		
+		<action name="pDel" class="parternAction" method="delete">
+			<result name="delete">/WEB-INF/partern/parternManager.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="pUpdate" class="parternAction" method="update">
+			<result name="edit">/WEB-INF/partern/parternManager.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<!--********************************** -->
+		<!--************同步密钥*********** -->
+		<!--********************************** -->
+		<action name="synchroKey" class="parternAction" method="synchroKey"></action>
+
+	</package>
+
+</struts>

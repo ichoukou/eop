@@ -1,0 +1,12 @@
+#content2{width:875px;margin:0 auto;overflow:hidden;background:#6b9dd1 url(../../images/single/ydjk_img.jpg) no-repeat;padding-top:257px;position:relative;}
+#content_tab{width:875px;background:url(../../images/single/ydjk_bg.jpg) repeat-x;overflow:hidden;}
+#content_tab ul{width:auto;height:54px;overflow:hidden;margin-left:12px;}
+#content_tab ul li{float:left;cursor:pointer}
+#jjbutton_1{width:169px;height:54px;}
+#jjbutton_2{width:168px;height:54px;}
+#jjbutton_3{width:166px;height:54px;}
+#jjbutton_4{width:169px;height:54px;}
+#jjbutton_5{width:170px;height:54px;}
+
+.content_tab_c{width:844px;height:486px;overflow:hidden;padding-left:12px;padding-top:4px;padding-bottom:10px;}
+.content_btn{width:184px;height:47px;overflow:hidden;position:absolute;right:194px;top:156px;}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.FilterRuleMapper">
+	<resultMap type="filterRule" id="filterRuleResultMap">
+		<id property="filterRuleId" column="filterRuleId" />
+		<result property="type" column="type" />
+		<result property="words" column="words" />
+		<result property="createTime" column="createTime" />
+		<result property="updateTime" column="updateTime" />
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="filterRuleId" parameterType="filterRule">
+		<![CDATA[
+		insert into ec_core_filter_rule(type,words,createTime,updateTime)
+		    values(#{type},#{words},now(),now())
+		]]>
+	</insert>
+	
+	<!-- 根据ID取单个filterRule对象 -->
+	<select id="get" parameterType="integer" resultMap="filterRuleResultMap" resultType="filterRule">
+		<![CDATA[
+		select * from ec_core_filter_rule where filterRuleId=#{filterRuleId}
+		]]>
+	</select>
+	
+	<!-- 按类型取规则列表 -->
+	<select id="getFilterRulesByType" parameterType="integer" resultMap="filterRuleResultMap" >
+		<![CDATA[
+		select * from ec_core_filter_rule where type=#{type}
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="getListPage" parameterType="Map" resultMap="filterRuleResultMap" >
+		<![CDATA[
+		select * from ec_core_filter_rule 
+		]]>
+		<where>
+			<if test="words != null and words != ''">
+				and words like CONCAT('%',#{words},'%')
+			</if>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+		</where>
+		<![CDATA[
+			ORDER BY createTime desc LIMIT #{start},#{limit}
+		]]>
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="integer">
+		<![CDATA[
+		select count(filterRuleId) from ec_core_filter_rule 
+		]]>
+		<where>
+			<if test="words != null and words != ''">
+				and words like CONCAT('%',#{words},'%')
+			</if>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+		</where>
+	</select>
+	<!-- 分页查询结束 -->
+	
+	<!-- 过滤规则修改 -->
+	<update id="edit" parameterType="filterRule">
+	<![CDATA[
+		update ec_core_filter_rule set type = #{type}, words = #{words},
+		 updateTime = now()
+		    where filterRuleId = #{filterRuleId}
+		]]>
+	</update>
+	
+	<!-- 过滤规则逻辑删除-->
+	<update id="delFilterRule" parameterType="filterRule">
+	<![CDATA[
+		update ec_core_filter_rule set updateTime = now()
+		    where filterRuleId = #{filterRuleId}
+		]]>
+	</update>
+	
+	<!-- 过滤规则逻辑删除-->
+	<delete id="remove" parameterType="filterRule">
+	<![CDATA[
+		delete from ec_core_filter_rule
+		    where filterRuleId = #{filterRuleId}
+		]]>
+	</delete>
+	
+	<update id="updateFilterRule" parameterType="filterRule">
+		update ec_core_filter_rule set words=#{words} where filterRuleId = #{filterRuleId}
+	</update>
+</mapper>

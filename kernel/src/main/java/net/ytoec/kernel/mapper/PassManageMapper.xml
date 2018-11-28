@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.PassManageMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.ReportIssue" id="passManageMap">
+		<id property="id" column="id" />
+		<result property="mailNo" column="mailNo" />
+		<result property="msgStatus" column="msg_status" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="buyerName" column="buyer_name" />
+		<result property="buyerPhone" column="buyer_phone" />
+		<result property="buyerMobile" column="buyer_mobile" />
+		<result property="issueDesc" column="issue_desc" />
+		<result property="receiveBranchId" column="receive_branch_id" />
+		<result property="attentionFlag" column="attention_flag" />
+		<result property="reportUserId" column="report_user_id" />
+		<result property="createUserId" column="createUserId" />
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.WarnUpOper" id="warnUpOperMap">
+		<id property="id" column="id" />
+		<result property="issueId" column="issue_id" />
+		<result property="operMsg" column="operMsg" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="createId" column="create_user_id" />
+		<result property="userId" column="userId" />
+	</resultMap>
+	
+	<insert id="addReportIssue" parameterType="reportIssue" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_warn_order(id,mailNo,msg_status,create_time,buyer_name,buyer_phone,buyer_mobile,
+		                               issue_desc,receive_branch_id,attention_flag,report_user_id,createUserId) 
+		values(#{id},#{mailNo},#{msgStatus},now(),#{buyerName},#{buyerPhone},#{buyerMobile},
+		                              #{issueDesc},#{receiveBranchId},#{attentionFlag},#{reportUserId},#{createUserId});	
+	</insert>
+
+	<insert id="addAttentionMail" parameterType="attentionMail" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_attentionmail
+		(id,mail_no,destination,buyer_name,buyer_phone,status,customer_id,line_type,accept_time,send_time,create_time,arrive_time,date_out,backup) 
+        values
+        (#{id},#{mailNo},#{destination},#{buyerName},#{buyerPhone},#{status},#{customerId},#{lineType},#{acceptTime},#{sendTime},#{createTime},#{arriveTime},#{dateOut},#{backup})
+	</insert>
+	
+	<!-- 公用[卖家查看已上报超时件+筛选、网点查看未/已回复超时件+筛选] -->
+	<select id="getReportIssueList" parameterType="map" resultType="list" resultMap="passManageMap">
+		SELECT * 
+		FROM
+		ec_core_warn_order w 
+		<where>
+			<if test='reportUserId != null and reportUserId != ""'>
+				AND w.report_user_id=#{reportUserId}
+			</if>
+			<if test='startTime != null and endTime != ""'>
+				AND w.create_time between #{startTime} and #{endTime}
+			</if>
+			<if test='mailNo != null and mailNo != ""'>
+				AND w.mailNo=#{mailNo}
+			</if>
+			<if test='buyerPhone != null and buyerPhone != ""'>
+				AND w.buyer_phone=#{buyerPhone}
+			</if>
+			<if test='buyerMobile != null and buyerMobile != ""'>
+				AND w.buyer_mobile=#{buyerMobile}
+			</if>
+			<if test='buyerName != null and buyerName != ""'>
+				AND w.buyer_name=#{buyerName}
+			</if>
+			
+			<if test='receiveBranchId != null and receiveBranchId != ""'>
+				AND w.receive_branch_id=#{receiveBranchId}
+			</if>
+			<if test='msgStatus != null and msgStatus != ""'>
+				AND w.msg_status=#{msgStatus}
+			</if>
+		</where>
+		
+		order by w.create_time desc
+		<if test='startIndex != null and pageNum != ""'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getOperList" parameterType="map" resultType="list" resultMap="warnUpOperMap">
+		SELECT * 
+		FROM
+		ec_core_warn_up_oper wu 
+		<where>
+			<if test='issueId != null and issueId != ""'>
+				 wu.issue_id=#{issueId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 卖家/网点发送消息给网点/卖家 -->
+	<insert id="addWarnUpOper"  parameterType="warnUpOper" keyProperty="id" useGeneratedKeys="true">
+		insert into ec_core_warn_up_oper(id,issue_id,operMsg,create_time,create_user_id,userId) 
+		values
+		(#{id},#{issueId},#{operMsg},#{createTime},#{createId},#{userId})
+	</insert>
+	
+	<update id="editReportIssue" parameterType="map">
+		update ec_core_warn_order set msg_status=#{msgStatus},update_time=#{updateTime} where id=#{id}
+	</update>
+</mapper>

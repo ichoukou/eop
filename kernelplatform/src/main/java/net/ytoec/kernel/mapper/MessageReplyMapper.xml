@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.MessageReplyMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.MessageReply" id="messageReplyResultMap">
+		<id property="id" column="id"/>
+		<result property="messageId" column="message_id"/>
+		<result property="replyUser" column="reply_user"/>
+		<result property="replyContent" column="reply_content"/>
+		<result property="replyTime" column="reply_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="messageReply" keyProperty="id" useGeneratedKeys="true">
+		insert into EC_CORE_REPLY(id, message_id, reply_user, reply_content)
+		values(#{id}, #{messageId}, #{replyUser}, #{replyContent})
+	</insert>
+	
+	<!-- 消息不需要update方法 -->
+	
+	<select id="get" parameterType="messageReply" resultType="messageReply" resultMap="messageReplyResultMap">
+		<![CDATA[
+			select * from EC_CORE_REPLY t where t.id = #{id}
+        ]]>
+	</select>
+	
+	<!-- 根据消息id获取回复信息列表（支持分页） -->
+	<select id="getReplyListByMap" parameterType="java.util.Map" resultType="list" resultMap="messageReplyResultMap">
+		select t.* from EC_CORE_REPLY t where t.message_id = #{messageId}
+		order by t.reply_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 根据消息id统计回复信息数 -->
+	<select id="countReplyListByMap" parameterType="java.util.Map" resultType="int">
+		select count(t.id) from EC_CORE_REPLY t where t.message_id = #{messageId}
+		order by t.reply_time desc
+	</select>
+
+</mapper>

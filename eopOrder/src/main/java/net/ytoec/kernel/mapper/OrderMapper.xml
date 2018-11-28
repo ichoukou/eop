@@ -1,0 +1,1480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Order" id="orderResultMap">
+		<id property="id" column="id" />
+		<result property="version" column="version" />
+		<result property="logisticProviderId" column="logistic_provider_id" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+		<result property="tradeNo" column="tradeNo" />
+		<result property="customerId" column="customer_id" />
+		<result property="mailNo" column="mailNo" />
+		<result property="type" column="type" />
+		<result property="flag" column="flag" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="sendStartTime" column="send_start_time" />
+		<result property="sendEndTime" column="send_end_time" />
+		<result property="insuranceValue" column="insurance_value" />
+		<result property="packageOrNot" column="package_or_not" />
+		<result property="special" column="special" />
+		<result property="remark" column="remark" />
+		<result property="clientId" column="client_id" />
+		<result property="status" column="status" />
+		<result property="lineType" column="line_type" />
+		<result property="weight" column="weight" />
+		<result property="signPrice" column="sign_price" />
+		<result property="vipId" column="vip_id" />
+		
+		<result property="orderType" column="order_type" />
+		<result property="serviceType" column="service_type" />
+		<result property="goodsValue" column="goods_value" />
+		<result property="itemsValue" column="items_value" />
+		<result property="totalServiceFee" column="total_service_fee" />
+		<result property="buyServiceFee" column="buy_service_fee" />
+		<result property="codSplitFee" column="cod_split_fee" />
+		<result property="acceptTime" column="accept_time" />
+		<result property="partitionDate" column="partitiondate" />
+		<result property="freightType" column="freight_type" />
+		<result property="freight" column="freight" />
+		<result property="trimFreight" column="trim_freight" />
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.Order" id="ecAccountResultMap">
+		<result property="mailNo" column="mailNo" />
+		<result property="lineType" column="line_type" />
+		<result property="status" column="status" />
+		<result property="weight" column="weight" />
+		<result property="numProv" column="numProv" />
+		<result property="fromAddr" column="fromAddr" />
+		<result property="toAddr" column="toAddr" />
+		<result property="acceptTime" column="accept_time" />
+		<result property="createTime" column="create_time" />
+        <result property="freightType" column="freight_type" />
+		<result property="trimFreight" column="trim_freight" />
+		<result property="orderType" column="order_type" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+		<result property="customerId" column="customer_id" />
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.Order" id="orderMonitorResultMap">
+		<id property="id" column="id" />
+		<result property="mailNo" column="mailNo" />
+		<result property="lineType" column="line_type" />
+		<result property="status" column="status" />
+		<result property="buyName" column="buyName" />
+		<result property="buyMobile" column="buyMobile" />
+		<result property="buyPhone" column="buyPhone" />
+		<result property="toAddr" column="toAddr" />
+		<result property="createTime" column="create_time" />
+		<result property="acceptTime" column="accept_time" />
+		<result property="customerId" column="customer_id" />
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.SearchReportBean" id="signRatioResultMap">
+		<result property="sendStartTime" column="sendStartTime" />
+		<result property="accept" column="accept" />
+		<result property="number" column="number" />
+		<result property="ratio" column="ratio" />
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.SearchReportBean" id="hourRatioResultMap">
+		<result property="hoursType" column="hourstype" />
+		<result property="number" column="number" />
+	</resultMap>
+	
+ 	<!--  根据电话号码更新淘宝号进入订单  -->
+ 	<update id="updateBuyerNickToOrder" parameterType="map">
+ 		<if test="buyerNick != null and buyerNick != '' ">
+	 		UPDATE  
+				ec_core_order o,
+				ec_core_traderinfo t
+			SET o.version = #{buyerNick}
+			WHERE o.id = t.order_id AND t.trade_type=1 
+			<if test="customerId != null and customerId != '' ">
+				AND o.customer_id=#{customerId} 
+			</if>	
+			<if test="buyerMobile != null and buyerMobile != '' ">
+				AND t.mobile = #{buyerMobile}
+			</if>
+		</if>
+ 	</update>
+ 	
+	<select id="getOrderByPartitiondate" parameterType="map"  resultType="OrderWeightUpdateDTO">
+		select o.id as id, o.mailNo as mailNo, o.tx_logistic_id as txLogisticId FROM EC_CORE_ORDER o where o.partitiondate = #{partitiondate} and (o.weight is null or o.weight = 0)
+		order by o.id ASC
+		limit #{limit} 
+	</select>
+	<select id="getOrderByPartitiondateById" parameterType="map"  resultType="OrderWeightUpdateDTO">
+		select o.id as id, o.mailNo as mailNo, o.tx_logistic_id as txLogisticId FROM EC_CORE_ORDER o where o.partitiondate = #{partitiondate} and o.id > #{id} and (o.weight is null or o.weight = 0)
+		order by o.id ASC
+		limit #{limit} 
+	</select>
+	
+	<select id="get" parameterType="order" resultType="order"
+		resultMap="orderResultMap">
+		SELECT
+		o.id,
+		o.version,
+		o.logistic_provider_id,
+		o.tx_logistic_id,
+		o.tradeNo,
+		o.customer_id,
+		o.mailNo,
+		o.type,
+		o.flag,
+		o.create_time,
+		o.update_time,
+		o.send_start_time,
+		o.send_end_time,
+		o.insurance_value,
+		o.package_or_not,
+		o.special,
+		o.remark,
+		o.client_id,
+		o.status,
+		o.line_type,
+		o.weight,
+		o.sign_price,
+		o.vip_id,
+		o.partitiondate
+		FROM
+		EC_CORE_ORDER o
+		WHERE o.id =
+		#{id}
+	</select>
+
+	<select id="getAllOrder" resultType="list" resultMap="orderResultMap">
+		SELECT
+		o.id,
+		o.version,
+		o.logistic_provider_id,
+		o.tx_logistic_id,
+		o.tradeNo,
+		o.customer_id,
+		o.mailNo,
+		o.type,
+		o.flag,
+		o.create_time,
+		o.update_time,
+		o.send_start_time,
+		o.send_end_time,
+		o.insurance_value,
+		o.package_or_not,
+		o.special,
+		o.remark,
+		o.client_id,
+		o.status,
+		o.line_type,
+		o.weight,
+		o.sign_price,
+		o.vip_id,
+		o.partitiondate
+		FROM
+		EC_CORE_ORDER o
+	</select>
+
+	<insert id="add" parameterType="order" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_ORDER
+		(id, version, logistic_provider_id, tx_logistic_id, 
+		tradeNo, customer_id, mailNo, type, 
+		flag, create_time,  
+		send_start_time, send_end_time,
+		insurance_value, package_or_not, special, remark,
+		client_id, status, line_type, weight, sign_price, vip_id,
+		order_type,service_type,goods_value,items_value,
+	    total_service_fee,buy_service_fee,cod_split_fee,partitionDate,freight_type,freight,trim_freight)
+		VALUES(#{id}, #{version}, #{logisticProviderId}, #{txLogisticId},
+		#{tradeNo}, #{customerId}, #{mailNo}, #{type}, 
+		#{flag},current_timestamp, 
+		#{sendStartTime}, #{sendEndTime}, 
+		#{insuranceValue}, #{packageOrNot}, #{special}, #{remark}, 
+		#{clientId}, #{status}, #{lineType}, #{weight}, #{signPrice}, #{vipId},
+		#{orderType},#{serviceType},#{goodsValue},#{itemsValue},
+		#{totalServiceFee},#{buyServiceFee},#{codSplitFee},#{partitionDate},#{freightType},#{freight},#{trimFreight})
+	</insert>
+
+	<delete id="remove" parameterType="order">
+		DELETE FROM EC_CORE_ORDER
+		WHERE id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="order">
+		UPDATE EC_CORE_ORDER
+		SET
+		version = #{version},
+		logistic_provider_id = #{logisticProviderId},
+		tx_logistic_id = #{txLogisticId},
+		tradeNo = #{tradeNo},
+		customer_id = #{customerId},
+		mailNo = #{mailNo},
+		type = #{type},
+		flag = #{flag},
+		 
+		update_time = now(),
+		send_start_time = #{sendStartTime},
+		send_end_time = #{sendEndTime},
+		insurance_value = #{insuranceValue},
+		package_or_not = #{packageOrNot},
+		special = #{special},
+		remark = #{remark},
+		client_id = #{clientId},
+		status = #{status},
+		line_type = #{lineType}, 
+		weight = #{weight}, 
+		sign_price = #{signPrice},
+		trim_freight = #{trimFreight},
+		vip_id = #{vipId}
+		WHERE id = #{id}
+	</update> 
+	
+	
+	<update id="updateMailNoById" parameterType="java.util.Map">
+		UPDATE EC_CORE_ORDER
+		SET
+		mailNo = #{mailNo}
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+	<select id="getOrderByLogisticId" parameterType="order" resultType="order"
+		resultMap="orderResultMap">
+		SELECT
+		o.id,<!-- 保留 -->
+<!-- 		o.version, -->
+<!-- 		o.logistic_provider_id, -->
+<!-- 		o.tx_logistic_id, -->
+<!-- 		o.tradeNo, -->
+		o.customer_id,<!-- 保留 -->
+		o.mailNo, <!-- 保留 -->
+		o.type,<!-- 保留 -->
+<!-- 		o.flag, -->
+		o.create_time,<!-- 保留 -->
+<!-- 		o.update_time, -->
+<!-- 		o.send_start_time, -->
+<!-- 		o.send_end_time, -->
+<!-- 		o.insurance_value, -->
+<!-- 		o.package_or_not, -->
+<!-- 		o.special, -->
+<!-- 		o.remark, -->
+<!-- 		o.client_id, -->
+		o.status, o.accept_time,o.order_type,o.weight, o.tx_logistic_id,o.trim_freight,o.freight_type,
+		o.line_type,o.partitiondate <!-- 保留 -->
+<!-- 		o.weight, -->
+<!-- 		o.sign_price, -->
+<!-- 		o.vip_id, -->
+<!-- 		o.partitiondate -->
+		FROM
+		EC_CORE_ORDER o
+		WHERE o.tx_logistic_id = #{logisticId}
+	</select>
+	
+	<select id="getOrderbyMailNo" parameterType="order" resultType="order"
+		resultMap="orderResultMap">
+		SELECT * FROM
+		EC_CORE_ORDER o
+		WHERE o.mailNo = #{mailNo}
+	</select>
+	
+	<select id="getOrderbyMailNoCustomerId" parameterType="order" resultType="order"
+		resultMap="orderResultMap">
+		SELECT * FROM
+		EC_CORE_ORDER o
+		<where>
+		<if test="mailNo != null">
+		AND o.mailNo IN
+		<foreach collection="mailNo" item="mailNo" open="(" separator="," close=")" >
+			#{mailNo}
+		</foreach>
+		</if>
+		<if test='customerId != null'>
+				AND customer_id IN
+		<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+			</if>	
+		</where>
+	</select>
+	
+	<select id="getOrderByTradeNo" resultType="order" parameterType="String">
+		SELECT
+		o.id,
+		o.version,
+		o.logistic_provider_id,
+		o.tx_logistic_id,
+		o.tradeNo,
+		o.customer_id,
+		o.mailNo,
+		o.type,
+		o.flag,
+		o.create_time,
+		o.update_time,
+		o.send_start_time,
+		o.send_end_time,
+		o.insurance_value,
+		o.package_or_not,
+		o.special,
+		o.remark,
+		o.client_id,
+		o.status,
+		o.line_type,
+		o.weight,
+		o.sign_price,
+		o.vip_id,
+		o.accept_time,
+		o.partitiondate
+		FROM
+		EC_CORE_ORDER o where o.tradeNo = #{tradeNo}
+	</select>
+	
+	<update id="updateOrderWeightByMailNo" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET
+        <if test='weight>0'>
+        o.weight=#{weight},
+        </if>
+		o.weight_update_flag='1'
+		,o.update_time=sysdate()
+		where o.mailNo = #{mailNo}
+		and o.partitiondate >=date(#{starttime}) and o.partitiondate <![CDATA[<= ]]> date(#{endtime})
+	</update>
+	
+	<update id="updateOrderWeightByTradeNo" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET
+		o.weight=#{weight}
+		where o.tradeNo = #{tradeNo}
+	</update>
+	<update id="updateOrderByMailNo" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET
+		o.freight_type=#{freightType},
+		o.trim_freight=#{trimFreight}
+		where o.mailNo = #{mailNo}
+	</update>
+	
+	<update id="cancelOrder" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET
+		o.update_time=now(),
+		o.status = 'WITHDRAW'
+		where o.id = #{id}
+	</update>
+	
+	
+	<select id="getOrderByMailNo" resultType="order" resultMap="orderResultMap" parameterType="string">
+		SELECT * FROM
+		EC_CORE_ORDER o
+		WHERE o.mailNo = #{mailNo}
+	</select>
+	
+	<select id="ecAccount" resultType="order" resultMap="ecAccountResultMap" parameterType="map">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.weight,
+			o.accept_time,
+			o.create_time,
+			CONCAT_WS("，", t1.prov, t1.city, t1.district, t1.address) as fromAddr,
+			CONCAT_WS("，", t2.prov, t2.city, t2.district, t2.address) as toAddr,
+			t2.numProv as numProv
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t1,
+			ec_core_traderinfo t2
+		WHERE o.customer_id IN
+		<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		<!-- 
+		WHERE #{customerId} IN (#{customerIdStr})
+		 -->
+		AND o.id = t1.order_id
+		AND t1.trade_type='0'
+		AND o.id = t2.order_id
+		AND t2.trade_type='1'
+		<if test="starttime != null and endtime != null">
+			AND o.partitiondate BETWEEN #{starttime} AND #{endtime}
+		</if>
+		<if test='prov != null and prov != ""'> AND t2.prov = #{prov}</if>
+		<if test='city != null and city != ""'>AND t2.city = #{city}</if>
+		<if test='district != null and district != ""'>AND t2.district = #{district}</if>
+		GROUP BY o.mailNo 
+		ORDER BY o.partitiondate DESC, o.id DESC
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="ecAccountHalf" resultType="order" resultMap="ecAccountResultMap" parameterType="map">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.weight,
+			o.accept_time,
+			o.create_time,
+			o.freight_type,
+			o.trim_freight,
+			o.order_type,
+			o.tx_logistic_id,
+			o.customer_id,
+			CONCAT_WS("，", t1.prov, t1.city, t1.district, t1.address) as #{addr},
+			t1.numProv as numProv
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t1
+		WHERE o.customer_id IN
+		<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		<!-- 
+		WHERE #{customerId} IN (#{customerIdStr})
+		 -->
+		AND o.id = t1.order_id
+		AND t1.trade_type=#{tradeType}
+		<if test="ucUpdateTime != null">
+			AND o.create_time > #{ucUpdateTime}
+		</if>
+		<if test="starttime != null and endtime != null">
+			AND o.partitiondate BETWEEN CONCAT(#{starttime}, ' 00:00:00') AND CONCAT(#{endtime}, ' 23:59:59')
+		</if>
+		<if test='prov != null and prov != ""'> AND t1.prov = #{prov}</if>
+		<if test='city != null and city != ""'>AND t1.city = #{city}</if>
+		<if test='district != null and district != ""'>AND t1.district = #{district}</if>
+		GROUP BY o.mailNo 
+		ORDER BY o.partitiondate DESC, o.id DESC
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<select id="getAddrByOrderId" resultType="order" resultMap="ecAccountResultMap" parameterType="map">
+		SELECT
+			CONCAT_WS("，", t1.prov, t1.city, t1.address) as #{addr},
+			t1.numProv as numProv
+		FROM
+			ec_core_traderinfo t1
+		WHERE t1.order_id = #{orderId}
+		AND t1.trade_type=#{tradeType}
+	</select>
+	
+	<select id="ecAccountByPosttemp" resultType="order" resultMap="ecAccountResultMap" parameterType="map">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.weight,
+			o.accept_time,
+			o.create_time,
+			CONCAT_WS("，", t1.prov, t1.city, t1.district, t1.address) as fromAddr,
+			CONCAT_WS("，", t2.prov, t2.city, t2.district, t2.address) as toAddr,
+			t2.numProv as numProv
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t1,
+			ec_core_traderinfo t2
+		WHERE o.customer_id IN
+		<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		<!-- 
+		WHERE #{customerId} IN (#{customerIdStr})
+		 -->
+		AND o.id = t1.order_id
+		AND t1.trade_type='0'
+		AND o.id = t2.order_id
+		AND t2.trade_type='1'
+		<if test="starttime != null and endtime != null">
+			AND o.partitiondate BETWEEN CONCAT(#{starttime}, ' 00:00:00') AND CONCAT(#{endtime}, ' 23:59:59')
+		</if>
+		GROUP BY o.mailNo 
+		ORDER BY o.partitiondate DESC, o.id DESC
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getOrdersByWeight" resultType="order" resultMap="orderResultMap" parameterType="string">
+		SELECT 
+        o.id,
+		o.version,
+		o.logistic_provider_id,
+		o.tx_logistic_id,
+		o.tradeNo,
+		o.customer_id,
+		o.mailNo,
+		o.type,
+		o.flag,
+		o.create_time,
+		o.update_time,
+		o.send_start_time,
+		o.send_end_time,
+		o.insurance_value,
+		o.package_or_not,
+		o.special,
+		o.remark,
+		o.client_id,
+		o.status,
+		o.line_type,
+		o.weight,
+		o.sign_price,
+		o.vip_id,
+		o.accept_time,
+		o.partitiondate
+        FROM EC_CORE_ORDER o WHERE  o.partitiondate>=date_format(#{startTime},'%Y-%m-%d %H:%i:%s') and  date_format(#{endTime},'%Y-%m-%d %H:%i:%s')>=o.partitiondate and mailNo is not null and o.weight_update_flag = '0' order by partitiondate 
+		<if test='limit != null and limit != ""'>
+			limit #{start},#{limit}
+        </if>
+	</select>
+	
+	<select id="getMailNoByPartitionDate" resultType="string" parameterType="map">
+		SELECT 
+		o.mailNo
+		FROM EC_CORE_ORDER o WHERE  o.partitiondate>=date(#{startTime}) and  date(#{endTime})>=o.partitiondate 
+		and o.customer_id=#{customerId}
+	</select>
+	<select id="countOrdersByWeight" resultType="int" parameterType="string">
+		SELECT 
+        count(*)
+        FROM EC_CORE_ORDER o WHERE  o.partitiondate>=date_format(#{startTime},'%Y-%m-%d %H:%i:%s') and  date_format(#{endTime},'%Y-%m-%d %H:%i:%s')>=o.partitiondate and mailNo is not null and o.weight_update_flag = '0' 
+	</select>
+	<update id="updateOrderMailNoByLogisticIdAndClientId" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET 
+        o.update_time=now()
+         
+         <if test='remark != null and remark != ""'>
+			, o.remark=#{remark}
+        </if>
+        
+        <if test='mailNo != null and mailNo != ""'>
+			, o.mailNo = #{mailNo}
+        </if>
+        
+        <if test='weight != null and weight != ""'>
+			, o.weight = #{weight}
+        </if>
+        
+        <if test='status != null and status != ""'>
+       	 	, o.status = #{status}
+        </if>
+        <if test='acceptTime != null and acceptTime != ""'>
+       	 	, o.accept_time = #{acceptTime}
+        </if>
+         <if test='type != null and type != ""'>
+       	 	, o.type = #{type}
+        </if>
+        
+		WHERE o.tx_logistic_id = #{logisticId}
+		AND	 o.client_id = #{clientId}
+	</update>
+	
+	<update id="updateOrderMailNoByLogisticIdAndPartition" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET 
+        o.update_time=now()
+         
+         <if test='remark != null and remark != ""'>
+			, o.remark=#{remark}
+        </if>
+        <if test='weight != null and weight != ""'>
+			, o.weight = #{weight}
+        </if>
+        <if test='mailNo != null and mailNo != ""'>
+			, o.mailNo = #{mailNo}
+        </if>
+        <if test='status != null and status != ""'>
+       	 	, o.status = #{status}
+        </if>
+        <if test='acceptTime != null and acceptTime != ""'>
+       	 	, o.accept_time = #{acceptTime}
+        </if>
+         <if test='type != null and type != ""'>
+       	 	, o.type = #{type}
+        </if>
+        
+		WHERE o.tx_logistic_id = #{logisticId}
+		AND	 o.client_id = #{clientId}
+		AND o.partitiondate >= date(#{partitiondate})
+	</update>
+	<!-- add new -->
+	<update id="updateOrderByTxlogisc" parameterType="map">
+		UPDATE
+        EC_CORE_ORDER o
+        SET 
+        o.update_time=now()
+         
+         <if test='remark != null and remark != ""'>
+			, o.remark=#{remark}
+        </if>
+        
+        <if test='mailNo != null and mailNo != ""'>
+			, o.mailNo = #{mailNo}
+        </if>
+        <if test='status != null and status != ""'>
+       	 	, o.status = #{status}
+        </if>
+        <if test='acceptTime != null and status != ""'>
+       	 	, o.accept_time = #{acceptTime}
+        </if>
+         <if test='type != null and type != ""'>
+       	 	, o.type = #{type}
+        </if>
+        
+		WHERE o.tx_logistic_id = #{logisticId}
+		AND	 o.client_id = #{clientId}
+	</update>
+	
+	
+	<update id="updateMailNoAndWeightByLogisticId" parameterType="map">
+		UPDATE
+		EC_CORE_ORDER o
+		SET 
+		<if test='mailNo!=null and mailNo !=""'>
+			o.mailNo = #{mailNo}		
+		</if>
+		<if test='weight!= null and weight !=""'>
+			, o.weight = #{weight}
+		</if>
+		where o.tx_logistic_id = #{txLogisticId}
+		
+	</update>
+	
+	
+	<select id="getOrderMonitorList" resultType="order" resultMap="orderMonitorResultMap" parameterType="map">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.accept_time,
+			o.customer_id,
+			t.name as buyName,
+			t.mobile as buyMobile,
+			t.phone as buyPhone,
+			CONCAT(t.prov,t.city,t.address) as toAddr,
+			o.create_time
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1
+		<if test="buyerName != null">
+			AND t.name = #{buyerName}
+		</if>
+		<if test="buyerPhone != null">
+			AND (t.mobile = #{buyerPhone} or t.phone = #{buyerPhone})
+		</if>
+		<if test="vipId != null">
+			AND o.customer_id IN
+			<foreach collection="vipId" item="vipId" open="(" separator="," close=")" >
+				#{vipId}
+		</foreach>
+		</if>
+		<if test="mailNo != null">
+			AND o.mailNo = #{mailNo}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="status == 1"><!-- 成功订单 -->
+			AND o.status = "SIGNED"
+		</if>
+		<if test="status == 2"><!-- 派送中订单 -->
+			AND o.status = "SENT_SCAN"
+		</if>
+		<if test="status == 3"><!-- 走件中订单 -->
+			AND (o.status != "SENT_SCAN" and o.status != "SIGNED")
+		</if>
+		<if test="status == 4"><!-- 退货订单（0-COD,1-普通订单,3-退货单） -->
+			AND o.order_type = 3
+		</if>
+		GROUP BY o.mailNo 
+		<if test="orderBy != null and orderBy == 1">
+			ORDER BY o.partitiondate ASC
+		</if>
+		<if test="orderBy != null and orderBy == 2">
+			ORDER BY o.partitiondate DESC 
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<select id="countOrderMonitorList" resultType="int" parameterType="map">
+		SELECT
+			count(DISTINCT o.mailNo)
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1
+		<if test="buyerName != null">
+			AND t.name = #{buyerName}
+		</if>
+		<if test="buyerPhone != null">
+			AND (t.mobile = #{buyerPhone} or t.phone = #{buyerPhone})
+		</if>
+		<if test="vipId != null">
+			AND o.customer_id IN
+			<foreach collection="vipId" item="vipId" open="(" separator="," close=")" >
+				#{vipId}
+			</foreach>
+		</if>
+		<if test="mailNo != null">
+			AND o.mailNo = #{mailNo}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="status == 1"><!-- 成功订单 -->
+			AND o.status = "SIGNED"
+		</if>
+		<if test="status == 2"><!-- 派送中订单 -->
+			AND o.status = "SENT_SCAN"
+		</if>
+		<if test="status == 3"><!-- 走件中订单 -->
+			AND (o.status != "SENT_SCAN" and o.status != "SIGNED")
+		</if>
+		<if test="status == 4"><!-- 退货订单（0-COD,1-普通订单,3-退货单） -->
+			AND o.order_type = 3
+		</if>
+	</select>
+	
+	<select id="getOrderMailNoListByTime" resultType="string" parameterType="map">
+		SELECT DISTINCT mailNo
+		FROM ec_core_order
+		WHERE 
+		<if test='startTime != null and endTime != null'>
+			partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="vipId != null">
+			<!-- 
+				and customer_id = #{vipId}
+			 -->
+			AND customer_id IN
+			<foreach collection="vipId" item="vipId" open="(" separator="," close=")" >
+				#{vipId}
+			</foreach>
+		</if>
+		ORDER BY create_time DESC
+	</select>
+	
+	<select id="getMerchantMonitorOrderList" resultType="list" resultMap="orderMonitorResultMap" parameterType="java.util.Map">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.accept_time,
+			o.customer_id,
+			t.name as buyName,
+			t.mobile as buyMobile,
+			t.phone as buyPhone,
+			CONCAT(t.prov,t.city,t.address) as toAddr,
+			o.create_time
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 AND 
+		o.customer_id in
+		<foreach item="vipList" collection="vipList" open="(" separator="," close=")" >
+			#{vipList}
+		</foreach>
+		<if test="buyerName != null">
+			AND t.name = #{buyerName}
+		</if>
+		<if test="buyerPhone != null">
+			AND (t.mobile = #{buyerPhone} or t.phone = #{buyerPhone})
+		</if>
+		<if test="mailNo != null">
+			AND o.mailNo = #{mailNo}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="status == 1"><!-- 成功订单 -->
+			AND o.status = "SIGNED"
+		</if>
+		<if test="status == 2"><!-- 派送中订单 -->
+			AND o.status = "SENT_SCAN"
+		</if>
+		<if test="status == 3"><!-- 走件中订单 -->
+			AND (o.status != "SENT_SCAN" and o.status != "SIGNED")
+		</if>
+		<if test="status == 4"><!-- 退货订单（0-COD,1-普通订单,3-退货单） -->
+			AND o.order_type = 3
+		</if>
+		GROUP BY o.mailNo 
+		<if test="orderBy != null and orderBy == 1">
+			ORDER BY o.partitiondate ASC
+		</if>
+		<if test="orderBy != null and orderBy == 2">
+			ORDER BY o.partitiondate DESC 
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<select id="countMerchantMonitorOrderList" resultType="int" parameterType="java.util.Map">
+		SELECT
+			count(DISTINCT o.mailNo)
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 AND 
+		o.customer_id in
+		<foreach item="vipList" collection="vipList" open="(" separator="," close=")" >
+			#{vipList}
+		</foreach>
+		<if test="buyerName != null">
+			AND t.name = #{buyerName}
+		</if>
+		<if test="buyerPhone != null">
+			AND (t.mobile = #{buyerPhone} or t.phone = #{buyerPhone})
+		</if>
+		<if test="mailNo != null">
+			AND o.mailNo = #{mailNo}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="status == 1"><!-- 成功订单 -->
+			AND o.status = "SIGNED"
+		</if>
+		<if test="status == 2"><!-- 派送中订单 -->
+			AND o.status = "SENT_SCAN"
+		</if>
+		<if test="status == 3"><!-- 走件中订单 -->
+			AND (o.status != "SENT_SCAN" and o.status != "SIGNED")
+		</if>
+		<if test="status == 4"><!-- 退货订单（0-COD,1-普通订单,3-退货单） -->
+			AND o.order_type = 3
+		</if>
+	</select>
+	
+	<select id="cleanOrderList" resultType="list" resultMap="orderResultMap" >
+		select id,tx_logistic_id,count(*) tradeNo from ec_core_order where
+		<if test='partitiondate != null'>
+       	 	partitiondate = #{partitiondate}
+        </if> 
+		<if test='startTime != null and endTime != null'>
+			partitiondate between #{startTime} and #{endTime}
+		</if>
+		 group by tx_logistic_id having tradeNo>1 
+		<if test='limit != null and limit != ""'>
+			limit #{limit}
+        </if>
+	</select>
+	
+	<select id="queryOrderListByMailNo" resultType="list" resultMap="orderResultMap" parameterType="string">
+		SELECT o.id,
+		o.tx_logistic_id,
+		o.mailNo,
+		o.line_type,
+		o.send_start_time,
+		o.send_end_time,
+		o.status,
+		o.weight,
+		o.items_value
+		FROM
+		EC_CORE_ORDER o
+		WHERE o.mailNo = #{mailNo}
+	</select>
+	
+	<select id="queryOrderListByMailNoAndCustomerid" resultType="list" resultMap="orderResultMap" parameterType="java.util.Map">
+		SELECT o.id,
+		o.tx_logistic_id,
+		o.mailNo,
+		o.send_start_time,
+		o.send_end_time,
+		o.status,
+		o.weight,
+		o.line_type,
+		o.items_value
+		FROM
+		EC_CORE_ORDER o
+		WHERE o.mailNo = #{mailNo} 
+		<if test="customerIdList != null">
+		AND o.customer_id in
+		<foreach item="customerIdList" collection="customerIdList" open="(" separator="," close=")" >
+			#{customerIdList}
+		</foreach>
+		</if>
+	</select>
+	
+	<select id="queryOrderTranderInfoByMailNo" resultType="list" resultMap="orderMonitorResultMap" parameterType="string">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.accept_time,
+			o.customer_id,
+			t.name as buyName,
+			t.mobile as buyMobile,
+			t.phone as buyPhone,
+			CONCAT(t.prov,t.city,t.address) as toAddr,
+			o.create_time
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 AND o.mailNo = #{mailNo} GROUP BY o.mailNo 
+	</select>
+	
+	<select id="getOrderMailNoListByBuyerInfo" resultType="string" parameterType="map">
+		SELECT DISTINCT o.mailNo
+		FROM 
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 
+<!-- 		 and o.customer_id = #{vipId} -->
+		<if test="vipId != null">
+		      AND o.customer_id in
+		<foreach item="vipId" collection="vipId" open="(" separator="," close=")" >
+			#{vipId}
+		</foreach>
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="buyerName != null and buyerName != ''">
+			AND t.name = #{buyerName}
+		</if>
+		<if test="buyerPhone != null and buyerPhone !=''">
+			AND (t.mobile = #{buyerPhone} or t.phone = #{buyerPhone})
+		</if>
+		GROUP BY o.mailNo 
+	</select>
+	
+	<select id="relatedOrderMailNoListByTime" resultType="string" parameterType="map">
+		SELECT DISTINCT mailNo
+		FROM ec_core_order o
+		WHERE o.customer_id IN
+		<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		<if test='startTime != null and endTime != null'>
+			and o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="ucUpdateTime != null">
+			AND o.create_time > #{ucUpdateTime}
+		</if>
+		ORDER BY create_time DESC
+	</select>
+	
+	<select id="relatedOrderMailNoListByBuyerInfo" resultType="string" parameterType="map">
+		SELECT DISTINCT o.mailNo
+		FROM 
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 and o.customer_id IN
+		<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="buyerName != null">
+			AND t.name = #{buyerName}
+		</if>
+		<if test="buyerPhone != null">
+			AND (t.mobile = #{buyerPhone} or t.phone = #{buyerPhone})
+		</if>
+		<if test="ucUpdateTime != null">
+			AND o.create_time > #{ucUpdateTime}
+		</if>
+		GROUP BY o.mailNo 
+	</select>
+	
+	<select id="getOrderbyMailNoAndCustomerId" parameterType="map" resultType="list" resultMap="orderMonitorResultMap">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.status,
+			o.line_type,
+			o.accept_time,
+			o.customer_id,
+			t.name as buyName,
+			t.mobile as buyMobile,
+			t.phone as buyPhone,
+			CONCAT(t.prov,t.city,t.address) as toAddr,
+			o.create_time
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 AND o.mailNo = #{mailNo} AND 
+		o.customer_id IN 
+		<foreach item="customerId" collection="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		GROUP BY o.mailNo ORDER BY o.partitiondate DESC
+	</select>
+	
+	<select id="getBuyerInfoByMailNo" parameterType="string" resultType="list" resultMap="orderMonitorResultMap">
+		SELECT
+			DISTINCT o.mailNo,
+			o.id,
+			o.customer_id,
+			t.name as buyName,
+			t.mobile as buyMobile,
+			t.phone as buyPhone,
+			CONCAT(t.prov,t.city,t.address) as toAddr
+		FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id AND t.trade_type=1 AND o.mailNo = #{mailNo} GROUP BY o.mailNo ORDER BY o.partitiondate DESC
+	</select>
+	
+	<select id="queryOrderPrint" resultType="order" resultMap="orderResultMap" parameterType="map">
+		SELECT * FROM
+			ec_core_order o
+		<!--  
+		AND o.order_type = 66
+		-->
+		<where>
+		<if test="status != null">
+			AND o.status = #{status}
+		</if>
+		<if test="ucUpdateTime != null">
+			AND o.create_time > #{ucUpdateTime}
+		</if>
+		
+		<if test="customerId != null">
+			AND o.customer_id IN
+			<foreach collection="customerId" item="customerId" open="(" separator="," close=")" >
+				#{customerId}
+			</foreach>
+		</if>
+		AND o.partitiondate BETWEEN CONCAT(#{starttime}, ' 00:00:00') AND CONCAT(#{endtime}, ' 23:59:59')
+		</where>
+		ORDER BY o.partitiondate DESC, o.id DESC
+		LIMIT #{startIndex}, #{pageNum}
+	</select>
+	
+	<select id="queryOrderList" resultType="order" resultMap="orderResultMap" parameterType="map">
+		SELECT * FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id
+		<if test="orderIdList != null">
+		AND o.id IN
+		<foreach collection="orderIdList" item="orderId" open="(" separator="," close=")" >
+			#{orderId}
+		</foreach>
+		</if> 
+		<if test="customerIds != null">
+		AND o.customer_id in
+		<foreach item="customerId" collection="customerIds" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach> 
+		</if>
+		<if test="buyName != null">
+			AND t.name = #{buyName}
+		</if>
+		<if test="txLogisticId != null">
+			AND o.tx_logistic_id = #{txLogisticId}
+		</if>
+		<if test="orderType != null">
+			AND o.order_type = #{orderType}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		AND o.status != 'WITHDRAW'
+		GROUP BY o.id
+		ORDER BY o.partitiondate DESC, o.id DESC
+		
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- (除‘UNACCEPT’和‘WITHDRAW’状态的订单) -->
+	<select id="countCurrentDayOrderByCustormerId" resultType="int" parameterType="java.util.Map">
+		SELECT 
+		count(DISTINCT o.mailNo)
+		FROM
+		EC_CORE_ORDER o
+		WHERE o.partitiondate = #{partitionDate} and o.status != 'UNACCEPT' and o.status != 'WITHDRAW'
+		<if test="customerIdList != null">
+			AND o.customer_id in
+			<foreach item="customerIdList" collection="customerIdList" open="(" separator="," close=")" >
+				#{customerIdList}
+			</foreach>
+		</if>
+	</select>
+	
+	<select id="countOrders" resultType="int" parameterType="java.util.Map">
+	    SELECT count(un.id) FROM
+	    {
+		SELECT o.id as id FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id
+		<if test="customerIds != null">
+		AND o.customer_id in
+		<foreach item="customerId" collection="customerIds" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+		</if>
+		<if test="buyName != null">
+			AND t.name = #{buyName}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		AND o.status != 'WITHDRAW'
+		GROUP BY o.id
+		} un
+	</select>
+	
+	
+	<!-- 根据custormers获取接单中(0)、已签收(SIGNED)、正在派送(SENT_SCAN)、走件中(非前面三种状态)运单数 -->
+	<select id="countOrderByStatusAndCustormerId" resultType="int" parameterType="map">
+		SELECT
+			count(DISTINCT o.mailNo)
+		FROM EC_CORE_ORDER o WHERE
+		<if test="custormerId != null">
+			o.customer_id IN
+			<foreach collection="custormerId" item="custormerId" open="(" separator="," close=")" >
+				#{custormerId}
+			</foreach>
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		<if test="status == 0"><!-- 接单中 -->
+			AND o.status = "0"
+		</if>
+		<if test="status == 1"><!-- 已签收 -->
+			AND o.status = "SIGNED"
+		</if>
+		<if test="status == 2"><!-- 正在派送订单 -->
+			AND o.status = "SENT_SCAN"
+		</if>
+		<if test="status == 3"><!-- 走件中订单 -->
+			AND (o.status != "0" and o.status != "SENT_SCAN" and o.status != "SIGNED")
+		</if>
+		order by o.partitiondate desc
+	</select>
+	
+	<select id="countOrdersByPages" resultType="int" parameterType="map">
+	    SELECT count(un.id) FROM
+	    (
+		SELECT o.id as id FROM
+			ec_core_order o,
+			ec_core_traderinfo t
+		WHERE o.id = t.order_id
+		<if test="orderIdList != null">
+		AND o.id IN
+		<foreach collection="orderIdList" item="orderId" open="(" separator="," close=")" >
+			#{orderId}
+		</foreach>
+		</if> 
+		<if test="customerIds != null">
+		AND o.customer_id in
+		<foreach item="customerId" collection="customerIds" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach> 
+		</if>
+		<if test="buyName != null">
+			AND t.name = #{buyName}
+		</if>
+		<if test="txLogisticId != null">
+			AND o.tx_logistic_id = #{txLogisticId}
+		</if>
+		<if test="orderType != null">
+			AND o.order_type = #{orderType}
+		</if>
+		<if test='startTime != null and endTime != null'>
+			AND o.partitiondate between #{startTime} and #{endTime}
+		</if>
+		AND o.status != 'WITHDRAW'
+		GROUP BY o.id
+		) un
+	</select>
+	
+	<!-- 全量build数据到 solr-->
+	<select id="bulidEccoreData" parameterType="map"  resultType="MailObjectDTO">
+	    select o.id as id,o.mailNo as mailNo,o.status as status,t.prov as prov,s.prov as provF,
+	    o.create_time as createTime,o.accept_time as acceptTime,o.customer_id as customerId, o.order_type as orderType,
+	    t.name as name,t.phone as phone,t.mobile as mobile,t.numProv as numProv,
+		t.city as city,t.district as district,o.weight as weight,s.numProv as numProvF,
+		s.city as cityF,o.tx_logistic_id as txLogisticId, t.address as address,
+		o.trim_freight as trimFreight,o.freight_type as freightType,o.partitiondate as partitiondate,
+		o.line_type as lineType,o.partitiondate as partitiondate, o.type as holdTime
+		from ec_core_order o, ec_core_traderinfo t ,ec_core_traderinfo s  
+		where o.id>#{id} and o.id=t.order_id and o.id=s.order_id and t.trade_type=1 and s.trade_type=0 limit #{limit}
+		
+		<!-- -o.trim_freight as trimFreight,o.freight_type as freightType, -->
+	</select>
+	
+		<!-- 增量build数据到 solr-->
+	<select id="bulidPartEccoreData" parameterType="map"  resultType="MailObjectDTO">
+
+		select o.id as id,o.mailNo as mailNo,o.status as status,t.prov as prov,s.prov as provF,
+	    o.create_time as createTime,o.accept_time as acceptTime,o.customer_id as customerId, o.order_type as orderType,
+	    t.name as name,t.phone as phone,t.mobile as mobile,t.numProv as numProv,
+		t.city as city,t.district as district,o.weight as weight,s.numProv as numProvF,
+		s.city as cityF,o.tx_logistic_id as txLogisticId, t.address as address,o.trim_freight as trimFreight,o.freight_type as freightType,
+		o.line_type as lineType,b.build_task as buildTask,b.mail_no as oldMailNo,o.partitiondate as partitiondate, o.type as holdTime
+		from ec_core_build_search b,ec_core_order o, ec_core_traderinfo t ,ec_core_traderinfo s  
+		where b.order_id=o.id and o.id=t.order_id and o.id=s.order_id and t.trade_type=1 and s.trade_type=0  order by b.id asc limit #{limit} 
+	</select>
+	
+	<select id="bulidPartEccoreDataOther" parameterType="map"  resultType="MailObjectDTO">
+		select o.id as id,o.mailNo as mailNo,o.status as status, 
+	    o.create_time as createTime,o.accept_time as acceptTime,o.customer_id as customerId, o.order_type as orderType,
+		o.weight as weight,
+		o.tx_logistic_id as txLogisticId,o.trim_freight as trimFreight,o.freight_type as freightType,
+		o.line_type as lineType,b.build_task as buildTask,b.mail_no as oldMailNo,o.partitiondate as partitiondate, o.type as holdTime
+		from ec_core_build_search b,ec_core_order o 
+		where b.order_id=o.id order by b.id asc limit #{limit} 
+	</select>
+	<!-- mytest -->
+	<select id="bulidPartEccoreDataByOrderId" parameterType="map"  resultType="MailObjectDTO">
+
+		select t.prov as prov,s.prov as provF,
+	    t.name as name,t.phone as phone,t.mobile as mobile,t.numProv as numProv,
+		t.city as city,t.district as district,s.numProv as numProvF,
+		s.city as cityF, t.address as address
+		from ec_core_traderinfo t ,ec_core_traderinfo s  
+		where  t.order_id=#{id} and s.order_id=#{id} and t.trade_type=1 and s.trade_type=0 and t.partitiondate=#{partitiondate}
+	</select>
+	
+	<update id="updateWeightByIdAndPartitiondate" parameterType="OrderWeightUpdateDTO">
+	          update ec_core_order  set weight=#{weight},update_time=now() where tx_logistic_id=#{txLogisticId}  
+	          <if test="partitiondate!=null">
+	               and  partitiondate=#{partitiondate}
+	          </if>
+	          
+	          
+	</update>
+	
+		<!-- 增量build数据到 solr-->
+	<select id="bulidPartEccoreStatusData" parameterType="map"  resultType="MailObjectDTO">
+		select o.id as id,o.mailNo as mailNo,o.status as status,t.prov as prov,s.prov as provF,
+	    o.create_time as createTime,o.accept_time as acceptTime,o.customer_id as customerId, o.order_type as orderType,
+	    t.name as name,t.phone as phone,t.mobile as mobile,t.numProv as numProv,
+		t.city as city,t.district as district,o.weight as weight,s.numProv as numProvF,
+		s.city as cityF,o.tx_logistic_id as txLogisticId, t.address as address,o.trim_freight as trimFreight,o.freight_type as freightType,
+		o.line_type as lineType,b.build_task as buildTask,b.mail_no as oldMailNo,o.partitiondate as partitiondate, o.type as holdTime
+        from ec_core_order o, ec_core_traderinfo t ,ec_core_traderinfo s,
+        (select id ,order_id,build_task,mail_no from ec_core_build_search_status_weight_index c order by c.id asc limit #{limit}) as b
+        where b.order_id=o.id and o.id=t.order_id and o.id=s.order_id and t.trade_type=1 and s.trade_type=0 
+             <![CDATA[
+        and o.partitiondate >=#{endDate} 
+        and o.partitiondate <= #{currentDate}
+        and t.partitiondate >=#{endDate} 
+        and t.partitiondate <= #{currentDate}
+        and s.partitiondate >=#{endDate}
+        and s.partitiondate <= #{currentDate};
+        	]]>	
+        
+	</select>
+	
+	<!-- 查询一个卖家最近的10条订单 -->
+	<select id="queryTenOrdersByCustomerId" parameterType="map" resultType="string">
+		select DISTINCT mailNo FROM EC_CORE_ORDER where customer_id=#{customerId} and status='SIGNED'
+		order by partitiondate desc
+		limit #{limit} 
+	</select>
+	
+	<update id="updateTimeById" parameterType="order">
+		UPDATE EC_CORE_ORDER
+		SET
+		    update_time=now()
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateMailNoValue" parameterType="order">
+		UPDATE EC_CORE_ORDER
+		SET
+		    mailNo = #{mailNo},
+		    goods_value = #{goodsValue}
+		WHERE id = #{id}
+	</update>
+	<update id="updateOrderByIds" parameterType="map">
+		UPDATE  
+				ec_core_order o
+			SET o.version = #{buyerNick}
+			where tx_logistic_id in 
+			<foreach collection="orderIds" item="orderId" open="(" separator="," close=")" >
+			  #{orderId}
+			</foreach>
+	</update>
+	
+	<!--  根据条件查询 每日成功签收比率 [每一天的跟踪] -->
+	<select id="getSignRatioByPamams" parameterType="Map" resultType="list" resultMap="signRatioResultMap">
+		<![CDATA[
+		select send_start_time as sendStartTime,(accept/n) as ratio,accept,n as number from (
+		select send_start_time,sum(mystatus) as accept,count(1) as n from (
+		select send_start_time, 
+  			   case
+  			   when (status ='ACCEPT' OR status ='GOT') then 1
+  			   else 0
+  			   end as mystatus
+ 		from ec_core_order
+ 		]]>		
+ 		<where>
+ 		<choose>
+			<when test="userType==4">
+				<choose>  
+					<when test="theId != null and theId !=''">
+						and 
+						 exists ( 
+		    			 select 1 from ec_core_user where customer_id = taobao_encode_key
+		                 and parentid = #{theId}
+		                )
+	                </when>
+	                <otherwise>
+	                </otherwise>
+                </choose>
+			</when>
+			<otherwise>
+				<if test="theId != null and theId !=''">
+ 					and customer_id = #{theId}
+ 				</if>
+			</otherwise>
+		</choose>
+ 		<if test="startDate != null and startDate !=''">
+			and date(send_start_time) >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate !=''">
+		<![CDATA[
+			and date(send_start_time) <= #{endDate}
+		]]>
+		</if>
+		</where>
+		)t_1
+ 		group by send_start_time
+		)t_2
+    </select>
+    
+    <!--  根据条件查询  卖家 每日成功签收比率 [同一发货时间的跟踪]  -->
+	<select id="getSellSignRatioForDayByPamams" parameterType="Map" resultType="int">
+		<![CDATA[
+			select count(1) from ec_core_order
+ 		]]>		
+ 		<where>
+ 		<if test="startDate != null and startDate !=''">
+			and date(send_start_time) = #{startDate}
+		</if>
+		<if test="endDate != null and endDate !=''">
+		<![CDATA[
+			and date(send_end_time) = #{endDate}
+		]]>
+		</if>
+		<if test="status==1">
+			and (status ='ACCEPT' OR status ='GOT')
+		</if>
+		<if test="theId != null and theId !=''">
+ 			and customer_id = #{theId}
+ 		</if>
+ 		</where>
+    </select>
+    
+    <!--  根据条件查询 平台 每日成功签收比率 [同一发货时间的跟踪]  -->
+	<select id="getPlatformSignRatioForDayByPamams" parameterType="Map" resultType="int">
+		<![CDATA[
+			 select count(1) from (
+			 select taobao_encode_key from ec_core_user where  
+			 taobao_encode_key is not null
+ 		]]>		
+ 		<if test="theId != null and theId !=''">
+ 			and parentid = #{theId}
+ 		</if>
+ 		)t_1 left join ec_core_order t2 on t_1.taobao_encode_key = t2.customer_id  )t_1 left join ec_core_order t2 on t_1.taobao_encode_key = t2.customer_id
+ 		<if test="startDate != null and startDate !=''">
+			and date(send_start_time) = #{startDate}
+		</if>
+		<if test="endDate != null and endDate !=''">
+		<![CDATA[
+			and date(send_end_time) = #{endDate}
+		]]>
+		</if>
+		<if test="status==1">
+			and (status ='ACCEPT' OR status ='GOT')
+		</if>
+    </select>
+    
+    <!--  根据条件查询 卖家 签收完成时间比率  -->
+	<select id="getSellHourRatioByPamams" parameterType="Map" resultType="list" resultMap="hourRatioResultMap">
+		<![CDATA[
+		select hourstype,sum(1) as number from (
+		select 
+		 case  
+		 when hours <= 24 then 1
+		 when hours <= 48 then 2
+		 when hours <= 72 then 3 
+		 else 0
+		 end hourstype,hours
+		 from (
+		select TIMESTAMPDIFF(HOUR,send_start_time,accept_time) as hours,accept_time,send_start_time
+		from ec_core_order
+		]]>
+		<where>
+ 		<if test="startDate != null and startDate !=''">
+			and date(send_start_time) >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate !=''">
+		<![CDATA[
+			and date(send_start_time) <= #{endDate}
+		]]>
+			and (status ='ACCEPT' OR status ='GOT')
+		<if test="theId != null and theId !=''">
+ 			and customer_id = #{theId}
+ 		</if>
+		</if> 
+		</where> 
+		)t_1
+		)t_2 group by hourstype
+    </select>
+	
+	<!--  根据条件查询 平台 签收完成时间比率  -->
+	<select id="getPlatformHourRatioByPamams" parameterType="Map" resultType="list" resultMap="hourRatioResultMap">
+		<![CDATA[
+		select hourstype,sum(1) as number from (
+			select 
+			 case  
+			 when hours <= 24 then 1
+			 when hours <= 48 then 2
+			 when hours <= 72 then 3 
+			 else 0
+			 end hourstype,hours
+			 from (
+			select TIMESTAMPDIFF(HOUR,send_start_time,accept_time) as hours,accept_time,send_start_time from (
+			select taobao_encode_key from ec_core_user where 
+			taobao_encode_key is not null
+		]]>	
+		<if test="theId != null and theId !=''">
+ 			and parentid = #{theId}
+ 		</if>
+		)t_1 left join ec_core_order t2 on t_1.taobao_encode_key = t2.customer_id 
+		<where>	
+		<if test="startDate != null and startDate !=''">
+			and date(send_start_time) >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate !=''">
+		<![CDATA[
+			and date(send_start_time) <= #{endDate}
+		]]>
+		</if>  
+			and (status ='ACCEPT' OR status ='GOT') 
+		</where>	
+		)t_2
+		)t_3 group by hourstype
+    </select>
+	
+</mapper>

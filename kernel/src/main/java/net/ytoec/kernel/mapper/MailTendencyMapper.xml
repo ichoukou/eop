@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.MailTendencyMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.MailTendency" id="mailTendencyResultMap">
+		<id property="id" column="id" />
+		<id property="siteId" column="site_id" />
+		<id property="userId" column="user_id" />
+		<id property="mailNoNum" column="mailNoNum" />
+		<id property="type" column="type" />
+		<id property="createTime" column="create_time" />
+		<id property="updateTime" column="update_time" />
+		<id property="mailNoCreateTime" column="mailno_create_time" />
+		<id property="remark" column="remake" />
+		<id property="partitionDate" column="partitiondate" />
+		<id property="userthreadId" column="userthread_id" />
+	</resultMap>
+
+	<select id="get" parameterType="mailTendency" resultType="mailTendency" resultMap="mailTendencyResultMap">
+		SELECT * FROM
+		ec_core_mailno_tendency
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 插入数据时，mailno_create_time对应order表的partitiondate -->
+	<insert id="add" parameterType="mailTendency" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO ec_core_mailno_tendency(id, site_id, user_id, mailNoNum, type, mailno_create_time, remake, partitiondate, userthread_id)VALUES(
+		#{id},#{siteId},#{userId},#{mailNoNum},#{type},#{mailNoCreateTime},#{remark},sysdate(),#{userthreadId})
+	</insert>
+
+	<delete id="remove" parameterType="mailTendency">
+		DELETE FROM ec_core_mailno_tendency
+		WHERE id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="mailTendency">
+		UPDATE ec_core_mailno_tendency
+		SET
+		site_id=#{siteId},
+		user_id=#{userId},
+		mailNoNum=#{mailNoNum},
+		type=#{type},
+		remake=#{remark},
+		userthread_id=#{userthreadId},
+		update_time=now()
+		WHERE id = #{id}
+	</update>
+
+	<!-- 根据网点id、用户id(可选)、统计某天内的运单数量 -->
+	<select id="countBranchTendency" resultType="list" resultMap="mailTendencyResultMap" parameterType="java.util.Map">
+		SELECT * FROM ec_core_mailno_tendency t
+		WHERE t.site_id = #{siteId}
+		<if test='userId != null'>
+			AND t.user_id = #{userId}
+		</if>
+		<if test='someDay != null'>
+			AND t.mailno_create_time = #{someDay}
+		</if>
+		ORDER BY t.partitiondate DESC
+	</select>
+	
+	<!-- 根据平台用户的分仓统计某天内的运单数量 -->
+	<select id="countPingTaiTendency" resultType="list" resultMap="mailTendencyResultMap" parameterType="java.util.Map">
+		SELECT * FROM ec_core_mailno_tendency t
+		WHERE t.user_id = #{userId}
+		<if test='ssomeDay != null'>
+			<![CDATA[ AND t.mailno_create_time >= #{ssomeDay} AND t.mailno_create_time <= #{esomeDay} ]]>
+		</if>
+		ORDER BY t.partitiondate DESC
+	</select>
+	
+	<!-- 找出用户表中userCode重复的网点数据 :其他不符合逻辑的方法勿用-->
+	<select id="getRepeatSiteList" resultType="list" resultMap="mailTendencyResultMap" parameterType="String">
+		SELECT * FROM ec_core_mailno_tendency t
+		WHERE t.site_id = #{siteId}
+		ORDER BY t.partitiondate DESC
+	</select>
+
+</mapper>

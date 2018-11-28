@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>kernelplatform</artifactId>
+	<packaging>war</packaging>
+
+	<description>eop后台工程,依赖eopCore、eopUser、eopApp</description>
+
+	<parent>
+		<groupId>ytoec</groupId>
+		<artifactId>eopParent</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
+		<relativePath>../eopParent</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopCore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopUser</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopApp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopCMS</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopFileCore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopSMS</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ytoec</groupId>
+			<artifactId>eopOrder</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<finalName>kernel</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>${jetty.version}</version>
+				<configuration>
+					<!-- force friendly name instead of artifact name + version -->
+					<contextPath>/</contextPath>
+					<classesDirectory>target/classes</classesDirectory>
+					<!-- This parameter will auto-deploy modified classes -->
+					<scanIntervalSeconds>1</scanIntervalSeconds>
+					<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
+					<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+					<webDefaultXml>${basedir}/src/main/resources/webdefault.xml</webDefaultXml>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>80</port>
+						</connector>
+						<connector implementation="org.mortbay.jetty.ajp.Ajp13SocketConnector">
+							<port>8009</port>
+						</connector>
+					</connectors>
+					<stopPorl>9966</stopPorl>
+					<stopKey>foo</stopKey>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>jetty-ajp</artifactId>
+						<version>${jetty.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.0-beta-1</version>
+				<configuration>
+					<port>8088</port>
+					<path>/ytoec</path>
+					<!-- <contextFile>${basedir}/context.xml</contextFile> -->
+					<useTestClasspath>false</useTestClasspath>
+				</configuration>
+
+			</plugin>
+		</plugins>
+	</build>
+</project>

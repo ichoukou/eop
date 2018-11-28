@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="smsServicePackage" namespace="/" extends="ssMyBatis">
+		<action name="smsServicePackage_*" class="smsServicePackageAction" method="{1}">
+		    <!-- 
+			<result name="toIndex" type="tiles">WEB-INF.sms/sms_buyers.jsp</result>
+			<result name="list" type="tiles">WEB-INF.sms/buyers_list.jsp</result>
+			 -->
+			 <result name="alipay">/alipay.jsp</result>
+			 <result name="getUseBalance" type="json">
+			    <param name="root">accountUser</param>
+			 </result>
+			 <result name="packageParams" type="json">
+			    <param name="root">params</param>
+			 </result>
+			 <interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">getUseBalance,toAlipay</param> 
+			</interceptor-ref>
+			<!-- 默认拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+	</package>
+</struts>

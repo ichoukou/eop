@@ -1,0 +1,4 @@
+.yto_onShow{height:24px;line-height:24px;border:1px solid #ECECD5;background:#FFFCEB;color:#808080;display:inline-block;padding:0 10px;vertical-align:top;}
+.yto_onFocus{height:24px;line-height:24px;border:1px solid #ECECD5;background:#FFFCEB;color:#808080;display:inline-block;padding:0 10px;vertical-align:top;}
+.yto_onError{height:24px;line-height:24px;border:1px solid #E05C5C;background:url(../images/form_error.png) no-repeat 6px 3px #FFF2F2;color:#DF5151;display:inline-block;padding:0 10px 0 30px;vertical-align:top;}
+.yto_onCorrect{height:26px;line-height:26px;background:url(../images/form_success.png) no-repeat 6px 3px;display:inline-block;padding:0 10px 0 30px;vertical-align:top;}

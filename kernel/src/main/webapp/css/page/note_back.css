@@ -1,0 +1,14 @@
+.note{width:805px;margin:0 auto;clear:both;}
+.note dl{background:url(../../images/single/bag_bg.png) no-repeat; width:379px;height:209px;float:left;margin:10px;display:inline;}
+.note dt{margin:10px;}
+.note .top_01{background:url(../../images/sprite/bag_title_bg.png) 0 0 no-repeat;width:357px;height:22px;text-indent:-9999px;}
+.note .top_02{background:url(../../images/sprite/bag_title_bg.png) 0 -23px no-repeat;width:357px;height:22px;text-indent:-9999px;}
+.note .top_03{background:url(../../images/sprite/bag_title_bg.png) 0 -46px no-repeat;width:357px;height:22px;text-indent:-9999px;}
+.note .top_04{background:url(../../images/sprite/bag_title_bg.png) 0 -69px no-repeat;width:357px;height:22px;text-indent:-9999px;}
+.note dd img{float:left;margin-left:10px;display:inline;}
+.note .content{margin-left:165px;}
+.note .content p{margin-bottom:10px;width:200px;line-height:1.5}
+.note .content p span{float:right;margin-right:10px;display:inline;}
+.dialog_p{margin-bottom:10px;}
+#gudie_desc{font-style:normal;font-weight:700;margin-bottom:10px;display:block;}
+#help_tips li{line-height:30px;}

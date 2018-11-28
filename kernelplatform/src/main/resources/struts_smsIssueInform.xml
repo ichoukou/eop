@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="sms" namespace="/" extends="ssMyBatis">
+	
+		<action name="issueInform_*" class="smsIssueInformAction" method="{1}">
+			
+			<result name="index" type="tiles">WEB-INF.sms/index.jsp</result>
+			
+			 <result name="sendMsg" type="json" >
+			 	<param name="root">resultString</param>
+			 </result> 
+			 
+			  <result type="json" />
+			 
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">index</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>	 
+		</action>
+		
+
+	</package>
+	
+</struts>

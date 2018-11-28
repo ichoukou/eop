@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ConfigCodeMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.ConfigCode" id="configCodeResultMap">
+		<id property="id" column="id" />
+		<result property="pid" column="pid" />
+		<result property="confKey" column="conf_key" />
+		<result property="confValue" column="conf_value" />
+		<result property="confText" column="conf_text" />
+		<result property="confType" column="conf_type" />
+		<result property="seq" column="seq" />
+		<result property="remark" column="remark" />
+		<result property="confLevel" column="conf_level" />
+	</resultMap>
+	
+	<insert id="add" parameterType="net.ytoec.kernel.dataobject.ConfigCode"
+		keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO EC_CORE_CONFIGCODE
+		(pid,conf_key,conf_value,conf_text,conf_type,seq,remark,conf_level)
+		VALUES(#{pid},#{confKey},#{confValue},#{confText},#{confType},#{seq},#{remark},#{confLevel})
+	</insert>
+	
+	<select id="get" parameterType="net.ytoec.kernel.dataobject.ConfigCode"
+		resultType="net.ytoec.kernel.dataobject.ConfigCode" resultMap="configCodeResultMap">
+		SELECT
+		c.id,
+		c.pid,
+		c.conf_key,
+		c.conf_value,
+		c.conf_text,
+		c.conf_type,
+		c.seq,
+		c.remark,
+		c.conf_level
+		FROM
+		EC_CORE_CONFIGCODE c
+		WHERE c.id = #{id}
+	</select>
+	
+	<delete id="remove" parameterType="net.ytoec.kernel.dataobject.ConfigCode">
+		DELETE FROM
+		EC_CORE_CONFIGCODE WHERE id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="net.ytoec.kernel.dataobject.ConfigCode">
+		UPDATE EC_CORE_CONFIGCODE
+		SET
+		pid = #{pid},
+		conf_key = #{confKey},
+		conf_value = #{confValue},
+		conf_text = #{confText},
+		conf_type = #{confType},
+		seq = #{seq},
+		remark = #{remark},
+		conf_level = #{confLevel}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getAllConfig" parameterType="java.util.Map" resultType="list" resultMap="configCodeResultMap">
+		SELECT * FROM EC_CORE_CONFIGCODE c order by c.id desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getConfigByLevel" parameterType="java.util.Map" resultType="list" resultMap="configCodeResultMap">
+		SELECT * FROM EC_CORE_CONFIGCODE c 
+		<where>
+			<if test='confLevel != null'>
+				c.conf_level = #{confLevel}
+			</if>
+		</where>
+		order by c.id desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getConfByPid" parameterType="Integer" resultType="list" resultMap="configCodeResultMap">
+		SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = #{pid} order by seq asc
+	</select>
+	
+	<select id="getConfByKey" parameterType="string" resultType="net.ytoec.kernel.dataobject.ConfigCode" resultMap="configCodeResultMap">
+		SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_key = #{confKey}
+	</select>
+	
+	<select id="getConfByKeyAndType" parameterType="map" resultType="list" resultMap="configCodeResultMap">
+		SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = #{confType} AND conf_key = #{confKey}
+	</select>
+	<select id="getConfByType" parameterType="string" resultType="list" resultMap="configCodeResultMap">
+		SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = #{confType}
+	</select>
+	<select id="updateConfByKey" parameterType="map" >
+		update EC_CORE_CONFIGCODE set conf_value=#{confValue} where conf_key=#{confKey}
+	</select>
+	<select id="getJobMonitorTime" parameterType="string" resultType="string">
+		SELECT conf_value FROM EC_CORE_CONFIGCODE WHERE conf_key = #{confKey}
+	</select>
+	<select id="getJobMonitorTime1" parameterType="string" resultType="list" resultMap="configCodeResultMap">
+		SELECT conf_text ,conf_value  FROM EC_CORE_CONFIGCODE WHERE conf_key LIKE #{confKey}
+	</select>
+</mapper>

@@ -1,0 +1,55 @@
+
+.form p {
+    padding-left:0px;
+}
+.form p span{
+    float: left;
+}
+.form p em{
+    font-style: normal;
+}
+.form p a{
+    margin-left: 20px;
+}
+.form p .label_raido {
+    float: none;
+    margin: 0;
+    width: auto;
+}
+.form p label {
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 100%;
+    line-height: 26px;
+    text-align: right;
+    width: 70px;
+    margin-left:0px;
+}
+.input_text,.select_text{
+    float: left;
+}
+.form p .m-tar{
+    margin-left:9px;
+}
+.record-bar{
+    border: 1px solid #8DB2E3;
+    padding: 18px;
+    overflow: hidden;
+    border-bottom: none;
+}
+.record-bar p{
+    font-weight:700;
+    font-size: 14px;
+    color:#333;
+}
+.record-slid li{
+    float: left;
+    padding: 10px 18px 0 0;
+}
+.record-slid .blue{
+    color:#1E579E;
+}
+.record-slid .red{
+    color:red;
+}

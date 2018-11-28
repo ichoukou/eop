@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ServerThreadMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.ServerThread" id="serverThreadResultMap">
+		<id property="id" column="id" />
+		<result property="ip" column="ip" />
+		<result property="port" column="port" />
+		<result property="startNum" column="start_num" />
+		<result property="endNum" column="end_num" />
+		<result property="startTaskId" column="start_taskid" />
+		<result property="endTaskId" column="end_taskid" />
+		<result property="createTime" column="create_time" />
+		<result property="remark" column="remark" />
+	</resultMap>
+
+	<select id="getLastServerThread" resultType="list" resultMap="serverThreadResultMap">
+		select * from EC_CORE_SERVERTHREAD t order by t.create_time desc 
+	</select>
+
+	<!-- serverThreadResultMap是serverThread-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="serverThread"
+		resultType="net.ytoec.kernel.dataobject.ServerThread" resultMap="serverThreadResultMap">
+		<![CDATA[
+			select * from EC_CORE_SERVERTHREAD t where t.id = #{id}
+        ]]>
+	</select>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="serverThread" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_SERVERTHREAD(id, ip, port, start_num, end_num, start_taskid, end_taskid, remark)
+		values(#{id}, #{ip}, #{port}, #{startNum}, #{endNum}, #{startTaskId}, #{endTaskId}, #{remark})
+	</insert>
+
+	<delete id="remove" parameterType="serverThread">
+		delete from EC_CORE_SERVERTHREAD where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,16 @@
+.print_btn{text-align:center;width:840px;margin:0 auto;position:relative;}
+.tips{position:absolute;top:0;left:480px;font:13px/27px SimSun;}
+.template{width:840px;height:467px;margin:0 auto;position:relative;overflow:hidden;}
+table{margin:0 auto;}
+.item{position:absolute;border-style:solid;border-color:#000;}
+.template_a{background:url(../../images/single/template_a.jpg) no-repeat center top;}
+.template_b{background:url(../../images/single/template_b.jpg) no-repeat center top;}
+.template_c{background:url(../../images/single/template_c.jpg) no-repeat center top;}
+.template_d{background:url(../../images/single/template_d.jpg) no-repeat center top;}
+.template_e{background:url(../../images/single/template_e.jpg) no-repeat center top;}
+.yto_2013{background:url(../../images/single/yto_2013.jpg) no-repeat center top;}
+#pagenavi{width:840px;height:27px;margin:0 auto;font:13px/27px Arial,SimSun;position:relative;}
+#curr_total_page{float:left;}
+#prev_next_page a{display:block;height:27px;position:absolute;top:0;}
+#prev_page{right:60px;}
+#next_page{right:0;}

@@ -1,0 +1,4 @@
+table{page-break-after:always;display:block !important;}
+td{border-bottom:1px solid transparent;}
+.print_btn,#pagenavi{display:none;}
+.template{background:none !important;margin-top:-10px;}

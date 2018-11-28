@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	  <groupId>net.ytoec.module.core</groupId>
+	<artifactId>eopCore</artifactId>
+	<name>eopCore</name>
+	<packaging>jar</packaging>
+	<description>EOP核心工程，公共核心类。如：util、common、base等代码。</description>
+
+	<parent>
+		<artifactId>eopParent</artifactId>
+		<groupId>net.ytoec</groupId>
+		<version>0.0.1</version>
+		<relativePath>../eopParent</relativePath>
+	</parent>
+	<build>
+		<finalName>eopCore</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
+	</build>
+</project>

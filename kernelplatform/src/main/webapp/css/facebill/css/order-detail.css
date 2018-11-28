@@ -1,0 +1,87 @@
+/*.layout :after{*/
+    /*display: table;*/
+    /*content: "";*/
+    /*clear: both;*/
+/*}*/
+.form p {
+    padding-left:0px;
+}
+.form p span{
+   float: left;
+
+}
+.form p a{
+  margin-left: 10px;
+}
+.form p label {
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 100%;
+    line-height: 26px;
+    text-align: right;
+    width: 68px;
+    margin-left:0px;
+}
+.box_a .box_bd select{
+    float:left;
+}
+.tab_c .tab_triggers li{
+    padding-left: 15px;
+}
+.tab_panel .order-num{
+    float: left;
+    display: inline;
+    width:236px;
+}
+.pro_box {
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 10px;
+}
+.order-bar,.order-box{
+    width:100%;
+    overflow: hidden;
+}
+.order-bar li{
+    padding:10px 0 0 18px;
+    float: left;
+    width:236px;
+}
+.order-bar li{
+    width:236px;
+}
+.order-bar li .red,.order-box li .red{
+    color: red;
+}
+.order-box li{
+    height:26px;
+}
+.order-box li .input_text{
+    width:135px;
+}
+.order-hd{
+    margin-top:10px;
+}
+.order-box li .order-pro{
+    width:288px;
+    display: inline-block;
+}
+.order-box li .order-pro .input_text{
+    width:136px;
+}
+.order-box li .order-pro label{
+    width: 124px;
+    display: inline-block;
+}
+.order-box li .order-tip{
+    width:85px;
+    display: inline-block;
+}
+.order-btn{
+    text-align: center;
+}
+.order-btn a{
+    margin: 0 10px;
+}

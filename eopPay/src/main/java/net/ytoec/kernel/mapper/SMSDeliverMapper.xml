@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSDeliverMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.SMSObject" id="smsDeliverResultMap">
+		<id property="id" column="id"/>		
+		<result property="smsType" column="sms_type"/>
+		<result property="sequenceID" column="sequenceID"/>
+		<result property="userId" column="user_id"/>		
+		<result property="createTime" column="create_time"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="deliverTime" column="deliver_time"/>
+		<result property="sendMobile" column="send_mobile"/>
+		<result property="destMobile" column="dest_mobile"/>		
+		<result property="pkTotal" column="Pk_total"/>
+		<result property="messageContent" column="message_content"/>
+		<result property="status" column="status"/>
+		<result property="errorCode" column="error_code"/>
+		<result property="succTotal" column="succ_total"/>
+	</resultMap>
+	
+	<insert id="add" parameterType="SMSObject" keyProperty="id" useGeneratedKeys="true">
+		insert into ec_core_deliverSMS
+		(
+		   id, sms_type, sequenceID,user_id, create_time, send_time,deliver_time,send_mobile,dest_mobile,Pk_total,message_content,status,
+		   error_code,succ_total
+		)
+		values
+		(
+		   #{id}, #{smsType}, #{sequenceID}, #{userId},now(),#{sendTime},#{deliverTime}
+		   ,#{sendMobile}, #{destMobile}, #{pkTotal}
+		   ,#{messageContent},#{status},#{errorCode},#{succTotal}
+		)
+	</insert>
+	
+	<delete id="removeByLimit" parameterType="int">
+		delete from ec_core_deliverSMS  order by id asc limit #{limit};
+    </delete>
+    
+    <delete id="removeByIDs" parameterType="java.util.List">
+		delete from ec_core_deliverSMS where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+           #{item.id}
+        </foreach>		
+    </delete>
+    
+	<select id="getList" parameterType="map" resultType="list" resultMap="smsDeliverResultMap">
+		select * from ec_core_deliverSMS  
+		<where>	
+		    <if test="id != null and id != ''">
+				and id = #{id}
+			</if>    
+			<if test="smsType != null and smsType != ''">
+				and sms_type = #{smsType}
+			</if>
+			<if test="sequenceID != null and sequenceID != ''">
+				and sequenceID = #{sequenceID}
+			</if>
+			<if test="userId != null and userId != ''">
+				and user_id = #{userId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				and create_time = #{createTime}
+			</if>
+			<if test="startTime != null and endTime != null ">
+				and send_time between #{startTime} and #{endTime}
+			</if>
+			<if test="deliverTime != null and deliverTime != ''">
+				and deliver_time = #{deliverTime}
+			</if>
+			<if test="sendMobile != null and sendMobile != ''">
+				and send_mobile = #{sendMobile}
+			</if>
+			<if test="destMobile != null and destMobile != ''">
+				and dest_mobile = #{destMobile}
+			</if>
+			<if test="pkTotal != null and pkTotal != ''">
+				and Pk_total = #{pkTotal}
+			</if>
+			<if test="messageContent != null and messageContent != ''">
+				and message_content = #{messageContent}	 
+			</if>
+			<if test="status != null and status != ''">
+				and status = #{status}	 
+			</if>
+			<if test="errorCode != null and errorCode != ''">
+				and error_code = #{errorCode}	 
+			</if>
+			<if test="succTotal != null and succTotal != ''">
+				and succ_total = #{succTotal}	 
+			</if>
+		</where>
+		order by id asc
+		<if test='limit != null'>
+			limit #{limit}
+		</if>
+	</select>
+	
+</mapper>

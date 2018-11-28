@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSServiceMarketMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSServiceMarket" id="smsServiceMarketResultMap">
+		<id property="id" column="id"/>
+		<id property="name" column="name"/>
+		<id property="userId" column="userId"/>
+		<id property="createTime" column="create_time"/>
+		<id property="createUserId" column="create_userId"/>
+	</resultMap>
+	
+	<!-- 添加 -->
+	<insert id="addSMSServiceMarket" parameterType="smsServiceMarket" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_sms_service_market(id,name,userId,
+		create_time,create_userId)values(
+		#{id},#{name},#{userId},#{createTime},#{createUserId})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteSMSServiceMarket"  parameterType="Integer">
+		delete from ec_core_sms_service_market where id = #{id}
+	</delete>
+	
+	<!-- 更新 -->
+	<update id="updateSMSServiceMarket"  parameterType="smsServiceMarket">
+		update ec_core_sms_service_market
+		set
+		name = #{name},
+		userId = #{userId},
+		create_time = #{createTime},
+		create_userId = #{createUserId}
+		where id = #{id}
+	</update>
+	
+	<!-- 查找 -->
+	<select id="getSMSServiceMarketById" parameterType="Integer" resultType="smsServiceMarket"
+		resultMap="smsServiceMarketResultMap">
+		select * from ec_core_sms_service_market where id = #{id} 
+	</select>
+</mapper>

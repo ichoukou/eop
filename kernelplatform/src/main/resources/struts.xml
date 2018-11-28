@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<!-- 	<constant name="struts.i18n.encoding" value="UTF-8"/> -->
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory.spring.useClassCache" value="true" />
+    <constant name="struts.multipart.maxSize" value="999999999"/>
+    <constant name="FormatNumeralg" value="{0,number,##0.00}"/>
+	<package name="ssMyBatis" extends="json-default, jfreechart-default,struts-default">
+		<result-types>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<interceptors>
+		
+            <!--定义一个拦截器-->
+            <interceptor name="sessionout"
+                         class="net.ytoec.kernel.interceptor.SessionInterceptor">
+            </interceptor>
+            <interceptor name="firstVisit"
+                         class="net.ytoec.kernel.interceptor.FirstVisitInterceptor">
+            </interceptor>
+            
+           <interceptor name="sessionMethodout"
+                         class="net.ytoec.kernel.interceptor.FilterInterceptor">
+           </interceptor>
+
+            <interceptor-stack name="userStack">
+                <interceptor-ref name="sessionout"/>
+                 <interceptor-ref name="defaultStack"/>
+             </interceptor-stack>
+           
+        </interceptors>
+        <!--默认调用拦截器-->
+        <default-interceptor-ref name="userStack"/>
+	
+        <global-results>
+           <result name="exception">/WEB-INF/login/error.jsp</result> 
+           <result name="baidu" type="redirect">http://www.baidu.com</result> 
+           <result name="no_permission" type="tiles">WEB-INF.login/no_permission.jsp</result> 
+           <result name="login">/WEB-INF/login/loginout.jsp</result>
+           <result name="g_toActive4taobao" type="tiles">WEB-INF.login/active4taobao.jsp</result>
+           <result name="g_toActive4taobaoStep2" type="tiles">WEB-INF.login/active4taobaoStep2.jsp</result>
+           <result name="g_toActive4vip" type="tiles">WEB-INF.login/active4vip.jsp</result>
+           <result name="g_toActive4vipStep2" type="tiles">WEB-INF.login/active4vipStep2.jsp</result>
+		   <result name="g_remindSubAccount" type="tiles">WEB-INF.login/no_subAccount.jsp</result><!-- 提示平台用户#新增业务账号 -->
+		   <result name="g_toAddPlatformSubAccount" type="tiles">WEB-INF.user/platform_add_subAccount.jsp</result><!-- 平台用户#新增业务账号 -->
+           <result name="siteFirstLogin" type="tiles">WEB-INF.login/activeSite.jsp</result>
+           <result name="instruction_vip" type="tiles">WEB-INF.questionnaire/vip_questionnaire_instruction.jsp</result>
+		   <result name="instruction_site" type="tiles">WEB-INF.questionnaire/site_questionnaire_instruction.jsp</result>
+		   <result name="instruction" type="tiles">WEB-INF.questionnaire/instruction.jsp</result>
+		   <result name="jsonRes" type="json">
+				<param name="root">jsonRes</param>
+			</result>
+        </global-results>
+        
+        <global-exception-mappings>
+            <exception-mapping exception="net.ytoec.kernel.exception.BusinessException" result="exception"/>
+            
+        </global-exception-mappings>
+        
+		<!-- 图片上传配置 -->
+		<action name="uploadFile" class="mediaUploadAction">
+<!-- 			<result name="success" type="json"> -->
+<!-- 				<param name="root">ipath</param> -->
+<!-- 			</result> -->
+			<result name="success">
+				/WEB-INF/common/uploadResOut.jsp
+			</result>
+		</action>
+
+		<action name="login_*" class="loginAction" method="{1}">
+			<result name="input">/WEB-INF/login/login.jsp</result><!-- xml登录验证返回页面 -->
+			<result name="loginOut">/WEB-INF/login/loginout.jsp</result>
+<!-- 			<result name="loginOut" type="redirect">login_goLogin.action</result> -->
+			<result name="doLogin" type="redirect">mainPage_home.action</result>
+			<result name="goLogin">/WEB-INF/login/login.jsp</result>
+			<!-- 易通首页入驻商家页面  -->
+			<result name="shops">/WEB-INF/login/shops.jsp</result>
+			<result name="loginError">/WEB-INF/login/login.jsp</result>
+			<result name="input">/WEB-INF/login/login.jsp</result> 
+<!-- 			<result name="loginError" type="redirectAction"> -->
+<!-- 				<param name="loginMessage">${loginMessage}</param> -->
+<!-- 				<param name="errorTimes">${errorTimes}</param> -->
+<!-- 				<param name="actionName">login_goLogin</param> -->
+<!-- 				<param name="namespace">/</param> -->
+<!-- 			</result> -->
+			<result name="taobaoLoginError">/WEB-INF/login/taobaoout.jsp</result>
+			<result name="showPasswordUI">/WEB-INF/login/retrievepwd.jsp</result>
+			<result name="updateCode" type="json">
+				<param name="root">codeString</param>
+			</result>
+			<result name="checkFindPass" type="json">
+				<param name="root">isValidate</param>
+			</result>
+			<result name="findPassword" type="json">
+				<param name="root">responseString</param>
+			</result>
+			<result name="applyForCode" type="json">
+				<param name="root">applyString</param>
+			</result>
+			<!-- 快速入门返回String -->
+			<result name="quickRead" type="json">
+				<param name="root">quickReadString</param>
+			</result>
+			<result name="taobaoLogin">/WEB-INF/login/taobao.jsp</result>
+			<result name="toActive" type="tiles">WEB-INF.login/active.jsp</result>
+			<result name="applyForCode" type="json"></result>
+			<result name="toAssociationAccount">/WEB-INF/login/binded_account_result.jsp</result>
+			
+			<result name="audioMenu">/WEB-INF/login/audioMenu.jsp</result><!-- 帮助视频 -->
+			<result name="audio1">/WEB-INF/login/audio1.jsp</result><!-- 申请客户编码帮助视频 -->
+		</action>
+		
+		<action name="jiaocai" class="loginAction" method="jiaocai">
+<!-- 			<result name="jiaocai">/WEB-INF/login/audio.jsp</result>帮助视频 -->
+			<result name="jiaocai" type="tiles">audio.login/audio.jsp</result><!-- 帮助视频 -->
+		</action>
+		
+		<!-- 短信回调action by wu.sha-->
+		<action name="smsCallBack" class="smsSendCallBackAction" method="SmsSendCallBack">
+			  <result name="success" type="json">
+				<param name="root">isSuccess</param>
+			</result>
+		</action>		
+		
+		<action name="mainPage_*" class="mainPageAction" method="{1}">
+			<result name="home_site" type="tiles">WEB-INF.home/home_site.jsp</result><!-- 网点版首页 -->
+			<result name="home_vip" type="tiles">WEB-INF.home/home_vip.jsp</result><!-- 卖家版首页 -->
+			<result name="home_pingtai" type="tiles">WEB-INF.home/home_pingtai.jsp</result><!-- 平台版首页 -->
+			<result name="home" type="tiles">WEB-INF.home/home.jsp</result><!-- 其他首页 -->
+			
+			<result name="childMenu" type="json">
+				<param name="root">thirdMenuList</param>
+			</result>
+			<result name="detailArticle" type="tiles">WEB-INF.home/news.jsp</result><!-- 我的易能最新动态查看页面 -->
+<!-- 			<result name="toHelp" type="tiles">help.help/help.jsp</result>帮助 -->
+<!-- 			<result name="each_help" type="tiles">help.help/help_each.jsp</result>帮助 -->
+<!-- 			<result name="audio" type="tiles">audio.login/audio.jsp</result>卖家版帮助视频 -->
+<!-- 			<result name="audioSite">/WEB-INF/login/audio_site.jsp</result>网点版帮助视频 -->
+		</action>
+		
+		<!-- 用户 -->
+		<action name="user" class="userAction">
+			<result name="toAdd" type="tiles">WEB-INF.user/user_add.jsp</result><!-- 新增 -->
+			<result name="toEdit" type="tiles">WEB-INF.user/user_edit.jsp</result><!-- 修改 -->
+			<result name="toList" type="tiles">WEB-INF.user/user_list.jsp</result><!-- 列表页 -->
+			<result name="toListModelWindow">/WEB-INF/user/user_list_modelWindow.jsp</result>
+			
+			<!-- 面单下载授权页面 -->
+			<result name="toCustomerList" type="tiles" >WEB-INF.user/user_customer_list.jsp</result>		
+			
+			<!-- 检索承包区客户列表 -->
+			<!-- 检索承包区客户列表 -->
+			<result name="toAddSubAccountJSON" type="json" >
+			</result>
+			<result name="toEditSubAccountJSON" type="json">
+			</result>
+		
+			<result name="jsonNameCheck" type="json" /><!-- 新增时的用户账号 唯一性ajax验证 -->
+			<result name="jsonEditPwd" type="json"><!-- 修改时ajax修改密码 -->
+				<param name="root">isValidate</param>
+			</result>
+			<result name="jsonQueryBranch" type="json"><!-- 修改时ajax修改密码 -->
+				<param name="root">ajaxAlertText</param>
+			</result>
+			<result name="jsonChechUserCode" type="json" />
+			<result name="jsonEditAddress" type="json" />
+			<result name="switchEccount" type="json" >
+				<param name="root">responseJson</param>
+			</result>
+			<result name="checkPassword" type="json" >
+				<param name="root">isValidate</param>
+			</result>
+			<result name="printNav" type="json" >
+				<param name="showLayer">json</param>
+			</result>	
+			<result name="printClose" type="json" >
+				<param name="root">json</param>
+			</result>	
+			<result name="sendEmail" type="json" >
+				<param name="root">json</param>
+			</result>	
+			<result name="toDelSubAccount" type="json" >
+				<param name="root">json</param>
+			</result>
+			
+			<result name="toSubAccountList" type="tiles">WEB-INF.user/user_list_subAccount.jsp</result>
+			<result name="toSubAccountListIndex" type="tiles">WEB-INF.user/user_list_subAccount.jsp</result>
+			<result name="toAddSubAccount" type="tiles">WEB-INF.user/user_add_subAccount.jsp</result>
+			<result name="toEditSubAccount" type="tiles">WEB-INF.user/user_edit_subAccount.jsp</result>
+			<result name="toPlatformSubAccountList" type="tiles">WEB-INF.user/platform_list_subAccount.jsp</result>
+			<result name="toAddPlatformSubAccount" type="tiles">WEB-INF.user/platform_add_subAccount.jsp</result>
+			<result name="toEditPlatformSubAccount" type="tiles">WEB-INF.user/platform_edit_subAccount.jsp</result>
+			
+			<result name="non_index" type="redirect">
+				<param name="location">user!toSubAccountListIndex.action?menuFlag=user_sub_acc_list</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="toEditIndex" type="redirect">
+				<param name="location">user!toEditIndex.action?menuFlag=user_myacc</param>
+				<param name="namespace">/</param>
+			</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">toEdit,toSubAccountList,list,edit,edit_pwd,toAddSubAccount,bindSubAccount,toEditSubAccount</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>					
+			
+		</action>
+		
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="toAddSubAccount" type="tiles">WEB-INF.user/user_add_subAccount.jsp</result>
+			<result name="toAddPlatformSubAccount" type="tiles">WEB-INF.user/platform_add_subAccount.jsp</result>
+			<result name="input" type="tiles">WEB-INF.user/user_add_subAccount.jsp</result>
+		</action>
+		
+		<!-- 修改密码  方便struts2框架校验   yangqinghua-->
+		<action name="userEditPwd_*" class="userAction" method="{1}">
+			<result name="toEdit" type="tiles">WEB-INF.user/user_edit.jsp</result><!-- 修改 -->
+			<result name="input" type="tiles">WEB-INF.user/user_edit.jsp</result>
+		</action>
+		
+		<!-- 检索承包区客户列表 -->
+		<action name="customersList" class="sendMessageAction" >
+			<result name="toAddSubAccount" type="json" >/WEB-INF/user/user_add_subAccount.jsp</result>
+			<result name="toEditSubAccount" type="json">/WEB-INF/user/user_edit_subAccount.jsp</result>
+		</action>
+		
+		<!-- 关联账号  -->
+		<action name="toBindedAccount" class="associationAccountAction" method="toBindedAssociationAccount">
+			<result name="success" type="tiles">WEB-INF.user/binded_account.jsp</result>
+		</action>
+		<action name="cancelAssociationAccount" class="associationAccountAction" method="cancelAssociationAccount">
+			<result name="success" type="json">/WEB-INF/user/binded_account.jsp</result>
+		</action>
+		
+		<!-- 不会进行登录拦截的action -->
+		<action name="noint" class="noInterceptAction">
+			<result name="input" type="tiles">WEB-INF.login/active4taobao.jsp</result>
+			<result name="jsonData" type="json" />
+			<result name="completeSite" type="tiles">WEB-INF.login/activeSite.jsp</result>
+			<result name="checkLoginName" type="json">
+				<param name="root">response</param>
+			</result>
+			<result name="jsonCheckUserCode" type="json">
+				<param name="root">isValidate</param>
+			</result>
+			<result name="getUnReadNum" type="json">
+				<param name="root">jsonResult</param>
+			</result>
+            <result name="questionnaire_index"  type="chain">questionnaire_index</result>
+            <result name="monitor_index"  type="chain">monitor_index</result>
+            <result name="type" type="json">
+            	<param name="root">types</param>
+            </result>
+            <result name="newIcon" type="json"></result>
+            <result name="moreNews" type="tiles">WEB-INF.home/more_news.jsp</result>
+		</action>
+		
+		<!-- 联系我们、关于易通 -->
+		<action name="noint1_*" class="noInterceptAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.login/active4taobao.jsp</result>
+			<result name="toHelp" type="tiles">help.help/help.jsp</result><!-- 帮助 -->
+			<result name="each_help" type="tiles">help.help/help_each.jsp</result><!-- 帮助 -->
+			<result name="contractus" type="tiles">WEB-INF.common/contactUs.jsp</result><!-- 联系我们 -->
+			<result name="onyto" type="tiles">WEB-INF.common/onyto.jsp</result><!-- 关于易通 -->
+			<result name="audio" type="tiles">audio.login/audio.jsp</result><!-- 卖家版帮助视频 -->
+		</action>
+		
+		<action name="noint2_*" class="noInterceptAction">
+			<result name="input" type="tiles">WEB-INF.login/activeSite.jsp</result>
+			<result name="completeSite" type="tiles">WEB-INF.login/activeSite.jsp</result>
+		</action>
+	 
+	 	<!-- 面单打印 -->
+		<action name="orderPrint" class="orderPrintAction">
+			<result name="orderPrint" type="tiles">WEB-INF.order/orderPrint.jsp</result><!-- 面单打印界面 -->
+			<result name="printOrderPrintList">/WEB-INF/order/printOrderPrintList.jsp</result><!-- 点击 打印快递单 按钮时取列表 -->
+			<result name="sendPrintOrderPrintList">/WEB-INF/order/sendPrintOrderPrintList.jsp</result><!-- 点击 打印发货单 按钮时取列表 -->
+			<result name="moduleExpressString" type="json">!-- 面单打印界面 -->
+				<param name="root">moduleExpressString</param>
+			</result>
+			<result name="updateCode" type="json">
+				<param name="root">codeString</param>
+			</result>
+			<result name="isPrint" type="json">!-- 面单打印界面 -->
+				<param name="root">json</param>
+			</result>
+			<result name="toPrintGuide" type="redirectAction">
+			<param name="actionName">orderPrint!printGuide.action</param>
+				<param name="namespace">/</param>
+			</result><!-- 打印指南  -->
+			<result name="printNews">WEB-INF.order/orderPrintNews.jsp</result>
+			<result name="printGuide">WEB-INF.order/orderPrintGuide.jsp</result><!-- 打印指南界面  -->
+			
+			<result name="non_index" type="tiles">WEB-INF.order/orderPrint.jsp</result>
+			<interceptor-ref name="sessionMethodout">
+	            <!-- 被拦截方法配置定义 -->             
+	        	<param name="includeMethods">orderPrint, getBatchPrintList, getUndeliverGoodsList, getDeliveredGoodsList</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+		
+		<!-- 订单导入 -->
+		<action name="orderImport_*" class="orderImportAction" method="{1}">
+			<result name="toOrderImoprt" type="tiles">WEB-INF.order/orderImport.jsp</result>
+			<result name="nofile" type="tiles">WEB-INF.login/error.jsp</result>
+<!-- 			<result name="upload" type="redirect"> -->
+<!-- 				<param name="location">orderImport_toOrderImoprt.action?currentPage=1</param> -->
+<!-- 				<param name="encode">true</param> -->
+<!-- 			</result>		 -->
+			<result name="non_index" type="redirect">
+				<param name="location">orderImport_index.action?menuFlag=fahuo_orderimport</param>
+				<param name="namespace">/</param>
+			</result>
+			
+	           	<!-- 被拦截方法配置定义 -->             
+			<interceptor-ref name="sessionMethodout">
+	        	<param name="includeMethods">toOrderImoprt, upload, downLoadZip, deleteOrderTemp, deleteOrderTempList, insertOrder</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+		
+		<!-- 订单 -->
+		<action name="order" class="orderAction">
+			<result name="toECAccount" type="tiles">WEB-INF.order/ecAccount.jsp</result><!-- 电子对账 -->
+			<result name="toECAccountIndex" type="tiles">WEB-INF.order/ecAccount.jsp</result><!-- 电子对账 -->
+			<result name="toNonECAccount" type="tiles">WEB-INF.order/ecAccount.jsp</result><!-- 电子对账 -->
+			<result name="toOrderDetails" type="tiles">WEB-INF.order/orderDetails.jsp</result><!-- 订单详情 -->
+			<result name="toOrderDetailsJSON" type="json"></result><!-- 订单详情，返回JSON数据 -->
+			<result name="toPotsttemp" type="tiles">WEB-INF.order/posttemp_list.jsp</result><!-- 运费模板列表页 -->
+			<result name="toPosttempAdd" type="tiles">WEB-INF.order/posttemp_add.jsp</result><!-- 运费模板新增 -->
+			<result name="orderMonitorJson" type="json"></result>
+			<result name="getPosttempByVipJSON" type="json"><!-- 返回运费模板json -->
+				<param name="root">posttempIdJson</param>
+			</result>
+			<result name="toErrorOrderView">/WEB-INF/order/ecAccount_errorOrder.jsp</result><!-- 查看异常订单 -->
+			<result name="toufOrderView">/WEB-INF/order/ecAccount_ufOrder.jsp</result><!-- 查看特殊订单 -->
+			<result name="tothOrderView">/WEB-INF/order/ecAccount_thOrder.jsp</result><!-- 查看退货订单 -->
+			
+			<result name="toQueryOrder" type="tiles">WEB-INF.order/orderprint_query.jsp</result><!-- 运单查询 -->
+			<result name="toOrderPrint" type="tiles">WEB-INF.order/orderprint_print.jsp</result><!-- 运单查询-打印 -->
+			<result name="json" type="json">
+				<param name="root">msg</param>
+			</result>
+			
+			<result name="non_index" type="redirect">
+				<param name="location">order!toECAccountIndex.action?currentPage=1</param>
+				<param name="namespace">/</param>
+			</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">toECAccount,exportOrder,ecAccount</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>		
+		</action>
+		
+		<!-- 发货 -->
+		<action name="orderPlace" class="orderPlaceAction" method="toMailNoBind">
+			<result name="toOrderCreate" type="tiles">WEB-INF.order/orderPlace.jsp</result>
+			<result name="json" type="json"></result>
+			
+			<result name="non_index" type="redirect">
+				<param name="location">orderPlace!toOrderCreate.action</param>
+				<param name="namespace">/</param>
+			</result>
+			
+<!-- 			<result name="input">/WEB-INF/order/orderPlace.jsp</result>  -->
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">orderCreate,toMailNoBind</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>				
+			
+		</action>
+		
+		<!-- 我要发货时 提交表单 -->
+		<action name="orderPlaceSubmit_*" class="orderPlaceAction" method="{1}">
+			<result name="toOrderCreate" type="tiles">WEB-INF.order/orderPlace.jsp</result>
+			<result name="input" type="tiles">WEB-INF.order/orderPlace.jsp</result> 
+		</action>
+		
+		<!-- 保存运单号-->
+		<action name="bindedOrUpd" class="orderPlaceAction" method="bindedOrUpdateMailNo" >
+			<result name="toOrderUpdate" type="tiles">WEB-INF.order/orderPlace.jsp</result>
+			<result name="json" type="json"></result>
+		</action> 
+		
+		<!-- 撤销运单 -->
+		<action name="cancelOrder" class="orderPlaceAction" method="cancelOrder">
+			<result name="toQueryAgain" type="redirect">
+			<param name="location">/orderPlace.action?startTime=${startTime}&amp;endTime=${endTime}&amp;receiverName=${receiverName}</param>
+			<param name="encode">true</param>
+			</result>
+			<result name="json" type="json"></result>
+		</action>
+		
+		<!-- 运费模板 -->
+		<action name="posttemp" class="posttempAction">
+			<result name="toPotsttemp" type="tiles">WEB-INF.order/posttemp_list.jsp</result><!-- 运费模板列表页 -->
+			<result name="toPosttempAdd" type="tiles">WEB-INF.order/posttemp_add.jsp</result><!-- 运费模板新增 -->
+			<result name="toPosttempEdit" type="tiles">WEB-INF.order/posttemp_edit.jsp</result><!-- 运费模板新增 -->
+			<result name="toPosttempView" type="tiles">WEB-INF.order/posttemp_view.jsp</result><!-- 运费模板新增 -->
+			<result name="non_index" type="redirect">
+				<param name="location">posttemp!toPosttemp.action?currentPage=1</param>
+				<param name="namespace">/</param>
+			</result>
+			
+			<result name="json" type="json"></result>
+			<result name="dynamicUrl" type="redirect">${url}</result><!-- 动态url参数。action中要指定属性url的值 -->
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">toPosttemp,toPosttempAdd</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+		</action>
+		
+		<!-- 邮件 -->
+		<action name="mail" class="mailAction">
+			<result name="jsonResult" type="json" />
+		</action>
+		<!-- 快递单打印模板 -->
+		<action name="printtemp" class="printTempAction">
+			<result name="toPrinttemp" type="tiles">WEB-INF.printTemp/printTempEdit.jsp</result><!-- 打印单据模板设计页面 -->
+			<result name="toPrint" type="tiles">WEB-INF.printTemp/printtemp_print.jsp</result>
+		</action>
+		
+		<!-- 省市级联Action -->
+		<action name="region_*" class="regionAction" method="{1}">
+			<result name="show" type="json">
+				<param name="root">regionList</param>
+			</result>
+			<result name="success" type="json">
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- 接口访问Action -->
+		<!-- 淘宝新接口   物流状态反馈 -->
+		<action name="taobaoLogisticStatusServlet" class="logisticStatusAction" method="taobaoLogisticStatus">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<action name="VipOrderServlet" class="orderProcessAction" method="vipOrderServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<action name="EdmServlet" class="coreEdmAction" method="addCoreEdm">
+			<result name="success" type="tiles">WEB-INF.order/edm.jsp</result>
+		</action>
+		
+		<action name="TaoBaoOrderServlet" class="net.ytoec.kernel.action.remote.MQTaoBaoOrderAction" method="vipOrderServlet">
+			<interceptor-ref name="defaultStack"></interceptor-ref>		
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="TaobaoServiceApplyServlet" class="taoBaoServiceApplyAction" method="taobaoServiceApplyServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="ServiceApplyNotifyServlet" class="taoBaoServiceApplyAction" method="kingGang2TaoBao">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<action name="CommonOrderServlet" class="commonOrderAction" method="vipOrderServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<!-- 接受易迅订单上传 -->
+		<action name="YixunOrderServlet" class="commonOrderAction" method="yixunOrderServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<action name="VipOrderLocalServlet" class="orderLocalProcessAction" method="vipOrderServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<action name="statusNotify" class="orderProcessAction" method="statusNotify">
+			<result name="success">statusNotify.jsp</result>
+		</action>
+		<action name="kingGang2TaoBao" class="orderProcessAction" method="kingGang2TaoBao">
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="taoBaoStatusNotify" class="net.ytoec.kernel.action.remote.MQKingGangOrderAction" method="vipOrderServlet">
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="commonStatusNotify" class="commonOrderAction" method="kingGang2TaoBao">
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="questionnaireProcess" class="questionnaireProcessAction" method="questionnaireServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		
+	    <action name="test" class="net.ytoec.kernel.action.test.TestAction" method="testServlet">
+			<result name="success">test.jsp</result>
+		</action>
+		
+		<action name="paserTest" class="net.ytoec.kernel.action.test.TaobaoParserTest" method="test">
+			<result name="success">test.jsp</result>
+		</action>
+		
+		<action name="test2" class="net.ytoec.kernel.action.test.TestAction" method="toJingangServlet">
+			<result name="success">test.jsp</result>
+		</action>
+		
+		 <action name="viewMemData" class="net.ytoec.kernel.action.test.TestAction" method="viewMemData">
+			<result name="success">test.jsp</result>
+		</action>
+		
+		<action name="userInfoProcess" class="userInfoProcessAction" method="userServlet">
+			<result name="success">index.jsp</result>
+		</action>
+		
+            <action name="upload" class="net.ytoec.kernel.action.test.UploadAction">    
+            <result name="input">/upload.jsp</result>    
+            <result name="success">/result.jsp</result>    
+            </action>
+            
+            
+       <action name="associationAccount_*" class="associationAccountAction" method="{1}">
+            <result name="success">index.jsp</result>
+            <result name="toBindedAccoutCustom" type="tiles">WEB-INF.user/binded_account_custom.jsp</result>
+       </action>
+       
+       <!-- 网点搜索引擎 -->
+       <action name="branch*" class="branchSearchAction" method="{1}">
+       		<result name="list" type="tiles">WEB-INF.search/branch_list.jsp</result>
+       		<result name="solr" type="tiles">WEB-INF.search/branch_list.jsp</result>
+			<result name="list2" type="tiles">WEB-INF.search/branch_list2.jsp</result>
+       		<result name="solr2" type="tiles">WEB-INF.search/branch_list2.jsp</result>
+       		<result name="correction" type="json">
+       			<param name="root">isValidate</param>
+       		</result>
+       		<result name="employ" type="json">
+       			<param name="root">isValidate</param>
+       		</result>
+       		<result name="cancelEmploy" type="json">
+       			<param name="root">isValidate</param>
+       		</result>
+       		<result name="addBranch" type="json">
+       			<param name="root">isValidate</param>
+       		</result>
+       		<result name="editBranch" type="json">
+       			<param name="root">isValidate</param>
+       		</result>
+       		<result name="checkBranch" type="json">
+       			<param name="root">isValidate</param>
+       		</result>
+       		<result name="jsondata" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="non_index" type="chain">
+				branchindex
+			</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	        	<!-- 被拦截方法配置定义 -->             
+	            <param name="includeMethods">solr,list</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+       </action>
+       
+       <!-- 短信营销定制 -->
+       <action name="smsServiceMarket_*" class="smsServiceMarketAction" method="{1}">
+            <result name="smsMarketPageStep1" type="tiles">
+            	WEB-INF.sms/service_market.jsp
+            </result>
+            <result name="smsTemplateAddPage" type="tiles">
+            	WEB-INF.sms/sms_template_add.jsp
+            </result>
+            <result name="smsMarketPageStep2" type="tiles">
+            	WEB-INF.sms/service_member.jsp
+            </result>
+            <result name="smsMarketPageStep3" type="tiles">
+            	WEB-INF.sms/service_send.jsp
+            </result>
+            <result name="smsBuyerSearchSelectPage">
+            	WEB-INF/sms/service_member_select.jsp
+            </result>
+            <result name="smsServicePackageToAlipay" type="redirect">
+            	smsServicePackage!toAlipay.action
+            </result>
+            <result name="portJson" type="json">
+            	<param name="root">portBuy</param>
+            </result>
+            <result name="inBuyPorts" type="tiles">
+            	WEB-INF.sms/service_port.jsp
+            </result>
+             <result name="sendPage" type="tiles">
+            	WEB-INF.sms/service_send.jsp
+            </result>
+            <result name="sendPorts" type="tiles">
+            	WEB-INF.sms/smsHome.jsp
+            </result>
+            <result name="backToMember" type="tiles">
+            	WEB-INF.sms/service_member.jsp
+            </result>
+            <result name="jsondata" type="json">
+				<param name="root">jsonStr</param>
+			</result>
+			<result name="smsWelcome" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+            <interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">
+		                 getSMSUsecountByUserId,
+		                 setTemplateDefault,
+		                 inSaveTemplate,
+		                 sendPorts,
+		                 backToMember
+	                 </param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+       </action>
+       
+       <!-- 定制套餐购买 -->
+       <action name="inBuyPortsAction" class="smsServiceMarketAction" method="inBuyPorts">
+            <result name="inBuyPorts" type="tiles">
+            	WEB-INF.sms/service_port.jsp
+            </result>
+			<result name="smsWelcome" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+            <interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">
+	                 </param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+       </action>
+       
+       	<!-- 网络文件上传下载 -->
+		<action name="webFile" class="webFileAction" method="{1}">
+			<result name="downFile" type="tiles"></result>
+			<result name="nofile" type="tiles">WEB-INF.login/error.jsp</result>
+	        <!-- 被拦截方法配置定义 -->             
+<!-- 			<interceptor-ref name="sessionMethodout"> -->
+<!-- 	        	<param name="includeMethods"></param>  -->
+<!-- 			</interceptor-ref> -->
+			<!-- 默认拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+	</package>
+	
+	<include file="struts_smsFilter.xml"></include>
+	<include file="struts_smsTemplate.xml"></include>
+	<include file="struts_smsQueryManage.xml"></include>
+	<include file="struts_smsIssueInform.xml"></include>
+	<include file="struts_passIssueManage.xml"></include>
+	<include file="struts_leavemsg.xml"></include>
+	<include file="struts_questionnaire.xml"></include>
+	<include file="struts_waybill.xml"></include>
+	<include file="struts_channel.xml"></include>
+	<include file="struts_jfreechart.xml"></include>
+	<include file="struts_cms.xml"></include>
+	<include file="struts_app.xml"></include>
+	<include file="struts_payservice.xml"></include>
+	<include file="struts_smsBuyersManage.xml"></include>
+	<include file="struts_smsPackage.xml"></include>
+	<include file="struts_report.xml"></include>
+	<include file="struts_cod.xml"></include>
+	<include file="struts_modifyPassword.xml"></include>
+	<include file="struts_waybillExport.xml"></include>
+	<include file="struts_api.xml"></include>
+	<include file="struts_partern.xml"></include>
+	<include file="struts_sellerInfo.xml"></include>
+	<include file="struts_forewarn.xml"></include>
+	<include file="struts_orderComman.xml"></include>
+</struts>

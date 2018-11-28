@@ -1,0 +1,294 @@
+package net.ytoec.kernel.timer;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import net.ytoec.kernel.action.common.XmlSender;
+import net.ytoec.kernel.dao.ApiLogDao;
+import net.ytoec.kernel.dataobject.ApiLog;
+import net.ytoec.kernel.dataobject.Mail;
+import net.ytoec.kernel.dataobject.SendTask;
+import net.ytoec.kernel.dataobject.SendTaskToTB;
+import net.ytoec.kernel.dataobject.ServerConfig;
+import net.ytoec.kernel.service.EdiOrderService;
+import net.ytoec.kernel.service.MailService;
+import net.ytoec.kernel.service.SendTaskToTBService;
+import net.ytoec.kernel.service.ServerConfigService;
+import net.ytoec.kernel.util.SystemHelper;
+
+import org.apache.commons.lang.StringUtils;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.quartz.QuartzJobBean;
+
+public class SendTask2TaobaoTimerQuartz extends QuartzJobBean {
+
+    private static Logger logger = LoggerFactory.getLogger(SendTask2TaobaoTimerQuartz.class);
+    private static final int DEFAULT_LIMIT = 5000;
+    private static boolean running = false;
+
+    private Integer limit;
+    private List<SendTaskToTB> taskList = new ArrayList<SendTaskToTB>();
+    private List<Integer> taskFlags = new ArrayList<Integer>();
+    private SendTaskToTBService<SendTask> sendTaskToTBService;
+    private ServerConfigService<ServerConfig> serverConfigService;
+
+    private String tomcatId;
+    private MailService<Mail> mailService;
+    private String receiver = "yto_yitong1@163.com";
+    /**
+     * 邮件模版
+     */
+    private static String mailContentTemp = "<HTML><HEAD><META HTTP-EQUIV=CONTENT-TYPE CONTENT=\"TEXT/HTML; CHARSET=UTF-8\"><STYLE>.tab-1{padding-left:32px; white-space:pre;}</STYLE><META CONTENT=\"MSHTML 6.00.2900.3492\" NAME=GENERATOR></HEAD>"
+            + "<BODY STYLE=\"BORDER-WIDTH:0; MARGIN:12PX;\"><DIV><DIV STYLE=\"LINE-HEIGHT:1.7;COLOR:#000000;FONT-SIZE:14PX;FONT-FAMILY:ARIAL\">"
+            + "<DIV> ${mailContent}</DIV>"
+            + "<DIV>系统地址：<A HREF=\"http://ec.yto56.net.cn\" TARGET=\"_BLANK\">http://ec.yto56.net.cn</A></DIV>"
+            + "<BR>--------------------------------------------------------------------------------------"
+            + "</BODY></HTML>";
+
+    /**
+     * <p>
+     * Field ediOrderService: 凡客数据对接业务接口
+     * </p>
+     */
+    private EdiOrderService ediOrderService;
+
+    /**
+     * <p>
+     * Field apiLogDao: 日志记录
+     * </p>
+     */
+    private ApiLogDao<ApiLog> apiLogDao;
+
+    /**
+     * <p>
+     * Description: 日志记录
+     * </p>
+     * 
+     * @return the apiLogDao
+     */
+    public ApiLogDao<ApiLog> getApiLogDao() {
+        return this.apiLogDao;
+    }
+
+    /**
+     * <p>
+     * Description: 日志记录
+     * </p>
+     * 
+     * @param apiLogDao the apiLogDao to set
+     */
+    public void setApiLogDao(ApiLogDao<ApiLog> apiLogDao) {
+        this.apiLogDao = apiLogDao;
+    }
+
+    @Override
+    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+
+        if (!running) {
+            logger.error("totb" + Thread.currentThread().getId());
+            running = true;
+            ApiLog log = new ApiLog(); // 日志
+            long startingDate = System.currentTimeMillis();
+            log.setCreateTime(new Date()); // 创建时间
+            log.setLogType("VANCL_SEND_TIMER");
+            try {
+                tomcatId = SystemHelper.TOMCAT_ID;
+                tomcatId="36";
+                if (StringUtils.isEmpty(tomcatId)) {
+                    logger.error("tomcat id is Empty");
+                    running = false;
+                    return;
+                }
+                if (!StringUtils.isNumeric(tomcatId)) {
+                    logger.error("tomcat id is not is Numeric");
+                    running = false;
+                    return;
+                }
+                logger.error("tomcat id:" + tomcatId);
+                ServerConfig serverConfig = serverConfigService.getConfigByServerId(Integer.valueOf(tomcatId));
+                if (serverConfig == null || serverConfig.getServerId() == null) {
+                    logger.error("serverConfig is null");
+                    running = false;
+                    return;
+                }
+
+                // 解析tomcat 对应的flag
+                stringToList(serverConfig.getTaskFlag());
+                logger.error("taskFlag:" + serverConfig.getTaskFlag());
+                // FIXME 时间排序 asc
+                long startTime = System.currentTimeMillis();
+
+                // FIXME error-info
+                logger.error("start time:" + startTime + "," + new Date() + "," + Thread.currentThread().getId());
+
+                taskList = sendTaskToTBService.getSendTaskListByFlagsAndLimit(taskFlags, limit);
+
+   /*              Last modified by Kui.Yang on 2013-10-10 
+                if (this.taskList != null && this.taskList.size() > 0) {
+                    boolean flag = false;
+                    try {
+                        for (SendTaskToTB sendTask : this.taskList) {
+                            if (sendTask != null && "VANCL".equals(sendTask.getClientId())) {
+                                this.taskList.remove(sendTask); // 移除凡客任务记录
+                            }
+                        }
+                        logger.error("VANCl SEND  starting......................");
+                        List<SendTaskToTB> sendList = this.ediOrderService.getSendTask();
+                        if (sendList != null && sendList.size() > 0) {
+                            flag = this.ediOrderService.send(); // 推送订单配送结果至凡客
+                            log.setUsedtime(System.currentTimeMillis() - startingDate); // 接口方法执行时间
+                            log.setDescription("SEND VANCL RESULT:" + flag);
+                            log.setException(false);
+                            this.apiLogDao.insertApiLog(log); // 记录日志信息
+                        }
+                        logger.error("success......................");
+                    } catch (Exception e) {
+                        logger.error("VANCl SEND exceptions message:" + e.getMessage(), e);
+                        log.setException(false);
+                        log.setExceptionMsg(e.getMessage());
+                    } finally {
+                        if (log.isException()) {
+                            log.setUsedtime(System.currentTimeMillis() - startingDate); // 接口方法执行时间
+                            this.apiLogDao.insertApiLog(log); // 记录日志信息
+                        }
+                        logger.info("VANCl synchronous  end......................");
+                    }
+
+                } // end
+*/
+                taskFlags.clear();
+                logger.error("get task list time:" + (System.currentTimeMillis() - startTime) + "," + new Date());
+                logger.error("taskList:" + taskList.size());
+                SendTaskToTB sendTask = new SendTaskToTB();
+                XmlSender xmlSender = new XmlSender();
+                boolean flag = false;
+                for (int i = 0; i < taskList.size(); i++) {
+                    sendTask = taskList.get(i);
+                    if (sendTask != null && "VANCL".equals(sendTask.getClientId())) {
+                       continue; // 如果是凡客，遍历下一条
+                    }
+                    xmlSender.setUrlString(sendTask.getRequestURL());
+                    // 设置请求方法为POST方法.
+                    xmlSender.setRequestMethod(XmlSender.POST_REQUEST_METHOD);
+                    // 设置请求参数.
+                    xmlSender.setRequestParams(sendTask.getRequestParams());
+                    sendTaskToTBService.sendTaskToTB(sendTask, xmlSender);
+
+                }
+                taskList.clear();
+                flag = this.ediOrderService.send();   // VANCL 
+                log.setUsedtime(System.currentTimeMillis() - startingDate); // 接口方法执行时间
+                log.setDescription("SEND VANCL RESULT:" + flag);
+                log.setException(false);
+                this.apiLogDao.insertApiLog(log); // 记录日志信息
+                // FIXME error-info
+                logger.error("end time:" + System.currentTimeMillis() + ",total time"
+                        + (System.currentTimeMillis() - startTime) / 1000 + "," + new Date());
+                running = false;
+                return;
+            } catch (Exception e) {
+                // TODO: handle exception
+                running = false;
+                logger.error("error", e);
+                log.setException(false);
+                log.setExceptionMsg(e.getMessage());
+                StackTraceElement ex = e.getStackTrace()[0];
+                Mail mail = new Mail();
+                mail.setSubject("SendTask2TaobaoTimer出现异常！");
+                mail.setSendToMail(this.receiver);
+                mail.setContent(mailContentTemp.replace("${mailContent}", "Timer监控出现异常！\n异常类型：" + e.getClass()
+                        + "\n异常行数：" + ex.getLineNumber()));
+                mailService.sendMail(mail);
+            }finally{
+                if (log.isException()) {
+                    log.setUsedtime(System.currentTimeMillis() - startingDate); // 接口方法执行时间
+                    this.apiLogDao.insertApiLog(log); // 记录日志信息
+                }
+                logger.info("VANCl synchronous  end......................");
+            }
+        }
+
+    }
+
+    public SendTaskToTBService<SendTask> getSendTaskToTBService() {
+        return sendTaskToTBService;
+    }
+
+    public void setSendTaskToTBService(SendTaskToTBService<SendTask> sendTaskToTBService) {
+        this.sendTaskToTBService = sendTaskToTBService;
+    }
+
+    public ServerConfigService<ServerConfig> getServerConfigService() {
+        return serverConfigService;
+    }
+
+    public void setServerConfigService(ServerConfigService<ServerConfig> serverConfigService) {
+        this.serverConfigService = serverConfigService;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        if (limit == null || limit.intValue() == 0) {
+            limit = DEFAULT_LIMIT;
+        }
+        this.limit = limit;
+    }
+
+    private void stringToList(String string) {
+        if (StringUtils.isEmpty(string)) {
+            return;
+        }
+        String[] strings = StringUtils.split(string, ",");
+        for (String str : strings) {
+            if (StringUtils.isNumeric(str)) {
+                taskFlags.add(Integer.valueOf(str));
+            }
+        }
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public MailService<Mail> getMailService() {
+        return mailService;
+    }
+
+    public void setMailService(MailService<Mail> mailService) {
+        this.mailService = mailService;
+    }
+
+    /**
+     * <p>
+     * Description: 凡客数据对接业务接口
+     * </p>
+     * 
+     * @return the ediOrderService
+     */
+    public EdiOrderService getEdiOrderService() {
+        return this.ediOrderService;
+    }
+
+    /**
+     * <p>
+     * Description: 凡客数据对接业务接口
+     * </p>
+     * 
+     * @param ediOrderService the ediOrderService to set
+     */
+    public void setEdiOrderService(EdiOrderService ediOrderService) {
+        this.ediOrderService = ediOrderService;
+    }
+
+}

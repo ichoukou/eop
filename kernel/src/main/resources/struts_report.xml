@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<package name="searchReport" namespace="/" extends="ssMyBatis">
+
+		<!-- 查询报表ACTION配置 -->
+		<action name="searchReport" class="searchReportAction" method="{1}">
+			<result name="searchReportView" type="tiles">WEB-INF.report/search_report.jsp</result>
+			<result name="json" type="json"></result>
+			<!-- 默认拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+
+	</package>
+</struts>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderLogMapper">
+	<!-- 插入ec_core_order_log表中的记录 -->
+	<insert id="addOrderLog" useGeneratedKeys="false" keyProperty="txLogisticId"
+		parameterType="String">
+		insert into ec_core_order_log (tx_logistic_id,
+		create_time) values (#{txLogisticId}, now())
+	</insert>
+
+	<update id="updateOrderLog" parameterType="orderLog">
+		update
+		ec_core_order_log o set o.payAmount = #{payAmount}, o.payTime =
+		#{payTime}, o.unitId = #{unitId}, o.employeeId = #{employeeId},
+		o.update_time = now(), o.remark = #{remark} where o.tx_logistic_id =
+		#{txLogisticId}
+	</update>
+</mapper>

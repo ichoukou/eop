@@ -1,0 +1,9 @@
+.print_btn{text-align:center;}
+.invoice_preview{width:960px;margin:20px auto;}
+.invoice_preview table{width:100%;border-collapse:collapse;border-spacing:0;}
+.invoice_preview .table_b{border-bottom:2px solid #000;}
+.invoice_preview table td{word-break:break-all;word-break:normal;word-wrap:break-word;font:12px/18px SimSun;padding:7px 5px;border:0 none;}
+.invoice_preview thead th{font:700 20px/1.8 'Microsoft YaHei',SimSun;border-bottom:2px solid #000;}
+.invoice_preview .goods_info td{border-width:2px 0;border-style:solid;border-color:#000;}
+.invoice_preview .goods_detail td{}
+.page_break{display:block;width:100%;border-bottom:2px dashed #ccc;}

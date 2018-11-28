@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderExpressMapper">
+	<resultMap type="orderExpress" id="orderExpressResultMap">
+		<id property="id" column="id" />
+		<result property="orderexpressname" column="orderExpressName" />
+		<result property="shippingmethodid" column="shippingMethodId" />
+		<result property="width" column="width" />
+		<result property="height" column="height" />
+		<result property="templatedata" column="templateData" />
+		<result property="backgroundimageurl" column="backgroundImageUrl" />
+		<result property="sortorder" column="sortOrder" />
+		<result property="status" column="status" />
+		<result property="createtime" column="createTime" />
+		<result property="updatetime" column="updateTime" />
+		<result property="version" column="version" />
+		<result property="storeid" column="storeId" />
+	</resultMap>
+	
+	<select id="getOrderExpressList" resultType="list"
+		resultMap="orderExpressResultMap">
+		select *
+		from ec_core_order_express t 
+		<where>
+			<if test="storeId != null">
+				AND storeId =#{storeId}
+			</if>
+			<if test="status != null">
+				AND status =#{status}
+			</if>
+		</where>
+		order by updateTime DESC
+		<!--  
+		<where>
+		</where>
+			<if test='startIndex != null and pageNum != null'>
+				limit #{startIndex}, #{pageNum}
+			</if>
+		-->
+	</select>
+	
+	<!-- 插入 自动生成ID -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="orderExpress">
+		insert into ec_core_order_express (
+			
+			orderExpressName
+			,shippingMethodId
+			,width
+			,height
+			,templateData
+			,backgroundImageUrl
+			,sortOrder
+			,status
+			,createTime
+			,updateTime
+			,version
+			,storeId
+		) values (
+			
+			#{orderexpressname}
+			,#{shippingmethodid}
+			,#{width}
+			,#{height}
+			,#{templatedata}
+			,#{backgroundimageurl}
+			,#{sortorder}
+			,#{status}
+			,#{createtime}
+			,now()
+			,#{version}
+			,#{storeid}
+		)
+	</insert>
+	
+	<!--抓取单个对象-->
+	<select id="get" parameterType="integer" resultType="orderExpress" resultMap="orderExpressResultMap">
+    	select * from ec_core_order_express
+    	where id = #{id}
+	</select>
+	
+	<!--修改-->
+	<update id="edit" parameterType="orderExpress">
+		update ec_core_order_express 
+		set 
+			
+			orderExpressName = #{orderexpressname}
+			,shippingMethodId = #{shippingmethodid}
+			,width = #{width}
+			,height = #{height}
+			,templateData = #{templatedata}
+			,backgroundImageUrl = #{backgroundimageurl}
+			,sortOrder = #{sortorder}
+			,status = #{status}
+			,createTime = #{createtime}
+			,updateTime = now()
+			,version = #{version}
+			,storeId = #{storeid}
+		where id = #{id}
+	</update>
+	
+	<!--物理删除-->
+	<delete id="remove" parameterType="integer">
+		delete from ec_core_order_express where id = #{id}
+	</delete>
+	
+	<!-- 分页查询start -->
+		<!--查询数据-->
+	<select id="getPageList" parameterType="Map" resultType="list" resultMap="orderExpressResultMap">
+		<![CDATA[
+			select * from ec_core_order_express
+			LIMIT #{start}, #{limit}
+		]]> 
+		
+	</select>
+		<!--查询数量-->
+	<select id="getTotal" parameterType="Map" resultType="integer">
+		<![CDATA[
+			select count(id) from ec_core_order_express
+		]]>
+	</select>
+	<!-- 分页查询end -->
+	
+	<select id="getAll" parameterType="Map" resultType="list" resultMap="orderExpressResultMap">
+		<![CDATA[
+			select * from ec_core_order_express
+		]]>
+	</select>
+	
+	
+	<select id="getOrderExpressByStoreId" parameterType="Map"  resultType="list" resultMap="orderExpressResultMap">
+		select * from ec_core_order_express  WHERE storeId =#{storeid}
+	</select>	
+	
+	<!-- 根据storeIds获取面单打印模版 -->
+	<select id="getOrderExpressByStoreIds" parameterType="Map" resultType="list" resultMap="orderExpressResultMap">
+    	select * from ec_core_order_express
+    	WHERE storeId IN    
+    	<foreach collection="storeIds" item="storeId" open="(" separator="," close=")" >
+			#{storeId}
+		</foreach>	
+		order by updateTime DESC
+	</select>
+</mapper>

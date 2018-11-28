@@ -1,0 +1,1153 @@
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:48:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:48:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:48:03  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:03  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE user_name = BINARY(?) AND user_password = ? 
+2013-07-10 09:48:03  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 4QrcOUm6Wau+VuBX8g+IPg==(String)
+2013-07-10 09:48:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:48:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:48:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:48:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:48:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:48:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:48:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:48:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:48:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:48:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:48:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:48:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND relational_query=? AND type=? 
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 1(String), 1(String)
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE id = ? 
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer)
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: insert into EC_CORE_STATS_MESSAGE(id,stats_type, stats_reason, remark,login_time,logout_time,user_id) values(?, ?, ?, ?, ?, ?, ?) 
+2013-07-10 09:48:09  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 0(String), net.ytoec.kernel.dataobject.User@147(String), 220029:登录系统,ip:127.0.0.1,ip:127.0.0.1,ip:127.0.0.1(String), 2013-07-10 09:48:09.58(Timestamp), null, 327(Integer)
+2013-07-10 09:48:12  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:12  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: UPDATE EC_CORE_USER SET parentId=?, user_name=?, user_password=?, tele_phone=?, mobile_phone=?, address_province=?, address_city=?, address_district=?, address_street=?, sex=?, shop_name=?, shop_account=?, mail=?, card_type=?, card_no=?, user_type=?, user_source=?, user_state=?, user_level=?, create_user=?, update_time=now(), remark=?, site=?, user_name_text=?, user_code = ?, login_time = ?, taobao_encode_key = ?, field001 = ?, field002 = ?, field003 = ?, binded_customer_id = ?, client_id = ? ,child_type = ? WHERE id = ? 
+2013-07-10 09:48:12  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: null, 220029(String), 4QrcOUm6Wau+VuBX8g+IPg==(String), 022-25878792(String), 13920416887(String), 天津(String), 天津市(String), 滨海新区(String), 新河幸福楼5-6栋之间(String), M(String), null, null, 303914052@qq.com(String), 1(String), null, 2(String), null, 1(String), null, null, null, 220029(String), 天津市塘沽区分公司(String), 220029(String), 2013-07-10 09:48:09.58(Timestamp), 327(String), 120000(String), ,ODcx,bmk2,MTk4(String), null, null, null, null, 327(Integer)
+2013-07-10 09:48:12  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:12  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:12  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:48:13  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:48:16  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:16  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER U WHERE U.PARENTID = ? order by u.login_time desc 
+2013-07-10 09:48:16  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer)
+2013-07-10 09:48:16  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:16  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE user_state= ? and site_code = ? order by cteate_time desc 
+2013-07-10 09:48:16  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 1(String), 220029(String)
+2013-07-10 09:48:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_column where column_code = ? 
+2013-07-10 09:48:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: yitong_01(String)
+2013-07-10 09:48:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_article WHERE column_id = ? and reader_type in(?,'0') ORDER BY seq asc,create_time desc limit ? 
+2013-07-10 09:48:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 34(Integer), 2(String), 6(Integer)
+2013-07-10 09:48:20  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:20  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:48:20  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:48:20  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:20  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:48:20  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND binded_user_name=? AND type=? 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 220029(String), 3(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-06-30(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-01(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-02(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-03(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-04(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-05(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-06(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-07(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-08(String)
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-07-10 09:48:21  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 327(Integer), 2013-07-09(String)
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:49:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:49:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:49:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:49:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:49:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:49:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:49:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:49:14  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:14  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD_CONTRACT_AREA WHERE add_userName = ? AND account_type = ? 
+2013-07-10 09:49:14  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 2(String)
+2013-07-10 09:49:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE site_code = ? and user_state=1 
+2013-07-10 09:49:19  DEBUG [3891820@qtp-27652339-3] (Slf4jImpl.java:28) - ==> Parameters: 220029(String)
+2013-07-10 09:49:20  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:20  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:49:20  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:49:20  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:49:20  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:49:20  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:50:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:50:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND binded_user_name=? AND type=? 
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 220029(String), 2(String)
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD_CONTRACT_AREA WHERE add_userName = ? AND account_type = ? 
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 2(String)
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE site_code = ? and user_state=1 
+2013-07-10 09:50:08  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String)
+2013-07-10 09:50:09  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:09  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND type=? 
+2013-07-10 09:50:09  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 4(String)
+2013-07-10 09:50:12  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:12  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:50:12  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:50:12  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:12  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:50:12  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:50:29  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:29  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD_CONTRACT_AREA WHERE add_userName = ? AND account_type = ? 
+2013-07-10 09:50:29  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 2(String)
+2013-07-10 09:50:29  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:29  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE site_code = ? and user_state=1 
+2013-07-10 09:50:29  DEBUG [10813382@qtp-27652339-4] (Slf4jImpl.java:28) - ==> Parameters: 220029(String)
+2013-07-10 09:50:29  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:29  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:50:29  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:50:29  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:29  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:50:29  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:50:46  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:46  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD_CONTRACT_AREA WHERE add_userName = ? AND account_type = ? 
+2013-07-10 09:50:46  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 2(String)
+2013-07-10 09:50:46  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:46  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE site_code = ? and user_state=1 
+2013-07-10 09:50:46  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==> Parameters: 220029(String)
+2013-07-10 09:50:47  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:47  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:50:47  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:50:47  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:47  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:50:47  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD_CONTRACT_AREA WHERE add_userName = ? AND account_type = ? 
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 2(String)
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE site_code = ? and user_state=1 
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String)
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND type=? 
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 4(String)
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:50:49  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD_CONTRACT_AREA WHERE add_userName = ? AND account_type = ? 
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 2(String)
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE site_code = ? and user_state=1 
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String)
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:50:50  DEBUG [4061820@qtp-27652339-6] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:51:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:51:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:51:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:51:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:51:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:51:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:51:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:52:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:52:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:53:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:53:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:53:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:53:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:53:50  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:50  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:53:50  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:53:50  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:53:50  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:53:50  DEBUG [16881106@qtp-27652339-5] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:54:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:54:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:54:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:54:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:54:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:54:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:54:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:54:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:54:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:54:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:55:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:55:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:55:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:55:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:55:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:55:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:55:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:55:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:55:14  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:14  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:55:14  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:55:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:55:18  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:18  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:55:18  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:55:19  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:56:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:56:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:56:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:56:10  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:56:11  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:56:15  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:15  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:56:15  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:56:15  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:56:15  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:56:15  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:57:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:57:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:57:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:57:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:57:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:58:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:58:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:58:08  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:58:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:58:09  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:58:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:58:12  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:58:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:58:17  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:58:27  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:27  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:58:27  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:58:27  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:27  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:58:27  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:58:29  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:29  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:58:29  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:58:29  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:29  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:58:29  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:58:50  DEBUG [16755253@qtp-27652339-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:50  DEBUG [16755253@qtp-27652339-8] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 09:58:50  DEBUG [16755253@qtp-27652339-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 09:58:50  DEBUG [16755253@qtp-27652339-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:58:50  DEBUG [16755253@qtp-27652339-8] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 09:58:50  DEBUG [16755253@qtp-27652339-8] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:59:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:59:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:59:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 09:59:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:59:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 09:59:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:59:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 09:59:06  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 09:59:07  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-6] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:00:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:00:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:00:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:00:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:00:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:03:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:03:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:03:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:03:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 10:03:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:03:50  DEBUG [12455534@qtp-27652339-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:50  DEBUG [12455534@qtp-27652339-9] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-07-10 10:03:50  DEBUG [12455534@qtp-27652339-9] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 327(Integer)
+2013-07-10 10:03:50  DEBUG [12455534@qtp-27652339-9] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:03:50  DEBUG [12455534@qtp-27652339-9] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-07-10 10:03:50  DEBUG [12455534@qtp-27652339-9] (Slf4jImpl.java:28) - ==> Parameters: 220029(String), 0(String), 2(String), 2013-07-01 00:00:00.0(Timestamp), 2013-07-11 00:00:00.0(Timestamp), 0(String)
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:04:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:04:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:04:03  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 10:04:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-10] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22000014(String)
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:05:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K10000903(String)
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:05:01  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K57150551(String)
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:05:02  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:05:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: SELECT count(*) FROM zebra_surfacebill where current_user_no = ? and is_use = 0 
+2013-07-10 10:05:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:05:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-07-10 10:05:04  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: K22002904(String)
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set warn_state=? where customer_code=? 
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_phone_state=? where customer_code=? 
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==>  Executing: update zebra_forewarn set send_mail_state=? where customer_code=? 
+2013-07-10 10:05:05  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-1] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), K22002904(String)
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select count(t2.partern_id) from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: select t2.* from ec_core_userthread t1, zebra_partern t2 where t1.user_code=t2.customer_code limit ?, ? 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 1000(Integer)
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT MAX(version_no) FROM zebra_surfacebill where current_user_no = ? 
+2013-07-10 10:06:00  DEBUG [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-4] (Slf4jImpl.java:28) - ==> Parameters: K22000014(String)

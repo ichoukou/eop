@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+	<!-- 占位符 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		lazy-init="false">
+		<property name="locations">
+			<list>
+				<value>classpath:kernel.dev.properties</value>
+				<value>classpath:kernel.properties</value>
+				<value>classpath:kernel.test.properties</value>
+				<value>classpath:kernel.prod.properties</value>
+				<value>classpath:ytoxlMail.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+
+	<!-- 配置DataSource数据源 -->
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
+		<property name="maxStatements" value="${jdbc.maxStatements}" />
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
+		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" />
+		<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}" />
+		<property name="breakAfterAcquireFailure" value="${jdbc.breakAfterAcquireFailure}" />
+		<property name="testConnectionOnCheckout" value="${jdbc.testConnectionOnCheckout}" />
+	</bean>
+
+
+	<!-- 配置SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="typeAliasesPackage" value="net.ytoec,com.ytoec" />
+	</bean>
+
+
+
+
+	<!-- 配置事务管理器，注意这里的dataSource和SqlSessionFactoryBean的dataSource要一致，不然事务就没有作用了 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="edit*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<!--<bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+		<property name="mapperInterface" value="net.ytoec.kernel.mapper.AccountMapper" 
+		/> <property name="sqlSessionFactory" ref="sqlSessionFactory" /> </bean> -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="net.ytoec,com.ytoec" />
+		<property name="markerInterface" value="net.ytoec.kernel.mapper.base.SqlMapper" />
+	</bean>
+
+	<!-- 注解扫描 -->
+	<context:component-scan base-package="net.ytoec,com.ytoec" />
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 订单批量操作 wangmindong start -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 订单批量操作 wangmindong end -->
+
+
+
+	<bean id="resource" class="net.ytoec.kernel.common.Resource">
+		<property name="channelService" ref="channelServiceImpl" />
+		<property name="configCodeService" ref="configCodeServiceImpl" />
+		<property name="userService" ref="userServiceImpl" />
+		<property name="userCustomService" ref="userCustomServiceImpl" />
+		<property name="regionService" ref="regionServiceImpl" />
+		<property name="userRelationService" ref="userRelationServiceImpl" />
+		<property name="otherProvinces">
+			<map>
+				<entry key="${province1.id}" value="${province1.name}" />
+				<entry key="${province2.id}" value="${province2.name}" />
+				<entry key="${province3.id}" value="${province3.name}" />
+				<!-- <entry key="${province4.id}" value="${province4.name}" /> -->
+				<!-- <entry key="${province5.id}" value="${province5.name}" /> -->
+				<!-- <entry key="${province6.id}" value="${province6.name}" /> -->
+				<!-- <entry key="${province7.id}" value="${province7.name}" /> -->
+			</map>
+		</property>
+		<property name="otherProvincesCH">
+			<map>
+				<entry key="${province1.name}" value="${province1.id}" />
+				<entry key="${province2.name}" value="${province2.id}" />
+				<entry key="${province3.name}" value="${province3.id}" />
+				<entry key="${province4.name}" value="${province4.id}" />
+				<entry key="${province5.name}" value="${province5.id}" />
+				<entry key="${province6.name}" value="${province6.id}" />
+				<entry key="${province7.name}" value="${province7.id}" />
+				<entry key="${province8.name}" value="${province8.id}" />
+				<entry key="${province9.name}" value="${province9.id}" />
+				<entry key="${province10.name}" value="${province10.id}" />
+				<entry key="${province11.name}" value="${province11.id}" />
+				<entry key="${province12.name}" value="${province12.id}" />
+				<entry key="${province13.name}" value="${province13.id}" />
+				<entry key="${province14.name}" value="${province14.id}" />
+				<entry key="${province15.name}" value="${province15.id}" />
+				<entry key="${province16.name}" value="${province16.id}" />
+				<entry key="${province17.name}" value="${province17.id}" />
+				<entry key="${province18.name}" value="${province18.id}" />
+				<entry key="${province19.name}" value="${province19.id}" />
+				<entry key="${province20.name}" value="${province20.id}" />
+				<entry key="${province21.name}" value="${province21.id}" />
+				<entry key="${province22.name}" value="${province22.id}" />
+				<entry key="${province23.name}" value="${province23.id}" />
+				<entry key="${province24.name}" value="${province24.id}" />
+				<entry key="${province25.name}" value="${province25.id}" />
+			</map>
+		</property>
+		<property name="orderProvinces">
+			<map>
+				<entry key="${province.guangdong.guangzhou1}" value="${province.guangdong.guangzhou1}" />
+				<entry key="${province.guangdong.guangzhou2}" value="${province.guangdong.guangzhou2}" />
+				<entry key="${province.guangdong.dongguan1}" value="${province.guangdong.dongguan1}" />
+				<entry key="${province.guangdong.dongguan2}" value="${province.guangdong.dongguan2}" />
+				<entry key="${province.guangdong.shenzhen1}" value="${province.guangdong.shenzhen1}" />
+				<entry key="${province.guangdong.shenzhen2}" value="${province.guangdong.shenzhen2}" />
+				<entry key="${province.guangdong.zhuhai1}" value="${province.guangdong.zhuhai1}" />
+				<entry key="${province.guangdong.zhuhai2}" value="${province.guangdong.zhuhai2}" />
+				<entry key="${province.guangdong.foshan1}" value="${province.guangdong.foshan1}" />
+				<entry key="${province.guangdong.foshan2}" value="${province.guangdong.foshan2}" />
+				<entry key="${province.guangdong.jiangmen1}" value="${province.guangdong.jiangmen1}" />
+				<entry key="${province.guangdong.jiangmen2}" value="${province.guangdong.jiangmen2}" />
+				<entry key="${province.guangdong.zhongshan1}" value="${province.guangdong.zhongshan1}" />
+				<entry key="${province.guangdong.zhongshan2}" value="${province.guangdong.zhongshan2}" />
+				<entry key="${province.guangdong.huizhou1}" value="${province.guangdong.huizhou1}" />
+				<entry key="${province.guangdong.huizhou2}" value="${province.guangdong.huizhou2}" />
+				<entry key="${province.guangdong.zhaoqing1}" value="${province.guangdong.zhaoqing1}" />
+				<entry key="${province.guangdong.zhaoqing2}" value="${province.guangdong.zhaoqing2}" />
+			</map>
+		</property>
+	</bean>
+
+
+
+
+	<bean id="oracleJDBC" class="net.ytoec.kernel.util.JDBCUtilSingle"
+		factory-method="getInstance">
+		<property name="url" value="${jdbc.connect.url}" />
+		<property name="password" value="${jdbc.connect.username}" />
+		<property name="username" value="${jdbc.connect.password}" />
+	</bean>
+
+	<bean id="orderOracleJDBC" class="net.ytoec.kernel.util.OrderJDBCUtilSingle"
+		factory-method="getInstance">
+		<property name="url" value="${order.jdbc.connect.url}" />
+		<property name="password" value="${order.jdbc.connect.password}" />
+		<property name="username" value="${order.jdbc.connect.username}" />
+	</bean>
+
+	<bean id="orderStatusOracleJDBC" class="net.ytoec.kernel.util.OrderStatusJDBCUtilSingle"
+		factory-method="getInstance">
+		<property name="url" value="${orderstatus.jdbc.connect.url}" />
+		<property name="password" value="${orderstatus.jdbc.connect.password}" />
+		<property name="username" value="${orderstatus.jdbc.connect.username}" />
+	</bean>
+
+	<bean id="configUtil" class="net.ytoec.kernel.util.ConfigUtilSingle"
+		factory-method="getInstance">
+		<property name="solrBranchUrl" value="${solr.branch.url}" />
+		<property name="solrEccoreUrl" value="${solr.eccore.url}" />
+		<property name="TOP_APPKEY" value="${top_appkey}" />
+		<property name="TOP_SECRET" value="${top_secret}" />
+		<property name="OFFICALURL" value="${officalurl}" />
+		<property name="LOGOFF_URL" value="${logoff_url}" />
+		<property name="TAOBAOFUWU_URL" value="${taobaofuwu_url}" />
+		<property name="TAOBAOUSERMETHOD" value="${taobao_user_method}" />
+		<property name="FORMAT_XML" value="${format_xml}" />
+		<property name="FORMAT_JSON" value="${format_json}" />
+		<property name="TAOBAO_USER_ENCRYPTEDID" value="${taobao_user_encryptedid}" />
+		<property name="PARTERID_TAOBAO" value="${parterid_taobao}" />
+		<property name="PARTERID_COMMON" value="${parterid_common}" />
+		<property name="PARTERID_HR" value="${parterid_hr}" />
+		<property name="COOKIE_EXPIRY_WEEK" value="${cookie_expiry_week}" />
+		<property name="COOKIE_ENCODE_KEY" value="${cookie_encode_key}" />
+		<property name="SIGN_METHOD_MD5" value="${sign_method_md5}" />
+		<property name="questionnaireIssue" value="${questionnaire.table.issue}" />
+		<property name="questionnaireIssuedeal" value="${questionnaire.table.issuedeal}" />
+		<property name="questionnairePeriod" value="${questionnaire.timer.period}" />
+		<property name="questionnaireFile" value="questionnaire.table.persistence" />
+		<property name="forbidBuyer" value="${forbid_buyer}" />
+		<property name="testBuyerName" value="${test_buyer_name}" />
+		<property name="CONTRALSYNCHRONIZED" value="${CONTRALSYNCHRONIZED}" />
+		<property name="TAOBAO_MEMBER_ZIP_URL" value="${TAOBAO_MEMBER_ZIP_URL}" />
+		<property name="TAOBAO_MEMBER_UNZIP_URL" value="${TAOBAO_MEMBER_UNZIP_URL}" />
+		<property name="ALIPAY_PARTNER" value="${alipay_partner}" />
+		<property name="ALIPAY_KEY" value="${alipay_key}" />
+		<property name="ALIPAY_SELLER_EMAIL" value="${alipay_seller_email}" />
+		<property name="NOTIFY_URL" value="${notify_url}" />
+		<property name="RETURN_URL" value="${return_url}" />
+		<property name="ALIPAY_INPUT_CHARSET" value="${alipay_input_charset}" />
+		<property name="performanceLimt" value="${performanceLimt}" />
+		<property name="SELLER_USERNAME" value="${seller}" />
+		<property name="BRANCH_USERNAME" value="${branch}" />
+
+		<property name="EMAY_SOFTWARESERIALNO" value="${emay_softwareSerialNo}" />
+		<property name="EMAY_KEY" value="${emay_key}" />
+		<property name="EMAY_PASSOWRD" value="${emay_passowrd}" />
+
+		<property name="GEN_NUM_SERVICE_URL" value="${gen_num_service_url}" />
+		<property name="version" value="${file_version}" />
+		<property name="emailListString" value="${email_list_str}"></property>
+		<property name="freeAgingTime" value="${free_aging_time}"></property>
+
+	</bean>
+
+	<bean id="cookie" class="net.ytoec.kernel.action.common.CookieAction"
+		factory-method="getInstance">
+	</bean>
+
+	<!-- 性能测试使用 -->
+	<!-- <bean id="performanceMonitor" class="net.ytoec.kernel.interceptor.PerfInterceptor" 
+		/> <aop:config> <aop:pointcut id="allServiceMethods" expression="execution(* 
+		net.ytoec.kernel.service.impl.*.*(..)) or execution(* net.ytoec.kernel.search.service.impl.*.*(..)) 
+		or execution(* net.ytoec.kernel.mapper.*.*(..))" /> <aop:advisor pointcut-ref="allServiceMethods" 
+		advice-ref="performanceMonitor" order="2" /> </aop:config> -->
+
+	<!-- 短信发送注册begin -->
+	<bean id="SMSSender" class="net.ytoec.kernel.techcenter.api.SMSSender">
+		<property name="SMSObjectService" ref="SMSObjectServiceImpl" />
+		<property name="SMSDeliverService" ref="SMSDeliverServiceImpl" />
+		<property name="dredgeServiceService" ref="dredgeServiceServiceImpl" />
+		<property name="SMSHistoryInfoService" ref="sMSHistoryInfoServiceImpl" />
+		<property name="SMSOtherWaitService" ref="sMSOtherWaitServiceImpl" />
+	</bean>
+
+	<!-- 短信发送注册end -->
+
+
+	<!-- user信息缓存定时更新定时器 -->
+
+	<bean id="paramTimer" class="net.ytoec.kernel.timer.ParamTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver" value="lilongyong@ytoxl.com;liuchunyan@ytoxl.com" />
+		<property name="userService" ref="userServiceImpl" />
+	</bean>
+
+	<bean id="paramTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 1秒开始执行任务 -->
+		<property name="delay" value="1000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="1728000000" />
+		<property name="timerTask" ref="paramTimer" />
+	</bean>
+
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref bean="paramTask" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

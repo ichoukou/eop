@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.MessageMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Message" id="messageResultMap">
+		<id property="id" column="id"/>
+		<result property="messageTheme" column="message_theme"/>
+		<result property="sendWay" column="send_way"/>
+		<result property="messageType" column="message_type"/>
+		<result property="sendUser" column="send_user"/>
+		<result property="receiveUser" column="receive_user"/>
+		<result property="sendUserId" column="send_user_id"/>
+		<result property="messageContent" column="message_content"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.Message" id="messageBeanResultMap">
+		<id property="id" column="id"/>
+		<result property="messageTheme" column="message_theme"/>
+		<result property="sendWay" column="send_way"/>
+		<result property="messageType" column="message_type"/>
+		<result property="sendUser" column="send_user"/>
+		<result property="receiveUser" column="receive_user"/>
+		<result property="sendUserId" column="send_user_id"/>
+		<result property="messageContent" column="message_content"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="messageStatus" column="message_status"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="message" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+		insert into EC_CORE_MESSAGE(id, message_theme, send_way, message_type, send_user, receive_user, send_user_id, message_content, update_time)
+		values(#{id}, #{messageTheme}, #{sendWay}, #{messageType}, #{sendUser}, #{receiveUser}, #{sendUserId}, #{messageContent}, now())
+		]]>
+<!-- 		<selectKey resultType="java.lang.Integer" keyProperty="id" statementType="STATEMENT" order="AFTER"> -->
+<!--         	<![CDATA[ select LAST_INSERT_ID() ]]> -->
+<!--     	</selectKey> -->
+	</insert>
+	
+	<!-- 消息有回复后更新时间 -->
+	<update id="updateMessage" parameterType="message">
+		update EC_CORE_MESSAGE
+		set message_theme = #{messageTheme},
+		message_content = #{messageContent},
+		update_time = now()
+		where id = #{id}
+	</update>
+	
+	<delete id="remove" parameterType="integer">
+		DELETE FROM EC_CORE_MESSAGE
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- messageResultMap是message-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="message" resultType="net.ytoec.kernel.dataobject.Message" resultMap="messageResultMap">
+		<![CDATA[
+			select * from EC_CORE_MESSAGE t where t.id = #{id}
+        ]]>
+	</select>
+	
+	<!-- 卖家：根据消息状态、收件人、发件人获取消息列表（支持分页） -->
+	<select id="getSellerMessageListByMap" parameterType="java.util.Map" resultType="list" resultMap="messageBeanResultMap">
+		select t.*,o.message_status from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id=#{userId}
+		<!-- 
+			所有消息 ：发件人或者收件人为当前用户的所有消息；
+			注：如果卖家没有激活，用户没有用户编码，则同时应该获取send_user_id为当前用户id的消息。
+			receiveUser、sendUser卖家用户编码；sendUserId卖家id
+		-->
+		<if test="classify == 0">
+			<if test="receiveUser != null or sendUser != null or sendUserId != null">
+				and (t.receive_user=#{receiveUser} or t.receive_user=#{userId} or t.send_user=#{sendUser} or t.send_user_id=#{sendUserId})
+			</if>
+		</if>
+		<!-- 
+			管理员：发件人为管理员、收件人为当前用户的管理员发的消息
+			receiveUser卖家用户编码
+		-->
+		<if test="classify == 1">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=3
+			</if>
+		</if>
+		<!-- 
+			系统消息：收件人为当前用户的系统消息
+			receiveUser卖家主账号id
+		-->
+		<if test="classify == 2">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=4
+			</if>
+		</if>
+		<!-- 
+			其他消息：发件人为网点、收件人为当前用户的网点发的消息    或者    发件人为当前卖家自己发的消息.
+			注：如果卖家没有激活，用户没有用户编码，则同时应该获取send_user_id为当前用户id的消息。 
+			receiveUser卖家用户编码；sendUserId卖家id
+		-->
+		<if test="classify == 3">
+			<if test="(receiveUser != null or sendUserId != null)">
+				and ((t.receive_user=#{receiveUser} and t.message_type=2) or ((t.send_user=#{receiveUser} or t.send_user_id=#{sendUserId}) and t.message_type=1))
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc 
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 卖家：根据消息状态、收件人、发件人统计消息列表数目 -->
+	<select id="countSellerMessageListByMap" parameterType="java.util.Map" resultType="int">
+		select count(t.id) from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id=#{userId}
+				<!-- 
+			所有消息 ：发件人或者收件人为当前用户的所有消息；
+			注：如果卖家没有激活，用户没有用户编码，则同时应该获取send_user_id为当前用户id的消息。
+			receiveUser、sendUser卖家用户编码；sendUserId卖家id
+		-->
+		<if test="classify == 0">
+			<if test="receiveUser != null or sendUser != null or sendUserId != null">
+				and (t.receive_user=#{receiveUser} or t.receive_user=#{userId} or t.send_user=#{sendUser} or t.send_user_id=#{sendUserId})
+			</if>
+		</if>
+		<!-- 
+			管理员：发件人为管理员、收件人为当前用户的管理员发的消息
+			receiveUser卖家主账号id
+		-->
+		<if test="classify == 1">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=3
+			</if>
+		</if>
+		<!-- 
+			系统消息：收件人为当前用户的系统消息
+			receiveUser卖家用户编码
+		-->
+		<if test="classify == 2">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=4
+			</if>
+		</if>
+		<!-- 
+			其他消息：发件人为网点、收件人为当前用户的网点发的消息    或者    发件人为当前卖家自己发的消息.
+			注：如果卖家没有激活，用户没有用户编码，则同时应该获取send_user_id为当前用户id的消息。 
+			receiveUser卖家用户编码；sendUserId卖家id
+		-->
+		<if test="classify == 3">
+			<if test="(receiveUser != null or sendUserId != null)">
+				and ((t.receive_user=#{receiveUser} and t.message_type=2) or ((t.send_user=#{receiveUser} or t.send_user_id=#{sendUserId}) and t.message_type=1))
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc 
+	</select>
+	
+	<!-- 网点：根据消息状态、收件人、发件人获取消息列表（支持分页） -->
+	<select id="getSiteMessageListByMap" parameterType="java.util.Map" resultType="list" resultMap="messageBeanResultMap">
+		select t.*,o.message_status from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id=#{userId}
+		<!-- 
+			所有消息 ：发件人或者收件人为当前用户的所有消息；注意：子账号查询时取主账号的Id查询
+			receiveUser、sendUser网点主账号用户id
+		-->
+		<if test="classify == 0">
+			<if test="receiveUser != null and sendUser != null">
+				and (t.receive_user=#{receiveUser} or t.send_user=#{sendUser})
+			</if>
+		</if>
+		<!-- 
+			管理员：发件人为管理员、收件人为当前用户的管理员发的消息； 
+			receiveUser网点主账号用户id
+		-->
+		<if test="classify == 1">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=3
+			</if>
+		</if>
+		<!-- 
+			系统消息：收件人为当前用户的系统消息
+			receiveUser网点主账号用户id
+		-->
+		<if test="classify == 2">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=4
+			</if>
+		</if>
+		<!-- 
+			其他消息：发件人为卖家、收件人为当前用户的卖家发的消息    或者    发件人为当前卖家自己发的消息.
+			receiveUser、sendUser网点主账号id
+		-->
+		<if test="classify == 3">
+			<if test="receiveUser != null or sendUser != null">
+				and ((t.receive_user=#{receiveUser} and t.message_type=1) or (t.send_user=#{sendUser} and t.message_type=2))
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 网点：根据消息状态、收件人、发件人统计消息列表 -->
+	<select id="countSiteMessageListByMap" parameterType="java.util.Map" resultType="int">
+		select count(t.id) from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id=#{userId}
+		<!-- 
+			所有消息 ：发件人或者收件人为当前用户的所有消息；注意：子账号查询时取主账号的Id查询
+			receiveUser、sendUser网点主账号用户id
+		-->
+		<if test="classify == 0">
+			<if test="receiveUser != null and sendUser != null">
+				and (t.receive_user=#{receiveUser} or t.send_user=#{sendUser})
+			</if>
+		</if>
+		<!-- 
+			管理员：发件人为管理员、收件人为当前用户的管理员发的消息； 
+			receiveUser网点主账号用户id
+		-->
+		<if test="classify == 1">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=3
+			</if>
+		</if>
+		<!-- 
+			系统消息：收件人为当前用户的系统消息
+			receiveUser网点主账号用户id
+		-->
+		<if test="classify == 2">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=4
+			</if>
+		</if>
+		<!-- 
+			其他消息：发件人为卖家、收件人为当前用户的卖家发的消息    或者    发件人为当前卖家自己发的消息.
+			receiveUser、sendUser网点主账号id
+		-->
+		<if test="classify == 3">
+			<if test="receiveUser != null or sendUser != null">
+				and ((t.receive_user=#{receiveUser} and t.message_type=1) or (t.send_user=#{sendUser} and t.message_type=2))
+			</if>
+		</if>
+		order by o.message_status asc, t.update_time desc
+	</select>
+	
+	<!-- 管理员：根据消息状态、收件人、发件人获取消息列表（支持分页） -->
+	<select id="getAdminMessageListByMap" parameterType="java.util.Map" resultType="list" resultMap="messageBeanResultMap">
+		select t.*,o.message_status from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id=#{userId}
+		<!-- 
+			所有消息 ：发件人或者收件人为当前用户的所有消息:管理员不需要看系统消息，系统消息用户不能回复；
+			receiveUser、sendUser管理员主账号id
+		-->
+		<if test="classify == 0">
+			<if test="receiveUser != null and sendUser != null">
+				and ((t.receive_user=#{receiveUser} and (t.message_type=1 or t.message_type=2 or t.message_type=5)) or (t.send_user=#{sendUser} and t.message_type=3))
+			</if>
+		</if>
+		<!-- 
+			管理员：发件人为管理员； 
+			sendUser管理员主账号id
+		-->
+		<if test="classify == 1">
+			<if test="sendUser != null">
+				and  t.send_user=#{sendUser} and t.message_type=3
+			</if>
+		</if>
+		<!-- 
+			网点：发件人为网点的消息
+			receiveUser管理员主账号id
+		-->
+		<if test="classify == 2">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=2
+			</if>
+		</if>
+		<!-- 
+			卖家：发件人为卖家的消息
+			receiveUser管理员主账号id
+		-->
+		<if test="classify == 3">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=1
+			</if>
+		</if>
+		<!-- 
+			平台用户：发件人为平台用户的消息
+			receiveUser管理员主账号id
+		-->
+		<if test="classify == 5">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=5
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc 
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 管理员：根据消息状态、收件人、发件人统计消息列表 -->
+	<select id="countAdminMessageListByMap" parameterType="java.util.Map" resultType="int">
+		select count(t.id) from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id=#{userId}
+		<!-- 
+			所有消息 ：发件人或者收件人为当前用户的所有消息:管理员不需要看系统消息，系统消息用户不能回复；
+			receiveUser、sendUser管理员主账号id
+		-->
+		<if test="classify == 0">
+			<if test="receiveUser != null and sendUser != null">
+				and ((t.receive_user=#{receiveUser} and (t.message_type=1 or t.message_type=2 or t.message_type=5)) or (t.send_user=#{sendUser} and t.message_type=3))
+			</if>
+		</if>
+		<!-- 
+			管理员：发件人为管理员； 
+			sendUser管理员主账号id
+		-->
+		<if test="classify == 1">
+			<if test="sendUser != null">
+				and  t.send_user=#{sendUser} and t.message_type=3
+			</if>
+		</if>
+		<!-- 
+			网点：发件人为网点的消息
+			receiveUser管理员主账号id
+		-->
+		<if test="classify == 2">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=2
+			</if>
+		</if>
+		<!-- 
+			卖家：发件人为卖家的消息
+			receiveUser管理员主账号id
+		-->
+		<if test="classify == 3">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=1
+			</if>
+		</if>
+		<!-- 
+			平台用户：发件人为平台用户的消息
+			receiveUser管理员主账号id
+		-->
+		<if test="classify == 5">
+			<if test="receiveUser != null">
+				and t.receive_user=#{receiveUser} and t.message_type=5
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc 
+	</select>
+	
+	<!-- 
+		平台用户：根据消息状态、收件人、发件人获取消息列表（支持分页）:平台用户按“发件箱”、“分仓用户”分类，只获取分仓所发信息（支持分页） ;
+		userId:平台用户id和其所有分仓用户及子账号的id
+	-->
+	<select id="getPlatMessageListByMap" parameterType="java.util.Map" resultType="list" resultMap="messageBeanResultMap">
+		select t.*,o.message_status from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id in
+		<foreach collection="userId" item="userId" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
+		<!-- 
+			平台用户发的消息
+			sendUser平台用户id
+		-->
+		<if test="classify == 0">
+			<if test="sendUser != null">
+				and t.send_user=#{sendUser} and t.message_type=5
+			</if>
+		</if>
+		<!-- 
+			分仓账号所发消息 ：发件人为当前用户的分仓所发的消息
+			sendUser:平台用户的所有分仓用户编码
+			sendUserId:平台用户的所有分仓用户id
+		-->
+		<if test="classify == 1">
+			<if test="sendUser != null">
+				and t.send_user in
+				<foreach collection="sendUser" item="sendUser" open="(" separator="," close=")">
+					#{sendUser}
+				</foreach>
+				and t.message_type=1
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc 
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 
+		平台用户：根据消息状态、收件人、发件人统计消息数目:平台用户按“发件箱”、“分仓用户”分类，只获取分仓所发信息 ;
+		userId:平台用户id和其所有分仓用户及子账号的id
+	-->
+	<select id="countPlatMessageListByMap" parameterType="java.util.Map" resultType="int">
+		select count(t.id) from EC_CORE_MESSAGE t inner join EC_CORE_MESSAGE_USER o on t.id=o.message_id
+		where o.user_id in
+		<foreach collection="userId" item="userId" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
+		<!-- 
+			平台用户发的消息
+			sendUser平台用户id
+		-->
+		<if test="classify == 0">
+			<if test="sendUser != null">
+				and t.send_user=#{sendUser} and t.message_type=5
+			</if>
+		</if>
+		<!-- 
+			分仓账号所发消息 ：发件人为当前用户的分仓所发的消息
+			sendUser:平台用户的所有分仓用户编码
+			sendUserId:平台用户的所有分仓用户id
+		-->
+		<if test="classify == 1">
+			<if test="sendUser != null">
+				and t.send_user in
+				<foreach collection="sendUser" item="sendUser" open="(" separator="," close=")">
+					#{sendUser}
+				</foreach>
+				and t.message_type=1
+			</if>
+		</if>
+		order by o.message_status asc,t.update_time desc 
+	</select>
+
+</mapper>

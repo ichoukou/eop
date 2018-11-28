@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ApplyKdbzMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.ApplyKdbz" id="ApplykdbzResultMap">
+		<id property="id" column="id" />
+		<result property="ecCompanyId" column="ec_company_id" />
+		<result property="logisticProvider" column="logistic_provider" />
+		<result property="customerId" column="customer_id" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="wangwang" column="wang_wang" />
+		<result property="requestNo" column="request_no" />
+		<result property="serviceType" column="service_type" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="mobile" column="mobile" />
+		<result property="address" column="address" />
+		<result property="reason" column="reason" />
+		<result property="vip" column="vip" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	<insert id="add" parameterType="applyKdbz" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_APPLY_KDBZ
+		(update_time,ec_company_id,logistic_provider,customer_id,wang_wang,status,
+		request_no,service_type,name,phone,mobile,address,reason,remark)
+		values
+		(current_timestamp,#{ecCompanyId},#{logisticProvider},#{customerId},#{wangwang},#{status},#{requestNo},
+		#{serviceType},#{name},#{phone},#{mobile},#{address},#{reason},#{remark});
+	</insert>
+	<update id="edit" parameterType="applyKdbz">
+		UPDATE EC_CORE_APPLY_KDBZ
+		SET
+
+		update_time =now(),
+		status = #{status},
+		vip = #{vip}
+		<if test="remark!=null">,remark = #{remark}</if>
+		
+		
+		WHERE request_No= #{requestNo}
+	</update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSObjectMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.SMSObject" id="smsObjResultMap">
+		<id property="id" column="id"/>		
+		<result property="smsType" column="sms_type"/>
+		<result property="sequenceID" column="sequenceID"/>
+		<result property="userId" column="user_id"/>		
+		<result property="createTime" column="create_time"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="deliverTime" column="deliver_time"/>
+		<result property="sendMobile" column="send_mobile"/>
+		<result property="destMobile" column="dest_mobile"/>		
+		<result property="pkTotal" column="Pk_total"/>
+		<result property="messageContent" column="message_content"/>
+		<result property="status" column="status"/>
+		<result property="errorCode" column="error_code"/>
+		<result property="succTotal" column="succ_total"/>
+		<result property="receiveName" column="receive_name"/>	
+		<result property="failTotal" column="fail_total"/>
+		<result property="smsBatchNum" column="smsbatch_num"/>	
+	</resultMap>
+	
+	<insert id="add" parameterType="SMSObject" keyProperty="id" useGeneratedKeys="true">
+		insert into ec_core_paysms
+		(
+		   id, sms_type, sequenceID,user_id, create_time, send_time,deliver_time,send_mobile,dest_mobile,Pk_total,message_content,status,
+		   error_code,succ_total,receive_name,fail_total
+		)
+		values
+		(
+		   #{id}, #{smsType}, #{sequenceID}, #{userId},now(),#{sendTime},#{deliverTime}
+		   ,#{sendMobile}, #{destMobile}, #{pkTotal}
+		   ,#{messageContent},#{status},#{errorCode},#{succTotal},#{receiveName},#{failTotal}
+		)
+	</insert>
+	
+	<delete id="remove" parameterType="SMSObject">
+		delete from ec_core_paysms where id = #{id}
+	</delete>
+	
+	<delete id="removeByLimit" parameterType="int">
+		delete from ec_core_paysms  order by id asc limit #{limit};
+    </delete>
+    
+	<select id="get" parameterType="SMSObject" resultType="SMSObject" resultMap="smsObjResultMap">
+		select * from ec_core_paysms  where id = #{id}
+	</select>
+	
+	
+	<update id="edit" parameterType="SMSObject">
+		update  ec_core_paysms  
+		    set  status = #{status}	  
+		    <if test="smsType != null and smsType != ''">
+				,sms_type = #{smsType}
+			</if>
+			<if test="sequenceID != null and sequenceID != ''">
+				,sequenceID = #{sequenceID}
+			</if>
+			<if test="userId != null and userId != ''">
+				,user_id = #{userId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				,create_time = #{createTime}
+			</if>
+			<if test="sendTime != null and sendTime != ''">
+				,send_time = #{sendTime}
+			</if>
+			<if test="deliverTime != null and deliverTime != ''">
+				,deliver_time = #{deliverTime}
+			</if>
+			<if test="sendMobile != null and sendMobile != ''">
+				,send_mobile = #{sendMobile}
+			</if>
+			<if test="destMobile != null and destMobile != ''">
+				,dest_mobile = #{destMobile}
+			</if>
+			<if test="pkTotal != null and pkTotal != ''">
+				,Pk_total = #{pkTotal}
+			</if>
+			<if test="messageContent != null and messageContent != ''">
+				,message_content = #{messageContent}	 
+			</if>			
+			<if test="errorCode != null and errorCode != ''">
+				,error_code = #{errorCode}	 
+			</if>
+			<if test="succTotal != null and succTotal != ''">
+				,succ_total = #{succTotal}	 
+			</if>			
+			<if test="receiveName != null and receiveName != ''">
+				,receive_name = #{receiveName}	 
+			</if>
+			<if test="failTotal != null and failTotal != ''">
+				,fail_total = #{failTotal}	 
+			</if>
+			<if test="smsBatchNum != null and smsBatchNum != ''">
+				,smsbatch_num = #{smsBatchNum}	 
+			</if>			
+		where id = #{id}
+	</update>
+	
+	<select id="getList" parameterType="map" resultType="list" resultMap="smsObjResultMap">
+		select * from ec_core_paysms  
+		<where>	
+		    <if test="id != null and id != ''">
+				and id = #{id}
+			</if>    
+			<if test="smsType != null and smsType != ''">
+				and sms_type = #{smsType}
+			</if>
+			<if test="sequenceID != null and sequenceID != ''">
+				and sequenceID = #{sequenceID}
+			</if>
+			<if test="userId != null and userId != ''">
+				and user_id = #{userId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				and create_time <![CDATA[<=]]> #{createTime} and status = 88
+			</if>
+			<if test="startTime != null and endTime != null ">
+				and send_time between #{startTime} and #{endTime}
+			</if>
+			<if test="deliverTime != null and deliverTime != ''">
+				and deliver_time = #{deliverTime}
+			</if>
+			<if test="sendMobile != null and sendMobile != ''">
+				and send_mobile = #{sendMobile}
+			</if>
+			<if test="destMobile != null and destMobile != ''">
+				and dest_mobile = #{destMobile}
+			</if>
+			<if test="pkTotal != null and pkTotal != ''">
+				and Pk_total = #{pkTotal}
+			</if>
+			<if test="messageContent != null and messageContent != ''">
+				and message_content = #{messageContent}	 
+			</if>
+			<if test="status != null and status != ''">
+				and status = #{status}	 
+			</if>
+			<if test="errorCode != null and errorCode != ''">
+				and error_code = #{errorCode}	 
+			</if>
+			<if test="succTotal != null and succTotal != ''">
+				and succ_total = #{succTotal}	 
+			</if>			
+			<if test="receiveName != null and receiveName != ''">
+				and receive_name = #{receiveName}	 
+			</if>
+		</where>
+		order by id asc
+		<if test='limit != null'>
+			limit #{limit}
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<!-- 查询短信状态根据批次号 start -->
+	<select id="getStatusList" parameterType="map" resultType="list" resultMap="smsObjResultMap">
+		select * from ec_core_paysms where smsbatch_num !=null or smsbatch_num != '' and date_format(create_time,'%Y-%m-%d')= date_format(NOW(),'%Y-%m-%d') order by id asc
+		<if test='limit != null'>
+			limit #{limit}
+		</if>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<!-- 查询短信状态根据批次号  end  -->
+	
+	<select id="getRecordsCount" parameterType="map" resultType="Integer">
+		select count(id) from ec_core_paysms  
+		<where>	
+		    <if test="id != null and id != ''">
+				and id = #{id}
+			</if>    
+			<if test="smsType != null and smsType != ''">
+				and sms_type = #{smsType}
+			</if>
+			<if test="sequenceID != null and sequenceID != ''">
+				and sequenceID = #{sequenceID}
+			</if>
+			<if test="userId != null and userId != ''">
+				and user_id = #{userId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				and create_time = #{createTime}
+			</if>
+			<if test="startTime != null and endTime != null ">
+				and send_time between #{startTime} and #{endTime}
+			</if>
+			<if test="deliverTime != null and deliverTime != ''">
+				and deliver_time = #{deliverTime}
+			</if>
+			<if test="sendMobile != null and sendMobile != ''">
+				and send_mobile = #{sendMobile}
+			</if>
+			<if test="destMobile != null and destMobile != ''">
+				and dest_mobile = #{destMobile}
+			</if>
+			<if test="pkTotal != null and pkTotal != ''">
+				and Pk_total = #{pkTotal}
+			</if>
+			<if test="messageContent != null and messageContent != ''">
+				and message_content = #{messageContent}	 
+			</if>
+			<if test="status != null and status != ''">
+				and status = #{status}	 
+			</if>
+			<if test="errorCode != null and errorCode != ''">
+				and error_code = #{errorCode}	 
+			</if>
+			<if test="succTotal != null and succTotal != ''">
+				and succ_total = #{succTotal}	 
+			</if>			
+			<if test="receiveName != null and receiveName != ''">
+				and receive_name = #{receiveName}	 
+			</if>
+			<if test="failTotal != null and failTotal != ''">
+				and fail_total = #{failTotal}	 
+			</if>	
+		</where>
+	</select>
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.WarnValueMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.WarnValue" id="warnValueMap">
+		<id property="id" column="id" />
+		<result property="sellerId" column="seller_id" />
+		<result property="destination" column="destination" />
+		<result property="warnValue" column="warn_value" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="extends1" column="extends1" />
+	</resultMap>
+	
+	<insert id="add" parameterType="warnValue" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_warnvalue(id,seller_id,destination,warn_value,create_time,update_time,extends1) 
+		values(#{id},#{sellerId},#{destination},#{warnValue},#{createTime},#{updateTime},#{extends1});	
+	</insert>
+
+	<!--点击修改后保存判断是否重复  -->
+	<select id="get" parameterType="warnValue" resultType="warnValue"
+		resultMap="warnValueMap">
+		select * from ec_core_warnvalue where seller_id=#{sellerId} and destination=#{destination} and warn_value=#{warnValue}
+	</select>
+	
+	<!-- 直接点击添加判断是否重复 -->
+	<select id="getForAdd" parameterType="warnValue" resultType="warnValue"
+		resultMap="warnValueMap">
+		select * from ec_core_warnvalue where seller_id=#{sellerId} and destination=#{destination}
+	</select>
+	
+	<select id="getAllList" parameterType="warnValue" resultType="list" resultMap="warnValueMap">
+		select * from ec_core_warnvalue where seller_id=#{sellerId}
+	</select>
+	<select id="getList" parameterType="warnValue" resultType="list" resultMap="warnValueMap">
+		select * from ec_core_warnvalue where seller_id=#{sellerId}
+			<!-- LIMIT #{begin},#{end}  -->
+	</select>
+	
+	<update id="edit" parameterType="warnValue">
+		update ec_core_warnvalue set destination=#{destination},warn_value=#{warnValue},update_time=#{updateTime}
+		where id=#{id}
+	</update>
+	 
+	<delete id="remove" parameterType="warnValue">
+		delete from ec_core_warnvalue where seller_id=#{sellerId} and destination=#{destination}
+	</delete>
+</mapper>

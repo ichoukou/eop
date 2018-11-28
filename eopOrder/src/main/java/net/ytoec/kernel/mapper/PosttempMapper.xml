@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.PosttempMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Posttemp" id="posttempResultMap">
+		<id property="id" column="id" />
+		<result property="ptName" column="pt_name" />
+		<result property="postinfo" column="postinfo" />
+		<result property="ptType" column="pt_type" />
+		<result property="createUser" column="create_user" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUser" column="update_user" />
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+		<result property="calclateType" column="calclate_type" />
+		<result property="firstWeight" column="first_weight" />
+		
+	</resultMap>
+
+	<select id="get" parameterType="posttemp" resultType="posttemp"
+		resultMap="posttempResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMP
+		WHERE id = #{id}
+	</select>
+
+	<select id="getPosttempByBranchId" parameterType="map" resultType="posttemp"
+		resultMap="posttempResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMP
+		WHERE create_user = #{userId}
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="getPosttempByType" parameterType="string" resultType="list"
+		resultMap="posttempResultMap">
+		SELECT *
+		FROM
+		EC_CORE_POSTTEMP
+		WHERE pt_type = #{ptType} 
+	</select>
+
+	<insert id="add" parameterType="posttemp" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_POSTTEMP
+		(pt_name, postinfo, pt_type, create_user, update_user, update_time, remark,module,calclate_type,first_weight)
+		VALUES(#{ptName}, #{postinfo}, #{ptType}, #{createUser}, #{updateUser}, #{updateTime},#{remark},#{module},#{calclateType},#{firstWeight})
+	</insert>
+
+	<delete id="remove" parameterType="posttemp">
+		DELETE FROM EC_CORE_POSTTEMP
+		WHERE id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="posttemp">
+		UPDATE EC_CORE_POSTTEMP
+		SET
+		pt_name=#{ptName},
+		postinfo=#{postinfo},
+		pt_type=#{ptType},
+		update_user=#{updateUser},
+		update_time=#{updateTime},
+		remark=#{remark},
+		module=#{module},
+		calclate_type=#{calclateType},
+		first_weight=#{firstWeight}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

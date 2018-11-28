@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.UserRelationMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.UserRelation" id="userRelationResultMap">
+		<id property="id" column="id" />
+		<id property="userId" column="user_id" />
+		<id property="relatedUserId" column="related_user_id" />
+		<id property="createTime" column="create_time" />
+		<id property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<insert id="add" parameterType="userRelation">
+		INSERT INTO ec_core_user_relation(id, user_id, related_user_id)
+		VALUES(#{id}, #{userId}, #{relatedUserId})
+	</insert>
+	
+	<delete id="remove" parameterType="userRelation">
+		delete from ec_core_user_relation where id = #{id}
+	</delete>
+	
+	<update id="edit" parameterType="userRelation">
+		UPDATE ec_core_user_relation
+		SET update_time=now()
+		<if test='userId!=null'>
+		,user_id=#{userId}
+		</if>
+        <if test='relatedUserId!=null'>
+		,related_user_id = #{relatedUserId}
+		</if>
+		where id = #{id}
+	</update>
+
+	<select id="get" parameterType="userRelation" resultType="userRelation">
+		SELECT * FROM ec_core_user_relation where id = #{id}
+	</select>
+	
+	<!-- 根据用户id获取该用户所关联的用户 :关联关系是双向关联的 -->
+	<select id="searchByUserId" parameterType="int" resultType="list" resultMap="userRelationResultMap">
+		SELECT * FROM ec_core_user_relation where user_id = #{userId} or related_user_id = #{userId} order by create_time 
+	</select>
+	
+	<!-- 查找两个用户是否存在关联关系：userRelation对象里面必须要有userId和relatedUserId属性的值，分别表示两个关联账户的id -->
+	<select id="searchRelation" parameterType="userRelation" resultType="list" resultMap="userRelationResultMap">
+		SELECT * FROM ec_core_user_relation where (user_id = #{userId} and related_user_id = #{relatedUserId}) 
+		or (user_id = #{relatedUserId} and related_user_id = #{userId})
+	</select>
+	
+	<!-- 取消关联关系:userRelation对象里面必须要有userId和relatedUserId属性的值，分别表示将要取消的两个关联账户的id -->
+	<delete id="cancelRelation" parameterType="userRelation">
+		delete from ec_core_user_relation where (user_id = #{userId} and related_user_id = #{relatedUserId}) 
+		or (user_id = #{relatedUserId} and related_user_id = #{userId})
+	</delete>
+	
+</mapper>

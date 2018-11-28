@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ProductMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Product" id="productResultMap">
+		<id property="id" column="id"/>
+		<result property="itemName" column="item_name"/>
+		<result property="itemNumber" column="item_number"/>
+		<result property="remark" column="remark"/>
+		<result property="orderId" column="order_id"/>
+		<result property="logisticId" column="tx_logistic_id"/>
+		<result property="mailNo" column="mailNo"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="partitionDate" column="partitiondate" />
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="product" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_PRODUCT(id,item_name, item_number, remark, order_id,item_value, tx_logistic_id, mailNo,partitionDate)
+		values(#{id}, #{itemName}, #{itemNumber}, #{remark}, #{orderId},#{itemValue}, #{logisticId}, #{mailNo},sysdate())
+	</insert>
+	
+	<update id="edit" parameterType="product">
+		update EC_CORE_PRODUCT t set
+		t.item_name = #{itemName},
+		t.item_number = #{itemNumber},
+		t.remark = #{remark},
+		t.order_id = #{orderId},
+		t.tx_logistic_id = #{logisticId},
+		t.mailNo = #{mailNo},
+		t.update_time = current_timestamp
+		where t.id = #{id}
+	</update>
+	
+	<!-- productResultMap是product-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="product"
+		resultType="net.ytoec.kernel.dataobject.Product" resultMap="productResultMap">
+		<![CDATA[
+			select t.id, 
+			t.item_name, 
+			t.item_number, 
+			t.remark, 
+			t.order_id, 
+			t.tx_logistic_id, 
+			t.mailNo, 
+			t.create_time, 
+			t.update_time,
+			t.partitiondate 
+			from EC_CORE_PRODUCT t where t.id = #{id}
+        ]]>
+	</select>
+	
+	<select id="getProductListByItemName" parameterType="net.ytoec.kernel.dataobject.Product"
+		resultType="list" resultMap="productResultMap">
+		select t.id, 
+		t.item_name, 
+		t.item_number, 
+		t.remark, 
+		t.order_id, 
+		t.tx_logistic_id, 
+		t.mailNo, 
+		t.create_time, 
+		t.update_time,
+		t.partitiondate  
+		from EC_CORE_PRODUCT t where t.item_name like '%' #{itemName} '%'
+	</select>
+	
+	<select id="getProductListByOrder" parameterType="net.ytoec.kernel.dataobject.Product"
+		resultType="list" resultMap="productResultMap">
+		select t.id, 
+		t.item_name, 
+		t.item_number, 
+		t.remark, 
+		t.order_id, 
+		t.tx_logistic_id, 
+		t.mailNo, 
+		t.create_time, 
+		t.update_time,
+		t.partitiondate  
+		from EC_CORE_PRODUCT t where t.order_id=#{orderId}
+	</select>
+
+	<select id="getAllProduct" resultType="list" resultMap="productResultMap">
+		select t.id, 
+		t.item_name, 
+		t.item_number, 
+		t.remark, 
+		t.order_id, 
+		t.tx_logistic_id, 
+		t.mailNo, 
+		t.create_time, 
+		t.update_time,
+		t.partitiondate 
+		from EC_CORE_PRODUCT t
+	</select>
+
+	<delete id="remove" parameterType="product">
+		delete from EC_CORE_PRODUCT where id = #{id}
+	</delete>
+	
+	<delete id="removeByorderId" parameterType="product">
+		delete from EC_CORE_PRODUCT where order_id = #{orderId}
+	</delete>
+</mapper>

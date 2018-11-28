@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+.page {
+    color: #666666;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 10px 0;
+    float:right;
+}
+.page .total{margin-bottom:5px;}
+.page span{margin:0 0 0 8px; float:left;}
+.total em{font-style:normal; padding:0 3px;}
+.page span a{height:18px;line-height:18px;border:1px solid #e3e3e3;margin:0 1px; padding:0 6px;display:inline-block; text-decoration:none; color:#666; overflow:hidden}
+.page span a.active{border:none; color:#eb6100; font-weight:700;margin:0;}
+.page span a.fail{font-size:12px; color:#ccc;}
+.page span .effective{font-size:12px;}
+b{color: #666666;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    height: 18px;
+    line-height: 18px;
+    margin: 0 1px;
+    overflow: hidden;
+    padding: 0 6px;
+    width: 0;
+}

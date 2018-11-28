@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.RegionMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Region" id="regionResultMap">
+		<id property="id" column="id"/>
+		<result property="regionNumber" column="region_number"/>
+		<result property="regionName" column="region_name"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="remark" column="remark"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="region" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_REGION(id,region_number, region_name, parent_id, remark)
+		values(#{id}, #{regionNumber}, #{regionName}, #{parentId}, #{remark})
+	</insert>
+	
+	<update id="edit" parameterType="region">
+		update EC_CORE_REGION t set
+		t.region_number = #{regionNumber},
+		t.region_name = #{regionName},
+		t.parent_id = #{parentId},
+		t.remark = #{remark},
+		t.update_time = now()
+		where t.id = #{id}
+	</update>
+	
+	<!-- 根据region_name查询region -->
+	<select id="getRegion" parameterType="region" resultType="net.ytoec.kernel.dataobject.Region" resultMap="regionResultMap">
+		select r.id,r.region_name from ec_core_region r where r.region_name = #{regionName}
+	</select>
+
+	<select id="get" parameterType="region"
+		resultType="net.ytoec.kernel.dataobject.Region" resultMap="regionResultMap">
+		<![CDATA[
+			select t.id, 
+			t.region_number, 
+			t.region_name, 
+			t.parent_id, 
+			t.remark, 
+			t.create_time, 
+			t.update_time 
+			from EC_CORE_REGION t where t.id = #{id}
+        ]]>
+	</select>
+	
+	
+	<select id="getRegionListByParentId" parameterType="net.ytoec.kernel.dataobject.Region"
+		resultType="list" resultMap="regionResultMap">
+		select t.id, 
+		t.region_number, 
+		t.region_name, 
+		t.parent_id, 
+		t.remark, 
+		t.create_time, 
+		t.update_time 
+		from EC_CORE_REGION t where t.parent_id = #{parentId}
+	</select>
+
+	<select id="getAllRegion" resultType="list" resultMap="regionResultMap">
+		select t.id, 
+		t.region_number, 
+		t.region_name, 
+		t.parent_id, 
+		t.remark, 
+		t.create_time, 
+		t.update_time 
+		from EC_CORE_REGION t
+	</select>
+
+	<delete id="remove" parameterType="region">
+		delete from EC_CORE_REGION where id = #{id}
+	</delete>
+	
+	<!-- 查询所有的省份，出去港澳台 -->
+	<select id="getAllProvince" resultType="list" parameterType="list" resultMap="regionResultMap">
+	    select t.id, 
+		t.region_number, 
+		t.region_name, 
+		t.parent_id, 
+		t.remark, 
+		t.create_time, 
+		t.update_time 
+		from EC_CORE_REGION t where t.parent_id = 0
+		<if test="list != null">
+				and t.id not in
+			<foreach collection="list" item="idlist" open="("
+				separator="," close=")">
+				#{idlist}
+		    </foreach>
+			</if>
+	</select>
+</mapper>

@@ -1,0 +1,76 @@
+#search_box{border:1px solid #8DB2E3;margin-bottom:10px;padding:10px;background:#FAFDFE;}
+#sear_box{padding:0 25px;}
+.date_rate,.date_cal{display:inline-block;margin-right:20px;}
+#table_stats{margin-bottom:10px;}
+#table_stats table{border:0 none;}
+#table_stats thead th{font:700 12px/35px SimSun;padding:0 10px;}
+.font_style_a{font:700 14px/1.4 SimSun;color:#333;}
+.font_style_b{font:700 16px/1.4 Arial;color:#61B610;padding:0 5px;}
+.font_style_c{font:12px/1.4 SimSun;color:#f00;}
+.font_style_d{font:700 16px/1.4 Arial;color:#1E579E;padding:0 5px;text-decoration:underline;cursor:pointer;}
+#table_tip{font:700 12px/35px SimSun;color:#a00;}
+#table_stats td{background:#E8F3FA;border:2px solid #fff;}
+#table_wp{border:1px solid #8DB2E3;}
+#search_detail{margin-bottom:10px;}
+#table_stats .td_l{border-right:0 none;}
+#table_stats .td_r{border-left:0 none;}
+.view_monitor{vertical-align:bottom;font-size:15px;font-weight:700;margin-left:25px;}
+.view_monitor a{vertical-align:bottom;}
+.form p .label_raido{margin:0;width:auto;float:none;}
+.qsn {
+	background: url(../../images/qsn.png) 0 6px no-repeat;
+	width: 16px;
+	height: 16px;
+	padding-left: 20px;
+}
+.btn_txt {
+	background: url(../../images/btn_txt.png) 0 4px no-repeat;
+	width: 16px;
+	height: 16px;
+	padding-left: 20px;
+}
+.btn_moble {
+	background: url(../../images/btn_moble.png) 0 4px no-repeat;
+	width: 16px;
+	height: 16px;
+	padding-left: 20px;
+}
+.btn_cate {
+	background: url(../../images/btn_cate.png) 0 4px no-repeat;
+	width: 16px;
+	height: 16px;
+	padding-left: 20px;
+}
+.tlayer {
+	width: 130px;
+	background: #fff;
+	border: 1px solid #aaa;
+	position: absolute; 
+	z-index:999;
+	margin: -100px 0 0 0;
+	display: none; /* 默认不显示 */
+	padding: 6px;
+	right:180px;
+
+}
+.tlayer li {
+	padding: 4px 0px 4px 20px;
+	display: block;
+	width: 100px; /*要显示文字的宽度*/
+	overflow: hidden; /*超出的部分隐藏起来。*/
+	white-space: nowrap; /*不显示的地方用省略号...代替*/
+	padding-right: 7px; /*文字距离右侧7像素。*/
+	text-overflow: ellipsis; /* 支持 IE */
+	-o-text-overflow: ellipsis; /* 支持 Opera */
+}
+.closebt {
+	position: absolute;
+	top: 2px;
+	right: 4px;
+	font: 14px/1 Arial;
+	text-decoration: none;
+}
+#table_b {margin-top:10px;}
+.td_e_add{width:200px;display:block;}
+.form p,.form p input{vertical-align:middle;}
+/* .input_text{margin-right:6px;} */

@@ -1,0 +1,183 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+<validators>
+
+	<field name="senderName">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入发货人姓名</message>
+		</field-validator>
+	</field>
+	
+	<field name="senderMobile">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>请输入发货人手机号码</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^1\d{10}$)]]></param>
+			<message>发货人手机号码格式不正确</message>
+		</field-validator>
+	</field>	
+	
+	<field name="senderProv">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请选择省市</message>
+		</field-validator>
+	</field>
+	
+	<field name="senderCity">
+		<field-validator type="requiredstring">
+				<param name="trim">true</param>
+				<message>请选择地市</message>
+		</field-validator>
+	</field>
+	
+	<field name="senderDistrict">
+		<field-validator type="requiredstring">
+				<param name="trim">true</param>
+				<message>请选择区县</message>
+		</field-validator>
+	</field>
+	
+	<field name="senderDetail">
+		<field-validator type="stringlength">
+		 	<param name="trim">true</param>
+			<param name="minLength">1</param>
+			<param name="maxLength">100</param>
+			<message>街道地址格式不对(${minLength}到 ${maxLength}个字符)</message>
+		</field-validator>
+	</field>
+	
+	
+	<field name="receiverName">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入收货联系人姓名</message>
+		</field-validator>
+	</field>
+	
+	<field name="mailNo">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入运单号</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^[A-Za-z0-9]{1}\d{9}$)]]></param>
+			<message>运单号格式错误</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverProv">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请选择省市</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverCity">
+		<field-validator type="requiredstring">
+				<param name="trim">true</param>
+				<message>请选择地市</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverDistrict">
+		<field-validator type="requiredstring">
+				<param name="trim">true</param>
+				<message>请选择区县</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverAddress">
+		<field-validator type="stringlength">
+		 	<param name="trim">true</param>
+			<param name="minLength">1</param>
+			<param name="maxLength">100</param>
+			<message>街道地址格式不对(${minLength}到 ${maxLength}个字符)</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverMobile">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>请输入收货人手机号码</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^1\d{10}$)]]></param>
+			<message>手机号码格式不正确</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverPhone1">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>区号必填</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^\d{3,4}$)]]></param>
+			<message>区号填写错误</message>
+		</field-validator>
+	</field>
+	
+	<field name="receiverPhone2">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>电话号没填</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^\d{7,8}$)]]></param>
+			<message>电话号填写错误</message>
+		</field-validator>
+	</field>
+	
+	<field name="telExtCode">
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^\d{0,5}$)]]></param>
+			<message>分机号填写错误</message>
+		</field-validator>
+	</field>
+	
+	<field name="itemName">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>请输入货物名称</message>
+		</field-validator>
+		<field-validator type="stringlength">
+		 	<param name="trim">true</param>
+			<param name="minLength">1</param>
+			<param name="maxLength">100</param>
+			<message>货物名称太长(${minLength}到 ${maxLength}个字符)</message>
+		</field-validator>
+	</field>
+	
+	<field name="itemNumber">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>请输入货物数量</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^[1-9]\d*$)]]></param>
+			<message>货物数量格式不正确</message>
+		</field-validator>
+	</field>
+	
+	<field name="itemWeight">
+		<field-validator type="requiredstring">
+		 	<param name="trim">true</param>
+			<message>请输入货物重要</message>
+		</field-validator>
+		<field-validator type="regex">
+		 	<param name="trim">true</param>
+			<param name="expression"><![CDATA[(^([+-]?)\d*\.?\d+$)]]></param>
+			<message>重量格式不正确</message>
+		</field-validator>
+	</field>
+</validators>

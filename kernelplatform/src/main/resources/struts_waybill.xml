@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="waybill" namespace="/" extends="ssMyBatis">
+	
+		<!-- 运单查询管理 -->
+		<action name="waybill_*" class="wayBillAction" method="{1}">
+			<result name="bill" type="tiles">WEB-INF.waybill/waybill_list.jsp</result>
+			<result name="nonList" type="tiles">WEB-INF.waybill/waybill_list.jsp</result>
+			<result name="list" type="tiles">WEB-INF.waybill/waybill_list.jsp</result>
+			<result name="Express" type="tiles">WEB-INF.order/orderExpressForm.jsp</result>
+			<result name="everydayOrderChart" type="tiles">WEB-INF.order/everydayOrderChart.jsp</result>
+			<result name="orderExpress" type="json">
+				<param name="root">orderExpress</param>
+			</result>
+			
+			<result name="add" type="json">
+				<param name="root">response</param>
+			</result>
+			
+			<result name="delete" type="json">
+				<param name="root">response</param>
+			</result>
+			
+			<result name="non_index" type="chain">waybill_nonList</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">bill,list</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+		</action>
+		
+		<action name="waybill_orderExpress" class="wayBillAction" method="orderExpress">
+			<result name="Express" type="tiles">WEB-INF.order/orderExpressForm.jsp</result>
+			<result name="orderExpress" type="json">
+				<param name="root">orderExpress</param>
+			</result>
+			
+			<result name="non_index" type="tiles">WEB-INF.order/orderExpressForm.jsp</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">orderExpress</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+		</action>
+
+
+		<!-- 运费调整网点 -->
+		<action name="freight_*" class="wayBillAction" method="{1}">
+			<result name="unlikefreight" type="tiles">WEB-INF.order/unlikeFreight_list.jsp</result>
+			<result name="unlikefreightlist" type="tiles">WEB-INF.order/unlikeFreight_list.jsp</result>
+
+			<result name="add" type="json">
+				<param name="root">response</param>
+			</result>
+			
+			<result name="non_index" type="redirect">
+				<param name="location">freight_unlikefreight.action?menuFlag=caiwu_freight2</param>
+				<param name="namespace">/</param>
+			</result>
+			<result type="json" />  
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">unlikefreight,add,unlikefreightlist</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+		</action>
+
+		<!-- 运费调整卖家 -->
+		<action name="mjfreight*" class="wayBillAction">
+			<result name="mjunlikefreight" type="tiles">WEB-INF.order/mjunlikeFreight_list.jsp</result>
+			<result name="mjunlikefreightlist" type="tiles">WEB-INF.order/mjunlikeFreight_list.jsp</result>
+			
+			<result name="non_index" type="redirect">
+				<param name="location">mjfreight!mjunlikefreight.action</param>
+				<param name="namespace">/</param>
+			</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	              <!-- 被拦截方法配置定义 -->             
+	             <param name="includeMethods">mjunlikefreightlist</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+		</action>		
+		
+	</package>
+	
+</struts>

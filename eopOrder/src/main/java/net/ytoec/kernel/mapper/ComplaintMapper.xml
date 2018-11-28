@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ComplaintMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Complaint" id="complaintResultMap">
+		<id property="id" column="id"/>
+		<result property="complaintUser" column="complaint_user"/>
+		<result property="siteUserCode" column="site_user_code"/>
+		<result property="siteUserName" column="site_user_name"/>
+		<result property="mailNo" column="mail_no"/>
+		<result property="complaintContent" column="complaint_content"/>
+		<result property="exchangeContent" column="exchange_content"/>
+		<result property="lastTimeForUser" column="last_time_for_user"/>
+		<result property="lastTimeForSite" column="last_time_for_site"/>
+		<result property="complaintTime" column="complaint_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="complaint" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+		insert into EC_CORE_COMPLAINT(id, complaint_user, site_user_code, site_user_name, mail_no, complaint_content, exchange_content, last_time_for_user, last_time_for_site, update_time)
+		values(#{id}, #{complaintUser}, #{siteUserCode}, #{siteUserName}, #{mailNo}, #{complaintContent}, #{exchangeContent}, #{lastTimeForUser}, #{lastTimeForSite}, now())
+		]]>
+	</insert>
+	
+	<!-- 投诉暂不提供更新 -->
+	
+	<!-- 投诉暂不提供删除 -->
+	
+	<select id="getByMailNo" parameterType="string" resultMap="complaintResultMap">
+		<![CDATA[
+		select * from EC_CORE_COMPLAINT where mail_no = #{mailNo}
+		]]>
+	</select>
+	
+</mapper>

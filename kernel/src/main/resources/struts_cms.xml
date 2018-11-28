@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="cms" extends="ssMyBatis" namespace="/">
+		
+		<!-- 文章管理 -->
+		<action name="*Article" class="articleAction" method="{1}">
+			<result name="search" type="tiles">WEB-INF.cms/article/search_article.jsp</result>
+             <result name="toList" type="redirect">searchArticle.action</result>
+            <result name="toAdd" type="tiles">WEB-INF.cms/article/add_article.jsp</result>
+            <result name="toEdit" type="tiles">WEB-INF.cms/article/edit_article.jsp</result>
+            <result name="check" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="detailArticle" type="tiles">WEB-INF.home/news.jsp</result><!-- 我的易能最新动态查看页面 -->
+		</action>
+		
+		<!-- 栏目管理 -->
+		<action name="*Column" class="columnAction" method="{1}">
+			<result name="search" type="tiles">WEB-INF.cms/column/search_column.jsp</result>
+             <result name="toList" type="redirect">searchColumn.action</result>
+            <result name="toAdd" type="tiles">WEB-INF.cms/column/add_column.jsp</result>
+            <result name="toEdit" type="tiles">WEB-INF.cms/column/edit_column.jsp</result>
+		</action>
+
+	</package>
+	
+</struts>

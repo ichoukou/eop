@@ -1,0 +1,12 @@
+.box{margin-bottom:10px;}
+.table{margin-bottom:10px;}
+.pagenavi{margin-bottom:10px;margin-right:10px;float:right;height:25px;}
+.attention{float:left;margin-left:10px;display:inline;}
+.zhi{margin:0 5px;}
+#input_text_text{width:300px;}
+.table thead tr th .arrow_down{background:url(../../images/sprite/table_arrow2.png) no-repeat right 12px;padding-right:20px;}
+.table thead tr th .arrow_up{background:url(../../images/sprite/table_arrow2.png) no-repeat right -78px;padding-right:20px;}
+.table thead tr .th_e{width:86px;}
+.table thead tr .th_g{width:93px;}
+#table_list thead tr .th_title{padding:0 5px;}
+.input_checkbox { margin: 4px;vertical-align: middle;}

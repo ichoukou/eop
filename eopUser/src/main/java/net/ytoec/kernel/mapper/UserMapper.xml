@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.UserMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.User" id="userResultMap">
+		<id property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="userName" column="user_name" />
+		<result property="userPassword" column="user_password" />
+		<result property="telePhone" column="tele_phone" />
+		<result property="mobilePhone" column="mobile_phone" />
+		<result property="addressProvince" column="address_province" />
+		<result property="addressCity" column="address_city" />
+		<result property="addressDistrict" column="address_district" />
+		<result property="addressStreet" column="address_street" />
+		<result property="sex" column="sex" />
+		<result property="shopName" column="shop_name" />
+		<result property="shopAccount" column="shop_account" />
+		<result property="mail" column="mail" />
+		<result property="cardType" column="card_type" />
+		<result property="cardNo" column="card_no" />
+		<result property="userType" column="user_type" />
+		<result property="userSource" column="user_source" />
+		<result property="userState" column="user_state" />
+		<result property="userLevel" column="user_level" />
+		<result property="createUser" column="create_user" />
+		<result property="createTime" column="create_time" />
+		<!--result property="updateUser" column="update_user" / @2011-07-27 直接用工具删除该字段 
+			By ChenRen -->
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+		<result property="site" column="site" />
+		<result property="userNameText" column="user_name_text" />
+		<result property="userCode" column="user_code" />
+		<result property="loginTime" column="login_time" />
+		<result property="taobaoEncodeKey" column="taobao_encode_key" />
+		<result property="field001" column="field001" />
+		<result property="field002" column="field002" />
+		<result property="field003" column="field003" />
+		<result property="bindedCustomerId" column="binded_customer_id" />
+		<result property="clientId" column="client_id" /><!-- 2012-02-22添加该字段zhengliang -->
+		<result property="childType" column="child_type" /><!-- 2012-03-22添加该字段zhengliang -->
+		
+		<result property="repeatNum" column="repeat_num" /><!-- 2012-05-10在userBean中添加属性，不存在数据表中 -->
+		<result property="isPrint" column="isprint" />
+		<result property="printNav" column="print_nav" />
+	</resultMap>
+	
+	<select id="searchUserByTBKeyAndUserNameAndShopAccount" resultType="user" resultMap="userResultMap">
+		select * from ec_core_user where taobao_encode_key is not null and user_name is null and shop_account is null
+	</select>
+	
+	<select id="get" parameterType="user" resultType="user"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		WHERE id =
+		#{id}
+	</select>
+
+	<select id="getAllUser" resultType="list" resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+	</select>
+	
+	<select id="getAllUserMap" parameterType="map" resultType="list" resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER u 
+		<where>
+			<if test='userNameText != null and userNameText != ""'>
+				AND u.user_name_text= #{userNameText}
+			</if>
+			<if test='userName != null and userName != ""'>
+				AND u.user_name=#{userName}
+			</if>
+			<if test='startTime != null and endTime != null'>
+				AND u.create_time between #{startTime} and #{endTime}
+			</if>
+		</where>
+		
+		order by u.create_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="searchTotal" resultType="int" parameterType="map">
+		select count(*) from ec_core_user u
+		<where>
+			<if test='userNameText != null and userNameText != ""'>
+				AND u.user_name_text= #{userNameText}
+			</if>
+			<if test='userName != null and userName != ""'>
+				AND u.user_name=#{userName}
+			</if>
+			<if test='startTime != null and endTime != null'>
+				AND u.create_time between #{startTime} and #{endTime}
+			</if>
+		</where>
+	</select>
+
+	<insert id="add" parameterType="user" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_USER(id, parentId, user_name,
+		user_password,
+		tele_phone, mobile_phone, address_province,
+		address_city,
+		address_district, address_street,
+		sex, shop_name,
+		shop_account, mail, card_type, card_no, user_type,
+		user_source,
+		user_state, user_level, create_user,
+		create_time, update_time, remark,
+		site, user_name_text, user_code, login_time,
+		taobao_encode_key, field001, field002, field003,binded_customer_id,client_id,child_type)VALUES(
+		#{id}, #{parentId},
+		#{userName},#{userPassword},#{telePhone},#{mobilePhone},#{addressProvince},
+		#{addressCity},#{addressDistrict},#{addressStreet},#{sex},
+		#{shopName},#{shopAccount},#{mail},#{cardType},#{cardNo},#{userType},
+		#{userSource},#{userState},#{userLevel},#{createUser},#{createTime},
+		#{updateTime},#{remark},#{site},#{userNameText},#{userCode},#{loginTime},
+		#{taobaoEncodeKey}, #{field001}, #{field002}, #{field003},#{bindedCustomerId},#{clientId},#{childType}
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+	</insert>
+	<insert id="addDeptUser" parameterType="user" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_USER(id, parentId, user_name,
+		user_password,
+		tele_phone,  address_province,		
+		sex, shop_name,
+		shop_account, mail, card_type, card_no, user_type,
+		user_source,
+		user_state, user_level, create_user,
+		create_time, update_time, remark,
+		site, user_name_text, user_code, login_time,
+		taobao_encode_key, field001, field002, field003,binded_customer_id,client_id,child_type)VALUES(
+		#{id}, #{parentId},
+		#{userName},#{userPassword},#{deptPhone},#{addressProvince},#{sex},
+		#{shopName},#{shopAccount},#{mail},#{cardType},#{cardNo},#{userType},
+		#{userSource},#{userState},#{userLevel},#{createUser},#{createTime},
+		#{updateTime},#{remark},#{site},#{deptName},#{deptCode},#{loginTime},
+		#{taobaoEncodeKey}, #{field001}, #{field002}, #{field003},#{bindedCustomerId},#{clientId},#{childType}
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+	</insert>
+
+	<delete id="remove" parameterType="integer">
+		DELETE FROM EC_CORE_USER
+		WHERE
+		id = #{id}
+	</delete>
+	
+	<update id="edit" parameterType="user">
+		UPDATE EC_CORE_USER
+		SET
+		parentId=#{parentId},
+		user_name=#{userName},
+		user_password=#{userPassword},
+		tele_phone=#{telePhone},
+		mobile_phone=#{mobilePhone},
+		address_province=#{addressProvince},
+		address_city=#{addressCity},
+		address_district=#{addressDistrict},
+		address_street=#{addressStreet},
+		sex=#{sex},
+		shop_name=#{shopName},
+		shop_account=#{shopAccount},
+		mail=#{mail},
+		card_type=#{cardType},
+		card_no=#{cardNo},
+		user_type=#{userType},
+		user_source=#{userSource},
+		user_state=#{userState},
+		user_level=#{userLevel},
+		create_user=#{createUser},
+		update_time=now(),
+		remark=#{remark},
+		site=#{site},
+		user_name_text=#{userNameText},
+		user_code = #{userCode},
+		login_time = #{loginTime},
+		taobao_encode_key = #{taobaoEncodeKey},
+		field001 = #{field001},
+		field002 = #{field002},
+		field003 = #{field003},
+		binded_customer_id = #{bindedCustomerId},
+		client_id = #{clientId}
+		,child_type = #{childType}
+		WHERE id = #{id}
+	</update>
+	<update id="modify" parameterType="user">
+		UPDATE EC_CORE_USER
+		SET
+		parentId=#{parentId},
+		user_name=#{userName},
+		user_password=#{userPassword},
+		tele_phone=#{telePhone},
+		mobile_phone=#{mobilePhone},
+		address_province=#{addressProvince},
+		address_city=#{addressCity},
+		address_district=#{addressDistrict},
+		address_street=#{addressStreet},
+		sex=#{sex},
+		shop_name=#{shopName},
+		shop_account=#{shopAccount},
+		mail=#{mail},
+		card_type=#{cardType},
+		card_no=#{cardNo},
+		user_type=#{userType},
+		user_source=#{userSource},
+		user_state=#{userState},
+		user_level=#{userLevel},
+		create_user=#{createUser},
+		update_time=now(),
+		remark=#{remark},
+		site=#{site},
+		user_name_text=#{userNameText},
+		user_code = #{userCode},
+		login_time = #{loginTime},
+		taobao_encode_key = #{taobaoEncodeKey},
+		field001 = #{field001},
+		field002 = #{field002},
+		field003 = #{field003},
+		binded_customer_id = #{bindedCustomerId},
+		client_id = #{clientId}
+		,child_type = #{childType}
+		WHERE user_Code = #{userCode} and site = #{userCode}
+	</update>
+
+	<update id="updateSiteByUserCode" parameterType="map" >
+		UPDATE EC_CORE_USER set site=#{userName}
+		WHERE user_type = '1'
+		AND user_state = '1'
+		AND user_code in
+		<foreach collection="userCodes" item="userCode" open="(" separator="," close=")" >
+			#{userCode}
+		</foreach>
+	</update>
+	
+	<select id="searchUsers" parameterType="map" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER u
+		<if test="servicesType != null and servicesType !=''">
+		JOIN eop_app_provider p ON p.user_id=u.id
+		</if>
+		<where>
+			<if test="site != null and site != ''">
+			AND u.site = #{site} 
+			</if>
+			<choose>
+				<when test="userState != null and userState != '' and userState != '-1'">
+					AND u.user_state = #{userState}
+				</when>
+				<when test="userState == null or userState == ''">
+					AND u.user_state in (0, 1, 2, 'TBA') <!-- 用户状态：正常 -->
+				</when>
+			</choose>
+			<if test="servicesType != null and servicesType !='' and servicesType != '-1'">
+				AND p.services_type = #{servicesType}
+			</if>
+			AND u.user_type IN(1, 4)  <!-- 用户类型：VIP、大商家 -->
+			<if test='userNameText != null and userNameText != ""'>
+				AND u.user_name_text like '%' #{userNameText} '%'
+			</if>
+			<if test='userName != null and userName != ""'>
+				AND u.user_name like '%' #{userName} '%'
+			</if>
+			<if test="userSource != null and userSource != ''">
+				AND u.user_source = #{userSource}
+			</if>
+			<if test="userSource != null and userSource != ''">
+				AND u.user_source = #{userSource}
+			</if>
+			<if test="childType != null and childType != ''">
+				and child_type = #{childType}
+			</if>
+			<if test='startTime != null and endTime != null'>
+				AND u.create_time between #{startTime} and #{endTime}
+			</if>
+		</where>
+		
+		order by u.create_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="searchUsersByName" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		<where>
+			<if test='userName != null'>
+				AND user_name like '%' #{userName} '%'
+			</if>
+		</where>
+	</select>
+
+	<select id="searchUserByNameAndPwd" parameterType="user"
+		resultType="list" resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		<where>
+			<if test='userName != null'>
+				AND user_name = #{userName}
+			</if>
+			<if test='userPassword != null'>
+				AND user_password = #{userPassword}
+			</if>
+		</where>
+	</select>
+	
+	<select id="loginUserCheck" parameterType="user" resultType="list" resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		<where>
+			<if test='userName != null'>
+				user_name = BINARY(#{userName}) 
+			</if>
+			<if test='userPassword != null'>
+				AND user_password = #{userPassword}
+			</if>
+		</where>
+	</select>
+
+	<select id="searchUsersBySite" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER where user_state = 1 and site = 
+		#{site}
+	</select>
+	
+	<select id="searchUsersBySiteAndUserType" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER 
+		<where>
+			<if test="site != null and site != ''">
+			and site = #{site} 
+			</if>
+			<if test="userType != null and userType != ''">
+			and user_type = #{userType}
+			</if>
+		</where>
+	</select>
+
+	<select id="searchUsersByUserName" parameterType="user"
+		resultType="list" resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		<where>
+			<if test='userName != null'>
+				user_name = #{userName}
+			</if>
+		</where>
+	</select>
+	<select id="searchUsersByShopAccount" parameterType="user"
+		resultType="list" resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER
+		<where>
+			<if test='userName != null'>
+				AND shop_account = #{shopAccount}
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchUsersByCode" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_code = #{userCode}
+	</select>
+	<!-- 根据userCode查询最后一个登陆的卖家 -->
+	<select id="getUserByUserCode" parameterType="user" resultType="user"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_code = #{userCode}
+		order by login_time desc
+		limit 1
+	</select>
+	
+	<select id="searchUsersByDeptCode" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_code = #{deptCode}
+	</select>
+	
+	<select id="getUserByClientId" parameterType="string" resultType="user"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE client_id = #{clientId} limit 1
+	</select>
+	
+	<select id="searchUsersByUserType" parameterType="user"
+		resultType="list" resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_type = #{userType} 
+	</select>
+
+	<select id="getVipUserByPostId" parameterType="int" resultType="list"
+		resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER U
+		WHERE U.ID IN (
+		SELECT P.VIPID
+		FROM EC_CORE_POSTTEMPUSER P WHERE P.POSTID = #{postId}
+		)
+	</select>
+
+	<select id="searchUsersByTaoBao" parameterType="string"
+		resultType="list" resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER U
+		WHERE
+		U.SHOP_ACCOUNT = #{taobao}
+	</select>
+	
+	<select id="searchUsersByUserSource" parameterType="string" resultType="list"
+		resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER U
+		WHERE U.USER_SOURCE = #{userSource} and U.USER_STATE = 1
+	</select>
+	
+	<select id="searchDepotHosting" parameterType="map" resultType="list" resultMap="userResultMap">
+		SELECT * FROM ec_core_user u
+		WHERE u.user_source = #{userSource}
+		<if test="userState!=null">
+			and u.user_state = #{userState}
+		</if>
+		<!-- 只选择分仓 -->
+		<if test="type==1">
+			and u.child_type = 'B'
+		</if>
+		<!-- 只选择入驻企业 -->
+		<if test="type==2">
+			and u.child_type = 'C'
+		</if>
+		<!-- 分仓和入驻企业 -->
+		<if test="type==0">
+			and (u.child_type = 'B' or u.child_type = 'C')
+		</if>
+		    order by u.login_time desc
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getSiteByVipId" parameterType="string" resultType="list"
+		resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER U
+		WHERE USER_TYPE = 2
+		AND U.SITE = (
+			SELECT U.SITE FROM EC_CORE_USER U
+			WHERE ID = #{id}
+		)
+	</select>
+
+	<select id="getUserByParentId" parameterType="map" resultType="list" resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER U
+		WHERE U.PARENTID = #{parentId}
+		order by u.login_time desc
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="getUserByCustomerId" parameterType="string" resultType="user"
+		resultMap="userResultMap">
+		SELECT * FROM EC_CORE_USER U
+		WHERE U.TAOBAO_ENCODE_KEY = #{customerId} AND user_type = 1
+	</select>
+	
+	<select id="searchUsersByCodeTypeState" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_code = #{userCode} and user_type = #{userType} and user_state = #{userState}
+	</select>
+	
+		<select id="getUsersByCustomerIds" parameterType="map" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER where taobao_encode_key in
+		<foreach collection="customerIds" item="customerId" open="(" separator="," close=")" >
+			#{customerId}
+		</foreach>
+	</select>
+	
+	<!-- 初始化用户密码 专用 -->
+		<select id="getUsersByRemark" parameterType="map" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER  where remark=#{remark}
+	</select>
+	
+	<!-- 找出用户表中userCode重复的网点数据 :其他不符合逻辑的方法勿用-->
+	<select id="getRepeatSiteList" resultType="list" resultMap="userResultMap">
+		select count(*) as repeat_num,user_code from ec_core_user where user_type = 2
+		group by user_code having count(*)>1
+	</select>
+	
+	<select id="searchUsersByCodeAndType" parameterType="user" resultType="list"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_code = #{userCode} and user_type = #{userType}
+	</select>
+	<update id="updateUserPrint" parameterType="map" >
+		UPDATE EC_CORE_USER
+		SET isprint=#{isPrint}
+		WHERE id = #{id}
+	</update>	
+	
+	<update id="updateUserPrintNav" parameterType="map" >
+		UPDATE EC_CORE_USER
+		SET print_nav=#{printNav}
+		WHERE id = #{id}
+	</update>		
+	<!-- 允许网点打印  是否选中  B -->
+	<select id="getisPrintFlag" parameterType="map" resultType="list"
+		resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER  where  id = #{id}
+	</select>
+   <!-- 允许网点打印  是否选中  E -->
+
+	<select id="getUserByUserName" parameterType="string" resultType="user"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER
+		WHERE user_name = #{userName}
+	</select>
+	
+		<select id="getUserByUserStateAndType" parameterType="map" resultType="list"
+		resultMap="userResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER where user_state = #{userState}  and user_type = #{userType} 
+	</select>
+
+	<select id="getUserByShopName" parameterType="string" resultType="user"	resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		WHERE shop_name = #{shopName} AND user_type='1'
+	</select>
+
+	<select id="getUsersByShopName" parameterType="string" resultType="list" resultMap="userResultMap">
+		SELECT * 
+		FROM
+		EC_CORE_USER
+		WHERE shop_name = #{shopName} AND user_type='1'
+	</select>
+    
+     <!--  根据shopNameorUserName查找用户(服务管理模块用到)
+	       pararms :shopUserName -->
+    <select id="getUserByShopNameorUserName" parameterType="string" resultType="list"
+		resultMap="userResultMap">
+		SELECT * FROM  EC_CORE_USER		
+		WHERE (user_name = #{shopUserName} 
+		       or shop_name = #{shopUserName} 		      
+		      )
+	</select>
+    
+    <!-- 根据mobilePhone查找用户(服务管理模块用到)
+	        pararms :mobilePhone -->
+    <select id="getUserByMobilePhone" parameterType="string" resultType="list"
+		resultMap="userResultMap">
+		SELECT * FROM  EC_CORE_USER		
+		WHERE  mobile_phone = #{mobilePhone} 		       
+	</select>
+    
+    <!-- 通过用户类型查询用户列表(服务管理模块用到) //网点，承包区,卖家,业务账号在这里要进行特殊处理     -->	        
+    <select id="getUserListByUserTypes" parameterType="map" resultType="list" resultMap="userResultMap">
+        select * from (
+		<if test='userTypeList!= null'>
+		    SELECT distinct * FROM  EC_CORE_USER	where user_type in	
+		    <foreach collection="userTypeList" item="userType" open="("   separator="," close=")">
+				#{userType}
+			</foreach>
+		</if>
+		<if test='site != null and userTypeList!= null '>union</if>
+		<if test='site != null '>
+		    select distinct * FROM  EC_CORE_USER  where  user_type = 2 and parentId is null
+		</if>
+		<if test='contractorAreas != null and (userTypeList!= null or site != null)'>union</if>
+		<if test='contractorAreas != null'>
+		    select distinct * FROM  EC_CORE_USER  where  user_type = 2 and parentId is not null
+		</if>
+		<if test='seller != null and (contractorAreas != null or userTypeList!= null or site != null)'>union</if>
+		<if test='seller != null '>
+		    select distinct * FROM  EC_CORE_USER  where  user_type = 1 and child_type is null
+		</if>
+		<if test='businessAccount != null and (seller != null or contractorAreas != null or userTypeList!= null or site != null)'>union</if>
+		<if test='businessAccount != null '>
+		    select distinct * FROM  EC_CORE_USER  where  user_type = 1 and child_type is not null
+		</if>
+		) t
+		<if test='formName != null'>
+		    where  (  t.user_name = #{formName} 
+		              or t.shop_name = #{formName} 
+		              or t.user_name_text = #{formName}
+		              or t.mobile_phone = #{formName} 
+		           )
+		</if>	  
+	</select>
+	
+	<update id="initBranch" parameterType="String">
+		update ec_core_user set user_state = 'TBA' where user_name = #{userName}
+	</update>
+
+	
+	<!-- 通过商家代码查询网点的email -->
+	<select id="searchSiteMailByUserCode" parameterType="string" resultType="string">
+		SELECT mail 
+		FROM
+		EC_CORE_USER where id = (select id from EC_CORE_USER where user_code =#{userCode})
+	</select>
+
+	
+	<!-- 创建网点用户之后根据ID修改 TaobaoEncodeKey -->
+	<update id="updateTaobaoEncodeKeyById" parameterType="user">
+		UPDATE EC_CORE_USER
+		SET
+		taobao_encode_key = #{taobaoEncodeKey}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

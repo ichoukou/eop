@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.ytoec.kernel.mapper.ZebraForewarnMapper">
+	<resultMap id="BaseResultMap" type="net.ytoec.kernel.dataobject.ZebraForewarn">
+		<id column="forewarn_id" property="forewarnId" jdbcType="INTEGER" />
+		<result column="branck_id" property="branckId" jdbcType="INTEGER" />
+		<result column="customer_code" property="customerCode"
+			jdbcType="VARCHAR" />
+		<result column="branck_warn_value" property="branckWarnValue"
+			jdbcType="INTEGER" />
+		<result column="customer_warn_value" property="customerWarnValue"
+			jdbcType="INTEGER" />
+		<result column="customer_warn_history_value" property="customerWarnHistoryValue"
+			jdbcType="INTEGER" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="remark_phone" property="remarkPhone" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="phone_warn" property="phoneWarn" jdbcType="TINYINT" />
+		<result column="email_warn" property="emailWarn" jdbcType="TINYINT" />
+		<result column="init_state" property="initState" jdbcType="TINYINT" />
+		<result column="warn_state" property="warnState" jdbcType="TINYINT" />
+		<result column="send_phone_state" property="sendPhoneState"
+			jdbcType="TINYINT" />
+		<result column="send_mail_state" property="sendMailState"
+			jdbcType="TINYINT" />
+		<result column="crate_time" property="crateTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<!-- 批量查询预警信息 -->
+	<select id="queryZebraForewarn" parameterType="list" resultType="list"
+		resultMap="BaseResultMap">
+  		<![CDATA[
+			SELECT 
+				CUSTOMER_CODE,
+				BRANCK_WARN_VALUE,
+				SEND_PHONE_STATE,
+				SEND_MAIL_STATE,
+				WARN_STATE 
+			FROM 
+				ZEBRA_FOREWARN
+	  		WHERE
+	  			CUSTOMER_CODE 
+	  			IN
+  		]]>
+		<foreach collection="list" item="customerNo" open="(" close=")"
+			separator=",">
+			<![CDATA[#{customerNo,jdbcType=VARCHAR}]]>
+		</foreach>
+	</select>
+
+	<!-- 更新预警信息-->
+	<update id="updateZebraForewarn" parameterType="net.ytoec.kernel.dataobject.ZebraForewarn">
+		<![CDATA[
+			UPDATE 
+				ZEBRA_FOREWARN 
+			SET 
+		]]>
+		<if test="sendPhoneState != null and sendPhoneState != ''">
+			SEND_PHONE_STATE= #{sendPhoneState},
+		</if>
+		<if test="sendMailState != null and sendMailState != ''">
+			SEND_MAIL_STATE= #{sendMailState},
+		</if>
+		<if test="warnState != null and warnState != ''">
+			WARN_STATE= #{warnState},
+		</if>
+			UPDATE_TIME = NOW()
+		WHERE
+			CUSTOMER_CODE=#{customerCode}
+	</update>
+
+	<!-- 更新预警信息 -->
+	<update id="updateForwarnByCustomerCode" parameterType="net.ytoec.kernel.dataobject.ZebraForewarn">
+		update
+		zebra_forewarn set branck_id=#{branckId},
+		branck_warn_value=#{branckWarnValue},
+		customer_warn_value=#{customerWarnValue},
+		phone=#{phone},
+		send_phone_state=0,
+		send_mail_state=0,
+		remark_phone=#{remarkPhone},
+		email=#{email},
+		phone_warn=#{phoneWarn},
+		email_warn=#{emailWarn},
+		update_time=#{updateTime}
+		where customer_code=#{customerCode}
+  </update>
+
+	<!-- 插入预警信息 -->
+	<insert id="insertForwarnByCustomerCode" parameterType="net.ytoec.kernel.dataobject.ZebraForewarn">
+		insert
+		into
+		zebra_forewarn(branck_id,customer_code,branck_warn_value,customer_warn_value,phone,
+		remark_phone,email,phone_warn,email_warn,send_phone_state,send_mail_state,update_time,init_state,
+		customer_warn_history_value)
+		values(#{branckId},#{customerCode},#{branckWarnValue},#{customerWarnValue},#{phone},
+		#{remarkPhone},#{email},#{phoneWarn},#{emailWarn},0,0,#{updateTime},1,#{customerWarnHistoryValue})
+	</insert>
+	<!-- 根据商家代码查询预警信息 -->
+	<select id="selectByCustomerCode" parameterType="string"
+		resultType="list" resultMap="BaseResultMap">
+		select * from zebra_forewarn where
+		customer_code=#{customerCode}
+  </select>
+
+	<!-- 第一次给仓配通某商家下单面单后，设置为不为初始状态 -->
+	<update id="updateInitStateByCustomerCode" parameterType="string">
+		update
+		zebra_forewarn set init_state=0 where customer_code=#{customerCode}
+	</update>
+
+	<!-- 更新预警状态 -->
+	<update id="updateWarnStateByCustomerCodeAndWarnState"
+		parameterType="map">
+		update zebra_forewarn set warn_state=#{warnState} where
+		customer_code=#{customerCode}
+  </update>
+
+	<!-- 更新短信是否发送状态 -->
+	<update id="updateSendPhoneStateByCustomerCode" parameterType="map">
+		update zebra_forewarn set send_phone_state=#{sendPhoneState} where
+		customer_code=#{customerCode}
+  </update>
+
+	<!-- 更新邮件是否发送状态 -->
+	<update id="updateSendMailStateByCustomerCode" parameterType="map">
+		update zebra_forewarn set send_mail_state=#{sendMailState} where
+		customer_code=#{customerCode}
+  </update>
+
+	<!-- 更新预警历史值 -->
+	<update id="updateCustomerWarnHistoryValue" parameterType="map">
+		update zebra_forewarn set
+		customer_warn_history_value=#{customerWarnHistoryValue} where
+		customer_code=#{customerCode}
+  </update>
+
+</mapper>

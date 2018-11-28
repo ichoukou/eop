@@ -1,0 +1,6 @@
+#branch_send .box_bd{position:relative;}
+#simulate_sel{background:#fff;border:1px solid #8DB2E3;padding:10px;position:absolute;top:71px;left:110px;display:block;display:none;*top:74px;_top:75px;_left:100px;}
+#user_sel{background:url(../../images/sprite/merger_arrow.png) no-repeat 274px 10px;cursor:default;}
+#topic,#user_sel,#message{width:278px;_margin-left:-3px;}
+#message{height:80px;}
+#sel_box p{text-align:center;}

@@ -1,0 +1,67 @@
+<data>
+	<item>
+		<store_name>全联网网店管理系统</store_name>				<!-- 网店名称 -->
+		<ship_name>micheal0792</ship_name>						<!-- 收货人-姓名 -->
+		<ship_regionFullName>中国,澳门,澳门</ship_regionFullName>	<!-- 收货人-地区 -->
+		<ship_address>12312</ship_address>						<!-- 收货人-地址 -->
+		<ship_tel>123123</ship_tel>
+		<ship_zip>201705</ship_zip>
+		<!-- 
+		<store_name>藤丝服装商城(演示商城)</store_name>
+		 -->
+		<order_no>D120207445693</order_no>						<!-- 订单号 -->
+		<shipment_item_count>1</shipment_item_count>			<!-- 发货单-物品数量 -->
+		<shipment_no>F120215066159</shipment_no>				<!-- 发货单号 -->
+		<mail_no></mail_no>										<!-- 面单号 -->
+		<dly_name>张某</dly_name>								<!-- 发货人-姓名 -->
+		<dly_regionFullName>中国,上海,浦东</dly_regionFullName>	<!-- 国家，省，市，区 -->
+		<dly_address>世纪大道</dly_address>						<!-- 详细地址 -->
+		<dly_tel></dly_tel>
+		<dly_zip>123456</dly_zip>								<!-- 邮编 -->
+		<dly_mobile>12345678901</dly_mobile>
+		<date_year>2012</date_year>
+		<date_moth>2</date_moth>
+		<date_day>15</date_day>
+	</item>
+	<item>
+		<store_name>全联网网店管理系统</store_name>
+		<ship_name>刘庆</ship_name>
+		<ship_regionFullName>中国,四川,巡场</ship_regionFullName>
+		<ship_address>21212</ship_address>
+		<ship_tel>11111111111</ship_tel>
+		<ship_zip>234234</ship_zip>
+		<store_name>藤丝服装商城(演示商城)</store_name>
+		<order_no>D111205953764</order_no>
+		<shipment_item_count>1</shipment_item_count>
+		<shipment_no>F111205338182</shipment_no>
+		<mail_no>1231231231</mail_no>
+		<dly_name>张某</dly_name>
+		<dly_regionFullName>中国,上海,浦东</dly_regionFullName>
+		<dly_address>世纪大道</dly_address>
+		<dly_tel></dly_tel>
+		<dly_zip>123456</dly_zip>
+		<dly_mobile>12345678901</dly_mobile>
+		<date_year>2012</date_year>
+		<date_moth>2</date_moth>
+		<date_day>15</date_day>
+	</item>
+	<item>
+		<store_name>${store_name}</store_name><ship_name>${ship_name}</ship_name>
+		<ship_regionFullName>${ship_regionFullName}</ship_regionFullName>
+		<ship_address>${ship_address}</ship_address>
+		<ship_tel>${ship_tel}</ship_tel>
+		<ship_zip>${ship_zip}</ship_zip>
+		<order_no>${order_no}</order_no>
+		<shipment_item_count>${shipment_item_count}</shipment_item_count>
+		<shipment_no>${shipment_no}</shipment_no>
+		<dly_name>${dly_name}</dly_name>
+		<dly_regionFullName>中国,上海,浦东</dly_regionFullName>
+		<dly_address>世纪大道</dly_address>
+		<dly_tel></dly_tel>
+		<dly_zip>123456</dly_zip>
+		<dly_mobile>12345678901</dly_mobile>
+		<date_year>2012</date_year>
+		<date_moth>2</date_moth>
+		<date_day>15</date_day>
+	</item>
+</data>

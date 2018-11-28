@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.QuestionaireRemarkMapper">
+  <resultMap id="QuestionaireRemarkResultMap" type="net.ytoec.kernel.dataobject.QuestionaireRemark" >
+    <result column="id" property="id"/>
+    <result column="operator_name" property="operatorName"/>
+    <result column="user_id" property="userId"/>
+    <result column="questionaire_id" property="questionaireId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="remak_content" property="remakContent"/>
+    <result column="had_read" property="hadRead"/>
+  </resultMap>
+  
+  <select id="get" resultMap="QuestionaireRemarkResultMap" parameterType="questionaireRemark" >
+    select id, operator_name, user_id, questionaire_id, create_time, update_time, remak_content,
+      had_read
+    from ec_core_questionaire_remark
+    where id = #{id}
+  </select>
+  
+  <insert id="add" parameterType="questionaireRemark" keyProperty="id"
+		useGeneratedKeys="true">
+    insert into ec_core_questionaire_remark (id, operator_name, user_id, questionaire_id,
+      create_time, remak_content, had_read)
+    values (#{id}, #{operatorName}, #{userId}, #{questionaireId},
+      current_timestamp, #{remakContent}, #{hadRead})
+  </insert>
+  <update id="edit" parameterType="questionaireRemark">
+		update
+		ec_core_questionaire_remark t set
+		t.had_read = #{hadRead},
+		t.user_id = #{userId},
+		t.operator_name = #{operatorName},
+		t.questionaire_id = #{questionaireId},
+		t.remak_content = #{remakContent},
+		t.create_time = #{createTime},
+		t.update_time = now()
+		where t.id = #{id}
+  </update>
+  <select id="findByQuestionId" resultType="list" resultMap="QuestionaireRemarkResultMap" parameterType="questionaireRemark" >
+    select id, operator_name, user_id, questionaire_id, create_time, update_time, remak_content,
+      had_read
+    from ec_core_questionaire_remark
+    where questionaire_id = #{questionaireId}
+    order by create_time DESC
+  </select>
+</mapper>

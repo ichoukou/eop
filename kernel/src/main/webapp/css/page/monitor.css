@@ -1,0 +1,30 @@
+#sear_box{padding:0 25px;}
+.form p .label_raido{margin:0;width:auto;float:none;}
+.box{margin-bottom:10px;}
+.table{margin-bottom:10px;}
+.pagenavi{margin-bottom:10px;margin-right:10px;float:right;display:inline;}
+.zhi{margin:0 5px;}
+#input_text_txt{width:300px;}
+#box_bd{padding:0px;}
+.tab_c .tab_triggers li a{font-weight:normal;font-size:12px;}
+.tab_c .tab_panels{padding:0px;}
+.table table{border-width:0px;}
+.table thead tr th .arrow_down{background:url(../../images/sprite/table_arrow2.png) no-repeat right 12px;padding-right:20px;}
+.table thead tr th .arrow_up{background:url(../../images/sprite/table_arrow2.png) no-repeat right -78px;padding-right:20px;}
+.attention{float:left;margin-left:10px;display:inline;}
+.tab_triggers ul li a span{float:left;width:17px;height:17px;position:relative;top:5px;left:-12px;background:url(../../images/sprite/ydjk_icon.png) no-repeat;}
+.tab_triggers ul li a .thd{background-position: 0 0px;}
+.tab_triggers ul li a .psz{background-position: 0 -18px;}
+.tab_triggers ul li a .zjz{background-position:0 -35px;}
+.tab_triggers ul li a .cgd{background-position:0 -53px;}
+.tab_triggers ul li a .gzd{background-position: 0 -71px;}
+.tab_triggers ul li a .qt{background-position:0 -89px;}
+.tab_triggers ul li a .jdz{background-position:0 -107px;}
+
+
+.tab_c .tab_triggers li{margin:0 5px;}
+.tab_panels .tab_panel .table .th_b{width:100px;}
+.tab_panels .tab_panel .table .th_c{width:214px;}
+.tab_panels .tab_panel .table thead tr .th_title{padding:0 5px}
+#sear_form p,#sear_form p input{vertical-align:middle;}
+.td_c_add{width:200px;}

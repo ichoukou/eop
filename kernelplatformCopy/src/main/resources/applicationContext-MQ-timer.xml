@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 读取mq的online业务消息 -->
+	<bean id="executeOnlineReadFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.OnlineReadFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="1" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeOnlineReadFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOnlineReadFromMQTimer" />
+		<property name="cronExpression" value="0/59 * * * * ?" />
+	</bean>
+
+
+
+	<!-- 读取mq的offline业务消息 -->
+	<bean id="executeOfflineReadFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.OfflineReadFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="1" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="executeOfflineReadFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOfflineReadFromMQTimer" />
+		<property name="cronExpression" value="0/59 * * * * ?" />
+	</bean>
+
+	<!-- 读取mq的金刚订单更新业务消息 -->
+	<bean id="executeJinGangReadFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.JinGangReadFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="2" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeJinGangReadFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeJinGangReadFromMQTimer" />
+		<property name="cronExpression" value="0/20 * * * * ?" />
+	</bean>
+
+	<!-- 读取back mq的offline业务消息 -->
+	<bean id="executeOfflineReadFromBackMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.OfflineReadFromBackMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="1" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="executeOfflineReadFromBackMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOfflineReadFromBackMQTimer" />
+		<property name="cronExpression" value="0/59 * * * * ?" />
+	</bean>
+	
+	
+	<!-- 读取back mq的online业务消息 -->
+	<bean id="executeOnlineReadFromBackMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.OnlineReadFromBackMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="1" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="executeOnlineReadFromBackMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOnlineReadFromBackMQTimer" />
+		<property name="cronExpression" value="0/59 * * * * ?" />
+	</bean>
+
+	<!-- 读取back mq的金刚订单更新业务消息 -->
+	<bean id="executeJinGangReadFromBackMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.JinGangReadFromBackMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="1" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="executeJinGangReadFromBackMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeJinGangReadFromBackMQTimer" />
+		<property name="cronExpression" value="0/59 * * * * ?" />
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="executeOnlineReadFromMQTrigger" />
+				<ref bean="executeOfflineReadFromMQTrigger" />
+				<ref bean="executeOfflineReadFromBackMQTrigger" />
+				<ref bean="executeOnlineReadFromBackMQTrigger" /> -->
+				<ref bean="executeJinGangReadFromMQTrigger" />
+				<ref bean="executeJinGangReadFromBackMQTrigger" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="addThreadPoolTaskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="25" />
+		<property name="keepAliveSeconds" value="300" />
+	</bean>
+
+</beans>

@@ -1,0 +1,15 @@
+[INFO ]2013-10-25 14:56:31,730 MESSAGE : MLog clients using log4j logging.
+[INFO ]2013-10-25 14:56:31,780 MESSAGE : Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+[DEBUG]2013-10-25 14:56:31,796 MESSAGE : MBean: com.mchange.v2.c3p0:type=PooledDataSource[1hge1zl8x1u5b8cr14fd6t3|15cd9a] registered.
+[INFO ]2013-10-25 14:59:26,569 MESSAGE : MLog clients using log4j logging.
+[INFO ]2013-10-25 14:59:26,617 MESSAGE : Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+[DEBUG]2013-10-25 14:59:26,640 MESSAGE : MBean: com.mchange.v2.c3p0:type=PooledDataSource[1hge1zl8x1u5ez9do793yy|15cd9a] registered.
+[INFO ]2013-10-25 15:05:58,244 MESSAGE : MLog clients using log4j logging.
+[INFO ]2013-10-25 15:05:58,294 MESSAGE : Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+[DEBUG]2013-10-25 15:05:58,314 MESSAGE : MBean: com.mchange.v2.c3p0:type=PooledDataSource[1hge1zl8x1u5ndh615di9r6|15cd9a] registered.
+[INFO ]2013-10-25 15:10:58,491 MESSAGE : MLog clients using log4j logging.
+[INFO ]2013-10-25 15:10:58,553 MESSAGE : Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+[DEBUG]2013-10-25 15:10:58,570 MESSAGE : MBean: com.mchange.v2.c3p0:type=PooledDataSource[1hge1zl8x1u5tt5n1du6ye5|bfb545] registered.
+[INFO ]2013-10-25 15:11:17,750 MESSAGE : MLog clients using log4j logging.
+[INFO ]2013-10-25 15:11:17,804 MESSAGE : Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+[DEBUG]2013-10-25 15:11:17,828 MESSAGE : MBean: com.mchange.v2.c3p0:type=PooledDataSource[1hge1zl8x1u5u80g1kaet28|bfb545] registered.

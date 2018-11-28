@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.AccountUserMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.AccountUser" id="accountUserResultMap">
+		<id property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="payAccount" column="pay_account" />
+		<result property="balance" column="balance" />
+		<result property="useBalance" column="use_balance" />
+		<result property="cellPhone" column="cell_phone" />
+		<result property="allConsume" column="all_consume" />
+		<result property="allRecharge" column="all_recharge" />
+		<result property="remark" column="remark" />
+		<result property="flag" column="flag" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="phoneCode" column="phone_code" />
+	</resultMap>
+
+	<!-- 插入记录 -->
+	<insert id="add" useGeneratedKeys="false" keyProperty="id"
+		parameterType="accountUser">
+		insert into ec_core_accountUser
+		(
+		id
+		,user_id
+		,pay_account
+		,balance
+		,use_balance
+		,cell_phone
+		,all_consume
+		,all_recharge
+		,remark
+		,flag
+		,phone_code
+		,create_time
+		,update_time
+		)
+		values
+		(
+		#{id}
+		,#{userId}
+		,#{payAccount}
+		,#{balance}
+		,#{useBalance}
+		,#{cellPhone}
+		,#{allConsume}
+		,#{allRecharge}
+		,#{remark}
+		,1
+		,#{phoneCode}
+		,now()
+		,now()
+		)
+	</insert>
+	<update id="updateByAccountUser" parameterType="accountUser">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		<if test="payAccount != null and payAccount != ''">
+			,pay_account = #{payAccount}
+		    </if>
+		<if test="balance != null ">
+			,balance = #{balance}
+		    </if>
+		<if test="useBalance != null ">
+			,use_balance = #{useBalance}
+		</if>
+		<if test="cellPhone != null and cellPhone != ''">
+			,cell_phone = #{cellPhone}
+		    </if>
+		<if test="allConsume != null ">
+			,all_consume = #{allConsume}
+		    </if>
+		<if test="allRecharge != null ">
+			,all_recharge = #{allRecharge}
+		    </if>
+		<if test="remark != null and remark != ''">
+			,remark = #{remark}
+		    </if>
+		<if test="flag != null and flag != ''">
+			,flag = #{flag}
+		    </if>
+		<if test="phoneCode != null and phoneCode != ''">
+			,phone_code = #{phoneCode}	 
+		    </if>
+		<if test="userId != null and userId != ''">
+			,user_id = #{userId}	 
+		</if>
+		where id = #{id}
+	</update>
+
+	<update id="edit" parameterType="accountUser">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		<if test="payAccount != null and payAccount != ''">
+			,pay_account = #{payAccount}
+		    </if>
+		<if test="balance != null ">
+			,balance = #{balance}
+		    </if>
+		<if test="useBalance != null ">
+			,use_balance = #{useBalance}
+		</if>
+		<if test="cellPhone != null and cellPhone != ''">
+			,cell_phone = #{cellPhone}
+		    </if>
+		<if test="allConsume != null ">
+			,all_consume = #{allConsume}
+		    </if>
+		<if test="allRecharge != null ">
+			,all_recharge = #{allRecharge}
+		    </if>
+		<if test="remark != null and remark != ''">
+			,remark = #{remark}
+		    </if>
+		<if test="flag != null and flag != ''">
+			,flag = #{flag}
+		    </if>
+		<if test="phoneCode != null and phoneCode != ''">
+			,phone_code = #{phoneCode}	 
+		    </if>
+		<if test="userId != null and userId != ''">
+			,user_id = #{userId}	 
+		</if>
+		where id = #{id}
+	</update>
+
+	<delete id="remove" parameterType="accountUser">
+		delete from
+		ec_core_accountUser where id = #{id}
+	</delete>
+
+	<select id="get" parameterType="accountUser" resultType="accountUser"
+		resultMap="accountUserResultMap">
+		select * from ec_core_accountUser
+		where id = #{id}
+	</select>
+
+	<!-- 通过用户ID取账户信息 -->
+	<select id="getAccountUserByUserId" parameterType="integer"
+		resultType="accountUser" resultMap="accountUserResultMap">
+		select * from ec_core_accountUser
+		where user_id = #{userId}
+	</select>
+
+	<!-- 查询账户列表 -->
+	<select id="getAccountUserList" parameterType="map" resultType="list" resultMap="accountUserResultMap">
+		select * from ec_core_accountUser
+		where flag='1'
+		<if test="id != null and id != ''">
+			and id = #{id}
+		    </if>
+		<if test="userId != null and userId != ''">
+			and user_id = #{userId}
+		</if>
+	    <if test="userIdArray != null">
+			and user_id in
+			<foreach collection="userIdArray" item="userIdArray" open="("
+				separator="," close=")">
+				#{userIdArray}
+		    </foreach>
+		</if>
+		<if test="payAccount != null and payAccount != ''">
+			and pay_account = #{payAccount}
+		    </if>
+		<if test="balance != null and balance != ''">
+			and balance = #{balance}
+		</if>
+		
+		<if test="startBalance != null and endBalance != null">
+			and use_balance between #{startBalance} and #{endBalance}
+		</if>
+		<if test="startBalance != null and endBalance == null">
+			 and use_balance <![CDATA[>=]]> #{startBalance}
+		</if>
+		<if test="startBalance == null and endBalance != null">
+			and use_balance <![CDATA[<=]]> #{endBalance}
+		</if>
+		
+		<if test="startConsume != null and endConsume != null">
+			and all_consume between #{startConsume} and #{endConsume}
+		</if>
+		<if test="startConsume != null and endConsume == null">
+			and all_consume <![CDATA[>=]]> #{startConsume} 
+		</if>
+		<if test="startConsume == null and endConsume != null">
+			and all_consume <![CDATA[<=]]> #{endConsume}
+		</if>
+		
+		<if test="cellPhone != null and cellPhone != ''">
+			and cell_phone = #{cellPhone}
+		</if>		
+		<if test="allRecharge != null and allRecharge != ''">
+			and all_recharge = #{allRecharge}
+		</if>
+		<if test="remark != null and remark != ''">
+			and remark = #{remark}
+		    </if>
+		<if test="flag != null and flag != ''">
+			and flag = #{flag}
+		</if>
+		<if test="phoneCode != null and phoneCode != ''">
+			and phone_code = #{phoneCode}	 
+		</if>
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime}	 
+		    </if>
+		<if test='startTime != null and endTime != null'>
+			and create_time between #{startTime} and #{endTime}
+		</if>
+		order by  all_consume desc
+
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+	    </if>
+	</select>
+	
+	<!-- 查询账户列表总记录数 -->
+	<select id="getAccountUserListCount" parameterType="map" resultType="java.lang.Integer" >
+		select count(id) from ec_core_accountUser
+		where flag='1'
+		<if test="id != null and id != ''">
+			and id = #{id}
+		    </if>
+		<if test="userId != null and userId != ''">
+			and user_id = #{userId}
+		</if>
+	    <if test="userIdArray != null">
+			and user_id in
+			<foreach collection="userIdArray" item="userIdArray" open="("
+				separator="," close=")">
+				#{userIdArray}
+		    </foreach>
+		</if>
+		<if test="payAccount != null and payAccount != ''">
+			and pay_account = #{payAccount}
+		    </if>
+		<if test="balance != null and balance != ''">
+			and balance = #{balance}
+		</if>
+		
+		<if test="startBalance != null and endBalance != null">
+			and use_balance between #{startBalance} and #{endBalance}
+		</if>
+		<if test="startBalance != null and endBalance == null">
+			 and use_balance <![CDATA[>=]]> #{startBalance}
+		</if>
+		<if test="startBalance == null and endBalance != null">
+			and use_balance <![CDATA[<=]]> #{endBalance}
+		</if>
+		
+		<if test="startConsume != null and endConsume != null">
+			and all_consume between #{startConsume} and #{endConsume}
+		</if>
+		<if test="startConsume != null and endConsume == null">
+			and all_consume <![CDATA[>=]]> #{startConsume} 
+		</if>
+		<if test="startConsume == null and endConsume != null">
+			and all_consume <![CDATA[<=]]> #{endConsume}
+		</if>
+		
+		<if test="cellPhone != null and cellPhone != ''">
+			and cell_phone = #{cellPhone}
+		</if>		
+		<if test="allRecharge != null and allRecharge != ''">
+			and all_recharge = #{allRecharge}
+		</if>
+		<if test="remark != null and remark != ''">
+			and remark = #{remark}
+		    </if>
+		<if test="flag != null and flag != ''">
+			and flag = #{flag}
+		</if>
+		<if test="phoneCode != null and phoneCode != ''">
+			and phone_code = #{phoneCode}	 
+		</if>
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime}	 
+		</if>
+		<if test='startTime != null and endTime != null'>
+			and create_time between #{startTime} and #{endTime}
+		</if>		
+	</select>
+	
+
+	<!-- 通过用户ID修改取账户的手机号码 -->
+	<update id="updateAccountUserMobileByUserId" parameterType="accountUser">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		<if test="cellPhone !=null and cellPhone !=''">
+			,cell_phone = #{cellPhone}
+	    </if>		
+			where user_id = #{userId}
+	</update>
+   <!-- 通过用户id 修改手机号（为空） -->
+    <update id="cancelMobileBindByUserId" parameterType="accountUser">
+		update
+		ec_core_accountUser
+		set
+		update_time = now(),
+		cell_phone = #{cellPhone}
+			where user_id = #{userId}
+	</update>
+
+	<!-- 通过用户ID修改用户表 记下cellPhone,phoneCode -->
+	<update id="updateSendPhoneCode" parameterType="map">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		<if test="cellPhone !=null and cellPhone !=''">
+			,cell_phone = #{cellPhone}
+	    </if>
+		<if test="phoneCode !=null and phoneCode !=''">
+			,phone_code = #{phoneCode}
+	    </if>
+			where user_id = #{userId}
+	</update>
+
+	<!-- 充值(总充值增加、余额增加) -->
+	<update id="updateAccountUserBalanceAddByUserId" parameterType="map">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		,all_recharge =
+		all_recharge + #{money}
+		,balance = balance + #{money}
+		,use_balance =
+		use_balance + #{money}
+		<if test="payAccount != null and payAccount != ''">
+		 , pay_account = #{payAccount} 
+		</if>
+		where user_id = #{userId}
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime} 
+		</if>
+	</update>
+
+	<!-- 买服务调用（余额减少、总消费增加） -->
+	<update id="updateAccountUserBalanceLowerByUserId"
+		parameterType="map">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		,all_consume =
+		all_consume + #{money}
+		,balance = balance - #{money}
+		,use_balance =
+		use_balance - #{money}
+		where user_id = #{userId}
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime} 
+		</if>
+	</update>
+
+	<!-- 获取总的可以余额 -->
+	<select id="getSumUseBalance" parameterType="map" resultType="java.lang.Double">
+		select sum(use_balance) from ec_core_accountUser
+		<where>
+			<if test='startTime != null and endTime != null'>
+				and create_time between #{startTime} and #{endTime}
+			</if>
+			
+			<if test="startBalance != null and endBalance != null">
+				and use_balance between #{startBalance} and #{endBalance}
+			</if>
+			<if test="startBalance != null and endBalance == null">
+				 and use_balance <![CDATA[>=]]> #{startBalance}
+			</if>
+			<if test="startBalance == null and endBalance != null">
+				and use_balance <![CDATA[<=]]> #{endBalance}
+			</if>
+			
+			<if test="startConsume != null and endConsume != null">
+				and all_consume between #{startConsume} and #{endConsume}
+			</if>
+			<if test="startConsume != null and endConsume == null">
+				and all_consume <![CDATA[>=]]> #{startConsume} 
+			</if>
+			<if test="startConsume == null and endConsume != null">
+				and all_consume <![CDATA[<=]]> #{endConsume}
+			</if>
+			
+			<if test="userIdArray != null">
+				and user_id in
+				<foreach collection="userIdArray" item="userIdArray" open="(" separator="," close=")">
+					#{userIdArray}
+			    </foreach>
+			</if>
+		</where>	
+	</select>
+
+	<!-- 获取总消费 -->
+	<select id="getSumAllConsume" parameterType="map" resultType="java.lang.Double">
+		select sum(all_consume) from ec_core_accountUser
+		<where>
+			<if test='startTime != null and endTime != null'>
+				and create_time between #{startTime} and #{endTime}
+			</if>
+			
+			<if test="startBalance != null and endBalance != null">
+				and use_balance between #{startBalance} and #{endBalance}
+			</if>
+			<if test="startBalance != null and endBalance == null">
+				 and use_balance <![CDATA[>=]]> #{startBalance}
+			</if>
+			<if test="startBalance == null and endBalance != null">
+				and use_balance <![CDATA[<=]]> #{endBalance}
+			</if>
+			
+			<if test="startConsume != null and endConsume != null">
+				and all_consume between #{startConsume} and #{endConsume}
+			</if>
+			<if test="startConsume != null and endConsume == null">
+				and all_consume <![CDATA[>=]]> #{startConsume} 
+			</if>
+			<if test="startConsume == null and endConsume != null">
+				and all_consume <![CDATA[<=]]> #{endConsume}
+			</if>
+	
+			<if test="userIdArray != null">
+				and user_id in
+				<foreach collection="userIdArray" item="userIdArray" open="(" separator="," close=")">
+					#{userIdArray}
+			    </foreach>
+			</if>
+		</where>			
+	</select>
+	
+	<!-- 修改可用余额[在付款跳到支付宝冻结相应的可用余额、定时器退回可用余额、在关闭时] -->
+	<update id="updateUseBalanceByUserId" parameterType="map">
+		update
+		ec_core_accountUser
+		set
+		update_time = now()
+		<if test="balance != null ">
+			, balance =  #{balance} 
+		</if>
+		<if test="allConsume != null">
+			, all_consume =  #{allConsume} 
+		</if>
+		<if test="allRecharge != null">
+			, all_recharge =  #{allRecharge} 
+		</if>
+		,use_balance =  #{money}
+		where user_id = #{userId}
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime} 
+		</if>
+	</update>
+	
+	<!-- 查询账户列表[给定时器使用,修改可使用余额,使可用余额跟余额相同] -->
+	<select id="getAccountUserListUseTime" parameterType="map" resultType="list"
+		resultMap="accountUserResultMap">
+		select * from ec_core_accountUser
+		where flag='1'		
+	</select>
+
+</mapper>

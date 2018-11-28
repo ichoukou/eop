@@ -1,0 +1,29 @@
+.tab_panel_c{border-bottom:1px dashed #ccc;padding:10px;}
+.tab_panel_c h5{font-size:14px;color:#0e1213;line-height:30px;margin-bottom:10px;}
+.tab_panel_c em{font-style:normal;}
+.pad1 ol li{color:red;padding-left:10px;line-height:25px;list-style:decimal inside none;}
+.tab_td1{width:110px;text-align:right;height:30px;}
+.tab_td2{padding-left:10px;width:265px;height:30px;}
+.tab_td3{width:450px;}
+.table_span{margin-left:10px;}
+.table_span a{text-decoration:underline;}
+.table_span a:hover{text-decoration:none;}
+.pad1{padding-bottom:10px;}
+.input_text2{width:200px;}
+.text_span{margin-right:5px;}
+.form p label{width:100px;}
+#fixed1,#fixed3{width:40px;}
+#fixed2{width:150px;}
+#quantity,#weight{width:70px;}
+.zhi_z{padding-left:6px;padding-right:6px;}
+.p_mar{width:265px;padding-top:15px;margin:0 auto;}
+.tab_last{border:none;}
+#address_detail,#attention{height:70px;width:278px;}
+#attention{margin-top:0;}
+#ban_count{display:inline-block;cursor:pointer;}
+#contact,#waybill,#mobile,#cart_name{width:278px;}
+.fahuo{margin-left:200px;color:#8DB2E3;font-size:13px;}
+.fahuo a{text-decoration:underline}
+#ban_dialog{width:700px;line-height:1.4;}
+#ban_dialog p{margin-bottom:5px;}
+.td_a .mailno{margin-right:5px;}

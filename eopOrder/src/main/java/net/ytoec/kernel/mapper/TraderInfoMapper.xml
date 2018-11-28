@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 联系人数据映射文件 -->
+<mapper namespace="net.ytoec.kernel.mapper.TraderInfoMapper">
+	<cache />
+	<resultMap type="traderInfo" id="traderInfoResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="postCode" column="post_code" />
+		<result property="phone" column="phone" />
+		<result property="mobile" column="mobile" />
+		<result property="prov" column="prov" />
+		<result property="city" column="city" />
+		<result property="district" column="district" />
+		<result property="address" column="address" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="tradeType" column="trade_type" />
+		<result property="orderId" column="order_id" />
+		<result property="partitionDate" column="partitiondate" />
+		<result property="numProv" column="numProv" />
+		<result property="numCity" column="numCity" />
+		<result property="numDistrict" column="numDistrict" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	<!-- 查询traderInfo表的prov -->
+	<select id="getTraderInfo" parameterType="map"  resultType="TraderInfo">
+		select t.id ,t.prov from ec_core_traderinfo t where t.partitiondate = #{partition} and t.numProv = '0' 
+		order by t.id asc limit #{limit}  
+	</select>
+	<select id="getTraderInfoById" parameterType="map"  resultType="TraderInfo">
+		select t.id ,t.prov from ec_core_traderinfo t where t.partitiondate = #{partition} and t.numProv = '0' and t.id > #{traderId}
+		order by t.id asc limit #{limit}  
+	</select>
+	
+	<update id="updateProviceInfo" parameterType="TraderInfo" >
+		update ec_core_traderinfo set numProv = #{numProv} where prov = #{prov} and partitiondate = #{partitionDate}
+	</update>
+	
+	
+	<select id="getAllTraderInfo" resultType="list" resultMap="traderInfoResultMap">
+		select * from EC_CORE_TRADERINFO
+	</select>
+
+
+	<select id="get" parameterType="TraderInfo" resultType="traderInfo"
+		resultMap="traderInfoResultMap">
+		<![CDATA[
+			select * from EC_CORE_TRADERINFO where id = #{id}
+        ]]>
+	</select>
+
+
+	<insert id="add" parameterType="traderInfo" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_TRADERINFO(id,name,
+		post_code,phone,mobile,prov,city,district,address,create_Time,trade_type,order_id,partitionDate,numProv,numCity,numDistrict,remark)
+		values(#{id}, #{name}, #{postCode}, #{phone}, #{mobile},
+		#{prov},#{city}, #{district}, #{address}, current_timestamp,  
+		#{tradeType},#{orderId},#{partitionDate},#{numProv},#{numCity},#{numDistrict},#{remark})
+	</insert>
+
+
+	<update id="edit" parameterType="traderInfo">
+		update EC_CORE_TRADERINFO set
+		name = #{name}, post_code =
+		#{postCode} , phone = #{phone} , mobile =
+		#{mobile} , prov =
+		#{prov}, city = #{city}, address = #{address},
+		district = #{district},
+		  update_Time = #{updateTime}, trade_type =
+		#{tradeType}, order_id = #{orderId}, numProv =
+		#{numProv}, numCity = #{numCity},numDistrict = #{numDistrict},remark = #{remark} where id = #{id}
+	</update>
+	<delete id="remove" parameterType="traderInfo">
+		delete from EC_CORE_TRADERINFO
+		where id = #{id}
+	</delete>
+
+	<delete id="delTraderInfoByOrderId" parameterType="int">
+		delete from
+		EC_CORE_TRADERINFO where order_id = #{orderId}
+	</delete>
+
+	<select id="getTraderInfoByOrderId" parameterType="int"
+		resultType="list" resultMap="traderInfoResultMap">
+		SELECT * FROM EC_CORE_TRADERINFO
+		WHERE order_id = #{orderId}
+	</select>
+
+	<select id="getTraderInfo4Question" parameterType="map"
+		resultType="list" resultMap="traderInfoResultMap">
+		SELECT * FROM EC_CORE_TRADERINFO
+		WHERE order_id = #{orderId} AND trade_type=#{tradeType}
+	</select>
+	
+	
+	<select id="getTraderInfoByPartitiondate" parameterType="map"
+		resultType="list" resultMap="traderInfoResultMap">
+		SELECT * FROM EC_CORE_TRADERINFO
+		WHERE order_id = #{orderId} AND partitiondate=#{Partitiondate}
+	</select>
+	
+	<select id="traderInfoTimerList" resultType="list" resultMap="traderInfoResultMap" parameterType="map">
+		select o.id, o.prov,o.numProv
+		from EC_CORE_TRADERINFO o
+		ORDER BY o.partitiondate ASC
+		LIMIT #{startIndex}, #{pageNum}
+	</select>
+	
+	<select id="countTraderInfoTimerList" resultType="int">
+		select count(o.id)
+		from EC_CORE_TRADERINFO o
+	</select>
+
+	<select id="getTraderInfoByIdAndByTraderType" parameterType="map" resultType="traderInfo" resultMap="traderInfoResultMap">
+		SELECT * FROM EC_CORE_TRADERINFO WHERE order_id = #{orderId} and trade_type = #{tradeType}
+	</select>
+</mapper>

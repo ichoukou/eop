@@ -1,0 +1,64 @@
+/*.layout :after{*/
+/*display: table;*/
+/*content: "";*/
+/*clear: both;*/
+/*}*/
+.form{
+    border-bottom: 1px solid #A2A2A2;
+}
+.form p {
+    padding-left:0px;
+}
+.form p span{
+    float: left;
+
+}
+.form p a{
+    margin-left: 40px;
+}
+.form p label {
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 100%;
+    line-height: 26px;
+    text-align: right;
+    width: 68px;
+    margin-left:0px;
+}
+.form p .input_text{
+	float:left;
+}
+.pro_box {
+    height: auto;
+    overflow: hididen;
+    position: relative;
+    padding :10px 0;
+}
+.order-box{
+    width:100%;
+    overflow: hidden;
+}
+.order-box li .red{
+    color: red;
+}
+.order-box li{
+     height:26px;
+ }
+.order-box li .m-span{
+   width:218px;
+    display: inline-block;
+}
+.order-hd{
+    margin-top:10px;
+}
+.order-btn{
+    text-align: center;
+}
+.order-btn a{
+    margin: 0 10px;
+}
+.m-span-last{
+ display:inline-block;
+ width:268px;
+}

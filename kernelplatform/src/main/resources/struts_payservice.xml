@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="payservice" namespace="/" extends="ssMyBatis">
+		<action name="payService_*" class="payServiceAction" method="{1}">
+		     <result name="toIndex" type="tiles">WEB-INF.payservice/payservice_list.jsp</result>
+		     <result name="toApplicay" type="tiles">WEB-INF.payservice/openservice.jsp</result>
+		     <result name="toSupplement" type="tiles">WEB-INF.payservice/recharge_online.jsp</result>
+		     <!-- 跳转到实效提醒页面   -->
+		     <result name="passManage_warn" type="redirect">
+		          <param name="location">passManage_warnningIndex.action?menuFlag=chajian_passManage_warn</param>
+		     </result>		     
+		      <result name="toOpen" type="redirect">
+		         <param name="location">payService_index.action?menuFlag=home_payService</param>
+		      </result> 
+		     <result name="success" type="tiles">WEB-INF.payservice/payment_detail.jsp</result> 
+		     <!-- 
+		     <result name="closeOrder" type="redirect">payService_getPaymentList</result> -->
+		     <result name="toRechargeHelp" type="tiles">WEB-INF.payservice/recharge_help.jsp</result>
+		     <!-- 
+		      <result name="cancelPhoneBind" type="tiles">WEB-INF.payservice/payservice_list.jsp</result>
+		      
+		       <result name="cancelPhoneBind" type="redirect">
+		           <param name="location">payService_index.action?menuFlag=payService</param>
+		       </result>
+		        -->
+		     <result name="cancelPhoneBind" type="json">
+		        <param name="root">isMatch</param>
+		     </result>
+		     <result name="closeOrder" type="json">
+			    <param name="root">response</param>
+			 </result>
+			 <!-- 
+		      <result name="toOpenSms" type="tiles">WEB-INF.payservice/payservice_list.jsp</result>
+		       -->
+		        <result name="toOpenSms" type="redirect">
+		            <param name="location">smsHomeEvent_homePage.action?menuFlag=sms_home</param>
+		        </result>
+		     <result name="toBuyPorts" type="chain">inBuyPortsAction</result>
+		     <result name="getUseBalance" type="json">
+			    <param name="root">accountUser</param>
+			 </result>
+			 <result name="saveSuccess" type="json">
+			    <param name="root">isSaveSuccess</param>
+			 </result>
+		      <result name="phoneCompare" type="json">
+		         <param name="root">isMatch</param>
+		      </result>
+		      <result name="phoneBind" type="json">
+		         <param name="root">isMatch</param>
+		      </result>
+		      <result name="phoneCodeCompare" type="json">
+		         <param name="root">isMatch</param>
+		      </result>
+		      <result name="checkPhone" type="json">
+		        <param name="root">isMatch</param>
+		      </result>
+		      <result name="overTimePhoneCode" type="json">
+		        <param name="root">isMatch</param>
+		      </result>
+		     <result name="toServiceDetail" type="tiles">WEB-INF.payservice/serviceDetil.jsp</result>
+		     <result name="smsServiceDetail" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+		     <result name="closeService" type="redirect">
+		       <param name="location">payService_indexService.action?menuFlag=home_payService</param>
+		       <param name="namespace">/</param>
+		     </result>
+		     <result name="alipay">/alipay.jsp</result> 
+		     <result name="non_index" type="redirect">
+					<param name="location">payService_indexService.action?menuFlag=home_payService</param>
+					<param name="namespace">/</param>
+			</result>
+		     <interceptor-ref name="sessionMethodout">     
+	                 <param name="includeMethods">
+	                 index,toAliPay,applyService,updateRemindService,checkPhone,phoneBind,updatePhoneCode,cancelPhoneBind,
+	                 applySmsService,closeService,toSupplement,payOrClose,
+	                 seeDetails
+	                 </param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>		
+		</action>		
+		 
+		 <!-- 收支明细 -->
+		<action name="payService_getPaymentList" class="payServiceAction" method="getPaymentList">
+		       <result name="success" type="tiles">WEB-INF.payservice/payment_detail.jsp</result>
+		       
+			    <result name="non_index" type="tiles">WEB-INF.payservice/payment_detail.jsp</result>
+			    
+		      <!--  <interceptor-ref name="sessionMethodout">     
+	                 <param name="includeMethods">getPaymentList</param> 
+	            </interceptor-ref>  -->
+			   <interceptor-ref name="defaultStack"></interceptor-ref>		  
+		</action>
+		 
+		 <!-- 详情页面中的 开始使用-->	
+		<action name="payServiceDetil_*" class="payServiceAction" method="{1}">
+		       <result name="toApplicayFromDetil" type="tiles">WEB-INF.payservice/openservice.jsp</result>
+			   <result name="non_index" type="tiles">
+			   WEB-INF.payservice/serviceDetil.jsp
+			   </result>
+		       <interceptor-ref name="sessionMethodout">     
+	                 <param name="includeMethods">applyServiceFromDetail</param> 
+			  </interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>		  
+		</action>
+		 
+		 
+		<!-- 账户管理 -->
+		<action name="accountAdmin_*" class="accountAdminAction" method="{1}">
+			<result name="list" type="tiles">WEB-INF.pay/account_userlist.jsp</result>
+			<result name="index" type="tiles">WEB-INF.pay/account_userlist.jsp</result>
+			<!-- <result name="remark" type="redirect">accountAdmin_index.action</result> -->
+			<result name="remark" type="json">
+			    <param name="root">response</param>
+			</result>
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">index,editRemark,list</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>		
+		</action>
+		
+		<!-- 收支记录 -->
+		<action name="paymentAdmin_*" class="paymentAdminAction" method="{1}">
+			<result name="list" type="tiles">WEB-INF.pay/payment_userlist.jsp</result>
+			<result name="index" type="tiles">WEB-INF.pay/payment_userlist.jsp</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">index,list</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+		</action>
+		
+		
+		
+		<!-- 服务管理 -->
+		<action name="serviceAdmin_*" class="serviceAdminAction" method="{1}">
+			<result name="list" type="tiles">WEB-INF.pay/service_userlist.jsp</result>
+			<result name="index" type="tiles">WEB-INF.pay/service_userlist.jsp</result>
+			<!-- <result name="remark" type="redirect">serviceAdmin_index.action</result> -->
+			<result name="remark" type="json">
+			      <param name="root">response</param>
+			</result>
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">index,list,editRemark</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>		
+		</action>
+		
+		<!--  在线充值  -->
+		<action name="alipay_*" class="alipayAction" method="{1}">    
+		<result name="alipay">/alipay.jsp</result>
+		<result name="success" type="tiles">WEB-INF.payservice/recharge_online.jsp</result>  
+		<result name="toApplicay" type="tiles">WEB-INF.payservice/openservice.jsp</result>
+		<result name="toServiceDetailFromSms" type="tiles">WEB-INF.payservice/serviceDetil.jsp</result>
+		<result name="toApplicayFromDetilSms" type="tiles">WEB-INF.payservice/openservice.jsp</result>
+		<result name="smsServiceDetail" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+		<result name="toOpenSmsFromSms" type="redirect">
+		   <param name="location">smsHomeEvent_homePage.action?menuFlag=sms_home</param>
+		</result>
+		<result name="toPayOrder" type="redirect">
+				<param name="location">payService_getPaymentList.action</param>
+		</result>   
+		 <result name="non_index" type="redirect">
+					<param name="location">alipay_toRechargeOnlineIndex.action?menuFlag=caiwu_alipay</param>
+					<param name="namespace">/</param>
+	    </result>
+			<interceptor-ref name="sessionMethodout">
+		                 <param name="includeMethods">onlineDealPayment,toRechargeOnline</param> 
+			</interceptor-ref>
+				
+				<interceptor-ref name="defaultStack"></interceptor-ref>	   
+		</action>
+		<!-- 给[支付调用] begin-->
+		<!--1)[同步]支付宝只调用一次[不需传界面给支付宝]  -->
+		<action name="alipayReturn" class="alipayAction" method="alipayReturn">	
+		 <result name="alipayResult" type="redirect">payService_getPaymentList.action?menuFlag=caiwu_paymentList</result> 
+		</action>
+			<!--2)[异步][需传界面给支付宝]假如传的界面没有输出success,支付宝每隔一段时间还会调用  -->
+		<action name="alipayNotify" class="alipayAction" method="alipayNotify">
+		  <!--   <result name="alipayResult">/alipayResult.jsp</result>    -->
+		</action>
+		<!-- 给[支付调用] end  -->
+		<!-- 无线天利注册 -->
+		<action name="registexTeach" class="alipayAction" method="registexTeach">	
+		     <result name="register" type="json">
+			      <param name="root">resFlag</param>
+			</result>
+		</action>
+		
+		<!-- admin 上传文件类        作用：供其他模块发送短信 -->
+		<action name="admin_upload" class="adminUploadAction" method="upload">		    
+            <result name="success" type="tiles">WEB-INF.pay/admin_upload.jsp</result>
+        </action>
+        <!-- admin 下载文件        作用：供其他模块发送短信 -->
+        <action name="admin_updateContent" class="adminUploadAction" method="updateContent">
+            <result name="toOrderImoprt" type="tiles">WEB-INF.pay/admin_upload.jsp</result>
+        </action>
+        
+        <action name="admin_download" class="adminUploadAction" method="downLoadZip">
+            <result name="success" type="tiles">WEB-INF.pay/admin_upload.jsp</result>
+        </action>
+        
+	</package>
+</struts>

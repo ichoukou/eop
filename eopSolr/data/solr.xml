@@ -1,0 +1,13 @@
+<solr persistent="true" sharedLib="lib">
+	<cores adminPath="/admin/cores">
+		<core name="branchcore" instanceDir="branchcore">
+			<property name="dataDir" value="branchcore/data" />
+		</core>
+		<core name="eccore" instanceDir="eccore">
+			<property name="dataDir" value="eccore/data" />
+		</core>
+		<core name="outareacore" instanceDir="outareacore">
+			<property name="dataDir" value="outareacore/data" />
+		</core>
+	</cores>
+</solr>

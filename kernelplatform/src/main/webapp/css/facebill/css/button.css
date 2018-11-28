@@ -1,0 +1,51 @@
+/* Button Public */
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner{
+	border:none;padding:0;
+}
+.btn input,.btn span,.btn button{border:0 none;margin:0;width:auto;padding:0;background:#fff;vertical-align:top;overflow:visible;}
+.btn,.btn input,.btn span,.btn button{display:inline-block;background:url(../../images/module/button.png?d=2012081101) no-repeat #fff;cursor:pointer;vertical-align:top;}
+.btn{overflow:hidden;text-decoration:none;}
+.btn:hover,.btn:hover span{text-decoration:none;}
+
+/* Button A */
+.btn_a{padding-left:15px;background-position:0 0;height:27px;}
+.btn_a input,.btn_a span,.btn_a button{padding-right:15px;height:27px;color:#fff;font:12px/27px Arial,SimSun;background-position:right 0;}
+.btn_a:hover{background-position:0 -169px;}
+.btn_a:active{background-position:0 -248px;}
+.btn_a:hover input,.btn_a:hover span,.btn_a:hover button{background-position:right -169px;}
+.btn_a:active input,.btn_a:active span,.btn_a:active button{background-position:right -248px;}
+
+/* Button B */
+.btn_b{padding-left:40px;background-position:0 -27px;height:38px;}
+.btn_b input,.btn_b span,.btn_b button{padding-right:40px;height:38px;color:#1E569E;font:20px/38px 'Microsoft YaHei';text-shadow:1px 1px 1px #fff;background-position:right -27px;}
+
+/* Button C */
+.btn_c{padding-left:25px;background-position:0 -65px;height:28px;}
+.btn_c input,.btn_c span,.btn_c button{padding-right:25px;height:28px;color:#fff;font:12px/28px Arial,SimSun;text-shadow:1px 1px 1px #536079;background-position:right -65px;}
+
+/* Button D */
+.btn_d{padding-left:15px;background-position:0 -93px;height:24px;}
+.btn_d input,.btn_d span,.btn_d button{padding-right:15px;height:24px;color:#fff;font:12px/24px Arial,SimSun;background-position:right -93px;}
+.btn_d:hover{background-position:0 -196px;}
+.btn_d:active{background-position:0 -303px;}
+.btn_d:hover input,.btn_d:hover span,.btn_d:hover button{background-position:right -196px;}
+.btn_d:active input,.btn_d:active span,.btn_d:active button{background-position:right -303px;}
+
+/* Button E */
+.btn_e{padding-left:15px;background-position:0 -117px;height:24px;}
+.btn_e input,.btn_e span,.btn_e button{padding-right:15px;height:24px;color:#818181;font:12px/24px Arial,SimSun;background-position:right -117px;}
+
+/* Button F */
+.btn_f{padding-left:15px;background-position:0 -141px;height:28px;}
+.btn_f input,.btn_f span,.btn_f button{padding-right:15px;height:28px;color:#000;font:12px/28px Arial,SimSun;background-position:right -141px;}
+.btn_f:hover{background-position:0 -220px;}
+.btn_f:active{background-position:0 -275px;}
+.btn_f:hover input,.btn_f:hover span,.btn_f:hover button{background-position:right -220px;}
+.btn_f:active input,.btn_f:active span,.btn_f:active button{background-position:right -275px;}
+
+/* Button Disable */
+.btn_disable{padding-left:15px;background-position:0 -117px;height:24px;cursor:not-allowed;}
+.btn_disable input,.btn_disable span,.btn_disable button{padding-right:15px;height:24px;color:#818181;font:12px/24px Arial,SimSun;background-position:right -117px;cursor:not-allowed;}

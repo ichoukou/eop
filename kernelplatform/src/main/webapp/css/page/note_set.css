@@ -1,0 +1,29 @@
+#content_bd {border:1px solid #9dbee7;position:relative;background-color: #fff;}
+#set_fm {padding:10px 0 10px 50px;width:517px;min-height:517px;_height:517px;}
+.template,.timearea,.sendarea {margin-bottom:25px;}
+.title {font-size: 13px;font-weight: bold;display:block;}
+.template .title {margin-left:-30px;}
+.timearea .title {margin-left:-10px;}
+.template ul {padding: 7px 0 7px 22px;}
+.template input {margin-left:-22px;}
+.template li {line-height:24px;color:#808080;}
+.template li.on {color:#000;}
+.template .iphone {background: url("../../images/single/iphone_bg.png") no-repeat scroll 0 0 transparent;width:197px;height:398px;color:#000;position:absolute;top:65px;right:45px;}
+.template p {margin-top:100px;padding:12px 24px;height:188px;overflow:hidden;line-height:1.4;} 
+.timearea p {padding-top:18px;}
+.timearea select{width:115px;}
+.sendarea p {margin:15px 0 10px;padding:8px;border:1px solid #9cbde7;line-height:16px;}
+.sendarea p a {color:#000;display:block;}
+.sendarea p a:hover {text-decoration:none;}
+.sendarea .choose {text-decoration:underline;}
+.opts {text-align:center;}
+.opts a {margin:20px 15px;}
+.cityarea {width:600px;background:url("../../images/single/cityarea_bg_v.gif") repeat-y scroll center top transparent;overflow:hidden;}
+.cityarea table {width: 100%;}
+.cityarea tr {background:url("../../images/single/cityarea_bg_h.gif") repeat-x scroll bottom left transparent;}
+.cityarea tr.last {background:none;}
+.cityarea td {padding:10px; width:50%;}
+.cityarea input {vertical-align:-1px;display:inline-block;}
+.cityarea label {margin-right:10px;display:inline-block;line-height:23px;}
+.cityarea .all {display:block;inline-height:24px;margin-bottom:12px;}
+.green {color:#0f0;}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.ApiLogMapper">
+	<insert id="insertApiLog" parameterType="net.ytoec.kernel.dataobject.ApiLog">
+		<![CDATA[		
+			INSERT INTO
+				EC_CORE_APILOG
+					(ID,CREATETIME,
+					LASTUPDATETIME,ISEXCEPTION,
+					LOGTYPE,USEDTIME,
+					REQUESTMSG,RESPONSEMSG,
+					EXCEPTIONMSG,REQUESTIP,
+					BUSINESSID,DESCRIPTION)
+			VALUES
+				(#{id,jdbcType=NUMERIC},#{createTime,jdbcType=TIMESTAMP},
+				#{lastUpdateTime,jdbcType=TIMESTAMP},#{isException,jdbcType=NUMERIC},
+				#{logType,jdbcType=VARCHAR},#{usedtime,jdbcType=NUMERIC},
+				#{requestMsg,jdbcType=VARCHAR},#{responseMsg,jdbcType=VARCHAR},
+				#{exceptionMsg,jdbcType=VARCHAR},#{requestIP,jdbcType=VARCHAR},
+				#{businessId,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR})
+		]]>
+	</insert>
+</mapper>

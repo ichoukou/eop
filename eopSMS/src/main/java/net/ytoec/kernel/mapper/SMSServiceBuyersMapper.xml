@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSServiceBuyersMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSServiceBuyers" id="smsServiceBuyersResultMap">
+		<id property="id" column="id"/>
+		<id property="smsMarketId" column="sms_market_id"/>
+		<id property="buyId" column="buy_id"/>
+		<id property="createTime" column="create_time"/>
+		<id property="createUserId" column="create_userId"/>
+	</resultMap>
+	
+	<!-- 添加 -->
+	<insert id="addSMSServiceBuyers" parameterType="smsServiceBuyers" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_sms_service_buyers(id,sms_market_id,buy_id,
+		create_time,create_userId)values(
+		#{id},#{smsMarketId},#{buyId},#{createTime},#{createUserId})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteSMSServiceBuyers" parameterType="Integer">
+		delete from ec_core_sms_service_buyers where id = #{id}
+	</delete>
+	
+	<!-- 更新 -->
+	<update id="updateSMSServiceBuyers"  parameterType="smsServiceBuyers">
+		update ec_core_sms_service_buyers set
+		sms_market_id = #{smsMarketId},
+		buy_id = #{buyId},
+		create_time = #{createTime},
+		create_userId = #{createUserId}
+		where id = #{id}
+	</update>
+	
+	<!-- 查找 -->
+	<select id="getSMSServiceBuyersById" parameterType="Integer" resultType="smsServiceBuyers"
+		resultMap="smsServiceBuyersResultMap">
+		select * from ec_core_sms_service_buyers where id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.UserThreadMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.UserThread" id="userThreadResultMap">
+		<id property="id" column="id" />
+		<id property="userCode" column="user_code" />
+		<id property="siteCode" column="site_code" />
+		<id property="userName" column="user_name" />
+		<id property="userState" column="user_state" />
+		<id property="createTime" column="cteate_time" />
+		<id property="backup1" column="backup1" />
+		<id property="backup2" column="backup2" />
+		<id property="backup3" column="backup3" />
+		<result property="switchEccount" column="switcheccount" /><!-- 是否关闭电子对账功能(1:关闭；0：开启) -->
+		<result property="userCodeUpteTime" column="user_code_update_time" /><!-- 修改用户编码的时间戳 -->
+	</resultMap>
+	
+	<select id="get" parameterType="userThread" resultType="userThread"	resultMap="userThreadResultMap">
+		SELECT * FROM
+		EC_CORE_USERTHREAD
+		WHERE id = #{id}
+	</select>
+
+	<select id="getAllUser" resultType="list" resultMap="userThreadResultMap">
+		SELECT * FROM EC_CORE_USERTHREAD
+	</select>
+
+	<insert id="add" parameterType="userThread" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO EC_CORE_USERTHREAD(id, user_code, site_code, user_name, user_state, 
+			backup1, backup2, backup3, switcheccount,user_code_update_time)
+		VALUES(
+		#{id},#{userCode},#{siteCode},#{userName},#{userState},
+		#{backup1},#{backup2},#{backup3},#{switchEccount},#{userCodeUpteTime})
+	</insert>
+
+	<delete id="remove" parameterType="userThread">
+		DELETE FROM EC_CORE_USERTHREAD
+		WHERE
+		id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="userThread">
+		UPDATE EC_CORE_USERTHREAD
+		SET
+		user_code=#{userCode},
+		site_code=#{siteCode},
+		user_name=#{userName},
+		user_state=#{userState},
+		backup1=#{backup1},
+		backup2=#{backup2},
+		backup3=#{backup3},
+		switcheccount=#{switchEccount},
+		user_code_update_time=#{userCodeUpteTime}
+		WHERE id = #{id}
+	</update>
+
+	<select id="searchUsersByCode" parameterType="userThread" resultType="list"
+		resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		WHERE user_code = #{userCode} 
+		<if test='userState!=null'>
+			 AND user_state=#{userState}
+		</if>
+	</select>
+	<!-- 获取某个网点下已经激活的用户 -->
+	<select id="searchUsersBySite" parameterType="userThread" resultType="list" resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		WHERE site_code = #{siteCode} and user_state=1
+	</select>
+	
+	<select id="searchUsersBySiteCodeAndName" parameterType="map" resultType="list" resultMap="userThreadResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USERTHREAD
+		<where>
+			user_state= #{userState} and site_code = #{siteCode}
+			<if test='userCode != null'>
+				and user_code = #{userCode}
+			</if>
+			<if test='userName != null'>
+				and user_name like '%' #{userName} '%'
+			</if>
+		</where>
+		order by cteate_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="getUserThreadByPostId" parameterType="int" resultType="list"
+		resultMap="userThreadResultMap">
+		SELECT * FROM EC_CORE_USERTHREAD U
+		WHERE U.ID IN (
+		SELECT P.VIPID
+		FROM EC_CORE_POSTTEMPUSER P WHERE P.POSTID = #{postId}
+		)
+	</select>
+</mapper>

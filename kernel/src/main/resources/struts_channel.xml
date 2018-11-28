@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="channel" extends="ssMyBatis" namespace="/">
+		
+		<!-- 渠道信息 -->
+		<action name="channel_*" class="channelAction" method="{1}">
+			<result name="list" type="tiles">WEB-INF.channel/list.jsp</result>
+			<result name="addUI" type="tiles">WEB-INF.channel/addUI.jsp</result>
+			<result name="editUI" type="tiles">WEB-INF.channel/editUI.jsp</result>
+			<result name="remove" type="json">
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<action name="channel1_*" class="channelAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.channel/addUI.jsp</result><!-- xml登录验证返回页面 -->
+			<result name="add" type="tiles">WEB-INF.channel/list.jsp</result>
+		</action>
+		
+		<action name="channel2_*" class="channelAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.channel/editUI.jsp</result><!-- xml登录验证返回页面 -->
+			<result name="edit" type="tiles">WEB-INF.channel/list.jsp</result>
+		</action>
+		
+		<!-- 配置项信息 -->
+		<action name="config_*" class="configAction" method="{1}">
+			<result name="index" type="tiles">WEB-INF.config/index.jsp</result>
+			<result name="list" type="tiles">WEB-INF.config/list.jsp</result>
+			<result name="addUI" type="tiles">WEB-INF.config/addUI.jsp</result>
+			<result name="addNextUI" type="tiles">WEB-INF.config/addNextUI.jsp</result>
+			<result name="editUI" type="tiles">WEB-INF.config/editUI.jsp</result>
+			<result name="editNextUI" type="tiles">WEB-INF.config/editNextUI.jsp</result>
+			<result name="remove" type="json">
+				<param name="root">response</param>
+			</result>
+			<result name="keyUnique" type="json">
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<action name="config1_*" class="configAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.config/addUI.jsp</result>
+			<result name="add" type="tiles">WEB-INF.config/index.jsp</result>
+		</action>
+		
+		<action name="config2_*" class="configAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.config/editUI.jsp</result>
+			<result name="edit" type="tiles">WEB-INF.config/index.jsp</result>
+		</action>
+		
+		<action name="config3_*" class="configAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.config/addNextUI.jsp</result>
+			<result name="add" type="tiles">WEB-INF.config/list.jsp</result>
+		</action>
+		
+		<action name="config4_*" class="configAction" method="{1}">
+			<result name="input" type="tiles">WEB-INF.config/editNextUI.jsp</result>
+			<result name="edit" type="tiles">WEB-INF.config/list.jsp</result>
+		</action>
+
+	</package>
+	
+</struts>

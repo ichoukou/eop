@@ -1,0 +1,13 @@
+.tab,.table{margin-bottom:10px;}
+#textarea_freight{width:570px;height:60px;}
+.input_text{width:200px;}
+#txt{margin-top:10px;display:block;}
+#prices,#weight{width:110px;}
+#manage_form p{padding:0;}
+#manage_form p .textarea_text{margin-top:0;}
+#detail_address{height:70px;}
+.table thead tr th div{padding:0 10px;}
+.table thead tr th.th_d{width:216px;}
+.customer_name{display:block;width:70px;}
+.table tbody tr td{padding:15px 5px;}
+.reason_block{display:block;width:125px;overflow:hidden;}

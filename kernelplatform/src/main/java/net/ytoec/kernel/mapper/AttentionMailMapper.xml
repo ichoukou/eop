@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.AttentionMailMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.AttentionMail" id="attentionMailResultMap">
+		<id property="id" column="id" />
+		<id property="mailNo" column="mail_no" />
+		<id property="destination" column="destination" />
+		<id property="buyerName" column="buyer_name" />
+		<id property="buyerPhone" column="buyer_phone" />
+		<id property="status" column="status" />
+		<id property="lineType" column="line_type" />
+		<id property="customerId" column="customer_id" />
+		<id property="acceptTime" column="accept_time" />
+		<id property="sendTime" column="send_time" />
+		<id property="createTime" column="create_time" />
+		<id property="updateTime" column="update_time" />
+		<id property="arriveTime" column="arrive_time" />
+		<id property="dateOut" column="date_out" />
+		<id property="backup" column="backup" />
+	</resultMap>
+
+
+	<select id="get" parameterType="attentionMail" resultType="attentionMail" resultMap="attentionMailResultMap">
+		SELECT * FROM
+		EC_CORE_ATTENTIONMAIL
+		WHERE id = #{id}
+	</select>
+
+	<select id="getAll" resultType="list" resultMap="attentionMailResultMap">
+		SELECT * FROM EC_CORE_ATTENTIONMAIL
+	</select>
+
+	<insert id="add" parameterType="attentionMail" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO EC_CORE_ATTENTIONMAIL(id, mail_no, destination, buyer_name, buyer_phone, status, line_type, customer_id, accept_time, send_time, arrive_time, date_out, backup)VALUES(
+		#{id},#{mailNo},#{destination},#{buyerName},#{buyerPhone},#{status},#{lineType},#{customerId},#{acceptTime},#{sendTime},#{arriveTime},#{dateOut},#{backup})
+	</insert>
+
+	<delete id="remove" parameterType="attentionMail">
+		DELETE FROM EC_CORE_ATTENTIONMAIL
+		WHERE id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="attentionMail">
+		UPDATE EC_CORE_ATTENTIONMAIL
+		SET
+		mail_no=#{mailNo},
+		destination=#{destination},
+		buyer_name=#{buyerName},
+		buyer_phone=#{buyerPhone},
+		status=#{status},
+		line_type=#{lineType},
+		customer_id=#{customerId},
+		accept_time=#{acceptTime},
+		send_time=#{sendTime},
+		update_time=now(),
+		arrive_time=#{arriveTime},
+		date_out=#{dateOut},
+		backup=#{backup}
+		WHERE id = #{id}
+	</update>
+
+	<select id="searchByMailNo" parameterType="string" resultType="list" resultMap="attentionMailResultMap">
+		SELECT * FROM EC_CORE_ATTENTIONMAIL
+		WHERE mail_no = #{mailNo} and create_time>DATE_SUB(NOW(),INTERVAL 5 day)
+	</select>
+	<select id="searchByCustomerId" parameterType="string"  resultType="list" 
+		resultMap="attentionMailResultMap">
+		SELECT * FROM EC_CORE_ATTENTIONMAIL
+		WHERE customer_id = #{customerId}
+	</select>
+	
+	<select id="searchByMailNoAndCustomerId" parameterType="map" resultType="list" resultMap="attentionMailResultMap">
+		SELECT * FROM EC_CORE_ATTENTIONMAIL
+		WHERE mail_no = #{mailNo} and customer_id = #{customerId}
+	</select>
+	
+	<select id="searchWithCustomerIdMailnoTime" parameterType="map" resultType="int">
+		SELECT count(*) FROM EC_CORE_ATTENTIONMAIL o
+		<where>
+			<if test="customerId != null and customerId.size() > 0">
+				 AND o.customer_id IN 
+					<foreach item="customerId" collection="customerId" open="(" separator="," close=")">
+						#{customerId}
+					</foreach>
+			</if>
+			<if test="mailNo != null and mailNo != ''">
+				 AND o.mail_no = #{mailNo}
+			</if>
+			<if test="sendStartTime != null and sendStartTime != '' and sendEndTime != null and sendEndTime != ''">
+				 AND o.send_time between #{sendStartTime} and #{sendEndTime}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 获取符合条件的关注运单 此处不分页:显示最近50条数据 -->
+	<select id="searchPaginationList" parameterType="java.util.Map" resultMap="attentionMailResultMap" resultType="list">
+		SELECT * FROM EC_CORE_ATTENTIONMAIL o
+		<where>
+			<if test="buyerName != null and buyerName != ''">
+				AND o.buyer_name = #{buyerName}
+			</if>
+			<if test="buyerPhone != null and buyerPhone != ''">
+				AND o.buyer_phone = #{buyerPhone}
+			</if>
+			<if test="customerId != null and customerId.size() > 0">
+				 AND o.customer_id IN 
+					<foreach item="customerId" collection="customerId" open="(" separator="," close=")">
+						#{customerId}
+					</foreach>
+			</if>
+			<if test="mailNo != null and mailNo != ''">
+				 AND o.mail_no = #{mailNo}
+			</if>
+			<if test="sendStartTime != null and sendStartTime != '' and sendEndTime != null and sendEndTime != ''">
+				 AND o.send_time between #{sendStartTime} and #{sendEndTime}
+			</if>
+		</where>
+		<if test="orderBy != null and orderBy == 1">
+			ORDER BY o.send_time ASC
+		</if>
+		<if test="orderBy != null and orderBy == 2">
+			ORDER BY o.send_time DESC 
+		</if>
+		limit 0,50
+	</select>
+	
+	<!-- 只统计最近50条数据 -->
+	<select id="countPaginationList" parameterType="java.util.Map" resultType="int">
+		SELECT count(o.id) FROM EC_CORE_ATTENTIONMAIL o
+		<where>
+			<if test="buyerName != null">
+				AND o.buyer_name = #{buyerName}
+			</if>
+			<if test="buyerPhone != null">
+				AND o.buyer_phone = #{buyerPhone}
+			</if>
+			<if test="customerId != null">
+				 AND o.customer_id IN 
+					<foreach item="customerId" collection="customerId" open="(" separator="," close=")">
+						#{customerId}
+					</foreach>
+			</if>
+			<if test="mailNo != null">
+				 AND o.mail_no = #{mailNo}
+			</if>
+			<if test="sendStartTime != null and sendEndTime != null">
+				 AND o.send_time between #{sendStartTime} and #{sendEndTime}
+			</if>
+		</where>
+		limit 0,50 
+	</select>
+	
+</mapper>

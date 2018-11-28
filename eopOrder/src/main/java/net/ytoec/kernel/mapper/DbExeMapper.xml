@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.DbExeMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Order" id="orderTempResultMap">
+		<id property="id" column="id" />
+		<result property="version" column="version" />
+		<result property="logisticProviderId" column="logistic_provider_id" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+		<result property="tradeNo" column="tradeNo" />
+		<result property="customerId" column="customer_id" />
+		<result property="mailNo" column="mailNo" />
+		<result property="type" column="type" />
+		<result property="flag" column="flag" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="sendStartTime" column="send_start_time" />
+		<result property="sendEndTime" column="send_end_time" />
+		<result property="insuranceValue" column="insurance_value" />
+		<result property="packageOrNot" column="package_or_not" />
+		<result property="special" column="special" />
+		<result property="remark" column="remark" />
+		<result property="clientId" column="client_id" />
+		<result property="status" column="status" />
+		<result property="weight" column="weight" />
+		<result property="signPrice" column="sign_price" />
+		<result property="vipId" column="vip_id" />
+		<result property="lineType" column="line_type" />
+		<result property="weightUpdateFlag" column="weight_update_flag" />
+		<result property="orderType" column="order_type" />
+		<result property="serviceType" column="service_type" />
+		<result property="goodsValue" column="goods_value" />
+		<result property="itemsValue" column="items_value" />
+		<result property="totalServiceFee" column="total_service_fee" />
+		<result property="buyServiceFee" column="buy_service_fee" />
+		<result property="codSplitFee" column="cod_split_fee" />
+		<result property="acceptTime" column="accept_time" />
+		<result property="partitionDate" column="partitiondate" />
+		<result property="freightType" column="freight_type" />
+		<result property="freight" column="freight" />
+		<result property="trimFreight" column="trim_freight" />
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.Product" id="productTempResultMap">
+		<id property="id" column="id"/>
+		<result property="itemName" column="item_name"/>
+		<result property="itemNumber" column="item_number"/>
+		<result property="itemValue" column="item_value"/>
+		<result property="remark" column="remark"/>
+		<result property="orderId" column="order_id"/>
+		<result property="logisticId" column="tx_logistic_id"/>
+		<result property="mailNo" column="mailNo"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="partitionDate" column="partitiondate" />
+	</resultMap>
+	
+	<resultMap type="traderInfo" id="traderInfoTempResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="postCode" column="post_code" />
+		<result property="phone" column="phone" />
+		<result property="mobile" column="mobile" />
+		<result property="prov" column="prov" />
+		<result property="city" column="city" />
+		<result property="district" column="district" />
+		<result property="address" column="address" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="tradeType" column="trade_type" />
+		<result property="orderId" column="order_id" />
+		<result property="partitionDate" column="partitiondate" />
+		<result property="numProv" column="numProv" />
+		<result property="numCity" column="numCity" />
+		<result property="numDistrict" column="numDistrict" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	
+	<select id="getOrderTempAllCount" parameterType="integer" resultType="integer">
+		SELECT count(*) FROM
+		ec_core_order_temp_2012919 t
+	</select>
+	
+	<select id="getOrderTempAll" parameterType="java.util.Map" resultType="order" resultMap="orderTempResultMap">
+		SELECT * FROM
+		ec_core_order_temp_2012919 t
+		LIMIT #{startIndex}, #{pageNum}
+	</select>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="addOrderFromTemp" parameterType="order" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_ORDER
+		(id, version, logistic_provider_id, tx_logistic_id, 
+		tradeNo, customer_id, mailNo, type, 
+		flag, create_time,update_time,  
+		send_start_time, send_end_time,
+		insurance_value, package_or_not, special, remark,
+		client_id, status, line_type,weight_update_flag, weight, sign_price, vip_id,
+		order_type,service_type,goods_value,items_value,
+	    total_service_fee,buy_service_fee,cod_split_fee,accept_time,partitiondate,freight_type,freight,trim_freight)
+		VALUES(#{id}, #{version}, #{logisticProviderId}, #{txLogisticId},
+		#{tradeNo}, #{customerId}, #{mailNo}, #{type}, 
+		#{flag},#{createTime},#{updateTime}, 
+		#{sendStartTime}, #{sendEndTime}, 
+		#{insuranceValue}, #{packageOrNot}, #{special}, #{remark}, 
+		#{clientId}, #{status}, #{lineType},#{weightUpdateFlag}, #{weight}, #{signPrice}, #{vipId},
+		#{orderType},#{serviceType},#{goodsValue},#{itemsValue},
+		#{totalServiceFee},#{buyServiceFee},#{codSplitFee},#{acceptTime},#{partitionDate},#{freightType},#{freight},#{trimFreight})
+	</insert>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="addProductFromTemp" parameterType="product" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_PRODUCT(item_name, item_number, remark, order_id,create_time,update_time,item_value, tx_logistic_id, mailNo,partitiondate)
+		values(#{itemName}, #{itemNumber}, #{remark}, #{orderId},#{createTime},#{updateTime},#{itemValue}, #{logisticId}, #{mailNo},#{partitionDate})
+	</insert>
+	
+	<insert id="addTraderInfoFromTemp" parameterType="traderInfo" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_TRADERINFO(name,
+		post_code,phone,mobile,prov,city,district,address,create_Time,update_Time,trade_type,order_id,partitionDate,numProv,numCity,numDistrict,remark)
+		values(#{name}, #{postCode}, #{phone}, #{mobile},
+		#{prov},#{city}, #{district}, #{address},#{createTime},#{updateTime},  
+		#{tradeType},#{orderId},#{partitionDate},#{numProv},#{numCity},#{numDistrict},#{remark})
+	</insert>
+	
+	<select id="getProductTempCount" parameterType="integer" resultType="integer">
+		select count(*) from 
+		EC_CORE_PRODUCT_temp_2012919 t 
+	</select>
+	
+	<select id="getProductTempByOrderId" parameterType="integer" resultType="product" resultMap="productTempResultMap">
+		SELECT * FROM
+		EC_CORE_PRODUCT_temp_2012919 t
+		where t.order_id = #{orderId}
+	</select>
+	
+	<select id="getTraderInfoTempCount" parameterType="integer" resultType="integer">
+		select count(*) from 
+		ec_core_traderinfo_temp_2012919 t 
+	</select>
+	
+	<select id="getTraderInfoTempByOrderId" parameterType="integer" resultType="traderInfo" resultMap="traderInfoTempResultMap">
+		SELECT * FROM
+		ec_core_traderinfo_temp_2012919 t
+		where t.order_id = #{orderId}
+	</select>
+	
+</mapper>

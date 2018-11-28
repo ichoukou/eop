@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<bean id="weightTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 20秒开始执行任务 -->
+		<property name="delay" value="20000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="600000" />
+		<property name="timerTask" ref="weightUpdate" />
+	</bean>
+	
+	<!-- 创建订单 -->
+	<bean id="createOrderTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 1秒开始执行任务 -->
+		<property name="delay" value="10000" />
+		<property name="period" value="10000" />
+		<property name="timerTask" ref="createOrderTimer" />
+	</bean>
+	<!-- 更新订单状态到db -->
+	<bean id="orderStatusUpdate2dbTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay" value="10000" />
+		<property name="period" value="30000" />
+		<property name="timerTask" ref="orderStatusUpdate2dbTimer" />
+	</bean>
+	<!-- 批量添加代发短信到短信表 -->
+	<bean id="addWaitInfo2WaitSMSTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay" value="1000" />
+		<property name="period" value="1000" />
+		<property name="timerTask" ref="addWaitInfo2WaitSMSTimer" />
+	</bean>
+
+	<bean id="repeatSiteDealTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 1秒开始执行任务 -->
+		<property name="delay" value="1000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="50000000" />
+		<property name="timerTask" ref="repeatSiteDealTimer" />
+	</bean>
+	<bean id="sendTask2TaobaoTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 20秒开始执行任务 -->
+		<property name="delay" value="20000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="3000" />
+		<property name="timerTask" ref="sendTask2Taobao" />
+	</bean>
+	<bean id="multiThreadSendTask2TaobaoTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 1秒开始执行任务 -->
+		<property name="delay" value="5000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="3000" />
+		<property name="timerTask" ref="multiThreadSendTask2Taobao" />
+	</bean>
+	<bean id="sendTask2JinggangTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- 容器初始化delay 1秒开始执行任务 -->
+		<property name="delay" value="10000" />
+		<!-- 间隔时间 -->
+		<property name="period" value="3000" />
+		<property name="timerTask" ref="sendTask2Jinggang" />
+	</bean>
+	<!-- <bean id="cleanOrderTask" class="org.springframework.scheduling.timer.ScheduledTimerTask"> 
+		容器初始化delay 1秒开始执行任务 <property name="delay" value="100" /> 间隔时间 <property 
+		name="period" value="1800000" /> <property name="timerTask" ref="cleanOrder" 
+		/> </bean> -->
+	<!-- 用户关联关系数据导入 -->
+	<bean id="importUserRelation" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay" value="10000" />
+		<property name="timerTask" ref="importUserRelationTask" />
+	</bean>
+
+	<!-- task 监控 -->
+	<bean id="jobMonitorSMS" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.JobMonitorSMS"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="sendTaskService" value-ref="sendTaskServiceImpl"></entry>
+				<entry key="sendTaskToTBService" value-ref="sendTaskToTBServiceImpl"></entry>
+				<entry key="buildSearchService" value-ref="buildSearchServiceImpl" />
+				<entry key="weightBuildSearchService" value-ref="buildSearchServiceImpl" />
+				<entry key="service" value-ref="buildSearchServiceImpl" />
+				<entry key="sMSObjectService" value-ref="SMSObjectServiceImpl" />
+			</map>
+		</property>
+	</bean>
+
+
+
+	<!-- part build order data into solr -->
+	<bean id="partEccoreSearchStatus" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.EccorePartBuildSearchStatusTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver"
+					value="yitonggroup@ytoxl.com" />
+
+				<entry key="eccoreSearchService" value-ref="eccoreSearchServiceImpl"></entry>
+				<entry key="limit" value="50000"></entry>
+			</map>
+		</property>
+	</bean>
+
+
+
+	
+
+	<bean id="jobMonitorSMSTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobMonitorSMS" />
+		<property name="cronExpression" value="0 0/1 0-23 * * ?" />
+	</bean>
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<!-- 定时初始化user信息 -->
+				<!-- <ref bean="paramTask" /> -->
+				<!-- 更新问题件 <ref bean="questionnaireTask" />  --><ref bean="weightTask" />
+				<!-- 批量添加代发短信到短信表 <ref bean="addWaitInfo2WaitSMSTask" /> <ref bean="sendTask2TaobaoTask" 
+					/> <ref bean="sendTask2JinggangTask" /> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="weightUpdate" class="net.ytoec.kernel.timer.WeightUpdaeTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+
+		<property name="orderService" ref="orderServiceImpl" />
+		<property name="configCodeService" ref="configCodeServiceImpl" />
+	</bean>
+
+	<!-- 更新问题件 -->
+	<bean id="questionnaireTimer" class="net.ytoec.kernel.timer.QuestionnaireTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+
+		<property name="questionnaireService" ref="questionnaireServiceImpl" />
+
+		<property name="tablename" value="${questionnaire.table.issue}" />
+		<property name="period" value="${questionnaire.timer.period}" />
+	</bean>
+
+	<!-- 创建订单 -->
+	<bean id="createOrderTimer" class="net.ytoec.kernel.timer.CreateOrderTimer">
+		<property name="orderService" ref="orderServiceImpl" />
+		<property name="configCodeService" ref="configCodeServiceImpl" />
+	</bean>
+
+	<!-- 更新订单状态到db -->
+	<bean id="orderStatusUpdate2dbTimer" class="net.ytoec.kernel.timer.OrderStatusUpdate2dbTimer">
+
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+
+		<property name="orderService" ref="orderServiceImpl" />
+		<property name="sendTaskToTBService" ref="sendTaskToTBServiceImpl" />
+
+	</bean>
+
+	<!-- 批量添加代发短信到短信表 -->
+	<bean id="addWaitInfo2WaitSMSTimer" class="net.ytoec.kernel.timer.AddWaitInfo2WaitSMSTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+
+	</bean>
+
+	<bean id="repeatSiteDealTimer" class="net.ytoec.kernel.timer.RepeatSiteDealTimer">
+		<property name="userService" ref="userServiceImpl" />
+		<property name="posttempUserDao" ref="posttempUserDaoImpl" />
+		<property name="messageUserService" ref="messageUserServiceImpl" />
+		<property name="mailTendencyService" ref="mailTendencyServiceImpl" />
+
+		<property name="posttempService" ref="posttempServiceImpl" />
+	</bean>
+
+
+	<!-- timer配置 longyong.li -->
+	<bean id="sendTask2Jinggang" class="net.ytoec.kernel.timer.SendTask2JinggangTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yto_yitong1@163.com;yto_yitong2@163.com;yitonggroup@ytoxl.com" />
+		<property name="sendTaskService" ref="sendTaskServiceImpl" />
+		<property name="serverConfigService" ref="serverConfigServiceImpl" />
+
+		<property name="limit" value="5000"></property>
+	</bean>
+	<bean id="importUserRelationTask" class="net.ytoec.kernel.timer.UserRelationImportTimer">
+		<property name="userCustomService" ref="userCustomServiceImpl" />
+		<property name="userRelationService" ref="userRelationServiceImpl" />
+
+		<property name="userService" ref="userServiceImpl" />
+	</bean>
+
+	<bean id="sendTask2Taobao" class="net.ytoec.kernel.timer.SendTask2TaobaoTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+		<property name="sendTaskToTBService" ref="sendTaskToTBServiceImpl" />
+		<property name="serverConfigService" ref="serverConfigServiceImpl" />
+		<property name="limit" value="5000"></property>
+	</bean>
+	<bean id="multiThreadSendTask2Taobao" class="net.ytoec.kernel.timer.MutiThreadSendTask2TaobaoTimer">
+		<property name="mailService" ref="mailServiceImpl" />
+		<property name="receiver"
+			value="yitonggroup@ytoxl.com" />
+		<property name="sendTaskToTBService" ref="sendTaskToTBServiceImpl" />
+		<property name="serverConfigService" ref="serverConfigServiceImpl" />
+		<!-- 必须设置 -->
+		<property name="limit" value="50000"></property>
+		<property name="threadNum" value="5"></property>
+	</bean>
+
+	<!-- CronTrigger -->
+	<!-- 发送短信的定时器 end qinghua.yang -->
+	<bean id="partEccoreSearchStatusTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="partEccoreSearchStatus" />
+		<property name="cronExpression" value="0/30 * * * * ?" />
+	</bean>
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"></bean>
+
+
+</beans>

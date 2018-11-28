@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.ytoec.kernel.mapper.ZebraSequenceMapper">
+	<resultMap id="BaseResultMap" type="net.ytoec.kernel.dataobject.ZebraSequence">
+		<id column="sequence_id" property="sequenceId" jdbcType="INTEGER" />
+		<result column="customer_code" property="customerCode"
+			jdbcType="VARCHAR" />
+		<result column="partern_code" property="parternCode" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="TOTALCOUNT" property="totalCount" javaType="INTEGER" />
+	</resultMap>
+
+	<!-- 新增序列记录(sequence_id为自增长) -->
+	<insert id="insertZebraSequence" parameterType="net.ytoec.kernel.dataobject.ZebraSequence">
+		<selectKey resultType="java.lang.Integer" keyProperty="sequenceId"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		<![CDATA[
+			INSERT INTO ZEBRA_SEQUENCE
+			(CUSTOMER_CODE,PARTERN_CODE,
+			 CREATE_TIME,STATE,
+			 UPDATE_TIME,TOTALCOUNT)
+			VALUES
+			(#{customerCode,jdbcType=VARCHAR},#{parternCode,jdbcType=VARCHAR},
+			 #{createTime, jdbcType=TIMESTAMP}, #{state,jdbcType=NUMERIC},
+			 #{updateTime, jdbcType=TIMESTAMP}, #{totalCount,jdbcType=NUMERIC})
+		]]>
+	</insert>
+
+	<!-- 判断商家时间段内是否某状态的序列 -->
+	<select id="isExistSequence" parameterType="map" resultType="String">
+		<![CDATA[
+			SELECT 
+				SEQUENCE_ID 
+			FROM 
+				ZEBRA_SEQUENCE  
+			WHERE 1=1 
+		]]>
+		<if test="customerCode != null and customerCode != ''">
+			AND CUSTOMER_CODE = #{customerCode,jdbcType=VARCHAR}
+		</if>
+		<if test="state != null">
+			AND STATE = #{state, jdbcType=NUMERIC} 
+		</if>
+		<if test="timeInterval != null and timeInterval != 0">
+			AND CREATE_TIME >= date_sub(NOW(),interval #{timeInterval,
+			jdbcType=TIMESTAMP} minute)
+		</if>
+		<![CDATA[ LIMIT 0,1 ]]>
+	</select>
+
+	<!-- 根据序列号查询序列信息 -->
+	<select id="queryZebraSequence" parameterType="String"
+		resultMap="BaseResultMap">
+		<![CDATA[
+			SELECT 
+				SEQUENCE_ID,
+				CUSTOMER_CODE,
+				TOTALCOUNT
+			FROM 
+				ZEBRA_SEQUENCE
+			WHERE 
+				STATE = 1 
+				AND SEQUENCE_ID = #{sequenceId,jdbcType=VARCHAR}
+		]]>
+	</select>
+
+	<!-- 更新同步状态 -->
+	<update id="updateStateById" parameterType="map">
+		<![CDATA[
+			UPDATE 
+				ZEBRA_SEQUENCE
+			SET
+				STATE = #{state,jdbcType=VARCHAR},
+				UPDATE_TIME = NOW()
+			WHERE 
+				SEQUENCE_ID = #{sequenceId,jdbcType=VARCHAR}
+		]]>
+	</update>
+	
+	<update id="updateState" parameterType="map">
+		update zebra_sequence set
+		state=#{state}
+		where sequence_id=#{sequence} and
+		customer_code=#{customerCode}
+	</update>
+	<!-- 查询最近一次状态为第一次请求中的请求序列的第一次请求时间 -->
+	<select id="selectLastSyningTime" parameterType="string"
+		resultType="string">
+		select create_time from zebra_sequence where
+		customer_code=#{customerCode}
+		and state=1 order by sequence_id desc
+		limit 0,1
+	</select>
+
+	<!-- 设置该请求序列的第二次请求时间 -->
+	<update id="updateSecondCreateTime" parameterType="map">
+		update
+		zebra_sequence set second_create_time=now()
+		where
+		sequence_id=#{sequence} and customer_code=#{customerCode}
+	</update>
+
+</mapper>

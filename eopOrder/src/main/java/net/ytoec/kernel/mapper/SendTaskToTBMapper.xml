@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 发送任务数据映射文件 -->
+<mapper namespace="net.ytoec.kernel.mapper.SendTaskToTBMapper">
+	<cache />
+	<resultMap type="sendTaskToTB" id="sendTaskToTBResultMap">
+		<id property="id" column="id" />
+		<result property="clientId" column="client_id" />
+		<result property="createTime" column="create_Time" />
+		<result property="lastSendTime" column="last_send_time" />
+		<result property="orderId" column="order_id" />
+		<result property="requestURL" column="request_url" />
+		<result property="requestParams" column="request_params" />
+		<result property="remark" column="remark" />
+		<result property="taskFlagId" column="task_flag_id" />
+		<result property="taskFlag" column="task_flag" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+	</resultMap>
+	<insert id="add" parameterType="sendTaskToTB"> insert into
+		EC_CORE_SEND_TaskToTB
+		(request_url,order_id,last_send_time,client_id,request_params,remark,task_flag_id,task_flag,tx_logistic_id)
+		values
+		(#{requestURL},
+		#{orderId},now(),#{clientId},#{requestParams},#{remark},#{taskFlagId},#{taskFlag},#{txLogisticId});
+	</insert>
+	
+	<!-- 批量添加 wmd -->
+	<insert id="batchAdd" parameterType="java.util.List"> 
+		insert into  EC_CORE_SEND_TaskToTB (request_url,order_id,last_send_time,client_id,request_params,remark,task_flag_id,task_flag,tx_logistic_id)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(#{item.requestURL},#{item.orderId},now(),#{item.clientId},#{item.requestParams},#{item.remark},#{item.taskFlagId},#{item.taskFlag},#{item.txLogisticId})
+		</foreach>
+	</insert>
+	<delete id="remove" parameterType="int"> delete from
+		EC_CORE_SEND_TaskToTB
+		where id = #{id}</delete>
+	<update id="edit" parameterType="sendTaskToTB"> update EC_CORE_SEND_TaskToTB t
+		set
+		t.client_id = (#{clientId}),t.last_send_time = now(),t.order_id =
+		#{orderId},t.request_url = #{requestURL},t.requestParams =
+		#{request_params},t.remark = #{remark},t.task_flag_id =
+		#{taskFlagId},t.task_flag = #{taskFlag},t.tx_logistic_id =
+		#{txLogisticId} where t.id = #{id}</update>
+	<select id="getAllSendTaskToTB" parameterType="String"
+		resultType="sendTaskToTB" resultMap="sendTaskToTBResultMap"> select * from
+		EC_CORE_SEND_TaskToTB</select>
+	<select id="get" parameterType="int" resultType="sendTaskToTB"
+		resultMap="sendTaskToTBResultMap"> select * from EC_CORE_SEND_TaskToTB where id = #{id}
+	</select>
+	<select id="getSendTaskToTBListByLimit" parameterType="int"
+		resultType="sendTaskToTB" resultMap="sendTaskToTBResultMap"> select * from
+		EC_CORE_SEND_TaskToTB order
+		by create_time desc limit #{limit};
+	</select>
+	<select id="getPaginationSendTaskToTBList" parameterType="java.util.Map"
+		resultType="list" resultMap="sendTaskToTBResultMap">
+		select * from EC_CORE_SEND_TaskToTB t
+		order by t.id asc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	<select id="getSendTaskToTBListByflag" parameterType="java.util.Map"
+		resultType="list" resultMap="sendTaskToTBResultMap">
+		select * from EC_CORE_SEND_TaskToTB t
+		<where>
+			<if test='taskFlag != null'>
+				AND t.task_flag = #{taskFlag}
+				</if>
+			<if test='taskFlagId != null'>
+				AND t.task_flag_id in {#{taskFlagId}}
+				</if>
+		</where>
+		order by t.id asc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="getSendTaskListByFlagsAndLimit" parameterType="java.util.Map"
+		resultType="list" resultMap="sendTaskToTBResultMap">
+		select * from EC_CORE_SEND_TaskToTB where task_flag_id in
+		<foreach item="flag" collection="flags" open="(" separator=","
+			close=")">
+			#{flag}
+		</foreach>
+		order by id asc limit #{limit}
+	</select>
+	<delete id="batchDelTask" parameterType="java.util.Map"  >
+		delete from EC_CORE_SEND_TaskToTB where id in
+		<foreach item="id" collection="ids" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="countTask"  resultType="int" >
+		select count(*) from EC_CORE_SEND_TaskToTB 
+	</select>
+	
+	<select id="getSendTaskByClientId" parameterType="java.util.Map"
+		resultType="list" resultMap="sendTaskToTBResultMap">
+		select * from EC_CORE_SEND_TaskToTB t
+		<where>
+			<if test='taskFlag != null'>
+				AND t.task_flag = #{taskFlag}
+				</if>
+			<if test='clientId != null'>
+				AND t.client_id = #{clientId}
+				</if>
+			<if test='taskFlagId != null'>
+				AND t.task_flag_id in {#{taskFlagId}}
+				</if>
+		</where>
+		order by t.id asc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+  </select>
+</mapper>

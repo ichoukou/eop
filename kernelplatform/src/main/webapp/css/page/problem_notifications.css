@@ -1,0 +1,10 @@
+.zhi{margin:0 3px;}
+.mar3{margin-left:6px;}
+.table_box{border-top:none}
+.table tbody tr td{vertical-align: top;}
+.td_a{width:60px;valign:top;}
+.td_b{width:150px;valign:top;}
+.td_c{width:120px;valign:top;}
+.td_d{width:188px;valign:top;}
+.msgbg{margin:0 0 5px 0;}
+.msgbg textarea{border:1px solid #8DB2E3;width:167px;height:180px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 1px 2px #707070;-moz-box-shadow:0 1px 2px #707070;box-shadow:0 1px 2px #707070;}

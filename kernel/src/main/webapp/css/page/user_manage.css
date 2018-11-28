@@ -1,0 +1,33 @@
+#content_bd {border:1px solid #9bbce6;padding:25px 40px;background-color:#fff;position:relative;}
+.statistics {width:660px;margin-bottom:87px;position:relative;}
+.image {width:358px;float:left;}
+.user {left: 467px;position: absolute;margin-top: 45px;}
+.user dt {padding:24px 0;}
+.user dd {padding:3px 0;}
+.user em {font: 700 14px/1.4 SimSun;display:block;}
+.user .total {color: #5abd08;font: 32px/1.4 Arial;}
+.user b {width:17px;height:17px;display:inline-block;margin-right:6px;vertical-align: top;}
+.user .common {background-color:#2599d3;}
+.user .senior {background-color:#1dd62c;}
+.user .vip {background-color:#b8e122;}
+.user .super {background-color:#48f1d3;}
+.user .percent {margin-left:20px;}
+.opts {text-align:center;bottom:25px;left: 190px;position: absolute;}
+.opts a {margin:0 4px;}
+#import_fm {width:402px;}
+#import_fm p,#import_fm div {padding:7px 0;}
+#import_fm label {margin-right:15px;float:left;}
+#import_fm .shop input{height:26px;border: 1px solid #9dbee7;}
+#import_fm .choose a {float:right;margin-left:10px;}
+#import_fm .file input {font-size:14px;height:26px;}
+#import_fm .note {padding:10px 14px;border:1px solid #9dbee7;margin-top:10px;}
+#import_fm .note dt {margin-bottom:10px;}
+#import_fm .note dd {padding:6px 0;}
+#import_fm .note span {cursor:pointer;}
+#import_fm .note input {margin-right: 8px;}
+#set_fm {padding-left:25px;}
+#set_fm p {padding:8px 0;}
+#set_fm input {border:1px solid #9dbee7;width:55px;height:27px;margin:0 5px;}
+#set_fm p.vip {margin-left:5px;}
+#set_fm p.super {margin-left:-20px;}
+#chart{width:640px;height:350px;display:block;}

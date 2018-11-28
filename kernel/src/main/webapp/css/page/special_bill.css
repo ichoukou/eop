@@ -1,0 +1,23 @@
+.box{margin-bottom:10px;}
+.table{margin-bottom:10px;}
+.zhi{margin:0 5px;}
+#num{width:20px;margin:0 5px}
+#textarea_search{width:500px;height:100px;vertical-align:middle;}
+#sear_form p{margin-bottom:10px;}
+.txterror{text-align:center;}
+.ec_acc_tip i{display:block;float:left;background:url(../../images/sprite/specialbill_bg.png) 0 0 no-repeat;margin-right:10px;}
+.ec_acc_tip li{padding:5px 10px;}
+.qsn i{width:10px;height:14px;background-position:0px 2px;}
+.house i{width:13px;height:14px;background-position:0px -12px;}
+.people i{width:12px;height:14px;background-position:0px -27px;}
+.moble i{width:11px;height:13px;background-position:0px -41px;}
+.cate i{width:12px;height:15px;background-position:0px -55px;}
+.ec_acc_tip{display:none;}
+.ec_acc_tip ul{background-color: #fff;border:1px solid #b7cbee;/*margin-top:-25px;*/position:relative;float:right;width:280px;}
+.td_f span{float:left;}
+.td_f .png{width:10px;height:11px;background:url(../../images/sprite/specialbill_bg.png) 0 0 no-repeat;position:relative;top:5px;right:20px;float:right;}
+.adjust{display:none;}
+.ec_acc_tip{display:none;position:absolute;right:40px;}
+.form p,.form p input{vertical-align:middle;}
+.table tbody tr td.td_b{width:340px;}
+.table tbody tr td.td_f{width:85px;}

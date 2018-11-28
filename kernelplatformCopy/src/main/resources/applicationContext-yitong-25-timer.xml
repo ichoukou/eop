@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 删除不存在用户的solr中的数据 -->
+	<bean id="deleteSolrWithNoneUser" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.DeleteOrderSolrTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yto_yitong1@163.com;yto_yitong2@163.com;" />
+				<entry key="eccoreSearchService" value-ref="eccoreSearchServiceImpl"></entry>
+				<entry key="searchServer" value="${solr.eccore.url}"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="deleteSolrWithNoneUserTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="deleteSolrWithNoneUser" />
+		<property name="cronExpression" value="0 0 1 * * ?" />
+	</bean>
+
+	<!-- task 监控 -->
+	<bean id="jobMonitor" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.JobMonitor"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl"></entry>
+				<entry key="sendTaskService" value-ref="sendTaskServiceImpl"></entry>
+				<entry key="sendTaskToTBService" value-ref="sendTaskToTBServiceImpl"></entry>
+				<entry key="receiver" value="yitonggroup@ytoxl.com;" />
+				<entry key="frequency" value="1"></entry>
+				<entry key="taobaoAlarmValue" value="2000"></entry>
+				<entry key="jinGangAlarmValue" value="50000"></entry>
+				<entry key="buildSearchService" value-ref="buildSearchServiceImpl" />
+				<entry key="weightBuildSearchService" value-ref="buildSearchServiceImpl" />
+				<entry key="service" value-ref="buildSearchServiceImpl" />
+				<entry key="normReceiver" value="yitonggroup@ytoxl.com;" />
+			    <entry key="ccReceiver" value="yto_yitong1@163.com;yto_yitong2@163.com;" />
+				<entry key="numBuildSearch" value="5000" />
+				<entry key="numBuildSearchStatusWeightIndex" value="100000" />
+			</map>
+		</property>
+	</bean>
+		<bean id="jobMonitorTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobMonitor" />
+		<property name="cronExpression" value="0 0 0/1 * * ?" />
+	</bean>
+	
+	
+	<!-- task 监控 ec_core_jgwaybill -->
+	<bean id="jobMonitorJgwaybill" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.JobMonitorJgwaybill"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="jgWaybillService" value-ref="jgWaybillServiceImpl" />
+
+				<entry key="jinGangAlarmValue" value="200000"></entry>
+				<entry key="receiver" value="yitonggroup@ytoxl.com;" />
+				<entry key="normReceiver" value="yitonggroup@ytoxl.com;" />
+				<entry key="ccReceiver" value="yto_yitong1@163.com;yto_yitong2@163.com;
+								15921938954@163.com;hunter@yto56.com.cn;yto@yto56.com.cn;" />
+				                          
+			</map>
+		</property>
+	</bean>
+	<bean id="jobMonitorJgwaybillTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobMonitorJgwaybill" />
+		<property name="cronExpression" value="0 0 23 * * ?" />
+	</bean>
+	
+	<!-- 测试PushSMSCallBackTimer -->
+	<bean id="pushSMSCallBackTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.PushSMSCallBackTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="sendtoOtherService" value-ref="SMSSendtoOtherServiceImpl"></entry>
+				<entry key="limit" value="50000"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="pushSMSCallBackTimerTrriger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="pushSMSCallBackTimer" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+	<!-- 短信发送 -->
+	<bean id="sendSMSTimber" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.SendSMSTimber"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="SMSObjectService" value-ref="SMSObjectServiceImpl" />
+				<entry key="limit" value="1"></entry>
+				<entry key="productId" value="20216102"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="sendSMSTimberTrriger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="sendSMSTimber" />
+		<property name="cronExpression" value="0/3 * 8-20 * * ?" />
+	</bean>
+
+
+	<!-- 全量更新网点到solr服务器 -->
+	<bean id="branchQuery" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.BranchTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yto_yitong1@163.com;yto_yitong2@163.com;" />
+				<entry key="branchSearchService" value-ref="branchSearchServiceImpl"></entry>
+				<entry key="searchServer" value="${solr.branch.url}"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="branchTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="branchQuery" />
+		<property name="cronExpression" value="0 0 7 * * ?" />
+		<!-- <property name="cronExpression" value="0 0/1 * * * ?" /> -->
+	</bean>
+
+
+	<!-- 运单走势时间器 -->
+	<bean id="tendencyTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.TendencyTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="orderService" value-ref="orderServiceImpl"></entry>
+				<entry key="userService" value-ref="userServiceImpl"></entry>
+				<entry key="mailTendencyService" value-ref="mailTendencyServiceImpl"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="tendencyTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="tendencyTimer" />
+		<property name="cronExpression" value="0 0 2 * * ?" />
+	</bean>
+
+	<!-- 增量同步新建订单到solr服务器 -->
+	<bean id="partEccoreSearch" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.EccorePartBuildSearchTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="eccoreSearchService" value-ref="eccoreSearchServiceImpl"></entry>
+				<entry key="limit" value="50000"></entry>
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+				<entry key="threadNum" value="5"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 增量同步新建订单到solr服务器 -->
+	<bean id="part2EccoreSearch" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.EccorePart2BuildSearchTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="eccoreSearchService" value-ref="eccoreSearchServiceImpl"></entry>
+				<entry key="limit" value="50000"></entry>
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+				<entry key="threadNum" value="5"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="addThreadPoolTaskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="20" />
+		<property name="maxPoolSize" value="30" />
+		<property name="keepAliveSeconds" value="300" />
+	</bean>
+	<bean id="partEccoreSearchTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="partEccoreSearch" />
+		<property name="cronExpression" value="0/10 * * * * ?" />
+	</bean>
+	
+	<bean id="part2EccoreSearchTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="part2EccoreSearch" />
+		<property name="cronExpression" value="0/10 * * * * ?" />
+	</bean>
+
+	<!-- 充值短信的定时器 begin guoliang.wang -->
+	<bean id="rechargeSMSTaskQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.RechargeSMSTimer" />
+
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="dredgeServiceService" value-ref="dredgeServiceServiceImpl" />
+
+				<entry key="accountUserService" value-ref="accountUserServiceImpl" />
+
+				<entry key="paymentService" value-ref="paymentServiceImpl" />
+				<entry key="serviceHistoryService" value-ref="serviceHistoryServiceImpl" />
+
+				<entry key="logsService" value-ref="logsServiceImpl" />
+				<entry key="userService" value-ref="userServiceImpl" />
+				<entry key="payServiceService" value-ref="payServiceServiceImpl" />
+				<entry key="SMSObjectService" value-ref="SMSObjectServiceImpl" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="rechargeSMSQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="rechargeSMSTaskQuartz" />
+		<property name="cronExpression" value="0 0 8 * * ?" />
+	</bean>
+
+
+	<!-- 自动续费定时器 begin -->
+	<bean id="autoPayForServiceQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.AutoPayForServiceTimer" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="dredgeServiceService" value-ref="dredgeServiceServiceImpl" />
+				<entry key="accountUserService" value-ref="accountUserServiceImpl" />
+				<entry key="paymentService" value-ref="paymentServiceImpl" />
+				<entry key="serviceHistoryService" value-ref="serviceHistoryServiceImpl" />
+				<entry key="logsService" value-ref="logsServiceImpl" />
+				<entry key="userService" value-ref="userServiceImpl" />
+				<entry key="payServiceService" value-ref="payServiceServiceImpl" />
+				<entry key="SMSObjectService" value-ref="SMSObjectServiceImpl" />
+			</map>
+		</property>
+	</bean>
+	<bean id="autoPayForServiceTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoPayForServiceQuartz" />
+		<property name="cronExpression" value="0 0 8 * * ?" />
+	</bean>
+
+	<!-- part build order data into solr -->
+	<bean id="partEccoreSearchStatusVersionTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.EccorePartBuildSearchStatusVersionTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="eccoreSearchVersionService" value-ref="eccoreSearchVersionServiceImpl"></entry>
+				<entry key="limit" value="50000"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="partEccoreSearchStatusVersionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="partEccoreSearchStatusVersionTimer" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+
+	<!-- part build order data into solr -->
+	<bean id="partEccoreSearchStatusIndexPressureTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.EccorePartBuildSearchStatusIndexPressureTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="eccoreSearchIndexPressureService" value-ref="eccoreSearchIndexPressureServiceImpl" />
+				<entry key="limit" value="50000"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="partEccoreSearchStatusIndexPressureTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="partEccoreSearchStatusIndexPressureTimer" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+
+	<!-- part build order data into solr -->
+	
+
+	<!-- 处理72小时未正确处理的短信 begin -->
+	<bean id="smsUnDealCallBackTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.SMSUnDealCallBackTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="smsUnDealService" value-ref="SMSUnDealServiceImpl"></entry>
+				<entry key="limit" value="100"></entry>
+				<entry key="hours" value="72"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="smsUnDealCallBackTimerTrriger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="smsUnDealCallBackTimer" />
+		<property name="cronExpression" value="0/20 * * * * ?" />
+	</bean>
+
+
+
+	<!-- all build order data into solr -->
+	<bean id="onceEccoreSearch" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.OnceEccoreAllBuildSearchTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="yitonggroup@ytoxl.com" />
+				<entry key="eccoreSearchService" value-ref="eccoreSearchServiceImpl"></entry>
+				<entry key="days" value="2000"></entry>
+				<entry key="threadNum" value="3"></entry>
+				<entry key="initId" value="191583268"></entry>
+				<entry key="totalId" value="196186157"></entry>
+				<entry key="limit" value="100000"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="onceEccoreSearchTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="onceEccoreSearch" />
+		<property name="cronExpression" value="0 0 19 21 3 ?" />
+	</bean>
+
+	<!-- 功能尚不清楚 -->
+	<bean id="noticeMailNoQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="noticeMailNoQuartz" />
+		<property name="cronExpression" value="0/10 * * * * ?" />
+	</bean>
+	<bean id="noticeMailNoQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.NoticeMailNoTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="sendTaskMailNoService" value-ref="sendTaskMailNoServiceImpl" />
+				<entry key="limit" value="100"></entry>
+			</map>
+		</property>
+	</bean>
+	<!-- 读取mq的solr更新消息 -->
+	<bean id="executeOrderChange2SolrFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.OrderChange2SolrFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="5" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeOrderChange2SolrFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOrderChange2SolrFromMQTimer" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+	
+	<!-- 读取mq的solr更新消息 -->
+	<bean id="executeOrderAdd2SolrFromMQTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="net.ytoec.kernel.timer.OrderAdd2SolrFromMQTimer"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mqService" value-ref="mqService" />
+				<entry key="threadNum" value="5" />
+				<entry key="addThreadPoolTaskExecutor" value-ref="addThreadPoolTaskExecutor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="executeOrderAdd2SolrFromMQTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="executeOrderAdd2SolrFromMQTimer" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+
+
+				<!-- 短信发送 -->
+				<!-- <ref bean="sendSMSTimberTrriger" /> -->
+				<ref bean="jobMonitorTrigger" />
+				<ref bean="jobMonitorJgwaybillTrigger"/>
+				<ref bean="branchTrigger" />
+				<ref bean="tendencyTrigger" />
+				<ref bean="partEccoreSearchTrigger" />
+				<ref bean="part2EccoreSearchTrigger" />
+				<ref bean="rechargeSMSQuartzTrigger" />
+				<ref bean="partEccoreSearchStatusVersionTrigger" />
+				<ref bean="partEccoreSearchStatusIndexPressureTrigger" />
+				<ref bean="smsUnDealCallBackTimerTrriger" />
+				<ref bean="executeOrderChange2SolrFromMQTrigger"/>
+				<ref bean="executeOrderAdd2SolrFromMQTrigger"/>
+				
+				<!-- all build order data into solr <ref bean="allEccoreSearchTrigger" 
+					/> -->
+				<!-- all build order data into solr <ref bean="onceEccoreSearchTrigger" 
+					/> -->
+
+
+			</list>
+		</property>
+	</bean>
+</beans>

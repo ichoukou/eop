@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>快递单打印-全联网网店管理系统</title>
+        <meta http-equiv="Cache-Control" content="no-cache,no-store"/>
+        <meta http-equiv="Pragma" content="no-cache,no-store"/>
+        <meta http-equiv="Expires" content="0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="ROBOTS" content="NONE"/>
+        <link href="/eadmin/styles/global.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/eadmin/styles/print.css" media="screen,print" />
+        <script type="text/javascript" src="/eadmin/scripts/jsp/globalVar.js?rs=20111210-1616"></script>
+        <script type="text/javascript" src="/eadmin/scripts/jquery-core/jquery-1.2.6.pack.js?rs=20111210-1616"></script>
+        <script type="text/javascript" src="/eadmin/scripts/probiz/framework/storeadmin.js?rs=20111210-1616"></script>
+        <link href="artDialog/skins/blue.css" rel="stylesheet"/>
+<script src="artDialog/artDialog.js"></script>
+<script src="artDialog/initArtDialog.js"></script>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+            $j.ajaxSetup({
+                cache: false,
+                beforeSend: function(){
+                    fnShowLoading();
+                },
+                complete: function(){
+                    fnHideLoading();
+                },
+                success: function(data){
+                
+                    if (data != null && data != undefined && data.indexOf("j_username") != -1 && data.indexOf("j_password") != -1) {
+                        window.location = __ctxPath + "/login.html";
+                    }
+                    
+                    fnHideLoading();
+                },
+                error: function(xhr){
+                    if (isLogined()) {
+                        if (xhr.readyState == 4 && xhr.status == 0) 
+                            ;//alert("Error: Some type of network error or abortion[readyState=4&status=0].");
+                        else 
+                        	art.dialog.alert("请求出现超时或异常，请重试。");
+                    }
+                }
+            });
+            
+            //设置当前storeId
+            __storeId = '1246';
+            
+            $j(document).ready(function(){
+                dwr.engine.setPreHook(function(){
+                    fnShowLoading();
+                });
+                dwr.engine.setPostHook(function(){
+                    fnHideLoading();
+                });
+                
+            });
+        </script>
+        <style media="print" type="text/css">
+            .notPrint {
+                display: none
+            }
+        </style>
+    </head>
+    <body>
+        <META name="decorator" content="printable2"/>
+        <div class="bill_list clearfix">
+            <div class="top_head clearfix">
+                <div class="logo_r">
+                </div>
+                <div class="txt">
+                </div>
+            </div>
+        </div>
+        <div id="expressFormPrinter" style="width: 869px; height: 489px; margin: 0 auto;">
+        </div>
+        <div class="pageBreak">
+        </div>
+        <div style="display:none">
+            <div id="divDlgexceptionDialog" style="visibility:hidden;position:absolute;overflow: auto;">
+                <div class="data">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="list_table" id="orderShipTable">
+                        <tr>
+                            <th style="width:50%">
+                                <span>发货单号</span>
+                            </th>
+                            <th style="width:50%">
+                                <span>订单编号</span>
+                            </th>
+                        </tr>
+                        <tr id="tr501" class="even">
+                            <td>
+                                F111205338182
+                            </td>
+                            <td>
+                                D111205953764
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var ui_dialog_exceptionDialog;
+                var ui_dialog_exceptionDialog_hasKeepScene = false;
+                var ui_dialog_exceptionDialog_needKeepScene = false;
+                
+                
+                $j(document).ready(function(){
+                    ui_dialog_exceptionDialog = $j("#divDlgexceptionDialog");
+                });
+                /**
+                 * æ¾ç¤ºdialog
+                 * @param {Object} param (å¯é) åéè³æå¡å¨ç key/value æ°æ®;JSONæ ¼å¼
+                 */
+                function dlgexceptionDialog_show(param){
+                    ui_dialog_exceptionDialog.css("visibility", "visible");
+                    
+                    
+                    ui_dialog_exceptionDialog.dialog({
+                        title: "查看异常, 共1条",
+                        modal: true,
+                        height: 480,
+                        width: 640,
+                        bgiframe: true,
+                        buttons: {
+                            '取消': dlgexceptionDialog_close
+                        },
+                        overlay: {
+                            opacity: 0.5,
+                            background: "black"
+                        },
+                        closeOnEscape: true
+                    });
+                    
+                    //ç§»é¤TOPçå³é­æé®ï¼å¦æä¸ºtrueç§»é¤ï¼å¦åä¿ç
+                    
+                    
+                    ui_dialog_exceptionDialog.dialog("open");
+                    
+                }
+                
+                
+                function dlgexceptionDialog_close(){
+                    ui_dialog_exceptionDialog.dialog("close");
+                }
+                
+                /**
+                 * ç¦ç¨dialog buttonsé¡¹ä¸­çæä¸ä¸ªbutton
+                 * @param btnValue  button content value, e.g. <button>btnValue</button>
+                 */
+                function dlgexceptionDialog_disableBtn(btnValue){
+                    ui_dialog_exceptionDialog.filter(function(){
+                        $j(":button:contains(" + btnValue + ")").attr("disabled", "true").attr("style", "background:#E6E6E6;border:1px solid #ccc;color:#bbb;");
+                    });
+                }
+                
+                /**
+                 * å¯ç¨dialog buttonsé¡¹ä¸­çæä¸ä¸ªbutton
+                 * @param btnValue  button content value, e.g. <button>btnValue</button>
+                 */
+                function dlgexceptionDialog_enableBtn(btnValue){
+                    ui_dialog_exceptionDialog.filter(function(){
+                        $j(":button:contains(" + btnValue + ")").removeAttr("disabled").removeAttr("style");
+                    });
+                }
+                
+                $j.fn.extend({
+                    loading: function(){
+                        return this.each(function(){
+                            $j(this).empty().html('<div class="loading_box"><div class="progress_bar"><img src="' + __ctxPath + '/images/icon/loadingBig.gif"/>loading...</div></div>');
+                        });
+                    }
+                });
+            </script>
+        </div>
+        <script type="text/javascript">
+            
+            $j(document).ready(function(){
+                $j("#expressFormPrinter").flash({
+                    swf: '/eadmin/images/printermode.swf?Mon Feb 13 15:45:57 CST 2012',
+                    width: '100%',
+                    height: '100%',
+                    wmode: false,
+                    flashvars: {
+                        xml: '%3Cprinter%20picposition%3D%220%3A0%22%3E%3Citem%3E%3Cname%3E%u6536%u8D27%u4EBA-%u59D3%u540D%3C/name%3E%3Cucode%3Eship_name%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E487%3A114%3A73%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u6536%u8D27%u4EBA-%u5730%u5740%3C/name%3E%3Cucode%3Eship_address%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E607%3A171%3A172%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u6536%u8D27%u4EBA-%u7535%u8BDD%3C/name%3E%3Cucode%3Eship_tel%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E665%3A114%3A105%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u6536%u8D27%u4EBA-%u90AE%u7F16%3C/name%3E%3Cucode%3Eship_zip%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E693%3A229%3A88%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u6536%u8D27%u4EBA-%u5730%u533A%3C/name%3E%3Cucode%3Eship_regionFullName%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E501%3A172%3A80%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u53D1%u8D27%u4EBA-%u59D3%u540D%3C/name%3E%3Cucode%3Edly_name%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E127%3A98%3A81%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u53D1%u8D27%u4EBA-%u5730%u5740%3C/name%3E%3Cucode%3Edly_address%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E229%3A159%3A162%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u53D1%u8D27%u4EBA-%u5730%u533A%3C/name%3E%3Cucode%3Edly_regionFullName%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E134%3A161%3A68%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u53D1%u8D27%u4EBA-%u90AE%u7F16%3C/name%3E%3Cucode%3Edly_zip%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E307%3A228%3A93%3A20%3C/position%3E%3C/item%3E%3Citem%3E%3Cname%3E%u53D1%u8D27%u4EBA-%u624B%u673A%3C/name%3E%3Cucode%3Edly_mobile%3C/ucode%3E%3Cfont%3Enull%3C/font%3E%3Cfontsize%3E12%3C/fontsize%3E%3Cfontspace%3E0%3C/fontspace%3E%3Cborder%3E0%3C/border%3E%3Citalic%3E0%3C/italic%3E%3Calign%3Eleft%3C/align%3E%3Cposition%3E142%3A223%3A108%3A20%3C/position%3E%3C/item%3E%3C/printer%3E',
+                        order_number: '1',
+                        data: '<data><item><store_name>全联网网店管理系统</store_name><ship_name>刘庆</ship_name><ship_regionFullName>中国,四川,巡场</ship_regionFullName><ship_address>21212</ship_address><ship_tel>11111111111</ship_tel><ship_zip>234234</ship_zip><store_name>藤丝服装商城(演示商城)</store_name><order_no>D111205953764</order_no><shipment_item_count>1</shipment_item_count><shipment_no>F111205338182</shipment_no><mail_no></mail_no><dly_name>张某</dly_name><dly_regionFullName>中国,上海,浦东</dly_regionFullName><dly_address>世纪大道</dly_address><dly_tel></dly_tel><dly_zip>123456</dly_zip><dly_mobile>12345678901</dly_mobile><date_year>2012</date_year><date_moth>2</date_moth><date_day>13</date_day></item></data>',
+                        bg: 'http://static.imall114.com/media//default/order/yto.jpg',
+                        copyright: 'probiz'
+                    },
+                });
+            });
+            
+            
+            function showMessage(){
+                dlgexceptionDialog_show();
+            }
+        </script>
+        <br/>
+        <br/>
+        <br/>
+        <div class="notPrint">
+            <div class="wrap-print">
+                <!-- <a href="javascript:window.print()"  class="btn-print"><span>打    印</span></a>--><a href="javascript:window.close();" class="btn-cancel"><span>关    闭</span></a>
+                <a href="javascript:showMessage()" class="btn-cancel"><span>查看异常(
+                        <font class="red">
+                            共1条
+                        </font>)
+                    </span></a>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var __FMT = {};
+            var __FMTExtend = {};
+            
+            
+            __FMTExtend = {
+                common_message_deleteOne: "请选择一条记录进行删除!",
+                common_message_confirmDelete: "您确认要删除吗?",
+                common_message_confirmClear: "您确认要清空吗?",
+                common_message_confirmSave: "您确认要保存吗?",
+                common_message_confirmDeleteThis: "您确认要删除",
+                common_message_confirmActiveThis: "您确认要激活",
+                common_message_confirmForbidThis: "您确认要禁用",
+                common_message_confirmDeleteSelected: "您确认删除所选记录?",
+                common_message_confirmSaveThis: "您确认要保存",
+                common_message_tabConfirmSave: "您当前的设置还未保存，继续吗？",
+                common_message_confirmAction: "请确认是否继续执行以下操作：",
+                common_message_confirmUpdateExpiredThis: "您确认要更新有效期",
+                common_multiDelete_pleaseSelect: "请先勾选要删除的条目。",
+                button_add: "添    加",
+                button_edit: "编    辑",
+                button_close: "关闭",
+                button_clear: "清    空",
+                button_cancel: "取消",
+                button_save: "保    存",
+                button_select: "选    择",
+                button_small_delete: "删除",
+                button_uploadFile: "上传文件",
+                select: "请选择",
+                error_upload_unsupport: "上传不支持此文件类型，只支持",
+                error_upload_err001: "文件内容太大,无法上传。",
+                error_upload_err002: "服务器出错,无法上传。",
+                customerList_selectCustomer: "请勾选客户列表前的选择框!"
+            
+            };
+            $j.extend(__FMT, __FMTExtend);
+            
+            
+            
+            var __vaMsg = {
+                notPass: "数据验证未通过",
+                required: "必填。",
+                number: "必须为数字。",
+                integer: "必须为0到2147483647之间的整数。",
+                short: "必须为不大于32767的整数。",
+                double: "必须为整数或小数。",
+                long: "必须为长整数。",
+                maxValue: "数值必须小于或等于",
+                minValue: "数值必须大于或等于",
+                eqValue: "数值必须等于",
+                maxlength: "长度必须小于或等于",
+                minlength: "长度必须大于或等于",
+                eqlength: "长度必须等于",
+                price: "无效价格/金额，应为整数(1-10位整数)或小数（1-2位小数）。",
+                money: "无效的金额，正确格式应为整数或小数（1-2位小数）。",
+                code: "包含了合法字符(字母、数字、下划线、减号)以外的字符。",
+                phone: "无效电话号，应为6－8位数字。",
+                mobile: "无效手机号，应为11位数字。",
+                email: "无效邮件地址。",
+                positiveInteger: "必须为1到2147483647之间的整数。",
+                double4: "无效格式，应为整数或小数（1-4位小数）。",
+                noHtml: "不能有HTML代码。",
+                radio: "必须至少选择一项。",
+                url: "URL格式不正确",
+                floatRange: "必须是此区间内的整数或小数（1-2位小数）:",
+                intRange: "必须是此区间内的整数:",
+                date: "错误的日期格式。"
+            };
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/probiz/framework/core.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/plugins/resize/jquery.wresize.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/probiz/framework/validation.js?rs=20111210-1616">
+        </script>
+        <script type='text/javascript' src="/eadmin/scripts/dwr/engine.min.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/plugins/alerts/jquery.alerts.js?rs=20111210-1616">
+        </script>
+        <link rel="stylesheet" type="text/css" href="/eadmin/scripts/plugins/alerts/themes/default/jquery.alerts.css?rs=20111210-1616" />
+        <script type="text/javascript" src="/eadmin/scripts/plugins/quicktip/quicktip.js?rs=20111210-1616">
+        </script>
+        <link rel="stylesheet" type="text/css" href="/eadmin/scripts/plugins/quicktip/themes/default/quicktip.css?rs=20111210-1616"/>
+        <script type="text/javascript" charset="utf-8" src="/eadmin/scripts/plugins/swfobject/swfobject.1-1-1.min.js">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/jquery-ui/ui.core.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/jquery-ui/ui.dialog.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/jquery-ui/external/jquery.bgiframe.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/jquery-ui/ui.resizable.js?rs=20111210-1616">
+        </script>
+        <script type="text/javascript" src="/eadmin/scripts/jquery-ui/ui.draggable.js?rs=20111210-1616">
+        </script>
+        <link rel="stylesheet" href="/eadmin/scripts/jquery-ui/themes/default/ui.all.css?rs=20111210-1616" type="text/css" />
+        <script type="text/javascript">
+            $j(document).ready(function(){
+            });
+        </script>
+    </body>
+</html>

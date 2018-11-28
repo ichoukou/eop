@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.StatsMessageMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.StatsMessage" id="statsMessageResultMap">
+		<id property="id" column="id" />
+		<result property="statsType" column="stats_type" />
+		<result property="statsReason" column="stats_reason" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+		<result property="loginTime" column="login_time" />
+		<result property="logoutTime" column="logout_time" />
+		<result property="userId" column="user_id" />
+	</resultMap>
+	
+	<select id="getStatsMessageList" resultType="list" resultMap="statsMessageResultMap">
+		select *
+		from EC_CORE_STATS_MESSAGE t
+		<where>
+			<if test='statsReason != null'>
+				AND t.stats_reason = #{statsReason}
+			</if>	
+		</where>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+
+	<select id="get" parameterType="statsMessage"
+		resultType="net.ytoec.kernel.dataobject.StatsMessage" resultMap="statsMessageResultMap">
+		<![CDATA[
+			select *
+			from EC_CORE_STATS_MESSAGE t where t.id = #{id}
+        ]]>
+	</select>
+
+
+	<insert id="add" parameterType="statsMessage" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_STATS_MESSAGE(id,stats_type, stats_reason, remark,login_time,logout_time,user_id)
+		values(#{id}, #{statsType}, #{statsReason}, #{remark}, #{loginTime}, #{logoutTime}, #{userId})
+	</insert>
+
+
+	<update id="edit" parameterType="statsMessage">
+		<![CDATA[
+			UPDATE 
+				EC_CORE_STATS_MESSAGE T 
+			SET
+		]]>
+		<if test="statsType != null and statsType != ''">
+			<![CDATA[ T.STATS_TYPE = #{statsType}, ]]>
+		</if>
+		<if test="statsReason != null and statsReason != ''">
+			<![CDATA[ T.STATS_REASON = #{statsReason}, ]]>
+		</if>
+		<if test="remark != null and remark != ''">
+			<![CDATA[ T.REMARK = #{remark}, ]]>
+		</if>
+		<if test="loginTime != null and loginTime != ''">
+			<![CDATA[ T.LOGIN_TIME = #{loginTime}, ]]>
+		</if>
+		<if test="logoutTime != null and logoutTime != ''">
+			<![CDATA[ T.LOGOUT_TIME = #{logoutTime}, ]]>
+		</if>
+		<![CDATA[
+				T.UPDATE_TIME = NOW()
+			WHERE T.USER_ID = #{userId}
+				AND CREATE_TIME = 
+				(SELECT CREATE_TIME FROM 
+				(SELECT 
+					MAX(ME.CREATE_TIME) CREATE_TIME
+				FROM 
+					EC_CORE_STATS_MESSAGE ME 
+				WHERE 
+					ME.USER_ID = #{userId}) AS A)
+		]]>
+	</update>
+	<delete id="remove" parameterType="statsMessage">
+		delete from EC_CORE_STATS_MESSAGE where id = #{id}
+	</delete>
+</mapper>

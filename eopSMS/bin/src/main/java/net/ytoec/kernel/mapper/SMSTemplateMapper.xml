@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSTemplateMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSTemplate" id="smsTemplateResultMap">
+		<id property="id" column="id" />
+		<result property="smsTypeId" column="sms_type_id" />
+		<result property="name" column="name" />
+		<result property="content" column="content" />
+		<result property="isDefault" column="is_default" />
+		<result property="status" column="status" />
+		<result property="sendCount" column="send_count" />
+		<result property="auditUser" column="audit_user" />
+		<result property="auditTime" column="audit_time" />
+		<result property="userId" column="userId" />
+		<result property="updateUserId" column="update_userId" />
+		<result property="updateTime" column="update_time" />
+		<result property="createTime" column="create_time" />
+		<result property="createUserId" column="create_userId" />
+		<result property="remark" column="remark" />		
+	</resultMap>
+	
+	<resultMap type="net.ytoec.kernel.dataobject.SMSTemplate" id="smsTemplateResultMapAdmin">
+		<id property="id" column="id" />
+		<result property="smsTypeId" column="sms_type_id" />
+		<result property="name" column="name" />
+		<result property="content" column="content" />
+		<result property="isDefault" column="is_default" />
+		<result property="status" column="status" />
+		<result property="sendCount" column="send_count" />
+		<result property="auditUser" column="audit_user" />
+		<result property="auditTime" column="audit_time" />
+		<result property="userId" column="userId" />
+		<result property="updateUserId" column="update_userId" />
+		<result property="updateTime" column="update_time" />
+		<result property="createTime" column="create_time" />
+		<result property="createUserId" column="create_userId" />
+		<result property="remark" column="remark" />
+		<result property="serviceName" column="serviceName" />		
+	</resultMap>
+	
+	<select id="getSMSTemplateByUserId" parameterType="map" resultType="list" resultMap="smsTemplateResultMapAdmin">
+		SELECT t.*,s.name serviceName FROM ec_core_sms_template t inner join ec_core_sms_service s 
+		where t.sms_type_id = s.id
+		<if test="userId != null and userId != ''">
+			 AND t.userId = #{userId}
+		</if>
+		<if test="smsTypeId != null and smsTypeId != ''">
+			 AND sms_type_id = #{smsTypeId}
+		</if>
+		<if test="name != null and name != ''">
+			 AND s.name = #{name}
+		</if>
+		<if test="moduleStatus != null and moduleStatus != ''">
+			 AND status IN
+			<foreach collection="moduleStatus" item="ele" open="(" separator="," close=")" >
+				#{ele}
+			</foreach>	
+		</if>
+		<if test="names != null and names !='' and names.size() > 0">
+			AND s.name IN
+			<foreach collection="names" item="name" open="(" separator="," close=")" >
+				#{name} 
+			</foreach>
+		</if>
+		order by update_time desc
+		<if test='startIndex != null and pageNum != null'>
+			LIMIT #{startIndex}, #{pageNum}
+		</if>
+	</select>  
+	
+	<select id="getSMSTemplateCountByUserId" parameterType="map" resultType="Integer">
+		SELECT count(*) FROM ec_core_sms_template t inner join ec_core_sms_service s 
+		where t.sms_type_id = s.id
+		<if test="userId != null and userId != ''">
+			 AND t.userId = #{userId}
+		</if>
+		<if test="name != null and name != ''">
+			 AND s.name = #{name}
+		</if>
+		<if test="moduleStatus != null and moduleStatus != ''">
+			 AND status IN
+			<foreach collection="moduleStatus" item="ele" open="(" separator="," close=")" >
+				#{ele}
+			</foreach>	
+		</if>
+	</select>              
+     
+	 <!-- 根据模版ID把当前模版改为默认模版  -->
+	 <update id="updateSMSTemplateToDefault" parameterType="Integer">
+		update ec_core_sms_template set is_default= "Y", update_time = now() where id = #{templateId}
+	</update>
+	
+	 <!-- 根据除模版ID之外的模版为非默认模版  -->
+	 <update id="updateSMSTemplateToUnDefault" parameterType="map">
+		update ec_core_sms_template set is_default= "N" where id != #{templateId} AND sms_type_id=#{smsTypeId}
+	</update>
+     
+     <!-- getDefaltTemplate 获取默认模版 -->
+     <select id="getDefaltTemplate" parameterType="map" resultType="smsTemplate" resultMap="smsTemplateResultMap">
+		SELECT t.* FROM ec_core_sms_template t left join ec_core_sms_service s 
+		on t.sms_type_id = s.id where t.is_default = 'Y' and t.userId=#{userId} and s.name=#{name}
+	</select>
+     
+     <!-- 管理员审核模版 -->
+     <update id="editTemplateOfAdminByParams" parameterType="map">
+     	update ec_core_sms_template set status=#{status},audit_user=#{auditUser},audit_time=now(),remark=#{remark}
+		where id=${id}
+     </update>
+     
+	<insert id="addSMSTemplate" parameterType="smsTemplate" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_sms_template(id,sms_type_id,name,content,is_default,status,send_count,audit_user,audit_time,userId,update_time,create_time,create_userId,remark) 
+		values(#{id},#{smsTypeId},#{name},#{content},#{isDefault},#{status},#{sendCount},#{auditUser},#{auditTime},#{userId},now(),now(),#{createUserId},#{remark});	
+	</insert>
+	
+	<delete id="delSMSTemplateById" parameterType="Integer">
+		delete from ec_core_sms_template where id=#{id} AND status != 'S'
+	</delete>
+	
+	<update id="editSMSTemplate" parameterType="smsTemplate">
+		update ec_core_sms_template set 
+			sms_type_id=#{smsTypeId},name=#{name},content=#{content},is_default=#{isDefault},status=#{status},send_count=#{sendCount},audit_user=#{auditUser},audit_time=#{auditTime},
+			userId=#{userId},update_userId=#{updateUserId},update_time=now(),create_userId=#{createUserId},remark=#{remark}  
+		where id=#{id}
+	</update>
+	
+	<!-- 获取单个模版 -->
+	<select id="getSMSTemplateById" parameterType="Integer" resultType="smsTemplate" resultMap="smsTemplateResultMap">
+		select * from ec_core_sms_template where id=#{id}
+	</select>
+	
+	<!-- 查询模版类型ID下的模版集合 -->
+	<select id="getTemplates" parameterType="smsTemplate" resultType="smsTemplate" resultMap="smsTemplateResultMap">
+		select * from ec_core_sms_template where sms_type_id=#{smsTypeId} and userId=#{userId}
+	</select>
+	
+	<!-- 查询模版类型ID下的模版集合  按时间降序 -->
+	<select id="getTemplatesDesc" parameterType="smsTemplate" resultType="smsTemplate" resultMap="smsTemplateResultMap">
+		select * from ec_core_sms_template where sms_type_id=#{smsTypeId} and userId=#{userId} order by update_time desc
+	</select>
+	
+	<update id="updateSendCount" parameterType="map">
+		update ec_core_sms_template set send_count = send_count + #{sendCount} where id=#{id}
+	</update>
+</mapper>
+

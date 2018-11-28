@@ -1,0 +1,44 @@
+#l_side{width:640px;float:left;}
+#r_side{width:300px;float:right;}
+.box_hd strong{font-weight:400;color:#1E569E;}
+.serve_name{display:block;padding-left:70px;position:relative;overflow:hidden;*zoom:1;}
+.serve_name p{width:412px;line-height:1.2;}
+.serve_name em{font:700 14px/1.4 SimSun;color:#333;display:block;width:200px;}
+.serve_name em span{color:#1E569E;font-family:Arial;}
+.serve_icon{width:58px;height:58px;display:inline-block;float:left;margin-left:-70px;}
+.expire{position:absolute;top:0;right:20px;font-family:Arial;color:#1E569E;width:140px;}
+#not_in_use td{width:50%;}
+#not_in_use .serve_name p{width:auto;margin-right:10px;}
+#not_in_use .serve_name em a{font:12px/1.2 SimSun;margin-left:10px;padding-right:10px;background:url(../../images/single/arrow_l.png) no-repeat right center;}
+#sended span{display:inline-block;}
+#sended em{font:12px/1.2 Arial;color:#1E569E;}
+#msg_manage{margin-top:10px;}
+#msg_manage .btn{margin-bottom:10px;}
+#l_side .box_bd table{width:100%;}
+#l_side .box_bd td{vertical-align:middle;padding:15px 0;}
+#in_use{margin-bottom:10px;}
+.td_b .serve_desc{padding:0 10px;display:block;width:208px;color:#808080;}
+#my_acc{margin-bottom:10px;}
+#my_acc .box_bd{color:#333;}
+#msg_sear_form p{padding-left:65px;}
+#msg_sear_form label{width:65px;margin-left:-65px;}
+#msg_sear_form .Wdate{width:143px;_width:140px;}
+#sear_textarea{width:208px;height:70px;}
+#mobile em,#remind em{font:12px/24px SimSun;width:80px;text-align:right;display:block;float:left;margin-left:-80px;display:inline;}
+#mobile_num{font-family:Arial;}
+.operate_link{display:inline-block;}
+#balance em{}
+#balance,#mobile{position:relative;margin-bottom:10px;}
+#balance .operate_link,#mobile .operate_link{position:absolute;right:0;top:0;}
+#balance em{font:700 14px/1.4 SimSun;}
+#balance strong{font-weight:400;}
+#remind select{width:60px;}
+#content{padding:10px 5px}
+.has_pop{position:relative;}
+.pop_tip{position:absolute;width:196px;height:29px;background:url(../../images/single/pop_bg.png) no-repeat;top:26px;left:-45px;font-size:12px;text-align:center;color:#808080;padding-top:15px;display:block;}
+.note_ad{margin:0 auto;}
+.note_ad p{margin:0;padding:0}
+.note_ad p img{border:0px;display:block;}
+.note_ad .intop{position:relative;}
+.note_ad .btn_01{background:url(../../images/sprite/ico_ktdx.png) 0 0 no-repeat; width:147px;height:40px; z-index:9999;display:block;position:absolute;left:40px;top:260px;border:0px;cursor:pointer;}
+.note_ad .btn_02{background:url(../../images/sprite/ico_ktdx.png) 0 -42px no-repeat; width:247px;height:42px;z-index:9999;display:block;position:absolute;left:330px;top:50px;border:0px;cursor:pointer;}

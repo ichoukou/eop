@@ -1,0 +1,11 @@
+#recharge_form h3{font:700 14px/2 SimSun;}
+#recharge_form ul{margin-bottom:30px;}
+#recharge_form li{width:137px;float:left;line-height:26px;}
+#recharge_form #money_box li{width:120px;float:left;line-height:26px;}
+#recharge_form #money_box #other{width:350px;}
+#recharge_form .input_radio{vertical-align:middle;display:inline-block;height:26px;line-height:26px;}
+#recharge_form label{vertical-align:middle;display:inline-block;}
+#diy_value{width:42px;vertical-align:middle;}
+.payment_logo{width:102px;height:32px;display:block;position:relative;top:-1px;}
+#recharge_btn{text-align:center;}
+#help_tips li{line-height:30px;}

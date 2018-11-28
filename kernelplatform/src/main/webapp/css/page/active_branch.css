@@ -1,0 +1,5 @@
+#act_branch_form .input_text,#act_branch_form textarea{width:230px;}
+#act_branch_form #tel_part_1, #act_branch_form #tel_part_3{width:40px;}
+#act_branch_form #tel_part_2{width:102px;}
+#agreement .box_bd{height:200px;overflow-y:scroll;overflow-x:hidden;}
+#agreement h3{font-size:16px;margin-bottom:10px;text-align:center;}

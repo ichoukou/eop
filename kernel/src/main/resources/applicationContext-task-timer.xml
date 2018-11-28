@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 淘宝请求金刚时间器 -->
+	<bean id="sendTask2TaobaoTaskQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.SendTask2TaobaoTimerQuartz" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver"
+					value="yto_yitong1@163.com;yto_yitong2@163.com;yto_yitong3@163.com" />
+				<entry key="sendTaskToTBService" value-ref="sendTaskToTBServiceImpl" />
+				<entry key="serverConfigService" value-ref="serverConfigServiceImpl" />
+				<entry key="limit" value="5000" />
+			</map>
+		</property>
+	</bean>
+	<bean id="sendTask2TaoBaoQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="sendTask2TaobaoTaskQuartz" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+
+	<!-- 金刚回应淘宝时间器-->
+	<bean id="sendTask2JinggangTaskQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.SendTask2JinggangTimerQuartz" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver"
+					value="yto_yitong1@163.com;yto_yitong2@163.com;yto_yitong3@163.com;" />
+				<entry key="sendTaskService" value-ref="sendTaskServiceImpl" />
+				<entry key="serverConfigService" value-ref="serverConfigServiceImpl" />
+				<entry key="limit" value="5000" />
+			</map>
+		</property>
+	</bean>
+	<bean id="sendTask2JinggangQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="sendTask2JinggangTaskQuartz" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- 发送发送任务给淘宝 -->
+			<!--    	--><ref bean="sendTask2TaoBaoQuartzTrigger" />
+				<!--发送发送任务给金刚 -->
+				<!-- <ref bean="sendTask2JinggangQuartzTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+</beans>

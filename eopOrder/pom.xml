@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.ytoec.module.order</groupId>
+	<artifactId>eopOrder</artifactId>
+	<name>eopOrder</name>
+	<packaging>jar</packaging>
+	<description>订单</description>
+
+	<parent>
+		<groupId>net.ytoec</groupId>
+		<artifactId>eopParent</artifactId>
+		<version>0.0.1</version>
+		<relativePath>../eopParent</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.ytoec.module.core</groupId>
+			<artifactId>eopCore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.ytoec.module.user</groupId>
+			<artifactId>eopUser</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>eopOrder</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
+	</build>
+</project>

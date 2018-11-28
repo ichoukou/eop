@@ -1,0 +1,13 @@
+#sear_box{margin-bottom:10px;}
+#sear_box .box_bd{padding-bottom:0;}
+.form p .reset_label{float:none;margin:0;text-align:left;width:auto;margin-right:10px;}
+#d_form textarea{width:200px;height:70px;}
+#d_form{width:322px;}
+#admin_select{width:174px;}
+.status{position:relative;display:block;z-index:10;}
+.tr_hover .status{z-index:20;font-weight:400;*zoom:1;position:relative;}
+.tr_hover .close_tip{display:block;}
+.close_tip{position:absolute;background:url(../../images/single/close_tip_01.png) no-repeat;width:196px;left:-100px;top:20px;_top:19px;font:12px/1.4 SimSun;color:#808080;display:none;}
+.close_tip .mid{background:url(../../images/single/close_tip_02.png) repeat-y;width:196px;margin-top:10px;}
+.close_tip .mid p{padding:10px;padding-bottom:0px;}
+.close_tip .fd{background:url(../../images/single/close_tip_03.png) no-repeat;width:196px;height:10px;display:block;}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.UserCustomMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.UserCustom" id="UserCustomResultMap">
+		<id property="userName" column="user_name" />
+		<id property="bindedUserName" column="binded_user_name" />
+		<id property="customerId" column="customer_id" />
+		<id property="type" column="type" />
+		<id property="relationalQuery" column="relational_query" />
+		<id property="field001" column="field001" />
+		<id property="field002" column="field002" />
+		<id property="field003" column="field003" />
+	</resultMap>
+
+	<select id="searchUsers" parameterType="UserCustom" resultType="list"
+		resultMap="UserCustomResultMap">
+		SELECT *
+		FROM
+		EC_CORE_USER_CUSTOM
+		WHERE 1=1 
+		<if test='userName!=null'>
+			 AND user_name=#{userName}
+		</if>
+		<if test='customerId!=null'>
+			 AND customer_id=#{customerId}
+		</if>
+		<if test='relationalQuery!=null'>
+			 AND relational_query=#{relationalQuery}
+		</if>
+		<if test='bindedUserName!=null'>
+			 AND binded_user_name=#{bindedUserName}
+		</if>
+		<if test='type!=null'>
+			 AND type=#{type}
+		</if>
+	</select>
+	<update id="edit" parameterType="userCustom">
+		UPDATE EC_CORE_USER_CUSTOM
+		SET
+		<if test='relationalQuery!=null'>
+		relational_query=#{relationalQuery}
+		</if>
+        <if test='field001!=null'>
+		,field001 = #{field001}
+		</if>
+        <if test='field002!=null'>
+		,field002 = #{field002}
+		</if>
+        <if test='field003!=null'>
+		,field003 = #{field003}
+		</if>
+		WHERE user_name = #{userName}
+		and binded_user_name = #{bindedUserName}
+		and type = #{type}
+	</update>
+	
+	<delete id="remove" parameterType="userCustom">
+	    DELETE FROM EC_CORE_USER_CUSTOM
+		WHERE user_name = #{userName}
+		<if test='bindedUserName!=null'>
+		and binded_user_name=#{bindedUserName}
+		</if>
+		<if test='customerId!=null'>
+		and customer_id=#{customerId}
+		</if>
+        <if test='type!=null'>
+		and type = #{type}
+		</if>
+	</delete>
+	
+	<insert id="add" parameterType="userCustom" >
+		INSERT INTO EC_CORE_USER_CUSTOM(user_name, binded_user_name, customer_id, 
+			type, relational_query, field001, field002, field003)
+		VALUES(#{userName}, #{bindedUserName}, #{customerId}, #{type}, 
+			#{relationalQuery}, #{field001}, #{field002}, #{field003})
+	</insert>
+	
+</mapper>

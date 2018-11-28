@@ -1,0 +1,9 @@
+#sear_box{margin-bottom:10px;}
+.half_p{float:left;width:365px;position:relative;}
+.form .half_p label{position:absolute;top:0;left:0;}
+.temp_content{width:230px;display:block;}
+.operate .gray{color:#808080;}
+#reason_dialog h4{font:700 14px/1.4 SimSun;margin-bottom:10px;}
+#reason_text{width:220px;height:80px;}
+#reason_textTip{display:block;margin-top:10px;display:none;}
+.tem_title{padding-right:20px;background:url(../../../images/sprite/ydjk_icon.png) no-repeat right -53px;display:inline-block;height:17px;line-height:17px;}

@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<schema name="example core zero" version="1.1">
+	<types>
+		<fieldType name="int" class="solr.TrieIntField"
+			precisionStep="0" omitNorms="true" positionIncrementGap="0" />
+		<fieldType name="string" class="solr.StrField"
+			sortMissingLast="true" omitNorms="true" />
+
+		<fieldType name="date" class="solr.TrieDateField" omitNorms="true"
+			precisionStep="8" positionIncrementGap="0" />
+		<fieldType name="float" class="solr.TrieFloatField"
+			omitNorms="true" precisionStep="0" positionIncrementGap="0" />
+		<fieldType name="short" class="solr.ShortField" omitNorms="true" />
+	</types>
+
+	<fields>
+		<!-- general -->
+		<field name="id" type="int" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="customerId" type="string" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="mailNo" type="string" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="orderType" type="short" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="numStatus" type="short" indexed="true" stored="true"
+			multiValued="false" />
+
+		<field name="name" type="string" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="phone" type="string" indexed="true" stored="false"
+			multiValued="true" />
+		<field name="displayPhone" type="string" indexed="false" stored="true"
+			multiValued="false" />
+		<field name="numProv" type="int" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="numCity" type="int" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="numDistrict" type="int" indexed="true" stored="true"
+			multiValued="false" />
+		<field name="address" type="string" indexed="false" stored="true"
+			multiValued="false" />
+
+		<field name="weight" type="float" indexed="false" stored="true"
+			multiValued="false" />
+		<field name="createTime" type="date" indexed="false" stored="true"
+			multiValued="false" />
+		<!-- acceptTime为空，则保存update_time的值 -->
+		<field name="acceptTime" type="date" indexed="false" stored="true"
+			multiValued="false" />
+		<field name="numCreateTime" type="int" indexed="true" stored="true"
+			multiValued="false" />
+		<!-- 卖家省ID -->
+		<field name="numProvF" type="int" indexed="true" stored="true"
+			multiValued="false" />
+		<!-- 卖家城市名 -->
+		<field name="cityF" type="string" indexed="false" stored="true"
+			multiValued="false" />
+		<!-- 调整订单 -->
+		<field name="freightType" type="short" indexed="false" stored="true"
+			multiValued="false" />
+		<!-- 调账价钱 -->
+		<field name="trimFreight" type="float" indexed="false" stored="true"
+			multiValued="false" />
+		<!-- 订单物流号 -->
+		<field name="txLogisticId" type="string" indexed="false" stored="true"
+			multiValued="false" />
+		<!-- 下单类型-->
+		<field name="lineType" type="short" indexed="false" stored="true"
+			multiValued="false" />
+		<field name="all" type="string" indexed="true" stored="false"
+			multiValued="true" />
+		<!--是否允许搜索，默认值为 0，无运单的订单 为1  -->
+		<field name="isDispaly" type="short" indexed="true" stored="false"
+			multiValued="false" />
+			
+		<!--揽件时间  对应order表中的type字段 by wusha-->
+		<field name="holdTime" type="int" indexed="true" stored="true"
+			multiValued="false" />
+			
+		<!-- 将mailNo 和 customerId 做为主键 -->
+		<field name="mailNoAndCustomerId" type="string" indexed="true" stored="false"
+			multiValued="false" />
+	</fields>
+	
+	<copyField source="name" dest="all" />
+	<copyField source="phone" dest="all" />
+	<copyField source="mailNo" dest="all" />
+
+
+	<!-- field to use to determine and enforce document uniqueness. -->
+	<uniqueKey>mailNoAndCustomerId</uniqueKey>
+
+	<!-- field for the QueryParser to use when an explicit fieldname is absent -->
+	<defaultSearchField>all</defaultSearchField>
+
+	<!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+	<solrQueryParser defaultOperator="OR" />
+</schema>
+

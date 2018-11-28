@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.TimerLogMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.TimerLog" id="timerLogResultMap">
+		<id property="id" column="id"/>
+		<result property="tableName" column="table_name"/>
+		<result property="operate" column="operate"/>
+		<result property="num" column="num"/>
+		<result property="errorNum" column="errorNum"/>
+		<result property="useTime" column="useTime"/>
+		<result property="createTime" column="create_time"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="timerNO" column="timerNO"/>
+		<result property="dataFrom" column="dataFrom"/>
+		<result property="isError" column="isError"/>
+		<result property="message" column="message"/>
+	</resultMap>
+	<insert id="addTimerLog" parameterType="net.ytoec.kernel.dataobject.TimerLog">
+		INSERT INTO
+			ec_core_timer_log
+				(table_name,
+				operate,num,
+				errorNum,useTime,
+				create_time,start_time,
+				end_time,timerNO,
+				dataFrom,isError,message)
+		VALUES
+			(
+			#{tableName},#{operate},
+			#{num},#{errorNum},
+			#{useTime},now(),
+			#{startTimeStr},#{endTimeStr},#{timerNO},
+			#{dataFrom},#{isError},#{message})
+	</insert>
+	
+	<select id="getTimerLog" parameterType="map" resultType="list" resultMap="timerLogResultMap">
+		select * from ec_core_timer_log
+		<where>
+			and 1=1
+		<if test="startTime !='' and startTime != null and endTime !='' and endTime != null">
+			and create_time between #{startTime} and #{endTime}
+		</if>
+		<if test="operate !=null">
+			and operate=#{operate}
+		</if>
+		<if test="timerNO !='' and timerNO !=null">
+			and timerNO=#{timerNO}
+		</if>
+		<if test="isError !=null">
+			and isError=#{isError} 
+		</if>
+		</where>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="countNum" parameterType="map" resultType="string" >
+		select sum(num) from ec_core_timer_log
+		<where>
+			and 1=1
+		<if test="startTime !='' and startTime != null and endTime !='' and endTime != null">
+			and create_time between #{startTime} and #{endTime}
+		</if>
+		<if test="operate !=null">
+			and operate=#{operate}
+		</if>
+		<if test="timerNO !='' and timerNO !=null">
+			and timerNO=#{timerNO}
+		</if>
+		<if test="isError !=null">
+			and isError=#{isError} 
+		</if>
+		</where>
+	</select>
+	<select id="count" resultType="int" parameterType="map">
+		select count(*) from ec_core_timer_log
+		<where>
+		and 1=1
+		<if test="startTime !='' and startTime != null and endTime !='' and endTime != null">
+			and create_time between #{startTime} and #{endTime}
+		</if>
+		<if test="operate !=null">
+			and operate=#{operate}
+		</if>
+		<if test="timerNO !='' and timerNO !=null">
+			and timerNO=#{timerNO}
+		</if>
+		<if test="isError !=null">
+			and isError=#{isError} 
+		</if>
+		</where>
+	</select>
+</mapper>

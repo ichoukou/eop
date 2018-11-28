@@ -1,0 +1,50 @@
+
+.form p .label_raido{margin:0;width:auto;float:none;}
+.form_tip{color:#FF0101;font-weight:400;}
+
+
+
+#box_bd_b,#box_bd_c,#box_bd_e{margin-top:-1px;}
+#box_bd_b{position:relative;z-index:10;*zoom:1;}
+#box_bd_c,#box_bd_d,#box_bd_e{height:27px;background:#E8F3FA;position:relative;}
+#orderby_box,#sear_ship_box,#sear_ship_box2{position:absolute;top:10px;right:10px;line-height:26px;}
+#orderby_box label,#sear_ship_box label,#sear_ship_box2 label{display:inline-block;vertical-align:top;}
+.table_footer{margin-top:10px;}
+.table_footer .print_box{float:left;line-height:27px;margin-left:11px;display:inline;}
+.table_footer .pagenavi{float:right;}
+.table .td_b .input_text{width:80px;}
+.contact_tel,.contact_mobile,.print_status{display:block;}
+.detail_box{padding:0 40px;}
+.detail_info{float:left;width:49%;}
+.detail_info h4{font:16px/1.4 SimSun;color:#333;margin-bottom:10px;}
+.detail_info dl{padding-left:70px;clear:both;overflow:hidden;*zoom:1;}
+.detail_info dt{width:70px;margin-left:-70px;display:inline;float:left;text-align:right;}
+.table tbody tr td{border-bottom:1px dashed #8CA2D3;border-left:1px solid #fff;border-right:1px solid #fff;}
+#to_order,#to_order2{position:absolute;top:0;right:0;}
+#date_choose,#box_bd_f{margin-bottom:10px;}
+#sear_ship{padding-left:25px;}
+.table thead tr th .fold_unfold{width:16px;height:16px;margin:8px 8px 0 0;float:left;display:inline;background:url(../../images/single/unfold.png) no-repeat;}
+.table thead tr th .unfold{background-position:0 0;}
+.table thead tr th .fold{background-position:0 -16px;}
+.tr_hover{cursor:pointer;}
+.merger_icon{font:11px/12px Arial;background:#8CA2D3;width:12px;height:12px;text-align:center;display:inline-block;margin-left:5px;color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;-webkit-text-size-adjust:none;}
+#merger_select{position:absolute;top:37px;left:10px;width:91px;background:#fff;border:1px solid #95B8E5;display:none;}
+#merger_select a{display:block;text-align:center;}
+#merger_select a:hover{background:#C7DCFE;text-decoration:none;}
+#clear_warn{line-height:22px;text-align:center;}
+#ship_vol_form,#del_item_form,#print_express_form,#print_invoice_form,.td_address{display:none;}
+#merger_orders_btn span em{font-style:normal;padding-right:15px;background:url(../../images/sprite/merger_arrow.png) no-repeat;}
+#merger_orders_btn span .select_down{background-position:right 5px;}
+#merger_orders_btn span .select_up{background-position:right -51px;}
+#shipnum_form{width:380px;}
+.table tbody .tr_hover td{background:#D1EDEE;border-left-color:#D1EDEE;border-right-color:#D1EDEE;}
+.ordernum,.shipnum,.contact_mobile,.contact_tel{font-family:Arial,SimSun;}
+.th_b .th_title{width:160px;}
+.table .th_title .check_all{margin-top:10px;}
+#box_bd_a,#box_bd_f,#box_bd_g{padding-bottom:0;}
+#start_shipnum{width:90px;}
+
+
+.prompt{color:#ff0000;margin-bottom:10px;}
+.prompt dt{float:left;}
+.prompt dd{margin-left:80px;}

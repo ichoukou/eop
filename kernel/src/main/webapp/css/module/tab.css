@@ -1,0 +1,37 @@
+/* Tab Public */
+.tab{overflow:hidden;}
+.tab_triggers ul{position:relative;}
+.tab_triggers li{height:100%;float:left;display:inline;}
+.tab_triggers li a{height:100%;text-decoration:none;display:inline-block;}
+.tab_triggers li a:hover{text-decoration:none;}
+.tab_panels{background:#fff;}
+
+/* Tab A */
+.tab_a .tab_triggers{border-width:1px;border-style:solid;border-color:#8DB2E3;height:26px;background:#E0ECFF;}
+.tab_a .tab_triggers ul{height:23px;line-height:23px;top:3px;}
+.tab_a .tab_triggers li,.tab_a .tab_triggers li a{background:url(../../images/module/tab.png) no-repeat;}
+.tab_a .tab_triggers li{margin:0 3px;border-bottom:1px solid #8DB2E3;padding-left:10px;background-position:0 -23px;}
+.tab_a .tab_triggers li a{padding-right:10px;color:#416AA3;background-position:right -23px;overflow:hidden;}
+.tab_a .tab_triggers .tab_cur{border-bottom:1px solid #fff;background-position:0 0;}
+.tab_a .tab_triggers .tab_cur a{background-position:right 0;font-weight:700;}
+.tab_a .tab_panels{border-width:0 1px 1px;border-style:solid;border-color:#8DB2E3;padding:10px;}
+
+/* Tab B */
+.tab_b .tab_triggers{border-bottom:1px solid #ccc;height:44px;}
+.tab_b .tab_triggers ul{height:33px;line-height:33px;top:11px;}
+.tab_b .tab_triggers .tab_cur,.tab_b .tab_triggers .tab_cur a{background:url(../../images/module/tab.png) #fff no-repeat;}
+.tab_b .tab_triggers li{margin:0 10px;border-bottom:1px solid #ccc;padding-left:10px;cursor:pointer;}
+.tab_b .tab_triggers li a{padding-right:10px;color:#333;}
+.tab_b .tab_triggers .tab_cur{border-bottom:1px solid #fff;background-position:0 -46px;}
+.tab_b .tab_triggers .tab_cur a{background-position:right -46px;font-weight:700;}
+.tab_b .tab_panels{padding:10px;}
+
+/* Tab C */
+.tab_c .tab_triggers{border-bottom:1px solid #ccc;height:40px;}
+.tab_c .tab_triggers ul{height:33px;line-height:26px;top:6px;}
+.tab_c .tab_triggers .tab_cur,.tab_c .tab_triggers .tab_cur a{background:url(../../images/module/tab.png) #fff no-repeat;}
+.tab_c .tab_triggers li{margin:0 10px;padding-left:30px;}
+.tab_c .tab_triggers li a{padding-right:15px;color:#333;background-position:right -79px;font-size:14px;font-weight:700;}
+.tab_c .tab_triggers .tab_cur{border-bottom:1px solid #fff;background-position:0 -79px;}
+.tab_c .tab_triggers .tab_cur a{background-position:right -79px;}
+.tab_c .tab_panels{padding:10px;}

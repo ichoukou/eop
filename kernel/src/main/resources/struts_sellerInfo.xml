@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 商家信息管理配置相关 -->
+	<package name="sellerInfo" extends="ssMyBatis" namespace="/">
+		<!--********************************** -->
+		<!--************商家信息*********** -->
+		<!--********************************** -->
+		<action name="sSellerInfo" class="sellerInfoAction" method="search">
+			<result name="doMerchantMain" type="tiles">WEB-INF.facebill/merchant-manege.jsp</result>
+			<result name="success" type="tiles">WEB-INF.facebill/merchant-manege.jsp</result>
+			<interceptor-ref name="userStack"/>
+		</action>
+
+		<!-- 密钥生成 -->
+		<action name="createKeyt" class="sellerInfoAction" method="createKeyt">
+			<result name="success" type="tiles">WEB-INF.facebill/merchant-manege.jsp</result>
+			<result name="error" type="tiles">WEB-INF.facebill/merchant-manege.jsp</result>
+			<interceptor-ref name="userStack"/>
+		</action>
+		<!-- 账号生成 -->
+		<action name="pUpdate" class="sellerInfoAction" method="createUserInfo">
+			<result name="success" type="tiles">WEB-INF.facebill/merchant-manege.jsp</result>
+			<interceptor-ref name="userStack"/>
+		</action>
+
+		<!--********************************** -->
+		<!--************同步密钥*********** -->
+		<!--********************************** -->
+		<action name="synchroKey" class="parternAction" method="synchroKey"></action>
+
+	</package>
+
+</struts>

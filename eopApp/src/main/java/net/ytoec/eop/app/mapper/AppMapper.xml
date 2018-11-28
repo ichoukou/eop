@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.eop.app.mapper.AppMapper">
+	<resultMap type="app" id="appResultMap">
+		<id property="id" column="id" />
+		<result property="appKey" column="app_key" />
+		<result property="appName" column="app_name" />
+		<result property="secret" column="secret" />
+		<result property="clientid" column="clientID" />
+		<result property="apptype" column="appType" />
+		<result property="appstatus" column="appStatus" />
+		<result property="testAppurl" column="test_appUrl" />
+		<result property="testCallbackUrl" column="test_callback_url" />
+		<result property="appurl" column="appUrl" />
+		<result property="callbackUrl" column="callback_url" />
+		<result property="operatemode" column="operateMode" />
+		<result property="applogo" column="appLOGO" />
+		<result property="appdetails" column="appDetails" />
+		<result property="message" column="message" />
+		<result property="userId" column="user_id" />
+		<result property="account" column="account" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	
+	<!-- 插入 自动生成ID -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="app">
+		insert into eop_app (
+			app_key
+			,app_name
+			,secret
+			,clientID
+			,appType
+			,appStatus
+			,test_appUrl
+			,test_callback_url
+			,appUrl
+			,callback_url
+			,operateMode
+			,appLOGO
+			,appDetails
+			,message
+			,user_id
+			,account
+			
+			,update_time
+			,remark
+		) values (
+			
+			#{appKey}
+			,#{appName}
+			,#{secret}
+			,#{clientid}
+			,#{apptype}
+			,#{appstatus}
+			,#{testAppurl}
+			,#{testCallbackUrl}
+			,#{appurl}
+			,#{callbackUrl}
+			,#{operatemode}
+			,#{applogo}
+			,#{appdetails}
+			,#{message}
+			,#{userId}
+			,#{account}
+			
+			,now()
+			,#{remark}
+		)
+	</insert>
+	
+	<!--抓取单个对象-->
+	<select id="get" parameterType="integer" resultType="app" resultMap="appResultMap">
+    	select * from eop_app
+    	where id = #{value}
+	</select>
+	
+	<!--修改-->
+	<update id="edit" parameterType="app">
+		update eop_app 
+		set 
+			app_key = #{appKey}
+			,app_name = #{appName}
+			,secret = #{secret}
+			,clientID = #{clientid}
+			,appType = #{apptype}
+			,appStatus = #{appstatus}
+			,test_appUrl = #{testAppurl}
+			,test_callback_url = #{testCallbackUrl}
+			,appUrl = #{appurl}
+			,callback_url = #{callbackUrl}
+			,operateMode = #{operatemode}
+			,appLOGO = #{applogo}
+			,appDetails = #{appdetails}
+			,message = #{message}
+			,user_id = #{userId}
+			,account = #{account}
+			,update_time = now()
+			,remark = #{remark}
+		where id = #{id}
+	</update>
+	
+	<!--物理删除-->
+	<delete id="remove" parameterType="integer">
+		delete from eop_app where id = #{value}
+	</delete>
+	
+	<!-- 分页查询start getPageList getTotal互为一对使用-->
+		<!--查询数据-->
+	<select id="getPageList" parameterType="Map" resultType="list" resultMap="appResultMap">
+	
+		select * from eop_app 
+		<where>
+			<if test='userId != null and userId != ""'>
+				and user_id=#{userId}
+			</if>
+			<if test='appName != null and appName != ""'>
+				and app_name like '%' #{appName} '%'
+			</if>
+			<if test="apptype!= null">
+				and appType = #{apptype}
+			</if>
+			<if test="appstatus!= null">
+				and appStatus = #{appstatus}
+			</if>
+			<if test="operatemode!= null">
+				and operateMode = #{operatemode}
+			</if>
+			<if test='startTime != null and endTime != null'>
+				AND create_time between #{startTime} and #{endTime}
+			</if>
+		</where>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+			
+	</select>
+		<!--查询数量-->
+	<select id="getTotal" parameterType="Map" resultType="integer">
+		select count(id) from eop_app
+		<where>
+			<if test='userId != null and userId != ""'>
+				and user_id=#{userId}
+			</if>
+			<if test='appName != null and appName != ""'>
+				and app_name like '%' #{appName} '%'
+			</if>
+			<if test="apptype!= null">
+				and appType = #{apptype}
+			</if>
+			<if test="appstatus!= null">
+				and appStatus = #{appstatus}
+			</if>
+			<if test="operatemode!= null">
+				and operateMode = #{operatemode}
+			</if>
+			<if test='startTime != null and endTime != null'>
+				AND create_time between #{startTime} and #{endTime}
+			</if>
+		</where>
+	</select>
+	<!-- 分页查询end -->
+	
+	<select id="getAll" parameterType="Map" resultType="list" resultMap="appResultMap">
+
+		select * from eop_app
+		<where>
+			<if test="apptype!= null">
+				and appType = #{apptype}
+			</if>
+			<if test="appstatus!= null">
+				and appStatus = #{appstatus}
+			</if>
+			<if test="operatemode!= null">
+				and operateMode = #{operatemode}
+			</if>
+			<if test="userId!= null">
+				and user_id = #{userId}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

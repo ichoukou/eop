@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="RequestOrder" type="RequestOrderType"/>
+	<xsd:complexType name="RequestOrderType">
+		<xsd:all>
+		    <xsd:element name="ecCompanyId" type="str64Type"/>
+			<xsd:element name="logisticProviderID" type="logisticProviderID_Type"/>
+			<xsd:element name="customerId" type="str64_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="txLogisticID" type="str64Type"/>
+			<xsd:element name="tradeNo" type="str64_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="mailNo" type="str64_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="orderType" type="xsd:int"/>
+			<xsd:element name="serviceType" type="xsd:long"/>
+			<xsd:element name="sender" type="clientType"/>
+			<xsd:element name="receiver" type="clientType"/>
+			<xsd:element name="sendStartTime" type="str64_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="sendEndTime" type="str64_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="goodsValue" type="xsd:double"/>
+			<xsd:element name="itemsValue" type="xsd:double"/>
+			<xsd:element name="items" type="itemsType"/>
+			<xsd:element name="packageOrNot" type="str32_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="special" type="specialType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="remark" type="str512_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="totalServiceFee" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="buyServiceFee" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="codSplitFee" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+		</xsd:all>
+		<xsd:attribute name="version" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:simpleType name="logisticProviderID_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="YTO"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="specialType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value=""/>
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str512Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="512" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str512_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="512" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str256Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="256" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str64Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str64_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str32Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="32" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str32_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="32" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str6_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="6" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="str10_null_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="10" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="itemsType">
+		<xsd:sequence>
+			<xsd:element name="item" type="itemType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="itemType">
+		<xsd:sequence>
+			<xsd:element name="itemName" type="str256Type"/>
+			<xsd:element name="number" type="xsd:int"/>
+			<xsd:element name="itemValue" type="xsd:double"/>
+			<xsd:element name="remark" type="str512_null_Type" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="clientType">
+		<xsd:sequence>
+			<xsd:element name="name" type="str32Type"/>
+			<xsd:element name="postCode" type="str10_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="phone" type="str32_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="mobile" type="str32_null_Type" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="prov" type="str32Type"/>
+			<xsd:element name="city" type="str32Type"/>
+			<xsd:element name="address" type="str256Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,53 @@
+.tip_content{
+    margin: 0 auto;
+    width:743px;
+    background: #fff;
+    border: 1px solid #A2A2A2;
+}
+.tip_content h2{
+    font-size:22px;
+    text-align: center;
+    padding: 18px 0;
+}
+.title{
+
+}
+.close{
+    background: none repeat scroll 0 0 #3e84c1;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    left: -35px;
+    padding: 5px;
+    position: relative;
+    top: -36px;
+}
+.tip_text{
+    width:640px;
+    height: 300px;
+    border: 1px solid #A2A2A2;
+    padding: 18px;
+    margin: 0 auto;
+}
+.tip_text p{
+    padding-bottom: 10px;
+    line-height: 24px;
+    font-size: 14px;
+}
+.tip_bar{
+    margin: 10px auto;
+    padding-bottom: 20px;
+    width: 680px;
+}
+.tip_fl{
+    float: left;
+}
+.red{
+    color: red;
+}
+.tip_fr{
+    float: right;
+}
+.tip_fr p{
+    line-height: 25px;
+}

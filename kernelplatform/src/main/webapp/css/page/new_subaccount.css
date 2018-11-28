@@ -1,0 +1,17 @@
+.from_list{padding:15px 0 0 15px;font:normal 12px/24px simsun;color:#666;}
+.from_list li{height:50px;}
+.from_list .input_text{width:298px;}
+.checkbox_box{display:inline-block;line-height:1.5}
+.checkbox_box label{margin:0 0 0 10px;}
+.button_box{padding-left:140px;padding-bottom:20px;}
+.button_box .btn_b{margin-right:20px}
+.form p .check_line{float:none;margin:0;width:auto;display:block;text-align:left;}
+#new_acc_form .input_text{width:278px;}
+#new_acc_form #tel_part_1,#new_acc_form #tel_part_3{width:40px;}
+#new_acc_form #tel_part_2{width:150px;}
+#acctype_check{display:inline-block;width:315px;}
+#small_tab_box{height:400px;width:400px;overflow-x:hidden;overflow-y:auto;}
+
+#smallTab{line-height:1.2;width:100%;}
+#smallTab span{position:relative;top:2px;*top:0px;}
+#smallTab span.tabtop_span{top:0px;}

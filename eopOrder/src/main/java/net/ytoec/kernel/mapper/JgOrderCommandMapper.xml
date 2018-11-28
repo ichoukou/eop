@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.JgOrderCommandMapper">
+
+	<select id="getJGOrderByLimit" parameterType="int"  resultType="JGOrderDTO">
+		select ID AS ID, COMMAND_TYPE AS COMMANDTYPE,CREATE_TIME AS CREATETIME,ORDER_LOGISTICS_CODE AS ORDERLOGISTICSCODE,ORDER_CHANNEL_CODE AS ORDERCHANNELCODE,STATUS AS STATUS,
+		IS_OFFLINE AS ISOFFLINE,COMMAND_CONTENT AS commendContent from ec_core_jg_order_command
+		where order_type = '0' order by id asc limit #{limit};
+	</select>
+	<select id="getJGOrder" parameterType="map"  resultType="JGOrderDTO">
+		select ID AS ID, COMMAND_TYPE AS COMMANDTYPE,CREATE_TIME AS CREATETIME,ORDER_LOGISTICS_CODE AS ORDERLOGISTICSCODE,
+		ORDER_CHANNEL_CODE AS ORDERCHANNELCODE,STATUS AS STATUS,ORDER_TYPE AS ORDERTYPE,
+		IS_OFFLINE AS ISOFFLINE,COMMAND_CONTENT AS commendContent from ec_core_jg_order_command
+		<where>
+			and 1=1
+		<if test="startTime !='' and startTime != null and endTime !='' and endTime != null">
+			and create_time between #{startTime} and #{endTime}
+		</if>
+		<if test="commandType !=null">
+			and command_type=#{commandType}
+		</if>
+		<if test="isOffline !=null">
+			and IS_OFFLINE=#{isOffline}
+		</if>
+		<if test="orderType !=null">
+			and order_type=#{orderType}
+		</if>
+		</where>
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="map"  resultType="int">
+		select count(*) from ec_core_jg_order_command
+		<where>
+			and 1=1
+		<if test="startTime !='' and startTime != null and endTime !='' and endTime != null">
+			and create_time between #{startTime} and #{endTime}
+		</if>
+		<if test="commandType !=null">
+			and command_type=#{commandType}
+		</if>
+		<if test="isOffline !=null">
+			and IS_OFFLINE=#{isOffline}
+		</if>
+		<if test="orderType !=null">
+			and order_type=#{orderType}
+		</if>
+		</where>
+	</select>
+
+	<select id="removeJGOrderById" parameterType="map" >
+		delete from ec_core_jg_order_command
+		where id >= #{minId} and id <![CDATA[<=]]>
+		#{maxId} and  order_type = '0';
+	</select>
+	
+	<insert id="add" parameterType="JGOrderDTO" keyProperty="id" useGeneratedKeys="true">
+	 INSERT INTO ec_core_jg_order_command (
+	 	command_type,create_time,order_logistics_code,order_channel_code,status,is_offline,command_content,order_type)
+	 VALUES (
+	    #{commandType}, #{createTime}, #{orderLogisticsCode}, #{orderChannelCode}, #{status}, #{isOffline}, #{commendContent}, #{orderType});
+	 
+	</insert>
+	
+<!-- 	<select id="get" parameterType="JGOrderDTO"  resultType="list"> -->
+<!-- 		select ID AS ID, COMMAND_TYPE AS COMMANDTYPE,CREATE_TIME AS CREATETIME,ORDER_LOGISTICS_CODE AS ORDERLOGISTICSCODE,ORDER_CHANNEL_CODE AS ORDERCHANNELCODE,STATUS AS STATUS, -->
+<!-- 		IS_OFFLINE AS ISOFFLINE,COMMAND_CONTENT AS commendContent from ec_core_jg_order_command -->
+<!-- 		where order_type = '0' order by id asc limit #{limit}; -->
+<!-- 	</select> -->
+</mapper>

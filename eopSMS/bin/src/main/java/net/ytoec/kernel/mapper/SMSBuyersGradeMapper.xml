@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSBuyersGradeMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSBuyersGrade" id="smsBuyersGradeResultMap">
+		<id property="id" column="id" />
+		<result property="highAccount" column="high_account" />
+		<result property="highCount" column="high_count" />
+		<result property="vipAccount" column="vip_account" />
+		<result property="vipCount" column="vip_count" />
+		<result property="vipHighAccount" column="vip_high_account" />
+		<result property="vipHighCount" column="vip_high_count" />
+		<result property="userId" column="userId" />
+		<result property="updateTime" column="update_time" />
+		<result property="updateUserId" column="update_userId" />
+		<result property="createTime" column="create_time" />
+		<result property="createUserId" column="create_userId" />
+	</resultMap>
+	             
+    
+	<insert id="addSMSBuyersGrade" parameterType="smsBuyersGrade" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_sms_buyers_grade(id,high_account,high_count,vip_account,vip_count,vip_high_account,vip_high_count,userId,create_time,create_userId) 
+		values(#{id},#{highAccount},#{highCount},#{vipAccount},#{vipCount},#{vipHighAccount},#{vipHighCount},#{userId},#{createTime},#{createUserId});	
+	</insert>
+	
+	<update id="editSMSBuyersGrade" parameterType="smsBuyersGrade">
+		update ec_core_sms_buyers_grade set 
+			high_account=#{highAccount},     
+			high_count=#{highCount},
+			vip_account=#{vipAccount},     
+			vip_count=#{vipCount},   
+			vip_high_account=#{vipHighAccount}, 
+			vip_high_count=#{vipHighCount},
+			userId=#{userId},
+			update_time=now(),
+			update_userId=#{updateUserId}
+		where id=#{id}
+	</update>
+	
+	<select id="getSMSBuyersGradeById" parameterType="Integer" resultType="smsBuyersGrade"
+		resultMap="smsBuyersGradeResultMap">
+		select * from ec_core_sms_buyers_grade where id=#{id}
+	</select>
+	
+	<delete id="delSMSBuyersGradeById" parameterType="Integer">
+		delete from ec_core_sms_buyers_grade where id=#{id}
+	</delete>
+	
+	<!-- 根据用户ID获取会员划分等级  -->
+	<select id="getSMSBuyersGradeByUserId" parameterType="Integer" resultType="smsBuyersGrade" resultMap="smsBuyersGradeResultMap">
+		select * from ec_core_sms_buyers_grade where userId=#{userId}
+	</select>
+</mapper>
+

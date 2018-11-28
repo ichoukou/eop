@@ -1,0 +1,69 @@
+/* Main */
+#main_v2{width:960px;margin:0 auto 40px;background:#fff;position:relative;}
+#content_v2{padding:10px;}
+.content_box{margin-bottom:15px;}
+.content_l{float:left;width:660px;}
+#start_navi{height:39px;line-height:39px;}
+#start_navi a{display:inline-block;}
+#start_navi img{vertical-align:middle;}
+#create_cus_code{width:110px;height:39px;background:url(../../images/single/custom_btn.png) no-repeat;text-indent:-9999em;overflow:hidden;display:block;}
+.content_r{float:right;width:270px;}
+#num_show{height:56px;margin-bottom:25px;}
+#num_show li{float:left;width:50%;}
+#num_show li a{font:700 14px/2 SimSun;}
+#home_sear_input,#guide_sear_input{position:absolute;top:0;}
+#home_sear_btn,#guide_sear_btn{height:27px;display:inline-block;position:absolute;top:0;right:0;background:url(../../images/single/sear_btn_bg.png) no-repeat right 0;padding:0 15px;line-height:27px;width:33px;}
+#home_sear_btn:hover,#guide_sear_btn:hover{text-decoration:none;}
+#home_sear_input,#guide_sear_input{border-color:#ABABAB;width:173px;-moz-border-radius:4px 0 0 4px;-khtml-border-radius:4px 0 0 4px;-webkit-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px;}
+#guide_sear_input{width:119px;}
+#home_sear{height:60px;border-bottom:1px solid #A2A2A2;margin-bottom:10px;}
+#home_sear form,#guide_sear_form{position:relative;height:27px;}
+#p_fun_1{background:url(../../images/single/print_icon.png) no-repeat 10px 0;}
+#p_fun_2{background:url(../../images/single/alarm_icon2.png) no-repeat 10px 0;}
+#p_fun_3{background:url(../../images/single/mobile_icon.png) no-repeat 10px 0;}
+.p_fun{padding-left:75px;padding-bottom:6px;}
+.p_fun p{color:#1A1A1A;font:13px/2 SimSun;}
+.p_fun a{color:#4BA0CA;}
+#content_box_a .box_bd{height:207px;}
+.content_r .box_hd strong{float:left;}
+.box_more{float:right;}
+#yto_news{height:252px;}
+#yto_news li{height:36px;line-height:36px;*margin-top:-3px;}
+#yto_news li a{float:left;}
+.news_date{float:right;color:#808080;}
+.btn_type_blue{width:180px;height:41px;font:700 20px/41px 'Microsoft YaHei',SimSun;color:#fff;background:url(../../images/single/btn_type_blue.png) no-repeat;display:block;text-align:center;margin:0 auto;}
+.btn_type_blue:hover{text-decoration:none;}
+
+/* Slide */
+#rec_slide{position:relative;width:638px;height:207px;}
+#rec_panel ul{position:relative;width:100%;height:100%;display:block;}
+#rec_panel ul li{position:absolute;left:0;top:0;}
+#rec_panel img{display:block;width:100%;}
+#rec_trigger{width:100%;position:absolute;bottom:0;left:0;}
+#rec_trigger ul{height:25px;line-height:25px;}
+#rec_trigger li{float:left;width:20%;*width:19.95%;}
+#rec_trigger li.four{width:25%;*width:24.999%;}
+#rec_trigger li.three{width:33.33%;*width:33.3099%;}
+#rec_trigger li.two{width:50%;}
+#rec_trigger li.one{width:100%;}
+#rec_trigger li a{display:block;width:100%;height:100;text-align:center;color:#3576BA;font-size:14px;background:#000;opacity:0.6;filter:alpha(opacity=60);}
+#rec_trigger li a:hover{text-decoration:none;}
+#rec_trigger .cur_trigger a{color:#fff;opacity:0.9;filter:alpha(opacity=90);}
+
+/* Chart */
+#content_box_b .box_bd{*zoom:1;overflow:hidden;position:relative;}
+#pie_wrapper,#line_wrapper{height:252px;width:100%;position:relative;overflow:hidden;}
+#line_selects{position:absolute;z-index:66;right:0;top:0;}
+#line_sel{position:absolute;right:9px;top:2px;z-index:10;}
+#line_sel2{float:right;margin-left:10px;}
+#line_selIsFencang{float:right;}
+#pie_sel{position:absolute;z-index:66;right:0;top:0;}
+#pie_chart{height:220px;left:0px;position:relative;top:34px;}
+#line_chart{height:265px;position:relative;z-index:9;top:-7px;}
+#line_mask{position:absolute;right:8px;top:8px;width:54px;height:24px;background:#fff;z-index:55;}
+#no_data{font:700 20px/2 SimSun;left:100px;top:50px;position:absolute;}
+
+
+
+
+#dialog{position:absolute;}

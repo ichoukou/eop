@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="codBill" namespace="/" extends="ssMyBatis">
+	
+		<!-- 综合查询 -->
+		<action name="codBill_*" class="codBillAction" method="{1}">
+			<result name="toSearch" type="tiles">WEB-INF.codBill/codBill_search.jsp</result>
+			<result name="ajax" type="json">
+				<param name="include">jsonResult</param>
+			</result>
+			
+			<interceptor-ref name="sessionMethodout">
+	                  <!-- 被拦截方法配置定义 -->             
+	                 <param name="includeMethods">bill,list</param> 
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+		</action>
+		
+	 	<!-- 代收货款 -->
+		<action name="codBillPay_*" class="codBillPayAction" method="{1}">
+			<result name="toBillDetail" type="tiles">WEB-INF.codBill/billDetails_search.jsp</result>
+			<result name="toDifferent" type="tiles">WEB-INF.codBill/billDiff_search.jsp</result>
+			<result name="ajax" type="json" >
+				<param name="include">jsonMapResult</param>
+			</result> 
+			<result name="updateDetail" type="redirect">codBillPay_toBillDetailSearch.action?menuFlag=caiwu_codpay</result>
+			 <interceptor-ref name="sessionMethodout">
+	                  <param name="includeMethods">toBillDetailSearch</param>
+			</interceptor-ref> 
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+	</package>
+	
+</struts>

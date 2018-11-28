@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.JgWaybillMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.JgWaybill" id="jgWaybillResultMap">
+		<id property="id" column="id"/>
+		<result property="mailNo" column="mail_no"/>
+		<result property="sName" column="sname"/>
+		<result property="sPostCode" column="spost_code"/>
+		<result property="sPhone" column="sphone"/>
+		<result property="sMobile" column="smobile"/>
+		<result property="sProv" column="sprov"/>
+		<result property="sCity" column="scity"/>
+		<result property="sDistrict" column="sdistrict"/>
+		<result property="sAddress" column="saddress"/>
+		<result property="bName" column="bname"/>
+		<result property="bPostCode" column="bpost_code"/>
+		<result property="bPhone" column="bphone"/>
+		<result property="bMobile" column="bmobile"/>
+		<result property="bProv" column="bprov"/>
+		<result property="bCity" column="bcity"/>
+		<result property="bDistrict" column="bdistrict"/>
+		<result property="bAddress" column="baddress"/>
+		<result property="orderId" column="order_id"/>
+		<result property="backup1" column="backup1"/>
+		<result property="backup2" column="backup2"/>
+		<result property="createTime" column="create_time"/>
+		<result property="logisticId" column="tx_logistic_id"/>
+		<result property="lineType" column="line_type" />
+		<result property="clientID" column="client_id" />
+		<result property="serviceType" column="service_type" />
+		<result property="customerId" column="customer_id" />
+	</resultMap>
+	
+	<!-- 自动生成id策略 -->
+	<insert id="add" parameterType="jgWaybill" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_JGWAYBILL(id, mail_no, sname, spost_code, sphone, smobile, sprov, scity,
+		 sdistrict, saddress, bname, bpost_code, bphone, bmobile, bprov, bcity, bdistrict, baddress, order_id, backup1, backup2, tx_logistic_id, line_type,client_id,service_type,customer_id)
+		values(#{id}, #{mailNo}, #{sName}, #{sPostCode}, #{sPhone}, #{sMobile}, #{sProv}, #{sCity}, #{sDistrict}
+		 , #{sAddress}, #{bName}, #{bPostCode}, #{bPhone}, #{bMobile}, #{bProv}, #{bCity}, #{bDistrict}, #{bAddress}, #{orderId}, #{backup1}, #{backup2}, #{logisticId}, #{lineType}, #{clientID},#{serviceType},#{customerId})
+	</insert>
+	
+	<select id="countJgwaybill"  resultType="int" >
+		select count(*) from ec_core_jgwaybill;
+	</select>
+	
+	<!-- 更新问题单 -->
+	<update id="edit" parameterType="jgWaybill">
+		update EC_CORE_JGWAYBILL t set
+		t.mail_no = #{mailNo},
+		t.sname = #{sName},
+		t.spost_code = #{sPostCode},
+		t.sphone = #{sPhone},
+		t.smobile = #{sMobile},
+		t.sprov = #{sProv},
+		t.scity = #{sCity},
+		t.sdistrict = #{sDistrict},
+		t.saddress = #{sAddress},
+		t.bname = #{bName},
+		t.bpost_code = #{bPostCode},
+		t.bphone = #{bPhone},
+		t.bmobile = #{bMobile},
+		t.bprov = #{bProv},
+		t.bcity = #{bCity},
+		t.bdistrict = #{bDistrict},
+		t.baddress = #{bAddress},
+		t.order_id = #{bAddress},
+		t.backup1 = #{backup1},
+		t.tx_logistic_id = #{logisticId},
+		t.line_type = #{lineType},
+		t.backup2 = #{backup2}
+		where t.id = #{id}
+	</update>
+	
+	<!-- jgWaybillResultMap是jgWaybill-resultmap.xml中定义的resultmap -->
+	<select id="get" parameterType="jgWaybill"
+		resultType="net.ytoec.kernel.dataobject.JgWaybill" resultMap="jgWaybillResultMap">
+		<![CDATA[
+			select t.id, 
+			t.mail_no,
+			t.sname,
+			t.spost_code,
+			t.sphone,
+			t.smobile,
+			t.sprov,
+			t.scity,
+			t.sdistrict,
+			t.saddress,
+			t.bname,
+			t.bpost_code,
+			t.bphone,
+			t.bmobile,
+			t.bprov,
+			t.bcity,
+			t.bdistrict,
+			t.baddress,
+			t.order_id,
+			t.tx_logistic_id,
+			t.line_type,
+			t.backup1,
+			t.backup2,
+			t.create_time
+			from EC_CORE_JGWAYBILL t where t.id = #{id} 
+        ]]>
+	</select>
+	
+	<select id="getAllJgWaybill" resultType="list" resultMap="jgWaybillResultMap">
+		select t.id,
+		t.mail_no,
+		t.sname,
+		t.spost_code,
+		t.sphone,
+		t.smobile,
+		t.sprov,
+		t.scity,
+		t.sdistrict,
+		t.saddress,
+		t.bname,
+		t.bpost_code,
+		t.bphone,
+		t.bmobile,
+		t.bprov,
+		t.bcity,
+		t.bdistrict,
+		t.baddress,
+		t.order_id,
+		t.backup1,
+		t.backup2,
+		t.tx_logistic_id,
+		t.line_type,
+		t.create_time
+		from EC_CORE_JGWAYBILL t order by t.create_time desc
+	</select>
+	
+	<delete id="remove" parameterType="jgWaybill">
+		delete from EC_CORE_JGWAYBILL where id = #{id}
+	</delete>
+	
+	<delete id="delJgWaybillFromJG" parameterType="int">
+		delete from EC_CORE_JGWAYBILL where tx_logistic_id like 'LP%' limit #{limit}
+	</delete>
+	
+</mapper>

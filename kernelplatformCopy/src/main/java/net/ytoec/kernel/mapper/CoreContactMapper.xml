@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.CoreContactMapper">
+	<resultMap type="coreContact"
+		id="CoreContactResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="postCode" column="post_code" />
+		<result property="phone" column="phone" />
+		<result property="mobile" column="mobile" />
+		<result property="prov" column="prov" />
+		<result property="city" column="city" />
+		<result property="address" column="address" />
+		<result property="createTime" column="create_Time" />
+		<result property="updateTime" column="update_Time" />
+		<result property="tradeType" column="trade_type" />
+		<result property="orderId" column="order_id" />
+	</resultMap>
+	<select id="getAllCoreContact" resultType="list"
+		resultMap="CoreContactResultMap">
+		select * from EC_CORE_CONTACT
+	</select>
+
+
+	<select id="get" parameterType="coreContact"
+		resultType="net.ytoec.kernel.dataobject.CoreContact"
+		resultMap="CoreContactResultMap">
+		<![CDATA[
+			select * from EC_CORE_CONTACT where id = #{id}
+        ]]>
+	</select>
+
+
+	<insert id="add" parameterType="coreContact" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into EC_CORE_CONTACT(id,name,
+		post_code,phone,mobile,prov,city,address,create_Time,trade_type,order_id)
+		values(#{id}, #{name}, #{postCode}, #{phone}, #{mobile},
+		#{prov}, #{city}, #{address}, #{createTime},  
+		#{tradeType},#{orderId})
+	</insert>
+
+
+	<update id="edit" parameterType="coreContact">
+		update EC_CORE_CONTACT set name = #{name}, post_code =
+		#{postCode} , phone = #{phone} , mobile = #{mobile} , prov =
+		#{prov}, city = #{city}, address = #{address},  
+		update_Time = #{updateTime}, trade_type =
+		#{tradeType}, order_id = #{orderId} where id = #{id}
+	</update>
+	<delete id="remove" parameterType="coreContact">
+		delete from EC_CORE_CONTACT where id = #{id}
+	</delete>
+</mapper>

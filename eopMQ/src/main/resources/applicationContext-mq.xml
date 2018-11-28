@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 占位符 -->
+	<bean id="propertyConfigurer"
+		class="net.ytoec.kernel.common.PropertyPlaceholderConfigurer"
+		lazy-init="false">
+		<property name="locations">
+			<list>
+				<value>classpath:kernel.dev.properties</value>
+				<value>classpath:kernel.properties</value>
+				<value>classpath:kernel.test.properties</value>
+				<value>classpath:kernel.prod.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+
+	<bean id="mqService" class="net.ytoec.kernel.service.impl.MqServiceImpl">
+		<!-- 队列管理器名称，及参数 -->
+		<property name="qmName" value="${qm.name}" />
+		<property name="qmParams">
+			<map>
+				<entry key="CCSID">
+					<value>${qm.ccsid}</value>
+				</entry>
+				<entry key="channel">
+					<value>${qm.channel}</value>
+				</entry>
+				<entry key="port">
+					<value type="int">${qm.port}</value>
+				</entry>
+				<entry key="hostname">
+					<value>${qm.hostname}</value>
+				</entry>
+			</map>
+		</property>
+		<!--在线订单发送消息队列名称 -->
+		<property name="onlineSendQueueName" value="${qm.onlinesendqueuename}" />
+			<!--自己联系物流发送消息队列名称 -->
+		<property name="offlineSendQueueName" value="${qm.offlinesendqueuename}" />
+		
+		<!--金刚订单更新发送消息队列名称 -->
+		<property name="jingangSendQueueName" value="${qm.jingangsendqueuename}" />
+		<!-- 在线订单接收消息队列名称 -->
+		<property name="onlineReceiveQueueName" value="${qm.onlinereceivequeuename}" />
+		<!-- 自己联系物流接收消息队列名称 -->
+		<property name="offlineReceiveQueueName" value="${qm.offlinereceivequeuename}" />
+		
+		<!-- 金刚订单更新接收消息队列名称 -->
+		<property name="jingangReceiveQueueName" value="${qm.jingangreceivequeuename}" />
+		<!--最大失败数，如果超过了，则放到backoutQueue中 -->
+		<property name="maxBackoutCount" value="${qm.maxbackoutcount}" />
+		<!--最大失败数，如果超过了，则放到backoutQueue中 -->
+		<property name="deadMaxBackoutCount" value="${qm.deadmaxbackoutcount}" />
+		
+		<!-- 在线订单消息多次失败后，放入的队列 -->
+		<property name="onlineBackoutQueueName" value="${qm.onlinebackoutqueuename}" />
+		<!-- 自己联系物流消息多次失败后，放入的队列 -->
+		<property name="offlineBackoutQueueName" value="${qm.offlinebackoutqueuename}" />
+		
+		<!-- 金刚订单更新读消息多次失败后，放入的队列 -->
+		<property name="jingangBackoutQueueName" value="${qm.jingangbackoutqueuename}" />
+		
+		<!-- 淘宝死信队列 -->
+		<property name="deadQueueName" value="${qm.deadqueuename}" />
+		<!-- 金刚死信队列 -->
+		<property name="jingangDeadQueueName" value="${qm.jingangdeadqueuename}" />
+		
+		<!-- 写SOLR队列 -->
+		<property name="solrSendQueueName" value="${qm.solrSendQueueName}" />
+		<property name="solrReceiveQueueName" value="${qm.solrReceiveQueueName}" />
+		<property name="solrAddSendQueueName" value="${qm.solrAddSendQueueName}" />
+		<property name="solrAddReceiveQueueName" value="${qm.solrAddReceiveQueueName}" />
+		<property name="solrOrderBackoutQueueName" value="${qm.solrOrderBackoutQueueName}" />
+		<property name="mqlimit" value="${mqlimit}"/>
+	</bean>
+	<!--连接池相关配置 -->
+	<bean id="mqSimpleConnectionManager" class="com.ibm.mq.MQSimpleConnectionManager">
+		<property name="active" ref="mqSimpleConnectionManagerActive" />
+		<property name="timeout" value="3600000" />
+		<property name="maxConnections" value="200" />
+		<property name="maxUnusedConnections" value="5" />
+	</bean>
+	<bean id="mqSimpleConnectionManagerActive"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.ibm.mq.MQSimpleConnectionManager.MODE_ACTIVE" />
+	</bean>
+</beans>

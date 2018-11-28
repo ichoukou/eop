@@ -1,0 +1,16 @@
+.keys{width:100%;}
+.content{border-radius:5px 5px 5px 5px;padding:5px;border:1px solid #d6d6d6;float:left;margin:0 30px 15px 0;display:inline-block;height:258px;}
+.title,.dist,.opt{width:139px;}
+.title{height:121px;margin-bottom:10px;}
+.dist,.opt{text-align:left;}
+.dist span{color:#818181;padding:4px 0;display:block;line-height:12px;}
+.dist .type{color:#3c7cb4;font-size:13px;}
+.dist .notice{color:#3c7cb4;}
+.dist em{color:#fb9608;font-style:normal;font-weight:bold;}
+.btn_buy{text-decoration:none;color:#418acd;}
+.dialog_p{margin-bottom:10px;line-height:1.2;}
+#sms_order{width:250px;}
+#to_pay span{color:#f00;}
+#gudie_desc{color:#808080;display:block;margin:0 auto;font-style:normal;line-height:1.4;margin-bottom:10px;}
+#help_tips li{padding:5px 0;}
+.buy_note p{padding:5px 0;}

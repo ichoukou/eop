@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.AppProviderMapper">
+	<resultMap type="appProvider" id="appProviderResultMap">
+		<id property="id" column="id" />
+		<result property="servicesType" column="services_type" />
+		<result property="companyName" column="company_name" />
+		<result property="companyUrl" column="company_url" />
+		<result property="companyAddress" column="company_address" />
+		<result property="linkman" column="linkman" />
+		<result property="paperType" column="paper_type" />
+		<result property="tradingCertificate" column="trading_certificate" />
+		<result property="tradingCertificatePath" column="trading_certificate_path" />
+		<result property="identityCard" column="identity_card" />
+		<result property="identityCardPath" column="identity_card_path" />
+		<result property="servicesAptitude" column="services_aptitude" />
+		<result property="customerContact" column="customer_contact" />
+		<result property="customerMail" column="customer_mail" />
+		<result property="customerPhone" column="customer_phone" />
+		<result property="userId" column="user_id" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	
+	<!-- 插入 自动生成ID -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="appProvider">
+		insert into eop_app_provider (
+			
+			services_type
+			,company_name
+			,company_url
+			,company_address
+			,linkman
+			,paper_type
+			,trading_certificate
+			,trading_certificate_path
+			,identity_card
+			,identity_card_path
+			,services_aptitude
+			,customer_contact
+			,customer_mail
+			,customer_phone
+			,user_id
+			,create_time
+			,update_time
+			,remark
+		) values (
+			
+			#{servicesType}
+			,#{companyName}
+			,#{companyUrl}
+			,#{companyAddress}
+			,#{linkman}
+			,#{paperType}
+			,#{tradingCertificate}
+			,#{tradingCertificatePath}
+			,#{identityCard}
+			,#{identityCardPath}
+			,#{servicesAptitude}
+			,#{customerContact}
+			,#{customerMail}
+			,#{customerPhone}
+			,#{userId}
+			,now()
+			,#{updateTime}
+			,#{remark}
+		)
+	</insert>
+	
+	<!--抓取单个对象-->
+	<select id="get" parameterType="appProvider" resultType="appProvider" resultMap="appProviderResultMap">
+    	select * from eop_app_provider
+    	where id = #{id}
+	</select>
+	
+	<!--根据用户ID抓取单个对象-->
+	<select id="getByUserId" parameterType="integer" resultType="appProvider" resultMap="appProviderResultMap">
+    	select * from eop_app_provider
+    	where user_id = #{value}
+	</select>
+	
+	<!--修改-->
+	<update id="edit" parameterType="appProvider">
+		update eop_app_provider 
+		set 
+			services_type = #{servicesType}
+			,company_name = #{companyName}
+			,company_url = #{companyUrl}
+			,company_address = #{companyAddress}
+			,linkman = #{linkman}
+			,paper_type = #{paperType}
+			,trading_certificate = #{tradingCertificate}
+			,trading_certificate_path = #{tradingCertificatePath}
+			,identity_card = #{identityCard}
+			,identity_card_path = #{identityCardPath}
+			,services_aptitude = #{servicesAptitude}
+			,customer_contact = #{customerContact}
+			,customer_mail = #{customerMail}
+			,customer_phone = #{customerPhone}
+			,update_time = now()
+			,remark = #{remark}
+		where id = #{id}
+	</update>
+	
+	<!--物理删除-->
+	<delete id="remove" parameterType="appProvider">
+		delete from eop_app_provider where id = #{id}
+	</delete>
+	
+	<!-- 分页查询start -->
+		<!--查询数据-->
+	<select id="getPageList" parameterType="Map" resultType="list" resultMap="appProviderResultMap">
+		<![CDATA[
+			select * from eop_app_provider
+			LIMIT #{start}, #{limit}
+		]]> 
+		
+	</select>
+		<!--查询数量-->
+	<select id="getTotal" parameterType="Map" resultType="integer">
+		<![CDATA[
+			select count(id) from eop_app_provider
+		]]>
+	</select>
+	<!-- 分页查询end -->
+	
+	<select id="getAll" parameterType="Map" resultType="list" resultMap="appProviderResultMap">
+		<![CDATA[
+			select * from eop_app_provider
+		]]>
+	</select>
+	
+</mapper>

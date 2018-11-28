@@ -1,0 +1,9 @@
+.half_w {float: left;position: relative;width: 361px;line-height:26px;}
+#d_address {width:370px;margin-bottom:10px;}
+#ps {width:270px;height:50px;}
+.opts a {margin-right:30px;}
+#addUser_form .half_w label{position:absolute;left:0;top:0;}
+#addUser_form em {color:#f00;}
+#addUser_form p{padding-left:110px;}
+#addUser_form p label{margin-left:-110px;width:100px;}
+p.d_ads{margin-bottom:0;}

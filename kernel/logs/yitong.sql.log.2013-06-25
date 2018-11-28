@@ -1,0 +1,384 @@
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE user_name = BINARY(?) AND user_password = ? 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: admin(String), 4QrcOUm6Wau+VuBX8g+IPg==(String)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND relational_query=? AND type=? 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: admin(String), 1(String), 1(String)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE id = ? 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 31886(Integer)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: insert into EC_CORE_STATS_MESSAGE(id,stats_type, stats_reason, remark,login_time,logout_time,user_id) values(?, ?, ?, ?, ?, ?, ?) 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 0(String), net.ytoec.kernel.dataobject.User@7c8e(String), admin:登录系统,ip:127.0.0.1,ip:127.0.0.1,ip:127.0.0.1(String), 2013-06-25 16:46:54.717(Timestamp), null, 31886(Integer)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: UPDATE EC_CORE_USER SET parentId=?, user_name=?, user_password=?, tele_phone=?, mobile_phone=?, address_province=?, address_city=?, address_district=?, address_street=?, sex=?, shop_name=?, shop_account=?, mail=?, card_type=?, card_no=?, user_type=?, user_source=?, user_state=?, user_level=?, create_user=?, update_time=now(), remark=?, site=?, user_name_text=?, user_code = ?, login_time = ?, taobao_encode_key = ?, field001 = ?, field002 = ?, field003 = ?, binded_customer_id = ?, client_id = ? ,child_type = ? WHERE id = ? 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: null, admin(String), 4QrcOUm6Wau+VuBX8g+IPg==(String), 021-69772938(String), 13774460310(String), 上海(String), 上海市辖区(String), 青浦区(String), 华新镇华徐公路3029弄27号(String), F(String), 管理员(String), null, huaiwenhu@126.com(String), 1(String), 771037(String), 3(String), (String), 1(String), (String), null, 圆通渠道信息员(String), 10000(String), 管理员(String), 11119(String), 2013-06-25 16:46:54.717(Timestamp), (String), 310000(String), ,NDU2,RXhy,MTIz(String), (String), null, null, null, 31886(Integer)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:54  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_column where column_code = ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: yitong_01(String)
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_article WHERE column_id = ? ORDER BY seq asc,create_time desc limit ? 
+2013-06-25 16:46:55  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 34(Integer), 6(Integer)
+2013-06-25 16:46:57  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:57  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 16:46:57  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 16:46:58  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 16:46:58  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 16:46:58  DEBUG [22451656@qtp-27292326-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:11:00  DEBUG [30642873@qtp-26867541-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:11:00  DEBUG [30642873@qtp-26867541-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:11:00  DEBUG [30642873@qtp-26867541-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:18:09  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:09  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:18:09  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:18:10  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_column where column_code = ? 
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: yitong_01(String)
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_article WHERE column_id = ? ORDER BY seq asc,create_time desc limit ? 
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 34(Integer), 6(Integer)
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:18:11  DEBUG [9166836@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE user_name = BINARY(?) AND user_password = ? 
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: admin(String), 4QrcOUm6Wau+VuBX8g+IPg==(String)
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND relational_query=? AND type=? 
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: admin(String), 1(String), 1(String)
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE id = ? 
+2013-06-25 17:19:23  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 31886(Integer)
+2013-06-25 17:19:24  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:24  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: insert into EC_CORE_STATS_MESSAGE(id,stats_type, stats_reason, remark,login_time,logout_time,user_id) values(?, ?, ?, ?, ?, ?, ?) 
+2013-06-25 17:19:24  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 0(String), net.ytoec.kernel.dataobject.User@7c8e(String), admin:登录系统,ip:127.0.0.1,ip:127.0.0.1,ip:127.0.0.1(String), 2013-06-25 17:19:24.0(Timestamp), null, 31886(Integer)
+2013-06-25 17:19:24  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:24  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: UPDATE EC_CORE_USER SET parentId=?, user_name=?, user_password=?, tele_phone=?, mobile_phone=?, address_province=?, address_city=?, address_district=?, address_street=?, sex=?, shop_name=?, shop_account=?, mail=?, card_type=?, card_no=?, user_type=?, user_source=?, user_state=?, user_level=?, create_user=?, update_time=now(), remark=?, site=?, user_name_text=?, user_code = ?, login_time = ?, taobao_encode_key = ?, field001 = ?, field002 = ?, field003 = ?, binded_customer_id = ?, client_id = ? ,child_type = ? WHERE id = ? 
+2013-06-25 17:19:24  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: null, admin(String), 4QrcOUm6Wau+VuBX8g+IPg==(String), 021-69772938(String), 13774460310(String), 上海(String), 上海市辖区(String), 青浦区(String), 华新镇华徐公路3029弄27号(String), F(String), 管理员(String), null, huaiwenhu@126.com(String), 1(String), 771037(String), 3(String), (String), 1(String), (String), null, 圆通渠道信息员(String), 10000(String), 管理员(String), 11119(String), 2013-06-25 17:19:24.0(Timestamp), (String), 310000(String), ,NDU2,RXhy,MTIz(String), (String), null, null, null, 31886(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:19:26  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_column where column_code = ? 
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: yitong_01(String)
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_article WHERE column_id = ? ORDER BY seq asc,create_time desc limit ? 
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 34(Integer), 6(Integer)
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:19:27  DEBUG [1545056@qtp-5066606-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:14  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:24:15  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-06-25 17:24:17  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:24:17  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:24:17  DEBUG [5791379@qtp-20772999-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:25:17  DEBUG [13490478@qtp-20772999-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:25:17  DEBUG [13490478@qtp-20772999-7] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:25:17  DEBUG [13490478@qtp-20772999-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:26:46  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-06-25 17:26:48  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:26:48  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:26:48  DEBUG [12383626@qtp-31489867-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:21  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-06-25 17:27:22  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:22  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-06-25 17:27:22  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-06-25 17:27:22  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:22  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-06-25 17:27:22  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-06-25 17:27:23  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:27:23  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:27:23  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:30:25  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:30:25  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:30:25  DEBUG [23886479@qtp-29703127-2] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:35:25  DEBUG [26731900@qtp-29703127-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:35:25  DEBUG [26731900@qtp-29703127-7] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:35:25  DEBUG [26731900@qtp-29703127-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:40:26  DEBUG [26731900@qtp-29703127-7] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:40:26  DEBUG [26731900@qtp-29703127-7] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:40:26  DEBUG [26731900@qtp-29703127-7] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)
+2013-06-25 17:45:25  DEBUG [21489996@qtp-29703127-8] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-06-25 17:45:25  DEBUG [21489996@qtp-29703127-8] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-06-25 17:45:25  DEBUG [21489996@qtp-29703127-8] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 31886(Integer)

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.NoticeMailNoMapper">
+
+	<resultMap type="net.ytoec.kernel.dataobject.SendTask" id="sendTaskMap">
+		<id property="id" column="id" />
+		<result property="taskFlag" column="task_flag" />
+		<result property="serverId" column="server_id" />
+		<result property="createTime" column="create_time" />
+		<result property="requestURL" column="request_url"/>
+		<result property="requestParams" column="request_params" />
+		<result property="clientId" column="clientId"/>
+	</resultMap>
+
+	<select id="getMailNoListByLimit" parameterType="int" resultType="sendTask" resultMap="sendTaskMap">
+		select * from ec_core_notice_mailno limit #{limit}
+	</select>
+	
+	<insert id="addMailNo" parameterType="map">
+		insert into ec_core_notice_mailno (request_params,request_url,task_flag_id,mailNo,clientId)
+		values(#{requestParams},#{requestURL},#{taskFlagId},#{mailNo},#{clientId})
+	</insert>
+	
+	<delete id="removeMailNo" >
+		delete from ec_core_notice_mailno where clientId = #{clientId} and mailNo = #{mailNo}
+	</delete>
+</mapper>

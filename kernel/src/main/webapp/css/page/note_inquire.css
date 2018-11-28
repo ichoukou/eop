@@ -1,0 +1,14 @@
+.half_p{float:left;width:365px;position:relative;}
+.form .half_p label{position:absolute;top:0;left:0;}
+#sear_input{margin-left:-75px;width:200px;}
+#sear_box{margin-bottom:10px;}
+.table{margin-bottom:10px;}
+#sms_content{width:500px;}
+#sms_content p{padding-left:70px;font:12px/1.8 Arial;margin-bottom:3px;overflow:hidden;clear:both;*zoom:1;}
+.subtitle{float:left;margin-left:-70px;display:inline-block;width:70px;text-align:right;}
+.subcontent{}
+.half_w{width:165px;float:left;position:relative;}
+.half_w .subtitle{position:absolute;left:0;top:0;}
+.member_id img{vertical-align:middle;margin-right:3px;}
+#sms_content .table tbody tr td{padding:5px 10px;}
+.failImg{background:url(../../images/sprite/sms_btn.png) no-repeat -77px -26px;display:inline-block;width:12px;height:13px;vertical-align:top;margin-left:5px;}

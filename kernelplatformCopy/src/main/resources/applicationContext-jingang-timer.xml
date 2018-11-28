@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 订单同步 from 金刚 -->
+	<bean id="createOrderTimerQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.CreateOrderTimerQuartz" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="orderService" value-ref="orderServiceImpl" />
+				<entry key="timerLogService" value-ref="timerLogServiceImpl" />
+				<entry key="jgOrderCommandService" value-ref="jgOrderCommandServiceImpl" />
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="lilongyong@ytoxl.com;linhuajie@ytoxl.com;liuchunyan@ytoxl.com" />
+				<entry key="configCodeService" value-ref="configCodeServiceImpl" />
+				<entry key="serverConfigService" value-ref="serverConfigServiceImpl" />
+				<entry key="threadNum" value="3" />
+				<entry key="step" value="120000" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="createOrderTimerQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="createOrderTimerQuartz" />
+		<property name="cronExpression" value="0/3 * * * * ?" />
+	</bean>
+	
+
+	<!-- 订单状态同步 from 金刚 -->
+	<bean id="orderStatusUpdate2dbTimerQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.OrderStatusUpdate2dbTimerQuartz" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="orderService" value-ref="orderServiceImpl" />
+				<entry key="timerLogService" value-ref="timerLogServiceImpl" />
+				<entry key="mailService" value-ref="mailServiceImpl" />
+<!-- 				<entry key="mqService" value-ref="mqServiceImpl"/> -->
+				<entry key="receiver" value="lilongyong@ytoxl.com;linhuajie@ytoxl.com;liuchunyan@ytoxl.com" />
+				<entry key="configCodeService" value-ref="configCodeServiceImpl" />
+				<entry key="serverConfigService" value-ref="serverConfigServiceImpl" />
+				<entry key="threadNum" value="3" />
+				<entry key="step" value="120000" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="orderStatusUpdate2dbTimerQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="orderStatusUpdate2dbTimerQuartz" />
+		<property name="cronExpression" value="2/3 * * * * ?" />
+	</bean>
+	
+	<!--  -->
+	<bean id="JqCreateOrderTimer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="net.ytoec.kernel.timer.JgCreateOrderTimerQuartz" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="orderService" value-ref="orderServiceImpl" />
+				<entry key="jgOrderCommandService" value-ref="jgOrderCommandServiceImpl" />
+				<entry key="mailService" value-ref="mailServiceImpl" />
+				<entry key="receiver" value="lilongyong@ytoxl.com;linhuajie@ytoxl.com;liuchunyan@ytoxl.com" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="JqCreateOrderTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="JqCreateOrderTimer" />
+		<property name="cronExpression" value="* 0/1 * * * ?" />
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="orderStatusUpdate2dbTimerQuartzTrigger" />
+				<ref bean="createOrderTimerQuartzTrigger" />
+				<ref bean="JqCreateOrderTimerTrigger"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

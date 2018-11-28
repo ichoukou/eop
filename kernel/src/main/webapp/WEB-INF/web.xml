@@ -1,0 +1,126 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Archetype Created Web Application</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext-common.xml,classpath*:applicationContext-yitong-25-timer.xml</param-value>
+<!-- 		<param-value>classpath*:applicationContext-common.xml</param-value> -->
+	</context-param>
+
+	<!-- struts tiles -->
+	<context-param>
+		<param-name>
+			org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG</param-name>
+		<param-value>
+			classpath:/tiles.xml
+	    </param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.tiles.context.AbstractTilesApplicationContextFactory</param-name>
+		<param-value>
+			org.apache.tiles.servlet.context.wildcard.WildcardServletTilesApplicationContextFactory
+	    </param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>CheckCode</servlet-name>
+		<servlet-class>net.ytoec.kernel.action.common.CheckCode</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>AppServlet</servlet-name>
+		<servlet-class>net.ytoec.kernel.interceptor.AppServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ShorCutServlet</servlet-name>
+		<servlet-class>net.ytoec.kernel.common.ShortCutServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CheckCode</servlet-name>
+		<url-pattern>/CheckCode</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AppServlet</servlet-name>
+		<url-pattern>/AppServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ShorCutServlet</servlet-name>
+		<url-pattern>/易通快捷方式.url</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/struts/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/jiaocai</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.apache.tiles.web.startup.TilesListener</listener-class>
+	</listener>
+	<!-- 字符filter,防止中文乱码 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/login/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/login/error.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/login/error.jsp</location>
+	</error-page>
+	<session-config>
+		<session-timeout>480</session-timeout>
+	</session-config>
+</web-app>

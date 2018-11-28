@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="smsBuyersManage" namespace="/" extends="ssMyBatis">
+		<action name="buyers*" class="smsBuyersAction" method="{1}">
+			<result name="toIndex" type="tiles">WEB-INF.sms/sms_buyers.jsp</result>
+			<result name="list" type="tiles">WEB-INF.sms/sms_buyer_list.jsp</result>
+			<result name="listInput" type="tiles">WEB-INF.sms/sms_buyer_list.jsp</result>
+			<result name="add" type="tiles">WEB-INF.sms/sms_buyer_edit.jsp</result>
+			<result name="toAddInput" type="tiles">WEB-INF.sms/sms_buyer_edit.jsp</result>
+			<result name="addInput" type="tiles">WEB-INF.sms/sms_buyer_edit.jsp</result>
+			<result name="toEdit" type="tiles">WEB-INF.sms/sms_buyer_edit.jsp</result>
+			<result name="editInput" type="tiles">WEB-INF.sms/sms_buyer_edit.jsp</result>
+			<result name="goSee" type="tiles">WEB-INF.sms/sms_buyer_desc.jsp</result>
+			 <!-- 权限设置,欢迎页面 -->
+			<result name="smsWelcome" type="tiles">WEB-INF.sms/smsWelcome.jsp</result>
+			<result name="jsondata" type="json">
+				<param name="root">jsonStr</param>
+			</result>
+			<result name="upload">WEB-INF.sms/sms_buyers.jsp</result>
+			
+			<!-- 设置会员等级<param name="root">grade</param> -->
+			<result name="getBuyerByUserId" type="tiles">WEB-INF.sms/sms_member_level.jsp</result>
+			<result name="setUserGrade" type="redirect">buyers!toIndex.action?menuFlag=buyers_manage</result>
+			
+			<!-- 默认拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+		</action>
+	</package>
+</struts>

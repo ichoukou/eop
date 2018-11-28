@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.BuildSearchStatusVersionMapper">
+
+	<select id="removeBuildSearchByLimit" parameterType="int">
+		delete from ec_core_build_search_status_weight_version
+		order by id asc limit #{limit};
+    </select>
+    
+    <insert id="add" parameterType="BuildSearchStatus" keyProperty="id" useGeneratedKeys="true">
+    	insert into ec_core_build_search_status_weight_version(order_id,build_task) values(#{orderId},'0'); 
+    </insert>
+    
+     <insert id="addWeightIndex" parameterType="BuildSearchStatus" keyProperty="id" useGeneratedKeys="true">
+    	insert into ec_core_build_search_status_weight_index(order_id,build_task) values(#{orderId},'0'); 
+    </insert>
+    
+</mapper>

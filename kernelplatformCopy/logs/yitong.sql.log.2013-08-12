@@ -1,0 +1,251 @@
+2013-08-12 17:47:42  DEBUG [timerFactory] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:47:43  DEBUG [timerFactory] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE user_type = ? 
+2013-08-12 17:47:43  DEBUG [timerFactory] (Slf4jImpl.java:28) - ==> Parameters: 1(String)
+2013-08-12 17:47:44  DEBUG [timerFactory] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:47:44  DEBUG [timerFactory] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE user_type = ? 
+2013-08-12 17:47:44  DEBUG [timerFactory] (Slf4jImpl.java:28) - ==> Parameters: 2(String)
+2013-08-12 17:47:51  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:47:51  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 17:47:51  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 17:47:51  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:47:51  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 17:47:51  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE user_name = BINARY(?) AND user_password = ? 
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 4QrcOUm6Wau+VuBX8g+IPg==(String)
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND relational_query=? AND type=? 
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 1(String), 1(String)
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER WHERE id = ? 
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer)
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: insert into EC_CORE_STATS_MESSAGE(id,stats_type, stats_reason, remark,login_time,logout_time,user_id) values(?, ?, ?, ?, ?, ?, ?) 
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 0(String), net.ytoec.kernel.dataobject.User@c(String), 100009:登录系统,ip:127.0.0.1,ip:127.0.0.1,ip:127.0.0.1(String), 2013-08-12 17:48:26.643(Timestamp), null, 12(Integer)
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: UPDATE EC_CORE_USER SET parentId=?, user_name=?, user_password=?, tele_phone=?, mobile_phone=?, address_province=?, address_city=?, address_district=?, address_street=?, sex=?, shop_name=?, shop_account=?, mail=?, card_type=?, card_no=?, user_type=?, user_source=?, user_state=?, user_level=?, create_user=?, update_time=now(), remark=?, site=?, user_name_text=?, user_code = ?, login_time = ?, taobao_encode_key = ?, field001 = ?, field002 = ?, field003 = ?, binded_customer_id = ?, client_id = ? ,child_type = ? WHERE id = ? 
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: null, 100009(String), 4QrcOUm6Wau+VuBX8g+IPg==(String), 010-64262238(String), 18001387001(String), 北京(String), 北京市(String), 朝阳区(String), 黄寺大街12号华沛写字楼A座一层(String),  M(String), null, null, 997715627caozhi@sina.com(String),  1(String), 771037(String), 2(String), null, 1(String), null, null, null, 100009(String), 北京市朝阳区和平里分公司(String), 100009(String), 2013-08-12 17:48:26.643(Timestamp), 12(String), 110000(String), ,MDAwMDk=,TXZBYw==,eXRvMQ==(String), true(String), null, null, null, 12(Integer)
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:26  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_admin(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 93(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 94(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_kefu(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 95(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_wangdian_caiwu(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 96(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 97(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_kefu(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 98(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_maijia_caiwu(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 99(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE conf_type = ? AND conf_key = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 2(String), permission_pingtai(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_CONFIGCODE WHERE pid = ? order by seq asc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 100(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER U WHERE U.PARENTID = ? order by u.login_time desc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USERTHREAD WHERE user_state= ? and site_code = ? order by cteate_time desc 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 1(String), 100009(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_column where column_code = ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: yitong_01(String)
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: select * from eop_cms_article WHERE column_id = ? and reader_type in(?,'0') ORDER BY seq asc,create_time desc limit ? 
+2013-08-12 17:48:27  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 34(Integer), 2(String), 6(Integer)
+2013-08-12 17:48:29  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:29  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 17:48:29  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 17:48:29  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:29  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 17:48:29  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 17:48:30  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:30  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM EC_CORE_USER_CUSTOM WHERE user_name=? AND binded_user_name=? AND type=? 
+2013-08-12 17:48:30  DEBUG [16638553@qtp-22640871-4] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 100009(String), 3(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-02(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-03(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-04(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-05(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-06(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-07(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-08(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-09(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-10(String)
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: SELECT * FROM ec_core_mailno_tendency t WHERE t.site_id = ? AND t.mailno_create_time = ? ORDER BY t.partitiondate DESC 
+2013-08-12 17:48:30  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 12(Integer), 2013-08-11(String)
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select * from ec_core_userthread where site_code=? 
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 100009(String)
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select count(waybill_no) from zebra_surfacebill where current_user_no=? and is_use=? 
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: K10000902(String), 0(Integer)
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select count(waybill_no) from zebra_surfacebill where current_user_no=? 
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: K10000902(String)
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select count(waybill_no) from zebra_surfacebill where current_user_no=? and (is_use=1 or is_use=2) 
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: K10000902(String)
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select * from zebra_forewarn where customer_code=? 
+2013-08-12 17:48:31  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: K10000902(String)
+2013-08-12 17:48:32  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:32  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 17:48:32  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 17:48:32  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:48:32  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 17:48:32  DEBUG [9171467@qtp-22640871-5] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 17:53:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:53:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 17:53:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 17:53:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:53:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 17:53:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 17:58:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:58:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 17:58:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 17:58:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 17:58:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 17:58:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:03:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:03:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:03:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:03:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:03:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:03:32  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:08:33  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:08:33  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:08:33  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:08:33  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:08:33  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:08:33  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:13:35  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:13:35  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:13:35  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:13:35  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:13:35  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:13:35  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:18:37  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:18:37  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:18:37  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:18:37  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:18:37  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:18:37  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:23:42  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:23:42  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:23:42  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:23:42  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:23:42  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:23:42  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:28:45  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:28:45  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:28:45  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:28:45  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:28:45  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:28:45  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:33:49  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:33:49  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:33:49  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:33:49  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:33:49  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:33:49  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:38:52  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:38:52  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:38:52  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:38:52  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:38:52  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:38:52  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:43:56  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:43:56  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:43:56  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:43:56  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:43:56  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:43:56  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:49:00  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:49:00  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:49:00  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:49:00  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:49:00  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:49:00  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:54:03  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:54:03  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:54:03  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:54:03  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:54:03  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:54:03  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 18:59:06  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:59:06  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 18:59:06  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 18:59:06  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 18:59:06  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 18:59:06  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 19:04:09  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:04:09  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 19:04:09  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 19:04:09  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:04:09  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 19:04:09  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 19:09:13  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:09:13  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 19:09:13  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 19:09:13  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:09:13  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 19:09:13  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 19:14:16  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:14:16  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 19:14:16  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 19:14:16  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:14:16  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 19:14:16  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)
+2013-08-12 19:19:19  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:19:19  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select * from EC_CORE_MESSAGE_USER t where t.message_status = ? and t.user_id = ? 
+2013-08-12 19:19:19  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 0(Integer), 12(Integer)
+2013-08-12 19:19:19  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ooo Connection Opened
+2013-08-12 19:19:19  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==>  Executing: select count(*) from EC_CORE_QUESTIONNAIRE t WHERE t.branck_id = ? AND t.wdIsRead = ? AND t.deal_status = ? AND t.partitiondate between ? and ? AND t.order_status = ? 
+2013-08-12 19:19:19  DEBUG [16939205@qtp-22640871-3] (Slf4jImpl.java:28) - ==> Parameters: 100009(String), 0(String), 2(String), 2013-08-03 00:00:00.0(Timestamp), 2013-08-13 00:00:00.0(Timestamp), 0(String)

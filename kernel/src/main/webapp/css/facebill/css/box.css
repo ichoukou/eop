@@ -1,0 +1,9 @@
+.box_hd{border-width:1px 1px 0;border-style:solid;height:25px;line-height:25px;padding:0 10px;background:url(../../images/module/box_hd.png) repeat-x #E0ECFF;}
+.box_bd{border-width:1px;border-style:solid;padding:10px;background:#fafdfe;line-height:24px;}
+/* 
+.box_a .box_hd,.box_a .box_bd{border-color:#8DB2E3;}
+.box_b .box_hd,.box_b .box_bd{border-color:#000;}
+ */
+.box_a .box_hd,.box_a .box_bd{border-color:#A2A2A2;}
+.box_a .box_hd{background:#E6E6E6;}
+.box_a .box_hd strong{font-weight:400;}

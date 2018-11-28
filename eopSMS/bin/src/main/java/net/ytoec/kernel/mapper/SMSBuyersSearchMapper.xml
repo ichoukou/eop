@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.SMSBuyersSearchMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.SMSBuyersSearch" id="smsBuyersSearchResultMap">
+		<id property="id" column="id" />
+		<result property="searchName" column="search_name" />
+		<result property="searchCondition" column="search_condition" />
+		<result property="updateTime" column="update_time" />
+		<result property="updateUserId" column="update_userId" />
+		<result property="createTime" column="create_time" />
+		<result property="createUserId" column="create_userId" />
+	</resultMap>
+	              
+	
+	<insert id="addSmsBuyersSearch" parameterType="smsBuyersSearch" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into ec_core_sms_buyers_search(id,search_name,search_condition,update_time,update_userId,create_time,create_userId) 
+		values(#{id},#{searchName},#{searchCondition},#{updateTime},#{updateUserId},now(),#{createUserId});	
+	</insert>
+	
+	<delete id="delSmsBuyersSearch" parameterType="Integer">
+		delete from ec_core_sms_buyers_search where id=#{id}
+	</delete>
+	
+	<update id="editSmsBuyersSearch" parameterType="smsBuyersSearch">
+		update ec_core_sms_buyers_search set 
+			search_name=#{searchName},     
+			search_condition=#{searchCondition},
+			update_time=now(),     
+			update_userId=#{updateUserId},   
+			create_userId=#{createUserId}  
+		where id=#{id}
+	</update>
+	
+	<select id="getSmsBuyersSearchById" parameterType="integer" resultType="smsBuyersSearch" resultMap="smsBuyersSearchResultMap">
+		select * from ec_core_sms_buyers_search where id=#{id}
+	</select>
+	 
+	 <!-- 获取当前用户的搜索器  -->
+	 <select id="getSMSBuyersSearchByUserId" parameterType="integer" resultType="list" resultMap="smsBuyersSearchResultMap">
+		select * from ec_core_sms_buyers_search where create_userId=#{userId} ORDER BY update_time DESC
+	</select>
+	
+	<!-- 获取当前用户的搜索器的数量  -->
+	 <select id="getSearchCountByUserId" parameterType="integer" resultType="integer">
+		select count(*) from ec_core_sms_buyers_search where create_userId=#{userId}
+	</select>
+</mapper>
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="WEB-INF.**" template="/WEB-INF/common/ytoLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/common/header.jsp" />
+<!-- 		<put-attribute name="menu" value="/WEB-INF/common/menu.jsp" /> -->
+		<put-attribute name="footer" value="/WEB-INF/common/footer.jsp" />	
+		<put-attribute name="content" value="/WEB-INF/{1}" />
+	</definition>
+	<definition name="audio.**" template="/WEB-INF/audio/audioLayout.jsp">
+		<put-attribute name="audio_header" value="/WEB-INF/audio/header.jsp" />
+		<put-attribute name="audio_menu" value="/WEB-INF/audio/menu.jsp" />
+		<put-attribute name="audio_footer" value="/WEB-INF/audio/footer.jsp" />	
+		<put-attribute name="audio_content" value="/WEB-INF/{1}" />
+	</definition>
+	<definition name="help.**" template="/WEB-INF/help/helpLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/help/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/help/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/help/footer.jsp" />	
+		<put-attribute name="content" value="/WEB-INF/{1}" />
+	</definition>
+</tiles-definitions>

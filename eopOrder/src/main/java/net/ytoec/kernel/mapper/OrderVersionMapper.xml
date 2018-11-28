@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.OrderVersionMapper">
+	
+	<!-- 增量build数据到 solr-->
+	<select id="bulidPartEccoreStatusData" parameterType="map"  resultType="MailObjectDTO">
+		select o.id as id,o.mailNo as mailNo,o.status as status,t.prov as prov,s.prov as provF,
+	    o.create_time as createTime,o.accept_time as acceptTime,o.customer_id as customerId,
+	    t.name as name,t.phone as phone,t.mobile as mobile,t.numProv as numProv,
+		t.city as city,t.district as district,o.weight as weight,s.numProv as numProvF,
+		s.city as cityF,o.tx_logistic_id as txLogisticId, t.address as address,o.trim_freight as trimFreight,o.freight_type as freightType,
+		o.line_type as lineType,b.build_task as buildTask,b.mail_no as oldMailNo,o.partitiondate as partitiondate, o.type as holdTime
+		from ec_core_order o, ec_core_traderinfo t ,ec_core_traderinfo s,
+        (select id ,order_id,build_task,mail_no from ec_core_build_search_status_weight_version c order by c.id asc limit #{limit}) as b
+        where b.order_id=o.id and o.id=t.order_id and o.id=s.order_id and t.trade_type=1 and s.trade_type=0
+        <![CDATA[
+        and o.partitiondate >=#{endDate} 
+        and o.partitiondate <= #{currentDate}
+        and t.partitiondate >=#{endDate} 
+        and t.partitiondate <= #{currentDate}
+        and s.partitiondate >=#{endDate}
+        and s.partitiondate <= #{currentDate};
+        	]]>	
+	</select>
+	
+</mapper>

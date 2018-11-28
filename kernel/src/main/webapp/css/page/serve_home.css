@@ -1,0 +1,50 @@
+#l_side{width:630px;float:left;}
+#r_side{width:300px;float:right;}
+.box_hd strong{font-weight:400;color:#1E569E;}
+.serve_name{display:block;height:58px;background:url(../../images/sprite/serve_icon.png) no-repeat;margin-right:10pxpadding-left:70px;font:700 14px/58px SimSun;color:#333;}
+#l_side .box_bd table{width:100%;}
+#l_side .box_bd td{vertical-align:middle;padding:15px 0 15px 5px;}
+#in_use{margin-bottom:10px;}
+.td_a{width:70px;}
+.td_d{width:180px;}
+.td_b{width:226px;}
+.td_b .serve_desc{padding:0 10px;display:block;width:208px;color:#808080;}
+#serve_b{background-position:0 -58px;}
+#serve_c{background-position:0 -116px;}
+#my_acc .box_bd{color:#333;}
+#mobile,#remind{padding-left:70px;}
+#mobile em,#remind em{font:12px/24px SimSun;width:75px;text-align:right;display:block;float:left;margin-left:-74px;display:inline;}
+#remind em{display:inline-block;height:120px;}
+#mobile_num{font-family:Arial;}
+.operate_link{display:inline-block;}
+#balance em{}
+#balance,#mobile{position:relative;margin-bottom:10px;}
+#balance .operate_link,#mobile .operate_link{position:absolute;right:-5px;top:0;}
+#balance em{font:700 14px/1.4 SimSun;}
+#balance strong{font-weight:400;}
+#remind select{width:60px;}
+.free_tip{color:#808080;}
+.select_bl{display:inline;}
+#mobile_form{width:430px;}
+#validity_num{width:50px;}
+#validity_numTip em{font:13px/26px Arial;}
+#mobile_tel{width:132px;*width:135px;}
+#modify_process{width:432px;margin-bottom:10px;}
+#modify_process ol{border:1px solid #99BBE6;height:37px;}
+#modify_process ol li{float:left;width:33.3%;line-height:37px;text-align:center;background:url(../../images/sprite/process.png) no-repeat right 0;}
+#modify_process ol #process_first,#modify_process ol #last_cur{background-position:right bottom;}
+#modify_process ol #process_cur{background-color:#EEF4FB;color:#3ABF00;}
+#modify_process ol #process_last,#remind_pro #last_pro{background:none;}
+#modify_box{border:1px solid #99BBE6;width:430px;padding:20px 0;}
+#modify_process ol #last_pro{background:#EEF4FB;color:#3ABF00;}
+#modify_tips p{font:13px/2 Arial,SimSun;margin-bottom:10px;}
+.has_pop{position:relative;float:right;}
+.f_close{background: url("../../images/module/dialog_close.png") no-repeat scroll 0 0 transparent;
+    height: 30px;
+    overflow: hidden;
+    position: absolute;
+    right: -10px;
+    text-indent: -9999em;
+    top: -10px;
+    width: 30px;}
+.pop_tip{position:absolute;width:196px;height:29px;background:url(../../images/single/pop_bg.png) no-repeat;top:20px;left:-45px;font-size:12px;text-align:center;color:#808080;padding-top:15px;display:block;}

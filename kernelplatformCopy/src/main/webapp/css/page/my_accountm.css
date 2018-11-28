@@ -1,0 +1,21 @@
+.from_list{padding:10px 10px 10px 10px;font:normal 12px/24px simsun;color:#666;}
+.from_list li{height:37px;}
+.from_list input{width:151px;}
+.address_tips{width:800px;display:inline-block;background:#f9f9f9;padding:6px;margin:0 auto;font-size:12px;}
+.save_box{padding:10px 0 0 80px;}
+#network_binding{text-align:center;}
+#network_binding p{margin:20px auto;}
+#basic_info em{font-style:normal;}
+#basic_info .input_text,#modify_psw .input_text,#basic_info textarea{width:278px;}
+#basic_info textarea{height:70px;}
+#basic_info #tel_part_1,#basic_info #tel_part_3{width:40px;}
+#basic_info #tel_part_2{width:150px;}
+#add_confirm{display:block;line-height:26px;background:#F9F9F9;color:#666;padding:0 10px;}
+
+.box_p p{padding-bottom:10px;padding-left:10px;}
+.input_text2{margin-left:10px;}
+.p_span{display:block;float:left;padding-top:0px;}
+.p_span2{font-weight:bold;}
+.p_span3{padding-right:15px;}
+.p_color{color:#F00;margin-top:20px;}
+span.req{color:red;}

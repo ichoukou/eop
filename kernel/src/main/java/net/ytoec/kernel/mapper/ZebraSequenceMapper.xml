@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.ytoec.kernel.mapper.ZebraSequenceMapper">
+	<resultMap id="BaseResultMap" type="net.ytoec.kernel.dataobject.ZebraSequence">
+		<id column="sequence_id" property="sequenceId" jdbcType="INTEGER" />
+		<result column="customer_code" property="customerCode" jdbcType="VARCHAR" />
+		<result column="partern_code" property="parternCode" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<insert id="insertZebraSequence" parameterType="net.ytoec.kernel.dataobject.ZebraSequence">
+		<selectKey resultType="java.lang.Integer" keyProperty="sequenceId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+        </selectKey>
+		insert into zebra_sequence (sequence_id, customer_code, partern_code,
+		create_time)
+		values (#{sequenceId,jdbcType=INTEGER}, #{customerCode,jdbcType=VARCHAR},
+		#{parternCode,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+</mapper>

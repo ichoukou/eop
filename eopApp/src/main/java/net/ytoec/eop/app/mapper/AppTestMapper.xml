@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.eop.app.mapper.AppTestMapper">
+	<resultMap type="appTest" id="appTestResultMap">
+		<id property="id" column="id" />
+		<result property="appId" column="app_id" />
+		<result property="clientId" column="client_id" />
+		<result property="txLogisticsId" column="tx_logistics_id" />
+		<result property="encodeMsg" column="encode_msg" />
+		<result property="decodeMsg" column="decode_msg" />
+		<result property="msgType" column="msg_type" />
+		<result property="orderType" column="order_type" />
+		<result property="status" column="status" />
+		<result property="errorMsg" column="error_msg" />
+		<result property="createTime" column="create_time" />
+		<result property="remark" column="remark" />
+	</resultMap>
+	
+	<!-- 插入 自动生成ID -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="appTest">
+		insert into eop_app_test (
+			
+			app_id
+			,client_id
+			,tx_logistics_id
+			,encode_msg
+			,decode_msg
+			,msg_type
+			,order_type
+			,status
+			,error_msg
+			,create_time
+			,remark
+		) values (
+			
+			#{appId}
+			,#{clientId}
+			,#{txLogisticsId}
+			,#{encodeMsg}
+			,#{decodeMsg}
+			,#{msgType}
+			,#{orderType}
+			,#{status}
+			,#{errorMsg}
+			,#{createTime}
+			,#{remark}
+		)
+	</insert>
+	
+	<!--抓取单个对象-->
+	<select id="get" parameterType="integer" resultType="appTest" resultMap="appTestResultMap">
+    	select * from eop_app_test
+    	where id = #{value}
+	</select>
+	
+	<!--修改-->
+	<update id="edit" parameterType="appTest">
+		update eop_app_test 
+		set 
+			
+			app_id = #{appId}
+			,client_id = #{clientId}
+			,tx_logistics_id = #{txLogisticsId}
+			,encode_msg = #{encodeMsg}
+			,decode_msg = #{decodeMsg}
+			,msg_type = #{msgType}
+			,order_type = #{orderType}
+			,status = #{status}
+			,error_msg = #{errorMsg}
+			,create_time = #{createTime}
+			,remark = #{remark}
+		where id = #{id}
+	</update>
+	
+	<!--物理删除-->
+	<delete id="remove" parameterType="integer">
+		delete from eop_app_test where id = #{value}
+	</delete>
+	
+	<!-- 分页查询start -->
+		<!--查询数据-->
+	<select id="getPageList" parameterType="Map" resultType="list" resultMap="appTestResultMap">
+
+		select * from eop_app_test
+		<where>
+			<if test="appId != null and appId != ''">
+				and app_id=#{appId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				and client_id=#{clientId}
+			</if>
+			<if test="txLogisticsId != null and txLogisticsId != ''">
+				and tx_logistics_id=#{txLogisticsId}
+			</if>
+			<if test="msgType != null and msgType != ''">
+				and msg_type=#{msgType}
+			</if>
+			<if test="orderType != null and orderType != ''">
+				and order_type=#{orderType}
+			</if>
+			<if test="status != null and status != ''">
+				and status=#{status}
+			</if>
+		</where>
+		order by create_time desc
+		<if test='startIndex != null and pageNum != null'>
+			limit #{startIndex}, #{pageNum}
+		</if>
+		
+	</select>
+		<!--查询数量-->
+	<select id="getTotal" parameterType="Map" resultType="integer">
+		select count(id) from eop_app_test
+		<where>
+			<if test="appId != null and appId != ''">
+				and app_id=#{appId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				and client_id=#{clientId}
+			</if>
+			<if test="txLogisticsId != null and txLogisticsId != ''">
+				and tx_logistics_id=#{txLogisticsId}
+			</if>
+			<if test="msgType != null and msgType != ''">
+				and msg_type=#{msgType}
+			</if>
+			<if test="orderType != null and orderType != ''">
+				and order_type=#{orderType}
+			</if>
+			<if test="status != null and status != ''">
+				and status=#{status}
+			</if>
+		</where>
+	</select>
+	<!-- 分页查询end -->
+	
+	<select id="getAll" parameterType="Map" resultType="list" resultMap="appTestResultMap">
+		select * from eop_app_test
+		<where>
+			<if test="appId != null and appId != ''">
+				and app_id=#{appId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				and client_id=#{clientId}
+			</if>
+			<if test="txLogisticsId != null and txLogisticsId != ''">
+				and tx_logistics_id=#{txLogisticsId}
+			</if>
+			<if test="msgType != null and msgType != ''">
+				and msg_type=#{msgType}
+			</if>
+			<if test="orderType != null and orderType != ''">
+				and order_type=#{orderType}
+			</if>
+			<if test="status != null and status != ''">
+				and status=#{status}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getTimes" parameterType="Map" resultType="int">
+		<![CDATA[
+			SELECT 100-COUNT(*) FROM eop_app_test WHERE DATE(create_time)=DATE(NOW())
+		]]>
+		<if test="clientId != null and clientId != ''">
+			and client_id=#{clientId}
+		</if>
+	</select>
+	
+</mapper>

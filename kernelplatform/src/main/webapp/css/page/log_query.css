@@ -1,0 +1,10 @@
+.record_bor{border-top:none;}
+#shopname{width:200px;}
+#rec_amount,#rec_amount2{width:96px;}
+#shopname,#rec_amount2{margin-right:50px;}
+.acc_p1{margin-top:10px;}
+#payment{width:145px;}
+.btn_a{margin-left:10px;}
+.td_e span,.td_f span{margin-right:10px;}
+.table tbody td.record_c{color:#F00}
+.pagenavi{margin-top:10px;height:50px;}

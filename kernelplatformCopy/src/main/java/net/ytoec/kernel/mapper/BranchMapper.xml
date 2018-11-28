@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.BranchMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.Branch" id="branchResultMap">
+		<id property="id" column="id" />
+		<id property="provice" column="provice" />
+		<id property="city" column="city" />
+		<id property="county" column="county" />
+		<id property="companyName" column="company_name" />
+		<id property="managerName" column="manager_name" />
+		<id property="managerPhone" column="manager_phone" />
+		<id property="fax" column="fax" />
+		<id property="email" column="email" />
+		<id property="msn" column="msn" />
+		<id property="servicePhone" column="service_phone" />
+		<id property="questionPhone" column="question_phone" />
+		<id property="sendScope" column="send_scope" />
+		<id property="unSendScope" column="unsend_scope" />
+		<id property="sendTimeLimit" column="send_timelimit" />
+		<id property="hoursFor24" column="hours_for24" />
+		<id property="specialService" column="special_service" />
+		<id property="remark" column="remark" />
+		<id property="createTime" column="create_time" />
+		<id property="updateTime" column="update_time" />
+		<id property="branchCode" column="branch_code" />
+	</resultMap>
+
+	<select id="get" parameterType="branch" resultType="branch"
+		resultMap="branchResultMap">
+		SELECT * FROM
+		EC_CORE_BRANCH
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 根据网点编码查询网点信息 -->
+	<select id="findByBranchCode" parameterType="int"
+		resultType="list" resultMap="branchResultMap">
+		SELECT * FROM
+		EC_CORE_BRANCH
+		WHERE branch_code = #{branchCode}
+	</select>
+	
+	<select id="findByUserId" parameterType="int"
+		resultType="branch" resultMap="branchResultMap">
+		SELECT * FROM
+		EC_CORE_BRANCH
+		WHERE branch_code = #{branchCode}
+	</select>
+
+	<!-- 根据公司名称校验数据 -->
+	<select id="findByCompanyName" parameterType="branch"
+		resultType="list" resultMap="branchResultMap">
+		SELECT * FROM EC_CORE_BRANCH 
+		<where>
+			<if test='companyName != null'>
+				company_name = #{companyName}
+			</if>
+			<if test='myCompanyName != null'>
+				AND company_name != #{myCompanyName}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据经理联系方式校验数据 -->
+	<select id="findByManagerPhone" parameterType="branch"
+		resultType="list" resultMap="branchResultMap">
+		SELECT * FROM EC_CORE_BRANCH
+		<where>
+			<if test='managerPhone != null'>
+				manager_phone = #{managerPhone}
+			</if>
+			<if test='myManagerPhone != null'>
+				AND manager_phone != #{myManagerPhone}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据查询电话校验数据 -->
+	<select id="findByServicePhone" parameterType="branch"
+		resultType="list" resultMap="branchResultMap">
+		SELECT * FROM EC_CORE_BRANCH
+		<where>
+			<if test='servicePhone != null'>
+				service_phone = #{servicePhone}
+			</if>
+			<if test='myServicePhone != null'>
+				AND service_phone != #{myServicePhone}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据问题件电话校验数据 -->
+	<select id="findByQuestionPhone" parameterType="branch"
+		resultType="list" resultMap="branchResultMap">
+		SELECT * FROM EC_CORE_BRANCH
+		<where>
+			<if test='questionPhone != null'>
+				question_phone = #{questionPhone}
+			</if>
+			<if test='myQuestionPhone != null'>
+				AND question_phone != #{myQuestionPhone}
+			</if>
+		</where>
+	</select>
+
+	<select id="getAllSearchData" resultType="list" resultMap="branchResultMap"
+		parameterType="java.util.Map">
+		SELECT * FROM EC_CORE_BRANCH
+		LIMIT #{startIndex},
+		#{pageNum}
+	</select>
+
+	<select id="countAllSearchData" resultType="int">
+		SELECT count(*) FROM
+		EC_CORE_BRANCH
+	</select>
+
+	<insert id="add" parameterType="branch" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_BRANCH(id, provice, city, county,
+		company_name, manager_name, manager_phone, fax, email, msn,
+		service_phone, question_phone, send_scope, unsend_scope,
+		send_timelimit, hours_for24, special_service, remark)VALUES(
+		#{id},#{provice},#{city},#{county},#{companyName},#{managerName},#{managerPhone},#{fax},#{email},#{msn},#{servicePhone},#{questionPhone},#{sendScope},#{unSendScope},#{sendTimeLimit},#{hoursFor24},#{specialService},#{remark})
+	</insert>
+
+	<!-- 当查询网点无结果的时候，新增网点 -->
+	<insert id="addBranch" parameterType="branch" keyProperty="id"
+		useGeneratedKeys="true">
+		INSERT INTO EC_CORE_BRANCH(id, provice, city, county,
+		company_name, manager_name, manager_phone, fax, email, msn,
+		service_phone, question_phone, send_scope, unsend_scope,
+		send_timelimit, hours_for24, special_service, remark,
+		branch_code)VALUES(
+		#{id},#{provice},#{city},#{county},#{companyName},#{managerName},#{managerPhone},#{fax},#{email},#{msn},#{servicePhone},#{questionPhone},#{sendScope},#{unSendScope},#{sendTimeLimit},#{hoursFor24},#{specialService},#{remark},#{branchCode})
+	</insert>
+
+	<delete id="remove" parameterType="branch">
+		DELETE FROM EC_CORE_BRANCH
+		WHERE id = #{id}
+	</delete>
+
+	<update id="edit" parameterType="branch">
+		UPDATE EC_CORE_BRANCH
+		SET
+		<!-- provice=#{provice},
+		city=#{city},
+		county=#{county},
+		-->
+		company_name=#{companyName},
+		manager_name=#{managerName}, 
+		company_name=#{companyName},
+		manager_phone=#{managerPhone},
+		fax=#{fax},
+		email=#{email},
+		msn=#{msn},
+		service_phone=#{servicePhone},
+		question_phone=#{questionPhone},
+		send_scope=#{sendScope},
+		unsend_scope=#{unSendScope},
+		send_timelimit=#{sendTimeLimit},
+		hours_for24=#{hoursFor24},
+		special_service=#{specialService},
+		remark=#{remark},
+		update_time=now(),
+		branch_code=#{branchCode}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

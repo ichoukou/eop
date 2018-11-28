@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 发送失败任务数据映射文件 -->
+<mapper namespace="net.ytoec.kernel.mapper.FailedTaskMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.FailedTask" id="failedTaskResultMap">
+		<id property="id" column="id" />
+		<result property="createTime" column="create_Time" />
+		<result property="requestUrl" column="request_url" />
+		<result property="taskStatus" column="task_status" />
+		<result property="requestParams" column="request_params" />
+		<result property="txLogisticId" column="tx_logistic_id" />
+		<result property="failedReason" column="failed_reason" />
+		<result property="taskDest" column="task_dest" />
+	</resultMap>
+	<insert id="add" parameterType="net.ytoec.kernel.dataobject.FailedTask" keyProperty="id"
+		useGeneratedKeys="true"> insert into EC_CORE_FAILED_TASK
+		(create_Time,request_url,task_status,request_params,tx_logistic_id,failed_reason,task_dest) values
+		(now(),#{requestUrl}, #{taskStatus},#{requestParams},#{txLogisticId},#{failedReason},#{taskDest});
+	</insert>
+</mapper>

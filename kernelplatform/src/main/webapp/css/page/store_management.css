@@ -1,0 +1,5 @@
+div.title01{font:normal 15px/1.5 simsun;padding-left:10px; padding-bottom:10px;color:#333;}
+div.title02{font:normal 15px/1.5 simsun;padding:10px;color:#333;}
+a.tb_link,a.tb_link:link,a.tb_link:visited{height:16px;display:inline-block;background:url(../../images/single/btn_tb.gif) no-repeat 0 0;font:normal 12px/16px simsun;padding-left:45px;color:#1e569e;}
+a.tb_link:hover{text-decoration:underline;}
+.box_bd p{color:#666; font-size:12px}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ytoec.kernel.mapper.QuestionnaireTagMapper">
+	<resultMap type="net.ytoec.kernel.dataobject.QuestionnaireTag"
+		id="questionnaireTagResultMap">
+		<id property="id" column="id" />
+		<result property="tagName" column="tag_name" />
+		<result property="tagPos" column="tag_pos" />
+		<result property="tagUserThreadId" column="tag_userthreadid" />
+		<result property="tagType" column="tag_type" />
+		<result property="tagRemark" column="tag_remark" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<!-- 新增标签       [自动生成id策略] -->
+	<insert id="addQuestionnaireTag" parameterType="questionnaireTag" keyProperty="id" useGeneratedKeys="true">
+	 insert into ec_core_questionnaire_tag
+  	 (id, tag_name, tag_pos, tag_userthreadid, tag_type, tag_remark,create_time,update_time)
+	 values
+ 	 (#{id}, #{tagName}, #{tagPos},#{tagUserThreadId},#{tagType},#{tagRemark},#{createTime},#{updateTime})
+	</insert>
+	
+	<!-- 获取标签在问题件中是否存在 -->
+	<select id="getTagCountInQuestionnaire" parameterType="integer" resultType="integer">
+		select count(*) from ec_core_questionnaire where tag_id = #{id} limit 1
+	</select>
+	
+	<!-- 删除标签 -->
+	<delete id="removeQuestionnaireTag" parameterType="integer">
+		delete from ec_core_questionnaire_tag where id = #{id}
+	</delete>
+
+	<!-- 更新标签 -->
+	<update id="editQuestionnaireTag" parameterType="questionnaireTag">
+		update ec_core_questionnaire_tag
+		   set tag_name   = #{tagName},
+		       tag_pos    = #{tagPos},
+		       tag_userthreadid = #{tagUserThreadId},
+		       tag_type   = #{tagType},
+		       tag_remark = #{tagRemark},
+		       create_time = #{createTime},
+		       update_time = #{updateTime}
+		where id = #{id}
+	</update>
+
+    <!-- 根据ID获取标签 -->
+	<select id="getQestionnaireTag" parameterType="integer" resultType="questionnaireTag" resultMap="questionnaireTagResultMap">
+		<![CDATA[		
+			select * from ec_core_questionnaire_tag where id = #{id}
+		]]>
+	</select>
+	
+	<!-- 根据用户获取标签 --> 
+	<select id="getQestionnaireTagsByUserThreadId" parameterType="integer" resultType="questionnaireTag" resultMap="questionnaireTagResultMap">
+		<![CDATA[		
+			select * from ec_core_questionnaire_tag where tag_userthreadid = #{tagUserThreadId}
+			order by tag_pos
+		]]>
+	</select>
+	
+	<!-- 根据用户CODE获取标签数量 -->
+	<select id="getQestionnaireTagsCountByUserThreadId" parameterType="integer" resultType="integer">
+		<![CDATA[		
+			select count(*) from ec_core_questionnaire_tag where tag_userthreadid = #{tagUserThreadId}
+		]]>
+	</select>
+	
+    <!-- 根据标签对象获取标签 -->
+	<select id="getQestionnaireTags" parameterType="questionnaireTag" resultType="questionnaireTag" resultMap="questionnaireTagResultMap">
+		<![CDATA[		
+			select * from ec_core_questionnaire_tag 
+		]]>
+		<where>
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="tagName != null and tagName != ''">
+			and tag_name = #{tagName}
+		</if>
+		<if test="tagPos != null">
+			and tag_pos = #{tagPos}
+		</if>
+		<if test="tagUserThreadId != null">
+			and tag_userthreadid = #{tagUserThreadId}
+		</if>
+		<if test="tagType != null">
+			and tag_type = #{tagType}
+		</if>
+		<if test="tagRemark != null and tagRemark != ''">
+			and tag_remark like CONCAT('%',#{tagRemark},'%')
+		</if>
+		</where>
+	</select>
+
+	<!-- 获取标签位置的最大值 -->
+	<select id="getQestionnaireTagMaxPos" parameterType="integer" resultType="integer">
+		<![CDATA[		
+			select MAX(tag_pos) from ec_core_questionnaire_tag where tag_userthreadid = #{tagUserThreadId}
+		]]>
+	</select>
+	
+	<!-- 获取标签在问题件表的使用数量 -->
+	<select id="getTagCountInQestionnaire" parameterType="integer" resultType="integer">
+		<![CDATA[		
+			select count(*) from ec_core_questionnaire where customer_id = #{customerId} and vipStatus = #{tagName}
+		]]>
+	</select>
+	
+</mapper>
