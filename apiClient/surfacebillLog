@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `surfacebill_log`;
+CREATE TABLE `surfacebill_log` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `sequence` varchar(255) NOT NULL COMMENT '同步面单时的请求序列',
+  `customer_code` varchar(255) NOT NULL COMMENT '商家代码',
+  `message` varchar(255) NOT NULL COMMENT '响应消息',
+  `call_api` varchar(255) NOT NULL COMMENT '调用圆通的接口(synWaybillFromYto:同步面单, uploadOrderToYto:上传订单)',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
